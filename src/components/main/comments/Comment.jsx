@@ -1,30 +1,30 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import TwoLineTextTime from "../main/TextLines"
-import StatusContent from "../main/StatusContent"
-import CommentsList from "../main/comments/CommentsList"
+import OneLineTextTime from "../../main/TextLines"
+import StatusContent from "../../main/StatusContent"
 
-export default function Status(props) {
+export default function Comment(props) {
 
     return (
-        <div className="post-status-bar">
+        <li>
+            <div className={props.isComment ? "post-status-bar comment-bar" : "post-status-bar"}>
             <Avatar className="post-avatar" style={
-                {height: "30px", 
-                width: "30px", 
+                {height: "20px", 
+                width: "20px", 
                 backgroundColor: "red"}}>
             </Avatar>
 
-            <TwoLineTextTime 
-            header="John Barney"
-            text="shop manager" />
+            <OneLineTextTime header="John Barney" />
 
             <StatusContent buttons={true} text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non sodales ligula. Etiam consequat tempor magna in vestibulum. Donec rhoncus molestie porttitor. Vivamus faucibus urna ultricies massa dapibus hendrerit. Cras luctus sem eros. Ut at ipsum nec risus molestie auctor. Vestibulum ac sapien aliquet, posuere ligula quis, porta neque."/>
             
-            <CommentsList />
+        
             
 
 
             
         </div>
+
+        </li>
     );
 }

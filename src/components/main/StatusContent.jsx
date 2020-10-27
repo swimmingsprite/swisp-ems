@@ -3,11 +3,12 @@ import LikeCommentPanel from "../main/LikeCommentPanel"
 
 
 export default function StatusContent(props) {
+    console.log("props buttons: "+props.buttons)
 
     return (
         <div className="status-content">
             {props.text}
-            <LikeCommentPanel />
+            {props.buttons && <LikeCommentPanel/>}
         </div>
     );
 }

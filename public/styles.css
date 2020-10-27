@@ -13,6 +13,10 @@ body {
   height: 100%;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .header {
   position: fixed;
   height: 90px;
@@ -129,7 +133,7 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
   margin: 0 15%;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 
   height: fit-content;
   background-color:#d7d7d7;
@@ -197,6 +201,14 @@ body {
   
 }
 
+.like-button:hover {
+  color: #0984e3;
+}
+
+.comment-button:hover {
+  color: #0984e3;
+}
+
 .like-comment-button {
   width: 49.6%;
   border: none;
@@ -206,7 +218,7 @@ body {
   padding-top: 10px;
   font-family: "Montserrat", sans-serif;
   font-weight: 900;
-  
+  outline: none; 
 }
 
 .like-comment-vr {
@@ -222,7 +234,13 @@ body {
   border-left: none;
   border-right: none;
   border-bottom: 1px solid #d7d7d7;
-  
+}
+
+.comment-bar {
+  padding-top: 20px;
+  padding-bottom: 0px;
+  margin: 0 7%;
+  margin-bottom: 0px;
 }
 
 
