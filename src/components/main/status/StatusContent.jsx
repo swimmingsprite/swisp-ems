@@ -1,5 +1,5 @@
 import React from 'react';
-import LikeCommentPanel from "../main/LikeCommentPanel"
+import LikeCommentPanel from "./LikeCommentPanel"
 
 
 export default function StatusContent(props) {

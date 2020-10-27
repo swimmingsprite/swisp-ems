@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import InputBar from "../InputBar"
+import InputBar from "./InputBar"
 
 export default function CommentInput(props) {
 

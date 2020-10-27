@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "./Header"
-import Navigation from "../components/Navigation"
+import Header from "./header/Header"
+import Navigation from "./navigation/Navigation"
 import MainContent from "../components/MainContent"
 
 function App() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import PublishTime from "./PublishTime"
+import PublishTime from "./status/PublishTime"
 
 
 export function OneLineTextTime(props) {

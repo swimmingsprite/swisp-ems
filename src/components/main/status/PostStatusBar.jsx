@@ -1,9 +1,11 @@
 import React from 'react';
 // import Avatar from "../components/Avatar"
 import Avatar from '@material-ui/core/Avatar';
-import InputBar from "./main/InputBar"
+import InputBar from "../input/InputBar"
 
 export default function PostStatusBar(props) {
+
+    console.log("HANDLE CHANGE JE: "+typeof props.handleChange)
 
     return (
         <div className="post-status-bar">
@@ -13,7 +15,7 @@ export default function PostStatusBar(props) {
                 backgroundColor: "red"}}>
             </Avatar>
 
-            <InputBar text="Napíšte status..." />
+            <InputBar handleChange={()=>{props.handleChange()}} text="Napíšte status..." />
 
         </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import OneLineTextTime from "../../main/TextLines"
-import StatusContent from "../../main/StatusContent"
+import StatusContent from "../status/StatusContent"
 
 export default function Comment(props) {
 

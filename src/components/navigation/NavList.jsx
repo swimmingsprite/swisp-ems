@@ -1,17 +1,11 @@
 import React from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/Inbox';
-
 
 
 export default function NavList() {
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  /*const [selectedIndex, setSelectedIndex] = React.useState(1);
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
-  };
+  };*/
 
   return (<ul className="nav-ul">
     <li className="nav-li">Domov</li>

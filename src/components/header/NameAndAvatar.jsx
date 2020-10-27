@@ -1,6 +1,6 @@
 import React from 'react';
-import Avatar from "../components/Avatar"
-import Paragraph from "../components/Paragraph"
+import Avatar from "../Avatar"
+import Paragraph from "./Paragraph"
 
 
 export default function NameAndAvatar(props) {

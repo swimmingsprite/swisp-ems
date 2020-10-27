@@ -1,11 +1,13 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import TwoLineTextTime from "../main/TextLines"
-import StatusContent from "../main/StatusContent"
-import CommentsList from "../main/comments/CommentsList"
-import PostEmojis from "../main/PostEmojis"
+import TwoLineTextTime from "../TextLines"
+import StatusContent from "./StatusContent"
+import CommentsList from "../comments/CommentsList"
+import PostEmojis from "./PostEmojis"
 
 export default function Status(props) {
+
+
 
     return (
         <div className="post-status-bar">
@@ -13,7 +15,8 @@ export default function Status(props) {
                 {height: "30px", 
                 width: "30px", 
                 backgroundColor: "red",
-                transform: "translateY(10%)"
+                transform: "translateY(10%)",
+                backgroundImage: "url("+props.src+")"
                 }}>
             </Avatar>
 

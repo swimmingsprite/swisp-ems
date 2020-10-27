@@ -1,6 +1,6 @@
 import React from 'react';
-import Logo from "../components/Logo"
-import Paragraph from "../components/Paragraph"
+import Logo from "./Logo"
+import Paragraph from "./Paragraph"
 
 export default function LogoText(props) {
   

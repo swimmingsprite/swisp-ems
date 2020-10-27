@@ -1,6 +1,6 @@
 import React from 'react';
-import LogoText from "../components/LogoText"
-import NameAndAvatar from "../components/NameAndAvatar"
+import LogoText from "./LogoText"
+import NameAndAvatar from "./NameAndAvatar"
 
 export default function Header() {
   
