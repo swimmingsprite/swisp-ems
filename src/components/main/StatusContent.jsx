@@ -1,13 +1,13 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import TwoLineText from "../main/TwoLineText"
+import LikeCommentPanel from "../main/LikeCommentPanel"
 
-export default function Status(props) {
+
+export default function StatusContent(props) {
 
     return (
         <div className="status-content">
             {props.text}
-            {/* <p className="status-content">{props.text}</p> */}
+            <LikeCommentPanel />
         </div>
     );
 }
