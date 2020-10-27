@@ -181,6 +181,9 @@ ul {
     resize: vertical;
 }
 
+[contentEditable=true]:empty:not(:focus):before{
+  content:attr(data-text)
+}
 
 .two-line-text {
   display: inline;
@@ -270,7 +273,10 @@ ul {
 }
 
 .input-bar-comment {
+}
 
+.post-emojis {
+  padding-top: 5px;
 }
 
 

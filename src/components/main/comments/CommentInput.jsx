@@ -13,7 +13,7 @@ export default function CommentInput(props) {
             }}>
         </Avatar>
 
-        <InputBar />
+        <InputBar text="Napíšte komentár..." />
 
     </div>
 

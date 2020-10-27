@@ -13,7 +13,7 @@ export default function PostStatusBar(props) {
                 backgroundColor: "red"}}>
             </Avatar>
 
-            <InputBar />
+            <InputBar text="Napíšte status..." />
 
         </div>
     );

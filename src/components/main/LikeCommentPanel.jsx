@@ -1,10 +1,10 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import TwoLineText from "./TextLines"
-import StatusContent from "../main/StatusContent"
 
 function Button(props) {
-    return <button className={"like-comment-button " + props.handleClass}>{props.text}</button>
+    return <button 
+    className={"like-comment-button " + props.handleClass}>
+    {props.text}
+    </button>
 }
 
 

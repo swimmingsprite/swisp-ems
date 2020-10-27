@@ -7,9 +7,9 @@ export default function CommentsList(props) {
 
     return (
         <ul className="comments-list">
+            {/* <Comment  />
             <Comment  />
-            <Comment  />
-
+         */}
             <CommentInput />
             
           
