@@ -7,11 +7,13 @@ export default function Comment(props) {
 
     return (
         <li>
-            <div className={props.isComment ? "post-status-bar comment-bar" : "post-status-bar"}>
+            <div className={"post-status-bar comment-bar"}>
             <Avatar className="post-avatar" style={
                 {height: "20px", 
                 width: "20px", 
-                backgroundColor: "red"}}>
+                backgroundColor: "red",
+                transform: "translateY(0%)"
+                }}>
             </Avatar>
 
             <OneLineTextTime header="John Barney" />

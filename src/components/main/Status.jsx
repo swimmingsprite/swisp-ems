@@ -11,7 +11,9 @@ export default function Status(props) {
             <Avatar className="post-avatar" style={
                 {height: "30px", 
                 width: "30px", 
-                backgroundColor: "red"}}>
+                backgroundColor: "red",
+                transform: "translateY(10%)"
+                }}>
             </Avatar>
 
             <TwoLineTextTime 
