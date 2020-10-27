@@ -134,6 +134,10 @@ body {
   background-color:#d7d7d7;
 }
 
+.post-status-bar:nth-child(3) {
+  margin-top: 50px;
+}
+
 .post-avatar {
   float: left;
   display: block;
@@ -155,6 +159,38 @@ body {
     outline: none;
     resize: vertical;
 }
+
+
+.two-line-text {
+  display: inline;
+}
+
+.two-line-text-header {
+  display: inline-block;
+  font-size: 1rem;
+}
+
+.two-line-text-text {
+  display: block;
+  font-size: 0.8rem;
+}
+
+.publish-time {
+  display: inline-block;
+  float: right;
+  margin-right: 25px;
+  font-size: 0.8rem;
+}
+
+.status-content {
+  margin: 15px 15px;
+  padding: 10px 10px;
+  border-radius: 10px;
+  background-color: white;
+  word-wrap: break-word;
+}
+
+
 
 
 /* ffc93c yellow */
