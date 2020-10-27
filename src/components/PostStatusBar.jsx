@@ -1,7 +1,7 @@
 import React from 'react';
 // import Avatar from "../components/Avatar"
 import Avatar from '@material-ui/core/Avatar';
-import InputBar from "../components/main/InputBar"
+import InputBar from "./main/InputBar"
 
 export default function PostStatusBar(props) {
 
