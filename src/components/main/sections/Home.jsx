@@ -4,23 +4,31 @@ import PostStatusBar from "../status/PostStatusBar"
 import Status from "../status/Status"
 
 export default function Home(props) {
+
+
+
     const [statusList, setStatusList] = React.useState([
-        <Status />,
-        <Status />
+        /*<Status />,
+        <Status />*/
     ]);
+
 
     /* fetch status list */
 
-    function changeTest() {
-        console.log("CHANGE TEST");
+    function onNewStatus(newStatusString) {
+        console.log("NEW STATUS STRING: "+newStatusString);
+        setStatusList([ <Status text={newStatusString}/> ,...statusList])
+
+        /*setStatusInput(event.target.value);*/
     }
 
 
     return (
         <div>
             <Title text="Príspevky"/>
-            <PostStatusBar handleChange={changeTest} />
-            {statusList.map((status) => <Status />)};
+            <PostStatusBar onNewStatus={onNewStatus} />
+            {/*{statusList.map((status) => <Status />)};*/}
+            {statusList}
 
 
 

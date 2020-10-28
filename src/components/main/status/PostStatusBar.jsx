@@ -5,7 +5,6 @@ import InputBar from "../input/InputBar"
 
 export default function PostStatusBar(props) {
 
-    console.log("HANDLE CHANGE JE: "+typeof props.handleChange)
 
     return (
         <div className="post-status-bar">
@@ -15,7 +14,9 @@ export default function PostStatusBar(props) {
                 backgroundColor: "red"}}>
             </Avatar>
 
-            <InputBar handleChange={()=>{props.handleChange()}} text="Napíšte status..." />
+            <InputBar
+                onNewStatus={(statusString)=>{props.onNewStatus(statusString)}}
+                text="Napíšte status..." />
 
         </div>
     );

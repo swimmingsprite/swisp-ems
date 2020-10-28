@@ -13,7 +13,9 @@ export default function CommentInput(props) {
             }}>
         </Avatar>
 
-        <InputBar text="Napíšte komentár..." />
+        <InputBar
+            onNewStatus={(statusString)=>{props.onNewStatus(statusString)}}
+            text="Napíšte komentár..." />
 
     </div>
 

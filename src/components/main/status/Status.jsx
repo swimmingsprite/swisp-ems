@@ -24,8 +24,9 @@ export default function Status(props) {
             header="John Barney"
             text="shop manager" />
 
-            <StatusContent buttons={true} text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non sodales ligula. Etiam consequat tempor magna in vestibulum. Donec rhoncus molestie porttitor. Vivamus faucibus urna ultricies massa dapibus hendrerit. Cras luctus sem eros. Ut at ipsum nec risus molestie auctor. Vestibulum ac sapien aliquet, posuere ligula quis, porta neque."/>
-            
+            {/*<StatusContent buttons={true} text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non sodales ligula. Etiam consequat tempor magna in vestibulum. Donec rhoncus molestie porttitor. Vivamus faucibus urna ultricies massa dapibus hendrerit. Cras luctus sem eros. Ut at ipsum nec risus molestie auctor. Vestibulum ac sapien aliquet, posuere ligula quis, porta neque."/>*/}
+            <StatusContent buttons={true} text={props.text} />
+
             <PostEmojis likeValue={16} commentsValue={6}/>
 
 
