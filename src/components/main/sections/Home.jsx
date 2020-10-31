@@ -7,10 +7,7 @@ export default function Home(props) {
 
 
 
-    const [statusList, setStatusList] = React.useState([
-        /*<Status />,
-        <Status />*/
-    ]);
+    const [statusList, setStatusList] = React.useState([]);
 
 
     /* fetch status list */
@@ -21,7 +18,15 @@ export default function Home(props) {
         var newStatus = {
             statusId: Math.floor(Math.random() * 100000000),
             text: newStatusString,
-            timestamp: new Date().getTime()
+            timestamp: new Date().getTime(),
+            emojiValues: {
+                likesValue: 0,
+                commentsValue: 0
+            }
+            // ,likes: {id1, id2, id3}
+            ,author: "John Barney"
+            ,authorId: 1236545454
+            ,authorRole: "shop manager"
         }
 
 
@@ -34,9 +39,9 @@ export default function Home(props) {
         <div>
             <Title text="Príspevky"/>
             <PostStatusBar onNewStatus={onNewStatus} />
-            {statusList.map((status) => <Status text={status.text}
-                                                statusId={status.statusId}
-                                                key={status.statusId}  />)}
+            {statusList.map((status) => <Status values={status}
+                                                key={status.statusId}
+            />)}
         </div>
     );
 }

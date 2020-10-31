@@ -94,6 +94,7 @@ ul {
   display: block;
   padding: 25px;
   border-bottom: 1px solid rgba(0,0,0,0.1);
+  cursor: pointer;
   /* box-shadow: 1px 6px 30px -30px rgba(0,0,0,0.75); */
 }
 
@@ -237,7 +238,8 @@ ul {
   padding-top: 10px;
   font-family: "Montserrat", sans-serif;
   font-weight: 900;
-  outline: none; 
+  outline: none;
+  cursor: pointer;
 }
 
 .like-comment-vr {

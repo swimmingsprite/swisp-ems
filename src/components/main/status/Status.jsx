@@ -5,8 +5,16 @@ import StatusContent from "./StatusContent"
 import CommentsList from "../comments/CommentsList"
 import PostEmojis from "./PostEmojis"
 
-export default function Status(props) {
+function isZeroPostInteraction(emojiValues) {
+    if (Object
+        .values(emojiValues)
+        .filter((value) => value !== 0)
+        .length
+        > 0) return false;
+    return true;
+}
 
+export default function Status(props) {
 
     return (
         <div className="post-status-bar">
@@ -20,14 +28,16 @@ export default function Status(props) {
             </Avatar>
 
             <TwoLineTextTime 
-            header="John Barney"
-            text="shop manager" />
+            header={props.values.author}
+            text={props.values.authorRole}
+            time={props.values.timestamp}
+            />
 
-            <StatusContent buttons={true} text={props.text} />
+            <StatusContent buttons={true} text={props.values.text} />
 
-            <PostEmojis likeValue={16} commentsValue={6}/>
+            {!isZeroPostInteraction(props.values.emojiValues) && <PostEmojis values={props.values.emojiValues}/>}
 
-            <CommentsList statusId={props.statusId} />
+            <CommentsList statusId={props.values.statusId}  />
             
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import OneLineTextTime from "../../main/TextLines"
+import {OneLineTextTime} from "../../main/TextLines"
 import StatusContent from "../status/StatusContent"
 
 export default function Comment(props) {
@@ -16,7 +16,7 @@ export default function Comment(props) {
                 }}>
             </Avatar>
 
-            <OneLineTextTime header="John Barney" />
+            <OneLineTextTime header="John Barney" time={props.time}/>
 
             <StatusContent buttons={false} text={props.text}/>
             

@@ -40,7 +40,7 @@ export default function CommentsList(props) {
             <CommentInput onNewStatus={handleNewComment}/>
             {comments
                 .filter((comment) => comment.statusId === props.statusId)
-                .map((comment => <Comment text={comment.text} key={comment.commentId} />))}
+                .map((comment => <Comment text={comment.text} key={comment.commentId} time={comment.timestamp} />))}
         </ul>
     );
 }

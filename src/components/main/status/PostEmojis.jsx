@@ -11,7 +11,7 @@ export default function PostEmojis(props) {
                 marginLeft: "15px",
 
             }}
-            >👍 {props.likeValue}</p>
+            >👍 {props.values.likesValue}</p>
             
             
             
@@ -21,7 +21,7 @@ export default function PostEmojis(props) {
                 marginRight: "15px",
                 float: "right"
 
-            }}>💬 {props.commentsValue}</p>
+            }}>💬 {props.values.commentsValue}</p>
             
 
         </div>
