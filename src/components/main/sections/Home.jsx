@@ -16,10 +16,17 @@ export default function Home(props) {
     /* fetch status list */
 
     function onNewStatus(newStatusString) {
-        console.log("NEW STATUS STRING: "+newStatusString);
-        setStatusList([ <Status text={newStatusString}/> ,...statusList])
+        /*post new status on server and fetch statusId and timestamp*/
 
-        /*setStatusInput(event.target.value);*/
+        var newStatus = {
+            statusId: Math.floor(Math.random() * 100000000),
+            text: newStatusString,
+            timestamp: new Date().getTime()
+        }
+
+
+        setStatusList([newStatus ,...statusList])
+
     }
 
 
@@ -27,11 +34,9 @@ export default function Home(props) {
         <div>
             <Title text="Príspevky"/>
             <PostStatusBar onNewStatus={onNewStatus} />
-            {/*{statusList.map((status) => <Status />)};*/}
-            {statusList}
-
-
-
+            {statusList.map((status) => <Status text={status.text}
+                                                statusId={status.statusId}
+                                                key={status.statusId}  />)}
         </div>
     );
 }

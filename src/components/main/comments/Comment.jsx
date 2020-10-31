@@ -18,7 +18,7 @@ export default function Comment(props) {
 
             <OneLineTextTime header="John Barney" />
 
-            <StatusContent buttons={true} text={props.text}/>
+            <StatusContent buttons={false} text={props.text}/>
             
         
             
