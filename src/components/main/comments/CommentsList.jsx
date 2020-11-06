@@ -2,8 +2,6 @@ import React from 'react';
 import Comment from "../comments/Comment";
 import CommentInput from "../input/CommentInput"
 
-import ReactDOM from "react-dom";
-
 
 export default function CommentsList(props) {
     const [comments, setComments] = React.useState([]);

@@ -17,11 +17,15 @@ function OneLineTextTime(props) {
     );
 }
 
-export default function TwoLineTextTime(props) {
-    var dateTimeString = new Date(props.time).toLocaleDateString()
-        + " "
-        + new Date(props.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+function timestampToShortDateTime(time) {
+    return new Date(time).toLocaleDateString([], {day: '2-digit', month:'2-digit'})
+        + '\u00A0\u00A0\u00A0'
+        + new Date(time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
+}
+
+export default function TwoLineTextTime(props) {
+    var dateTimeString = timestampToShortDateTime(props.time)
     return (
         <div className="two-line-text">
             <h3 className="two-line-text-header">{props.header}</h3>
@@ -31,4 +35,4 @@ export default function TwoLineTextTime(props) {
     );
 }
 
-export {OneLineTextTime};
+export {OneLineTextTime, timestampToShortDateTime};
