@@ -4,9 +4,10 @@ import PublishTime from "../status/PublishTime";
 import {timestampToShortDateTime} from "../TextLines";
 
 function mapValuesToPanel(value) {
-    console.log("values in map: "+value)
+    console.log("values in map: " + value)
 
-    return <li style={{display: "block",
+    return <li style={{
+        display: "block",
         marginBottom: "5px"
     }}>
         <Avatar className="post-avatar" style={
@@ -37,12 +38,10 @@ function mapValuesToPanel(value) {
 }
 
 function TwoSidePanel(props) {
-    console.log("header props: "+props.first.header)
-    console.log("TWOSIDE props VALUES: "+props.first.values[0])
 
 
     return (
-        <div className="post-status-bar" >
+        <div className="post-status-bar">
             <Panel header={props.first.header}
                    values={props.first.values}
             />
@@ -56,13 +55,15 @@ function TwoSidePanel(props) {
 
 export default function Panel(props) {
 
-    console.log("props VALUES: "+props.values)
+    console.log("props VALUES: " + props.values)
 
     return (
-        <div className="panel" style={props.style} >
+        <div className="panel" style={props.style}>
             <h1 className={"panel-header"}>{props.header}</h1>
             <ul className="panel-content" id="style-1">
-                {props.values.map(mapValuesToPanel)}
+                {props.values.map(
+                    mapValuesToPanel
+                )}
             </ul>
 
 
