@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from "./main/sections/Home"
 import Employees from "./main/sections/Employees";
+import Shifts from "./main/sections/Shifts";
 
 export default function Content(props) {
 
@@ -10,7 +11,8 @@ export default function Content(props) {
         <div className="main-content">
             <div className="content">
                 {/*<Home/>*/}
-                <Employees />
+                {/*<Employees />*/}
+                <Shifts />
             </div>
         </div>
 

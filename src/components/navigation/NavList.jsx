@@ -10,6 +10,7 @@ export default function NavList() {
   return (<ul className="nav-ul">
     <li className="nav-li">Domov</li>
     <li className="nav-li">Zamestnanci</li>
+    <li className="nav-li">Smeny</li>
     <li className="nav-li">Udalosti</li>
     <li className="nav-li">Ponuky práce</li>
     <li className="nav-li">Správy</li>
