@@ -414,6 +414,8 @@ ul {
   height: 35px;
   padding: 5px 0;
   width: 40%;
+  white-space: nowrap;
+
   /*width: fit-content;*/
   left: 10%;
   border-radius: 10px;
@@ -431,20 +433,14 @@ ul {
 }*/
 
 .shift-element-header {
-  position: absolute;
+  position: relative;
   /*border: 1px solid black;*/
   font-size: 0.8rem;
   display: inline-block;
   margin-left: 5px;
-  /*margin-top: 10px;*/
   white-space: nowrap;
-  top: 0;
-  height: 100%;
-  vertical-align: middle;
-  float: left;
-  padding-top: 9px;
-  /*padding-bottom: 10px;*/
-  /*top: 0;*/
+  padding-right: 5px;
+  transform: translateY(-3px);
 }
 
 
