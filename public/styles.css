@@ -384,23 +384,25 @@ ul {
 }
 
 .shift-content-table {
-  display: block;
+  display: inline-block;
   width: 100%;
   margin: 0;
   padding: 0;
   border-spacing: 0;
 }
 
-.shift-content-td {
-  width: 65px;
-  /*width: 10%;*/
+.shift-content-div {
+  text-align: center;
+  display: inline-block;
+  /*width: 65px;*/
+  width: 10%;
   padding: 10px 0;
   /*border: 1px solid black;*/
   border-bottom: 1px solid #d7d7d7;
   border-right: 1px solid #d7d7d7;
 }
 
-.shift-content-td:last-child {
+.shift-content-div:last-child {
   border-right: none;
 }
 
@@ -411,8 +413,9 @@ ul {
   background-color: #0984e3;
   height: 35px;
   padding: 5px 0;
-  width: 200px;
-  left: 130px;
+  width: 40%;
+  /*width: fit-content;*/
+  left: 10%;
   border-radius: 10px;
 }
 
@@ -421,7 +424,28 @@ ul {
   width: 25px;
   font-size: 0.6rem;
 }
+/*
+.MuiAvatar-img {
+  background-size: cover;
+  background-position: top center;
+}*/
 
+.shift-element-header {
+  position: absolute;
+  /*border: 1px solid black;*/
+  font-size: 0.8rem;
+  display: inline-block;
+  margin-left: 5px;
+  /*margin-top: 10px;*/
+  white-space: nowrap;
+  top: 0;
+  height: 100%;
+  vertical-align: middle;
+  float: left;
+  padding-top: 9px;
+  /*padding-bottom: 10px;*/
+  /*top: 0;*/
+}
 
 
 
