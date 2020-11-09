@@ -385,9 +385,14 @@ ul {
   min-height: 170px;
 }
 
-.shift-content > :not(.arrow) {
-  overflow: hidden;
-}
+
+
+
+/*.shift-content-table > :not(.time-pointer) {
+  overflow: visible;
+}*/
+
+
 
 
 
@@ -397,6 +402,7 @@ ul {
   margin: 0;
   padding: 0;
   border-spacing: 0;
+  /*overflow: hidden;*/
 }
 
 .shift-content-div {
@@ -472,6 +478,25 @@ ul {
 .next-arrow {
   right: -100px;
 }
+
+.shift-content > :not(.arrow) {
+  overflow: hidden;
+}
+
+.time-pointer {
+  position: relative;
+  border: 2px solid black;
+  overflow: hidden;
+  /*border-left: 1px solid black;*/
+  /*border-left: 1px solid black;*/
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  z-index: 40;
+}
+
+
 
 
 

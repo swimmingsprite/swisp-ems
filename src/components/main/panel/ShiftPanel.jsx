@@ -20,6 +20,14 @@ function BackArrow(props) {
     </div>
 }
 
+function TimePointer(props) {
+    return <div>
+        <div className={"time-pointer"}>
+
+        </div>
+    </div>
+}
+
 
 /* var shifts = [
         {
@@ -79,7 +87,7 @@ function ShiftElement(props) {
     // shift-start - start = dlzka / 1% dlzka vysledok + "%"
 
 
-    console.log("LEFT PERCENTAGE STRING: " + left);
+
     var width = (shift.end - shift.start) / onePercent;
     var zeroLeftRadius = {};
     if (shift.start < props.currentView.startTimestamp) {
@@ -216,16 +224,18 @@ export default function ShiftPanel(props) {
         })
     }
 
-    return <div className="post-status-bar"
+    return <div className="post-status-bar shift-panel"
                 style={{width: "100%", minWidth: "440px"}}>
         <div className="shift-content">
             <NextArrow onClick={handleNextArrowClick} />
             <BackArrow onClick={handleBackArrowClick} />
             <div className="shift-content-table">
+
                 <div>
                     {mapHoursToDivs(currentView)}
                 </div>
 
+                <TimePointer />
                 {/*MAP SHIFTS TO SHIFT ELEMENTS*/}
 
                 {shifts
