@@ -1,6 +1,5 @@
 import React from 'react';
 import TextareaAutosize from 'react-autosize-textarea';
-import Home from "../sections/Home";
 
 export default function InputBar(props) {
     console.log("INPUT BAR props: " + typeof props.handleChange)

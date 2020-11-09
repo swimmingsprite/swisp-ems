@@ -7,6 +7,7 @@ import deepOrange from "@material-ui/core/colors/deepOrange";
 import deepPurple from "@material-ui/core/colors/deepPurple";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import {useDispatch, useSelector, useStore} from "react-redux";
 
 function NextArrow(props) {
     return <div className="arrow next-arrow" onClick={props.onClick}>
@@ -14,8 +15,17 @@ function NextArrow(props) {
     </div>
 }
 
+
+
 function BackArrow(props) {
-    return <div className="arrow back-arrow" onClick={props.onClick}>
+    var dispatch = useDispatch();
+
+    function dispatchClick() {
+        // var store = useSelector();
+        dispatch({ type: 'BACK_CLICK', text: "Clicked back !" })
+    }
+
+    return <div className="arrow back-arrow" onClick={dispatchClick}>
         <NavigateBeforeIcon style={{fontSize: "5rem"}}  />
     </div>
 }
@@ -143,6 +153,10 @@ function ShiftElement(props) {
 
 
 export default function ShiftPanel(props) {
+
+    var store = useStore();
+    console.log("STORE JE: "+store);
+
     var shifts = [
         {
             id: "6562656",
@@ -213,7 +227,14 @@ export default function ShiftPanel(props) {
         })
     }
 
+    store.subscribe(() => {
+        console.log("HANDLE SUBSCRIBE!")
+        handleBackArrowClick()
+    });
+
+
     var handleBackArrowClick = () => {
+        console.log("inside handle")
         setCurrentView(prevState => {
             return {
                 ...prevState,
