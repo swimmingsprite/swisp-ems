@@ -6,11 +6,11 @@ import Status from "../status/Status"
 export default function Home(props) {
 
 
+    /* todo fetch status list, from redux */
 
     const [statusList, setStatusList] = React.useState([]);
 
 
-    /* fetch status list */
 
     function onNewStatus(newStatusString) {
         /*post new status on server and fetch statusId and timestamp*/

@@ -1,27 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
-import {Provider, useStore} from "react-redux";
+import {Provider} from "react-redux";
 import {combineReducers, createStore} from "redux";
+import {arrowClickReducer, rootReducer} from "./reducers/reducers";
 
 var hello = "hello";
-
-var rootReducer = (state = hello, action) => {
-    console.log("REDUCER___________")
-    console.log("state: "+state);
-    console.log("action: "+{...action});
-    return state;
-}
-
-var arrowClickReducer = (state = null , action) => {
-    console.log("Arrow reducer: "+action.type+" text: "+action.text);
-    return {...state, type: action.type};
-}
 
 
 
 
 // const store = createStore(rootReducer, arrowClickReducer);
+/*
+const store = createStore(combineReducers(
+    {rootReducer: rootReducer, arrowClickReducer: arrowClickReducer}
+    ));
+*/
+
 const store = createStore(combineReducers(
     {rootReducer: rootReducer, arrowClickReducer: arrowClickReducer}
     ));

@@ -5,6 +5,8 @@ import {TwoSidePanel} from "../panel/Panel";
 
 export default function Employees(props) {
 
+    //todo fetch arrival, exits, lates from redux
+
     var arrivals = [
         {time: new Date().getTime(), name: "John Vasilijevovič" + Math.floor(Math.random() * 999)},
         {time: new Date().getTime(), name: "Alexandra Myšiakovovová" + Math.floor(Math.random() * 999)},

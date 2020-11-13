@@ -10,19 +10,22 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import {useDispatch, useSelector, useStore} from "react-redux";
 
 function NextArrow(props) {
-    return <div className="arrow next-arrow" onClick={props.onClick}>
+    var dispatch = useDispatch();
+
+    function dispatchClick() {
+        dispatch({ type: 'ARROW_NEXT_CLICK', text: "Clicked back !" })
+    }
+
+    return <div className="arrow next-arrow" onClick={dispatchClick}>
         <NavigateNextIcon style={{fontSize: "5rem"}} />
     </div>
 }
-
-
 
 function BackArrow(props) {
     var dispatch = useDispatch();
 
     function dispatchClick() {
-        // var store = useSelector();
-        dispatch({ type: 'BACK_CLICK', text: "Clicked back !" })
+        dispatch({ type: 'ARROW_BACK_CLICK', text: "Clicked back !" })
     }
 
     return <div className="arrow back-arrow" onClick={dispatchClick}>
@@ -54,12 +57,8 @@ function TimePointer(props) {
 
 function ShiftElement(props) {
     /*do propsu cely objekt jednej smeny*/
-    var currentView = props.currentView;
     var shift = props.value;
 
-    var aColor = "red";
-
-    console.log("PROPS C VIEW: " + props.cView)
 
     const styles = makeStyles((theme) => createStyles({
         avatar: {
@@ -155,7 +154,6 @@ function ShiftElement(props) {
 export default function ShiftPanel(props) {
 
     var store = useStore();
-    console.log("STORE JE: "+store);
 
     var shifts = [
         {
@@ -193,63 +191,52 @@ export default function ShiftPanel(props) {
     }
 
     var time = new Date().setHours(new Date().getHours(), 0, 0, 0);
-    var startTimestamp = new Date(time).getTime() - 18000000
 
-    var time2 = new Date().setHours(new Date().getHours(), 0, 0, 0);
-    var endTimestamp = new Date(time).getTime() + 18000000 - 1
-
-    var test = new Date(startTimestamp).toLocaleTimeString();
-    var test2 = new Date(endTimestamp).toLocaleTimeString();
-    console.log("TEST: " + test);
-    console.log("TEST 2: " + test2);
 
     var [currentView, setCurrentView] = React.useState({
-        startHour: new Date().getHours() - 5,
-        endHour: new Date().getHours() + 4,
         currentTimestamp: new Date().getTime(),
-        startTimestamp: startTimestamp,
-        endTimestamp: endTimestamp,
+        startTimestamp: new Date(time).getTime() - 18000000,
+        endTimestamp: new Date(time).getTime() + 18000000 - 1,
     })
 
-    console.log("start: " + currentView.start + " " +
-        "end: " + currentView.end + " " +
-        "current: " + currentView.current +
-        "start timestamp:" + currentView.startTimestamp);
-
-    var handleNextArrowClick = () => {
+    var handleArrowClick = (type) => {
         setCurrentView(prevState => {
-            return {
-                ...prevState,
+            if (type === "ARROW_NEXT_CLICK") return {
                 currentTimestamp: new Date().getTime(),
-                startTimestamp: prevState.startTimestamp+3600000,
-                endTimestamp: prevState.endTimestamp+3600000
+                startTimestamp: currentView.startTimestamp+3600000,
+                endTimestamp: currentView.endTimestamp+3600000
             }
-        })
+            else if (type === "ARROW_BACK_CLICK") return {
+                currentTimestamp: new Date().getTime(),
+                startTimestamp: currentView.startTimestamp-3600000,
+                endTimestamp: currentView.endTimestamp-3600000
+            }
+            return prevState;
+        });
+        /*store.dispatch({
+            type: "CURRENT_VIEW_CHANGE",
+            value: {
+                startTimestamp: currentView.startTimestamp,
+                endTimestamp: currentView.endTimestamp
+            }
+        })*/
     }
 
     store.subscribe(() => {
-        console.log("HANDLE SUBSCRIBE!")
-        handleBackArrowClick()
+        var state = store.getState();
+        console.log("state je: "+state.arrowClickReducer.lastAction);
+        if (state.arrowClickReducer.lastAction === "ARROW_NEXT_CLICK") handleArrowClick("NEXT_CLICK")
+        else if (state.arrowClickReducer.lastAction === "ARROW_BACK_CLICK") handleArrowClick("BACK_CLICK")
     });
 
 
-    var handleBackArrowClick = () => {
-        console.log("inside handle")
-        setCurrentView(prevState => {
-            return {
-                ...prevState,
-                currentTimestamp: new Date().getTime(),
-                startTimestamp: prevState.startTimestamp-3600000,
-                endTimestamp: prevState.endTimestamp-3600000
-            }
-        })
-    }
+
 
     return <div className="post-status-bar shift-panel"
                 style={{width: "100%", minWidth: "440px"}}>
         <div className="shift-content">
-            <NextArrow onClick={handleNextArrowClick} />
-            <BackArrow onClick={handleBackArrowClick} />
+            <NextArrow />
+            <BackArrow />
             <div className="shift-content-table">
 
                 <div>
