@@ -14,11 +14,10 @@ export function getCurrentTimestamp() {
     return new Date().getTime();
 }
 
-export function currentViewFilter(shift, currentView) {
-    console.log("FILTER: "+shift+" cview: "+currentView)
-    if (shift.start >= currentView.startTimestamp && shift.start < currentView.endTimestamp) return true;
-    if (shift.end >= currentView.startTimestamp && shift.end < currentView.endTimestamp) return true;
-    if (shift.start < currentView.startTimestamp && shift.end > currentView.endTimestamp) return true;
+export function currentViewFilter(element, currentView) {
+    if (element.start >= currentView.startTimestamp && element.start < currentView.endTimestamp) return true;
+    if (element.end >= currentView.startTimestamp && element.end < currentView.endTimestamp) return true;
+    if (element.start < currentView.startTimestamp && element.end > currentView.endTimestamp) return true;
     return false;
 }
 
@@ -36,7 +35,7 @@ export function getElementWidth(shift, currentView) {
 
 export function getNextCurrentView(currentView) {
     return {
-        currentTimeStamp: getCurrentTimestamp(),
+        currentTimestamp: getCurrentTimestamp(),
         startTimestamp: currentView.startTimestamp+3600000,
         endTimestamp: currentView.endTimestamp+3600000
     }
@@ -44,7 +43,7 @@ export function getNextCurrentView(currentView) {
 
 export function getBackCurrentView(currentView) {
     return {
-        currentTimeStamp: getCurrentTimestamp(),
+        currentTimestamp: getCurrentTimestamp(),
         startTimestamp: currentView.startTimestamp-3600000,
         endTimestamp: currentView.endTimestamp-3600000
     }

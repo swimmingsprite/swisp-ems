@@ -157,7 +157,7 @@ export default function ShiftPanel(props) {
         return divs;
     }
 
-// <div style={{position: "relative"}}>
+
     return <div className="post-status-bar shift-panel"
                 style={{width: "100%", minWidth: "440px", position: "relative"}}>
         <NextArrow onClick={() => {store.dispatch({type: "CURRENT_VIEW_ARROW_NEXT_CLICK"})}}/>
@@ -168,7 +168,8 @@ export default function ShiftPanel(props) {
                     {mapHoursToDivs()}
                 </div>
 
-                <TimePointer/>
+                {currentViewFilter({start: new Date().getTime()},
+                    currentView) && <TimePointer/>}
 
                 {shifts
                     .filter(shift => {
