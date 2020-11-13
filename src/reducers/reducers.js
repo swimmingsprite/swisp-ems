@@ -1,10 +1,17 @@
-import {getCurrentTimestamp, getInitEndTime, getInitStartTime} from "../logic/shifts/currentView";
+import {
+    getBackCurrentView,
+    getCurrentTimestamp,
+    getInitEndTime,
+    getInitStartTime,
+    getNextCurrentView
+} from "../logic/shifts/currentView";
 
 export var arrowClickReducer = (state = {lastAction: null}, action) => {
     console.log("Arrow reducer: " + action.type + " text: " + action.text);
     if (action.type.startsWith("ARROW")) return {...state, lastAction: action.type};
     return state;
 }
+
 export var rootReducer = (state = {currentSection: "Home"}, action) => {
     console.log("REDUCER___________")
     console.log("state: " + state);
@@ -41,6 +48,12 @@ var shifts = {
 export var shiftReducer = (state = shifts, action) => {
     switch (action.type) {
         case "CURRENT_VIEW_CHANGE": return {...state, currentView: action.currentView};
+        case "CURRENT_VIEW_CURRENT_TIMESTAMP_CHANGE": return {...state, currentView: {
+            ...state.currentView, currentTimestamp: action.payload }};
+        case "CURRENT_VIEW_ARROW_BACK_CLICK": return {...state, currentView: getBackCurrentView(state.currentView)};
+        case "CURRENT_VIEW_ARROW_NEXT_CLICK": return {...state, currentView: getNextCurrentView(state.currentView)};
+
+
         default: return state;
     }
 

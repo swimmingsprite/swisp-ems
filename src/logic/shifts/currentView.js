@@ -14,7 +14,7 @@ export function getCurrentTimestamp() {
     return new Date().getTime();
 }
 
-export function currentViewShiftFilter(shift, currentView) {
+export function currentViewFilter(shift, currentView) {
     console.log("FILTER: "+shift+" cview: "+currentView)
     if (shift.start >= currentView.startTimestamp && shift.start < currentView.endTimestamp) return true;
     if (shift.end >= currentView.startTimestamp && shift.end < currentView.endTimestamp) return true;
@@ -34,6 +34,21 @@ export function getElementWidth(shift, currentView) {
     return (shift.end - shift.start) / onePercent;
 }
 
+export function getNextCurrentView(currentView) {
+    return {
+        currentTimeStamp: getCurrentTimestamp(),
+        startTimestamp: currentView.startTimestamp+3600000,
+        endTimestamp: currentView.endTimestamp+3600000
+    }
+}
+
+export function getBackCurrentView(currentView) {
+    return {
+        currentTimeStamp: getCurrentTimestamp(),
+        startTimestamp: currentView.startTimestamp-3600000,
+        endTimestamp: currentView.endTimestamp-3600000
+    }
+}
 
 
 

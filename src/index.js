@@ -27,6 +27,15 @@ const store = createStore(combineReducers(
 
 console.log("STORE VALUES: "+Object.keys(store));
 
+/*todo activate only if shift section is active*/
+setInterval(() => {
+    console.log("UPDATING CURRENT TIMESTAMP... "+new Date().getTime())
+    store.dispatch({
+        type: "CURRENT_VIEW_CURRENT_TIMESTAMP_CHANGE",
+        payload: new Date().getTime()
+    })
+},20000)
+
 
 ReactDOM.render(<Provider store={store}> <App /> </Provider>, document.getElementById("root"));
 

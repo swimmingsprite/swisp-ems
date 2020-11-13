@@ -8,28 +8,16 @@ import deepPurple from "@material-ui/core/colors/deepPurple";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import {useDispatch, useSelector, useStore} from "react-redux";
-import {currentViewShiftFilter, getElementLeft, getElementWidth} from "../../../logic/shifts/currentView";
+import {currentViewFilter, getElementLeft, getElementWidth} from "../../../logic/shifts/currentView";
 
 function NextArrow(props) {
-    var dispatch = useDispatch();
-
-    function dispatchClick() {
-        dispatch({type: 'ARROW_NEXT_CLICK', text: "Clicked back !"})
-    }
-
-    return <div className="arrow next-arrow" onClick={dispatchClick}>
+    return <div className="arrow next-arrow" onClick={props.onClick}>
         <NavigateNextIcon style={{fontSize: "5rem"}}/>
     </div>
 }
 
 function BackArrow(props) {
-    var dispatch = useDispatch();
-
-    function dispatchClick() {
-        dispatch({type: 'ARROW_BACK_CLICK', text: "Clicked back !"})
-    }
-
-    return <div className="arrow back-arrow" onClick={dispatchClick}>
+    return <div className="arrow back-arrow" onClick={props.onClick}>
         <NavigateBeforeIcon style={{fontSize: "5rem"}}/>
     </div>
 }
@@ -41,11 +29,10 @@ function TimePointer(props) {
 
     return <div>
         <div className={"time-pointer"}
-             style={{left: getElementLeft(currentView.currentTimestamp, currentView)+"%"}}
+             style={{left: getElementLeft(currentView.currentTimestamp, currentView) + "%"}}
         ></div>
     </div>
 }
-
 
 
 function ShiftElement(props) {
@@ -173,7 +160,7 @@ export default function ShiftPanel(props) {
 // <div style={{position: "relative"}}>
     return <div className="post-status-bar shift-panel"
                 style={{width: "100%", minWidth: "440px", position: "relative"}}>
-        <NextArrow/>
+        <NextArrow onClick={() => {store.dispatch({type: "CURRENT_VIEW_ARROW_NEXT_CLICK"})}}/>
         <div className="shift-content">
             <div className="shift-content-table">
 
@@ -185,7 +172,7 @@ export default function ShiftPanel(props) {
 
                 {shifts
                     .filter(shift => {
-                        return currentViewShiftFilter(shift, currentView);
+                        return currentViewFilter(shift, currentView);
                     })
                     .map(shift => {
                         return <ShiftElement value={shift} currentView={currentView}/>
@@ -195,7 +182,7 @@ export default function ShiftPanel(props) {
             </div>
         </div>
 
-        <BackArrow/>
+        <BackArrow onClick={() => {store.dispatch({type: "CURRENT_VIEW_ARROW_BACK_CLICK"})}} />
 
     </div>
     // </div>
