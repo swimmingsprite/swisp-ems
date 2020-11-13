@@ -8,16 +8,17 @@ import deepPurple from "@material-ui/core/colors/deepPurple";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import {useDispatch, useSelector, useStore} from "react-redux";
+import {currentViewShiftFilter, getElementLeft, getElementWidth} from "../../../logic/shifts/currentView";
 
 function NextArrow(props) {
     var dispatch = useDispatch();
 
     function dispatchClick() {
-        dispatch({ type: 'ARROW_NEXT_CLICK', text: "Clicked back !" })
+        dispatch({type: 'ARROW_NEXT_CLICK', text: "Clicked back !"})
     }
 
     return <div className="arrow next-arrow" onClick={dispatchClick}>
-        <NavigateNextIcon style={{fontSize: "5rem"}} />
+        <NavigateNextIcon style={{fontSize: "5rem"}}/>
     </div>
 }
 
@@ -25,39 +26,35 @@ function BackArrow(props) {
     var dispatch = useDispatch();
 
     function dispatchClick() {
-        dispatch({ type: 'ARROW_BACK_CLICK', text: "Clicked back !" })
+        dispatch({type: 'ARROW_BACK_CLICK', text: "Clicked back !"})
     }
 
     return <div className="arrow back-arrow" onClick={dispatchClick}>
-        <NavigateBeforeIcon style={{fontSize: "5rem"}}  />
+        <NavigateBeforeIcon style={{fontSize: "5rem"}}/>
     </div>
 }
 
 function TimePointer(props) {
-    return <div>
-        <div className={"time-pointer"}>
+    var currentView = useSelector((state) => {
+        return state.shiftReducer.currentView
+    });
 
-        </div>
+    return <div>
+        <div className={"time-pointer"}
+             style={{left: getElementLeft(currentView.currentTimestamp, currentView)+"%"}}
+        ></div>
     </div>
 }
 
 
-/* var shifts = [
-        {
-            id: "6562656",
-            start: new Date().getTime() - (60000 * 20),
-            end: new Date().getTime() + (60000 * 30),
-            employees: [
-                {name: "Jožo Baranek", id: 1885959, avatar: "image base64 <--"},
-                {name: "Majko Zguruna", id: 1885958, avatar: "image base64 <--"},
-                {name: "Harry Potter", id: 1885955, avatar: "image base64 <--"}
-            ]
-        },
-    ]*/
 
 function ShiftElement(props) {
     /*do propsu cely objekt jednej smeny*/
     var shift = props.value;
+
+    var currentView = useSelector((state) => {
+        return state.shiftReducer.currentView
+    });
 
 
     const styles = makeStyles((theme) => createStyles({
@@ -88,20 +85,13 @@ function ShiftElement(props) {
 
     var avClasses = avStyles();
 
-    var length = (props.currentView.endTimestamp - props.currentView.startTimestamp);
-    var onePercent = length / 100;
-    var left = (shift.start - props.currentView.startTimestamp) / onePercent;
+    var left = getElementLeft(shift.start, currentView)
+    var width = getElementWidth(shift, currentView)
 
-    //   [-----*----------*--------------]  end - start = dlzka, dlzka / 100 = 1% dlzka,
-    // shift-start - start = dlzka / 1% dlzka vysledok + "%"
-
-
-
-    var width = (shift.end - shift.start) / onePercent;
     var zeroLeftRadius = {};
     if (shift.start < props.currentView.startTimestamp) {
         left = 0;
-        width = (shift.end - props.currentView.startTimestamp) / onePercent;
+        width = getElementWidth({end: shift.end, start: currentView.startTimestamp}, currentView)
         zeroLeftRadius = {
             borderBottomLeftRadius: 0,
             borderTopLeftRadius: 0
@@ -113,8 +103,7 @@ function ShiftElement(props) {
                     left: left + "%",
                     width: width + "%",
                     ...zeroLeftRadius
-                }
-                }>
+                }}>
         <div style={{
             display: "inline-block"
         }
@@ -155,29 +144,21 @@ export default function ShiftPanel(props) {
 
     var store = useStore();
 
-    var shifts = [
-        {
-            id: "6562656",
-            start: new Date().getTime() - (60000 * 540),
-            end: new Date().getTime() + (60000 * 240),
-            employees: [
-                {name: "Jožo Baranek", id: 1885959, avatar: "image base64 <--"},
-                {name: "Majko Zguruna", id: 1885958, avatar: "image base64 <--"},
-                {name: "Harry Potter", id: 1885955, avatar: "image base64 <--"}
-            ]
-        },
+    var currentView = useSelector((state) => {
+        return state.shiftReducer.currentView
+    });
+    var shifts = useSelector((state) => {
+        return state.shiftReducer.shifts
+    });
 
-    ]
-
-    console.log("SHIFT START TIME:" + new Date(shifts[0].start).toLocaleTimeString());
-    console.log("SHIFT END TIME:" + new Date(shifts[0].end).toLocaleTimeString());
-
-    function mapHoursToDivs(cView) {
+    function mapHoursToDivs() {
+        console.log("MAP HOURS TO DIVS******************")
         var hours = [];
-        for (var x = cView.startTimestamp; x < cView.endTimestamp;) {
+        for (var x = currentView.startTimestamp; x < currentView.endTimestamp;) {
             hours.push(new Date(x).getHours());
             x += 3600000;
         }
+        console.log("HOURS: " + Object.values(hours));
 
         var divs = [];
         hours.forEach(value => {
@@ -187,71 +168,24 @@ export default function ShiftPanel(props) {
         })
 
         return divs;
-
     }
 
-    var time = new Date().setHours(new Date().getHours(), 0, 0, 0);
-
-
-    var [currentView, setCurrentView] = React.useState({
-        currentTimestamp: new Date().getTime(),
-        startTimestamp: new Date(time).getTime() - 18000000,
-        endTimestamp: new Date(time).getTime() + 18000000 - 1,
-    })
-
-    var handleArrowClick = (type) => {
-        setCurrentView(prevState => {
-            if (type === "ARROW_NEXT_CLICK") return {
-                currentTimestamp: new Date().getTime(),
-                startTimestamp: currentView.startTimestamp+3600000,
-                endTimestamp: currentView.endTimestamp+3600000
-            }
-            else if (type === "ARROW_BACK_CLICK") return {
-                currentTimestamp: new Date().getTime(),
-                startTimestamp: currentView.startTimestamp-3600000,
-                endTimestamp: currentView.endTimestamp-3600000
-            }
-            return prevState;
-        });
-        /*store.dispatch({
-            type: "CURRENT_VIEW_CHANGE",
-            value: {
-                startTimestamp: currentView.startTimestamp,
-                endTimestamp: currentView.endTimestamp
-            }
-        })*/
-    }
-
-    store.subscribe(() => {
-        var state = store.getState();
-        console.log("state je: "+state.arrowClickReducer.lastAction);
-        if (state.arrowClickReducer.lastAction === "ARROW_NEXT_CLICK") handleArrowClick("NEXT_CLICK")
-        else if (state.arrowClickReducer.lastAction === "ARROW_BACK_CLICK") handleArrowClick("BACK_CLICK")
-    });
-
-
-
-
+// <div style={{position: "relative"}}>
     return <div className="post-status-bar shift-panel"
-                style={{width: "100%", minWidth: "440px"}}>
+                style={{width: "100%", minWidth: "440px", position: "relative"}}>
+        <NextArrow/>
         <div className="shift-content">
-            <NextArrow />
-            <BackArrow />
             <div className="shift-content-table">
 
                 <div>
-                    {mapHoursToDivs(currentView)}
+                    {mapHoursToDivs()}
                 </div>
 
-                <TimePointer />
-                {/*MAP SHIFTS TO SHIFT ELEMENTS*/}
+                <TimePointer/>
 
                 {shifts
                     .filter(shift => {
-                        if (shift.start >= currentView.startTimestamp && shift.start < currentView.endTimestamp) return true;
-                        if (shift.end >= currentView.startTimestamp && shift.end < currentView.endTimestamp) return true;
-                        if (shift.start < currentView.startTimestamp && shift.end > currentView.endTimestamp) return true;
-                        return false;
+                        return currentViewShiftFilter(shift, currentView);
                     })
                     .map(shift => {
                         return <ShiftElement value={shift} currentView={currentView}/>
@@ -261,6 +195,8 @@ export default function ShiftPanel(props) {
             </div>
         </div>
 
+        <BackArrow/>
 
     </div>
+    // </div>
 }

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./components/App";
 import {Provider} from "react-redux";
 import {combineReducers, createStore} from "redux";
-import {arrowClickReducer, rootReducer} from "./reducers/reducers";
+import {arrowClickReducer, rootReducer, shiftReducer} from "./reducers/reducers";
 
 var hello = "hello";
 
@@ -18,9 +18,14 @@ const store = createStore(combineReducers(
 */
 
 const store = createStore(combineReducers(
-    {rootReducer: rootReducer, arrowClickReducer: arrowClickReducer}
+    {rootReducer: rootReducer, arrowClickReducer: arrowClickReducer, shiftReducer: shiftReducer }
     ));
 
+/*const store = createStore(combineReducers(
+    [ rootReducer, arrowClickReducer ]
+    ));*/
+
+console.log("STORE VALUES: "+Object.keys(store));
 
 
 ReactDOM.render(<Provider store={store}> <App /> </Provider>, document.getElementById("root"));
