@@ -1,5 +1,6 @@
 import React from 'react';
 import TextareaAutosize from 'react-autosize-textarea';
+import {textEmojisToUnicode} from "../../../logic/emojis/emojis";
 
 export default function InputBar(props) {
     console.log("INPUT BAR props: " + typeof props.handleChange)
@@ -14,6 +15,7 @@ export default function InputBar(props) {
             setStatusInput("");
             console.log("ENTER STLAčENY")
         }
+        console.log("Event target value je: "+event.target.value)
         console.log("ENTER NEBOL STLAčENY")
 
     }
@@ -21,7 +23,9 @@ export default function InputBar(props) {
     return (
 
         <TextareaAutosize
-            onChange={(event) => {setStatusInput(event.target.value)}}
+            onChange={(event) => {
+                // setStatusInput(event.target.value)}}
+                setStatusInput(textEmojisToUnicode(event.target.value))}}
             onKeyDown={handleKeyDown}
             className={props.isComment ? "input-bar input-bar-comment" : "input-bar"}
 
