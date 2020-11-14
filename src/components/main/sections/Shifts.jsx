@@ -1,7 +1,7 @@
 import React from 'react';
 import Title, {SubTitle} from "../title/Title";
 import ShiftPanel from "../panel/ShiftPanel";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 
 export default function Shifts(props) {
@@ -31,9 +31,21 @@ export default function Shifts(props) {
     console.log("___*shift title filters* typeof: "+ typeof shiftTitleFilters);
     console.log("___*shift title filters*: "+ shiftTitleFilters);
     console.log("___*shift title filters list*: "+ shiftTitleFilters.placesList);
+    var dispatch = useDispatch();
+    var showList = useSelector((state) => {
+        return state.shiftReducer.headerFilter.hover;
+    })
 
     return <div>
-        <Title text="Smeny" filters={shiftTitleFilters}/>
+        <Title text="Smeny"
+               filters={shiftTitleFilters}
+               // onClickItem={}
+               onMouseOver={() => {dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilter: {hover: true, timeout: false}})}}
+               onMouseOut={() => {dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilter: {hover: false, timeout: true }})}}
+               /*onListOver={() => {dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilter: {hover: false, listHover: true}})}}
+               onListOut={() => {dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilter: {hover: null, listHover: false}})}}*/
+               showList={showList}
+        />
         <SubTitle text="Prebiehajúce"/>
         <ShiftPanel />
 

@@ -5,6 +5,7 @@ import {
     getInitStartTime,
     getNextCurrentView
 } from "../logic/shifts/currentView";
+import {useDispatch, useSelector, useStore} from "react-redux";
 
 export var arrowClickReducer = (state = {lastAction: null}, action) => {
     console.log("Arrow reducer: " + action.type + " text: " + action.text);
@@ -12,7 +13,7 @@ export var arrowClickReducer = (state = {lastAction: null}, action) => {
     return state;
 }
 
-export var rootReducer = (state = {currentSection: "Home"}, action) => {
+export var rootReducer = (state = {currentSection: "Shifts"}, action) => {
     console.log("REDUCER___________")
     console.log("state: " + state);
     console.log("action: " + {...action});
@@ -42,11 +43,27 @@ var shifts = {
         startTimestamp: getInitStartTime(),
         endTimestamp: getInitEndTime(),
     },
-    selectedPlaceId: null
+    selectedPlaceId: null,
+    headerFilter: {hover: false, timeout: false}
 }
 
 
 export var shiftReducer = (state = shifts, action) => {
+    /*function handleHoverChange() {
+        if (action.headerFilter.hover === false && action.headerFilter.timeout ) {
+            setTimeout(() => {
+                var headerFilter = useSelector(state => {
+                    return state.shiftReducer.headerFilter.hover
+                });
+                if (headerFilter === false) {
+                    var store = useStore();
+                    store.dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilter: {hover: false, timeout: false}})
+                }
+            }, 500)
+        }
+        //{...state, headerFilter: action.headerFilter };
+    }*/
+
     switch (action.type) {
         case "CURRENT_VIEW_CHANGE": return {...state, currentView: action.currentView};
         case "CURRENT_VIEW_CURRENT_TIMESTAMP_CHANGE": return {...state, currentView: {
@@ -54,6 +71,8 @@ export var shiftReducer = (state = shifts, action) => {
         case "CURRENT_VIEW_ARROW_BACK_CLICK": return {...state, currentView: getBackCurrentView(state.currentView)};
         case "CURRENT_VIEW_ARROW_NEXT_CLICK": return {...state, currentView: getNextCurrentView(state.currentView)};
         case "CURRENT_PLACE_CHANGE": return {...state, selectedPlaceId: action.selectedPlaceId };
+        case "HEADER_FILTER_HOVER_CHANGE": return {...state, headerFilter: {hover: action.headerFilter.hover}};
+
         default: return state;
     }
 }
