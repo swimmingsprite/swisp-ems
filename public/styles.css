@@ -130,6 +130,10 @@ ul {
   margin-top: 50px;
 }
 
+.title h1 {
+  display: inline-block;
+}
+
 .sub-title {
   font-family: "Montserrat", sans-serif;
   font-size: 0.6rem;

@@ -41,7 +41,8 @@ var shifts = {
         currentTimestamp: getCurrentTimestamp(),
         startTimestamp: getInitStartTime(),
         endTimestamp: getInitEndTime(),
-    }
+    },
+    selectedPlaceId: null
 }
 
 
@@ -52,9 +53,84 @@ export var shiftReducer = (state = shifts, action) => {
             ...state.currentView, currentTimestamp: action.payload }};
         case "CURRENT_VIEW_ARROW_BACK_CLICK": return {...state, currentView: getBackCurrentView(state.currentView)};
         case "CURRENT_VIEW_ARROW_NEXT_CLICK": return {...state, currentView: getNextCurrentView(state.currentView)};
-
-
+        case "CURRENT_PLACE_CHANGE": return {...state, selectedPlaceId: action.selectedPlaceId };
         default: return state;
     }
-
 }
+
+var places = [
+    {
+        id: 84486565,
+        name: "Kaufland Slovenská",
+        departments: [
+            {
+                id: 91354565,
+                name: "oddelenie záhrad"
+            }
+        ]
+    },
+    {
+        id: 97486256,
+        name: "Kaufland Stredočeská",
+        departments: [
+            {
+                id: 16549855,
+                name: "oddelenie nápojov"
+            }
+        ]
+    },
+]
+
+export var placeReducer = (state = places, action) => {
+    switch (action.type) {
+        case "PLACE_ADD": return {...state, places: [state.push(action.payload)]};
+        default: return state;
+    }
+}
+
+var user = {
+    id: 1515584841,
+    name: "John Barney",
+    place: {
+        id: 97486256,
+        name: "Kaufland Stredočeská"
+    }
+}
+
+
+export var userReducer = (state = user, action) => {
+    switch (action.type) {
+        // case "PLACE_ADD": return {...state, places: [state.push(action.payload)]};
+        default: return state;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 import React from 'react';
-import Title, {SubTitle} from "../Title";
+import Title, {SubTitle} from "../title/Title";
 import {TwoSidePanel} from "../panel/Panel";
 
 
