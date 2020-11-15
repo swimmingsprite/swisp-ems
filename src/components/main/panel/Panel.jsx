@@ -6,10 +6,7 @@ import {timestampToShortDateTime} from "../TextLines";
 function mapValuesToPanel(value) {
     console.log("values in map: " + value)
 
-    return <li style={{
-        display: "block",
-        marginBottom: "5px"
-    }}>
+    return <li className={"panel-content-li"}>
         <Avatar className="post-avatar" style={
             {
                 height: "20px",

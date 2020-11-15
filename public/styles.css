@@ -321,6 +321,11 @@ ul {
     height: 260px;
 }
 
+.panel-content-li {
+    display: block;
+   padding: 2.5px 0;
+}
+
 .panel-content:hover {
     overflow-y: scroll;
     overflow-y: overlay;
@@ -527,6 +532,11 @@ ul {
 
 .title-filter-list-li:hover {
     background-color: rgba(238, 238, 238, 0.4)
+}
+
+.panel-content li:hover {
+    background-color: rgba(238, 238, 238, 0.4);
+    cursor: pointer
 }
 
 

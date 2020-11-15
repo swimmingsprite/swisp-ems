@@ -52,6 +52,12 @@ export function getBackCurrentView(currentView) {
     }
 }
 
+export function getEmployeesShiftNames(employees) {
+    return employees.map((employee, index) => {
+        return index === (employees.length-1) ? employee.name : employee.name+", "
+    });
+}
+
 
 
 
