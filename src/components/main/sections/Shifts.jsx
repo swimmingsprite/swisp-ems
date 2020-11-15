@@ -12,43 +12,59 @@ export default function Shifts(props) {
     * redux ma zoznam miest
     *
     * */
+    var dispatch = useDispatch();
+
 
     var shiftTitleFilters = useSelector((state) => {
         var selectedPlaceId = state.shiftReducer.selectedPlaceId
-        if (selectedPlaceId === null) selectedPlaceId = state.userReducer.place.id;
-        return [{
-            selectedPlaceId: selectedPlaceId,
-            list: state.placeReducer
-        }]
+        if (selectedPlaceId === null) {
+            selectedPlaceId = state.userReducer.place.id;
+            dispatch({type: "CURRENT_PLACE_CHANGE", selectedPlaceId: state.userReducer.place.id})
+        }
+        return [
+            {
+                selectedPlaceId: selectedPlaceId,
+                list: state.placeReducer
+            },
+            {
+                selectedPlaceId: selectedPlaceId,
+                list: [{name: "Gogoľova"}, {name: "Mimomestská"}]
+            }
+        ]
     })
 
-        /*[{
+    /*[{
 
-        selectedId: "Kaufland Slovenská,
-        list: [{name: "Kaufland Slovenská", id: 554451}] //list miest, z reduxu
-    }]*/
+    selectedId: "Kaufland Slovenská,
+    list: [{name: "Kaufland Slovenská", id: 554451}] //list miest, z reduxu
+}]*/
 
-    console.log("___*shift title filters* typeof: "+ typeof shiftTitleFilters);
-    console.log("___*shift title filters*: "+ shiftTitleFilters);
-    console.log("___*shift title filters list*: "+ shiftTitleFilters.list);
-    var dispatch = useDispatch();
+    console.log("___*shift title filters* typeof: " + typeof shiftTitleFilters);
+    console.log("___*shift title filters*: " + shiftTitleFilters);
+    console.log("___*shift title filters list*: " + shiftTitleFilters.list);
     var showList = useSelector((state) => {
         return state.shiftReducer.headerFilterHover;
     })
 
+    //todo fix multiple filters bug
+
     return <div>
         <Title text="Smeny"
                filters={shiftTitleFilters}
-               // onClickItem={}
-               onMouseOver={() => {dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilterHover: true})}}
-               onMouseOut={() => {dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilterHover: false})}}
-               /*onListOver={() => {dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilter: {hover: false, listHover: true}})}}
-               onListOut={() => {dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilter: {hover: null, listHover: false}})}}*/
+               onClickItem={(newId) => {
+                   dispatch({type: "CURRENT_PLACE_CHANGE", selectedPlaceId: newId});
+                   dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilterHover: false})
+               }}
+               onMouseOver={() => {
+                   dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilterHover: true})
+               }}
+               onMouseOut={() => {
+                   dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilterHover: false})
+               }}
                showList={showList}
         />
         <SubTitle text="Prebiehajúce"/>
-        <ShiftPanel />
-
+        <ShiftPanel/>
 
 
     </div>

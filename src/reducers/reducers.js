@@ -35,7 +35,19 @@ var shifts = {
                 {name: "Jožo Baranek", id: 1885959, avatar: "image base64 <--", avatarColor: "red"},
                 {name: "Majko Zguruna", id: 1885958, avatar: "image base64 <--", avatarColor: "green"},
                 {name: "Harry Potter", id: 1885955, avatar: "image base64 <--", avatarColor: "violet"}
-            ]
+            ],
+            placeId: 84486565
+        },
+        {
+            id: "808985",
+            start: new Date().getTime() - (60000 * 540),
+            end: new Date().getTime() + (60000 * 140),
+            employees: [
+                {name: "Michal Veselý", id: 1885959, avatar: "image base64 <--", avatarColor: "red"},
+                {name: "Angela Funny", id: 1885958, avatar: "image base64 <--", avatarColor: "green"},
+                {name: "Sirius Black", id: 1885955, avatar: "image base64 <--", avatarColor: "violet"}
+            ],
+            placeId: 97486256
         }
     ],
     currentView: {
@@ -111,7 +123,7 @@ var user = {
     id: 1515584841,
     name: "John Barney",
     place: {
-        id: 97486256,
+        id: 84486565,
         name: "Kaufland Stredočeská"
     }
 }

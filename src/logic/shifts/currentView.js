@@ -14,10 +14,13 @@ export function getCurrentTimestamp() {
     return new Date().getTime();
 }
 
-export function currentViewFilter(element, currentView) {
-    if (element.start >= currentView.startTimestamp && element.start < currentView.endTimestamp) return true;
-    if (element.end >= currentView.startTimestamp && element.end < currentView.endTimestamp) return true;
-    if (element.start < currentView.startTimestamp && element.end > currentView.endTimestamp) return true;
+export function currentViewFilter(element, currentView, selectedPlaceId) {
+    if (element.placeId === selectedPlaceId) {
+        if (element.start >= currentView.startTimestamp && element.start < currentView.endTimestamp) return true;
+        if (element.end >= currentView.startTimestamp && element.end < currentView.endTimestamp) return true;
+        if (element.start < currentView.startTimestamp && element.end > currentView.endTimestamp) return true;
+    }
+    console.log("returning false");
     return false;
 }
 

@@ -14,7 +14,8 @@ function mapFilters(filter, props) {
 
         onMouseOver={() => {
             hideList = false;
-            props.onMouseOver()}}
+            props.onMouseOver()
+        }}
         onMouseOut={() => {
             setTimeout(() => {
                 hideList && props.onMouseOut()
@@ -27,19 +28,19 @@ function mapFilters(filter, props) {
                            style={{width: "12px", position: "relative", top: "5px", opacity: "0.9"}}
         />}
 
-        { props.showList && <ul
+        {props.showList && <ul
             className={"title-filter-list"}
-            >
+        >
             {filter.list.map(place => {
                 return <li
                     className={"title-filter-list-li"}
                     onClick={() => {
                         props.onClickItem(place.id)
                     }}
-                           onMouseOver={() => {
-                               hideList = false;
-                               props.onMouseOver()
-                           }}
+                    onMouseOver={() => {
+                        hideList = false;
+                        props.onMouseOver()
+                    }}
 
                 >{place.name}</li>
             })}
@@ -61,10 +62,10 @@ function SubTitle(props) {
 
 export default function Title(props) {
 
-    console.log("2___*shift title filters* typeof: " + typeof props.filters);
+    /*console.log("2___*shift title filters* typeof: " + typeof props.filters);
     console.log("2___*shift title filters*: " + props.filters);
     if (props.filters) console.log("2___*shift title filters list*: " + Object.values(props.filters));
-
+*/
     return (
         <div className="title" style={props.style}>
             <h1>{props.text}</h1>

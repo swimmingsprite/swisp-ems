@@ -173,9 +173,11 @@ export default function ShiftPanel(props) {
 
                 {shifts
                     .filter(shift => {
-                        return currentViewFilter(shift, currentView);
+                        console.log("In filter je: "+shift);
+                        return currentViewFilter(shift, currentView, store.getState().shiftReducer.selectedPlaceId);
                     })
                     .map(shift => {
+                        console.log("Shift je: "+shift);
                         return <ShiftElement value={shift} currentView={currentView}/>
                     })}
 
