@@ -7,7 +7,7 @@ function mapFilters(filter, props) {
     var hideList = true;
 
     var selectedPlaceId = filter.selectedPlaceId;
-    var filteredPlace = filter.list.filter(place => place.id === selectedPlaceId);
+    var filteredPlace = filter.list.filter(place => place.id === selectedPlaceId); //todo
     var placeName = filteredPlace.length > 0 ? filteredPlace[0].name : null;
     return <div
         className={"title-filter"}
@@ -22,13 +22,13 @@ function mapFilters(filter, props) {
             }, 350);
         }}
     >
-        {placeName}
+        <div style={{textAlign: "right"}}>{placeName}
         &nbsp;&nbsp;
         {placeName && <img src="images/icons/icon-arrow-down.png"
-                           style={{width: "12px", position: "relative", top: "5px", opacity: "0.9"}}
-        />}
+                           style={{width: "12px", position: "relative", top: "5px", opacity: "0.9"}}/>}
+        </div>
 
-        {props.showList && <ul
+        {props.showList  && <ul
             className={"title-filter-list"}
         >
             {filter.list.map(place => {
@@ -62,10 +62,6 @@ function SubTitle(props) {
 
 export default function Title(props) {
 
-    /*console.log("2___*shift title filters* typeof: " + typeof props.filters);
-    console.log("2___*shift title filters*: " + props.filters);
-    if (props.filters) console.log("2___*shift title filters list*: " + Object.values(props.filters));
-*/
     return (
         <div className="title" style={props.style}>
             <h1>{props.text}</h1>

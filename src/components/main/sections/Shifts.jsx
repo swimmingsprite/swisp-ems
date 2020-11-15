@@ -28,7 +28,7 @@ export default function Shifts(props) {
             },
             {
                 selectedPlaceId: selectedPlaceId,
-                list: [{name: "Gogoľova"}, {name: "Mimomestská"}]
+                list: [{name: "Gogoľova", id: selectedPlaceId}, {name: "Mimomestská", id: selectedPlaceId}]
             }
         ]
     })

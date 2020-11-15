@@ -8,7 +8,12 @@ import deepPurple from "@material-ui/core/colors/deepPurple";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import {useDispatch, useSelector, useStore} from "react-redux";
-import {currentViewFilter, getElementLeft, getElementWidth} from "../../../logic/shifts/currentView";
+import {
+    currentViewFilter,
+    getElementLeft,
+    getElementWidth,
+    getEmployeesShiftNames
+} from "../../../logic/shifts/currentView";
 
 function NextArrow(props) {
     return <div className="arrow next-arrow" onClick={props.onClick}>
@@ -85,6 +90,8 @@ function ShiftElement(props) {
         }
     }
 
+
+
     return <div className="shift-element"
                 style={{
                     left: left + "%",
@@ -122,7 +129,7 @@ function ShiftElement(props) {
         </div>
 
 
-        <h1 className={"shift-element-header"}>John Barney, Silvia Cloak, Amanda Header</h1>
+        <h1 className={"shift-element-header"}>{getEmployeesShiftNames(shift.employees)}</h1>
     </div>
 }
 
