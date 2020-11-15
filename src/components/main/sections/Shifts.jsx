@@ -18,7 +18,7 @@ export default function Shifts(props) {
         if (selectedPlaceId === null) selectedPlaceId = state.userReducer.place.id;
         return [{
             selectedPlaceId: selectedPlaceId,
-            placesList: state.placeReducer
+            list: state.placeReducer
         }]
     })
 
@@ -30,18 +30,18 @@ export default function Shifts(props) {
 
     console.log("___*shift title filters* typeof: "+ typeof shiftTitleFilters);
     console.log("___*shift title filters*: "+ shiftTitleFilters);
-    console.log("___*shift title filters list*: "+ shiftTitleFilters.placesList);
+    console.log("___*shift title filters list*: "+ shiftTitleFilters.list);
     var dispatch = useDispatch();
     var showList = useSelector((state) => {
-        return state.shiftReducer.headerFilter.hover;
+        return state.shiftReducer.headerFilterHover;
     })
 
     return <div>
         <Title text="Smeny"
                filters={shiftTitleFilters}
                // onClickItem={}
-               onMouseOver={() => {dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilter: {hover: true, timeout: false}})}}
-               onMouseOut={() => {dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilter: {hover: false, timeout: true }})}}
+               onMouseOver={() => {dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilterHover: true})}}
+               onMouseOut={() => {dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilterHover: false})}}
                /*onListOver={() => {dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilter: {hover: false, listHover: true}})}}
                onListOut={() => {dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilter: {hover: null, listHover: false}})}}*/
                showList={showList}

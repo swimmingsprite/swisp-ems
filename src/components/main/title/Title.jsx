@@ -3,11 +3,11 @@ import React from 'react';
 
 function mapFilters(filter, props) {
 
-    console.log("places list: " + Object.values(filter.placesList));
+    console.log("places list: " + Object.values(filter.list));
     var hideList = true;
 
     var selectedPlaceId = filter.selectedPlaceId;
-    var filteredPlace = filter.placesList.filter(place => place.id === selectedPlaceId);
+    var filteredPlace = filter.list.filter(place => place.id === selectedPlaceId);
     var placeName = filteredPlace.length > 0 ? filteredPlace[0].name : null;
     return <div
         className={"title-filter"}
@@ -30,10 +30,12 @@ function mapFilters(filter, props) {
         { props.showList && <ul
             className={"title-filter-list"}
             >
-            {filter.placesList.map(place => {
+            {filter.list.map(place => {
                 return <li
                     className={"title-filter-list-li"}
-                    onClick={props.onClickItem}
+                    onClick={() => {
+                        props.onClickItem(place.id)
+                    }}
                            onMouseOver={() => {
                                hideList = false;
                                props.onMouseOver()

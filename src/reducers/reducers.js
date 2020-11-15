@@ -44,7 +44,7 @@ var shifts = {
         endTimestamp: getInitEndTime(),
     },
     selectedPlaceId: null,
-    headerFilter: {hover: false, timeout: false}
+    headerFilterHover: false
 }
 
 
@@ -71,7 +71,7 @@ export var shiftReducer = (state = shifts, action) => {
         case "CURRENT_VIEW_ARROW_BACK_CLICK": return {...state, currentView: getBackCurrentView(state.currentView)};
         case "CURRENT_VIEW_ARROW_NEXT_CLICK": return {...state, currentView: getNextCurrentView(state.currentView)};
         case "CURRENT_PLACE_CHANGE": return {...state, selectedPlaceId: action.selectedPlaceId };
-        case "HEADER_FILTER_HOVER_CHANGE": return {...state, headerFilter: {hover: action.headerFilter.hover}};
+        case "HEADER_FILTER_HOVER_CHANGE": return {...state, headerFilterHover: action.headerFilterHover};
 
         default: return state;
     }
