@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function mapFilter(filter, props) {
+function mapFilter(filter, props, style) {
     var hideList = true;
 
     var selectedPlaceId = filter.selectedPlaceId; //vybrane id co sa ma zobraziť
@@ -11,6 +11,7 @@ function mapFilter(filter, props) {
 
     return <div
         className={"title-filter"}
+        style={style}
 
 
         onMouseOver={() => {
@@ -33,7 +34,9 @@ function mapFilter(filter, props) {
 
         {props.showList && <ul
             className={"title-filter-list"}>
-            {filter.list.map(place => {
+            {filter.list.
+                filter((place => place.id !== selectedPlaceId))
+                .map(place => {
                 return <li
                     className={"title-filter-list-li"}
                     onClick={() => {
@@ -64,7 +67,7 @@ function SubTitle(props) {
             {props.secondText && <p
                 style={{
                     position: "relative",
-                    top: "-34px",
+                    top: "-36px",
                     fontSize: "0.95rem",
                     textAlign: "right"
                 }}

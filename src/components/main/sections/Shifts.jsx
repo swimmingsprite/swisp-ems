@@ -37,7 +37,7 @@ export default function Shifts(props) {
 
         return  {
                 selectedPlaceId: selectedDepartmentId,
-                list: [...list, {name: "všetky oddelenia", id: 0}]
+                list: [{name: "všetky oddelenia", id: 0} ,...list]
                 }
 
     })
