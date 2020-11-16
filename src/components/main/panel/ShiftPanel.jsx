@@ -11,10 +11,11 @@ import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 import RotateRightIcon from '@material-ui/icons/RotateRight';
 import {useDispatch, useSelector, useStore} from "react-redux";
 import {
+    currentViewCurrentTimestampLocation,
     currentViewFilter,
     getElementLeft,
     getElementWidth,
-    getEmployeesShiftNames
+    getEmployeesShiftNames, getInitCurrentView
 } from "../../../logic/shifts/currentView";
 
 function NextArrow(props) {
@@ -31,13 +32,13 @@ function BackArrow(props) {
 
 function SlideNext(props) {
     return <div className="slide next-slide" onClick={props.onClick}>
-        <RotateRightIcon style={{fontSize: "1.5rem", position: "relative",top: "calc(40% - 42px)"}}/>
+        <RotateRightIcon style={{fontSize: "1.5rem", position: "relative"}}/>
     </div>
 }
 
 function SlideBack(props) {
     return <div className="slide back-slide" onClick={props.onClick}>
-        <RotateLeftIcon style={{fontSize: "1.5rem", position: "relative",top: "calc(40% - 42px)"}}/>
+        <RotateLeftIcon style={{fontSize: "1.5rem", position: "relative"}}/>
     </div>
 }
 
@@ -181,7 +182,10 @@ export default function ShiftPanel(props) {
     return <div className="post-status-bar shift-panel"
                 style={{width: "100%", minWidth: "440px", position: "relative"}}>
 
-        <SlideNext />
+        {currentViewCurrentTimestampLocation(currentView) === "before" &&
+        <SlideNext onClick={() => {store.dispatch({type: "CURRENT_VIEW_CHANGE", currentView: getInitCurrentView()})}} />}
+
+
         <NextArrow onClick={() => {store.dispatch({type: "CURRENT_VIEW_ARROW_NEXT_CLICK"})}}/>
 
         <div className="shift-content">
@@ -210,7 +214,9 @@ export default function ShiftPanel(props) {
             </div>
         </div>
         <BackArrow onClick={() => {store.dispatch({type: "CURRENT_VIEW_ARROW_BACK_CLICK"})}} />
-        <SlideBack />
+
+        {currentViewCurrentTimestampLocation(currentView) === "after" &&
+        <SlideBack onClick={() => {store.dispatch({type: "CURRENT_VIEW_CHANGE", currentView: getInitCurrentView()})}}/>}
     </div>
     // </div>
 }

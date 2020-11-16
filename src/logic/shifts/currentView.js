@@ -54,6 +54,24 @@ export function getBackCurrentView(currentView) {
     }
 }
 
+export function getInitCurrentView() {
+    return {
+        currentTimestamp: getCurrentTimestamp(),
+        startTimestamp: getInitStartTime(),
+        endTimestamp: getInitEndTime()
+    }
+}
+
+export function currentViewCurrentTimestampLocation(currentView) {
+    var currentTimestamp = getCurrentTimestamp();
+    if (currentTimestamp >= currentView.startTimestamp && currentTimestamp <= currentView.endTimestamp) return "middle";
+    if (currentTimestamp < currentView.startTimestamp && currentTimestamp < currentView.endTimestamp) return "after";
+    if (currentTimestamp > currentView.startTimestamp && currentTimestamp > currentView.endTimestamp) return "before";
+}
+
+
+
+
 export function getEmployeesShiftNames(employees) {
     return employees.map((employee, index) => {
         return index === (employees.length-1) ? employee.name : employee.name+", "
