@@ -454,7 +454,7 @@ ul {
     position: absolute;
     right: 0px;
     display: inline-block;
-    z-index: 31;
+    /*z-index: 31;*/
     top: 0;
 }
 
@@ -506,9 +506,29 @@ ul {
     right: -70px;
 }
 
-/*.shift-content > :not(.arrow) {
-  overflow: hidden;
-}*/
+.slide:hover {
+    border-radius: 10px;
+    cursor: pointer;
+    color: black;
+    transform: scale(1.15);
+}
+
+.slide {
+    position: absolute;
+    top: 65%;
+    z-index: 21;
+    color: #d7d7d7;
+    display: inline-block;
+    user-select: none;
+}
+
+.back-slide {
+    right: -42px;
+}
+
+.next-slide {
+    left: -42px;
+}
 
 .time-pointer {
     position: absolute;

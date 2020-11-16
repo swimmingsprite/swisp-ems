@@ -7,6 +7,8 @@ import deepOrange from "@material-ui/core/colors/deepOrange";
 import deepPurple from "@material-ui/core/colors/deepPurple";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import RotateLeftIcon from '@material-ui/icons/RotateLeft';
+import RotateRightIcon from '@material-ui/icons/RotateRight';
 import {useDispatch, useSelector, useStore} from "react-redux";
 import {
     currentViewFilter,
@@ -24,6 +26,18 @@ function NextArrow(props) {
 function BackArrow(props) {
     return <div className="arrow back-arrow" onClick={props.onClick}>
         <NavigateBeforeIcon style={{fontSize: "5rem", position: "relative",top: "calc(50% - 42px)"}}/>
+    </div>
+}
+
+function SlideNext(props) {
+    return <div className="slide next-slide" onClick={props.onClick}>
+        <RotateRightIcon style={{fontSize: "1.5rem", position: "relative",top: "calc(40% - 42px)"}}/>
+    </div>
+}
+
+function SlideBack(props) {
+    return <div className="slide back-slide" onClick={props.onClick}>
+        <RotateLeftIcon style={{fontSize: "1.5rem", position: "relative",top: "calc(40% - 42px)"}}/>
     </div>
 }
 
@@ -103,7 +117,7 @@ function ShiftElement(props) {
         }
         }>
 
-            <AvatarGroup max={3}
+            {width > 15 && <AvatarGroup max={3}
                          classes={{avatar: classes.avatar}}
                          style={{marginLeft: "5px"}}>
 
@@ -124,14 +138,13 @@ function ShiftElement(props) {
                     className={avClasses.orange}
                 />
 
-            </AvatarGroup>
+            </AvatarGroup> }
 
         </div>
 
 
-        <h1 className={"shift-element-header"}>{getEmployeesShiftNames(shift.employees)}</h1>
-        <div style={{width: "15px", height: "25px",float: "right", position: "relative"}}> </div>
-        <div className="shift-element-end-tile"> </div>
+        {width > 15 && <h1 className={"shift-element-header"}>{getEmployeesShiftNames(shift.employees)}</h1> }
+        {width > 5 && <div className="shift-element-end-tile"> </div>}
     </div>
 }
 
@@ -167,7 +180,10 @@ export default function ShiftPanel(props) {
 
     return <div className="post-status-bar shift-panel"
                 style={{width: "100%", minWidth: "440px", position: "relative"}}>
+
+        <SlideNext />
         <NextArrow onClick={() => {store.dispatch({type: "CURRENT_VIEW_ARROW_NEXT_CLICK"})}}/>
+
         <div className="shift-content">
             <div className="shift-content-table">
 
@@ -193,9 +209,8 @@ export default function ShiftPanel(props) {
 
             </div>
         </div>
-
         <BackArrow onClick={() => {store.dispatch({type: "CURRENT_VIEW_ARROW_BACK_CLICK"})}} />
-
+        <SlideBack />
     </div>
     // </div>
 }
