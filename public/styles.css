@@ -162,6 +162,7 @@ ul {
 
     height: fit-content;
     background-color: #d7d7d7;
+    outline: none;
 }
 
 /* 
@@ -421,6 +422,8 @@ ul {
     /*border: 1px solid black;*/
     border-bottom: 1px solid #d7d7d7;
     border-right: 1px solid #d7d7d7;
+    user-select: none;
+
 }
 
 .shift-content-div:last-child {
@@ -458,15 +461,20 @@ ul {
     white-space: nowrap;
     padding-right: 5px;
     transform: translateY(-3px);
+    user-select: none;
+
 }
 
 .arrow {
     position: absolute;
-    top: calc(50% - 42px);
-    /*top: 0%;*/
+    height: 100%;
+    top: 0;
     z-index: 20;
     color: #d7d7d7;
     display: inline-block;
+    user-select: none;
+
+
     /*background-color: rgba(0,0,0,0.5);*/
 }
 

@@ -17,13 +17,13 @@ import {
 
 function NextArrow(props) {
     return <div className="arrow next-arrow" onClick={props.onClick}>
-        <NavigateNextIcon style={{fontSize: "5rem"}}/>
+        <NavigateNextIcon style={{fontSize: "5rem", position: "relative",top: "calc(50% - 42px)"}}/>
     </div>
 }
 
 function BackArrow(props) {
     return <div className="arrow back-arrow" onClick={props.onClick}>
-        <NavigateBeforeIcon style={{fontSize: "5rem"}}/>
+        <NavigateBeforeIcon style={{fontSize: "5rem", position: "relative",top: "calc(50% - 42px)"}}/>
     </div>
 }
 
