@@ -130,6 +130,7 @@ ul {
 .title {
     font-family: "Montserrat", sans-serif;
     margin-top: 50px;
+    position: relative;
 }
 
 .title h1 {
@@ -142,6 +143,8 @@ ul {
     max-width: 680px;
     min-width: 384px;
     margin: 0 auto;
+    position: relative;
+
 }
 
 .post-status-bar {
@@ -495,14 +498,15 @@ ul {
 
 .title-filter {
     cursor: pointer;
-    position: relative;
-    top: 10px;
+    position: absolute;
+    top: 0px;
     float: right;
     right: 0px;
     display: inline-block;
     margin-left: 15px;
     z-index: 20;
     background-color: transparent;
+    font-size: 1rem;
     /*border: 1px solid black*/
 }
 

@@ -56,7 +56,9 @@ var shifts = {
         endTimestamp: getInitEndTime(),
     },
     selectedPlaceId: null,
-    headerFilterHover: false
+    currentShiftSubHeaderDepartmentId: null,
+    headerFilterHover: false,
+    currentShiftsSubHeaderFilterHover: false
 }
 
 
@@ -84,6 +86,8 @@ export var shiftReducer = (state = shifts, action) => {
         case "CURRENT_VIEW_ARROW_NEXT_CLICK": return {...state, currentView: getNextCurrentView(state.currentView)};
         case "CURRENT_PLACE_CHANGE": return {...state, selectedPlaceId: action.selectedPlaceId };
         case "HEADER_FILTER_HOVER_CHANGE": return {...state, headerFilterHover: action.headerFilterHover};
+        case "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE": return {...state, currentShiftSubHeaderDepartmentId: action.currentShiftSubHeaderDepartmentId };
+        case "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE": return {...state, currentShiftsSubHeaderFilterHover: action.currentShiftsSubHeaderFilterHover};
 
         default: return state;
     }
@@ -97,6 +101,14 @@ var places = [
             {
                 id: 91354565,
                 name: "oddelenie záhrad"
+            },
+            {
+                id: 91359125,
+                name: "oddelenie drogéria"
+            }
+            ,{
+                id: 4364565,
+                name: "oddelenie čokolad"
             }
         ]
     },
@@ -108,6 +120,18 @@ var places = [
                 id: 16549855,
                 name: "oddelenie nápojov"
             }
+            ,{
+                id: 98236855,
+                name: "oddelenie zmrzlín"
+            }
+            ,{
+                id: 62149855,
+                name: "oddelenie šamponov"
+            }
+            ,{
+                id: 46749855,
+                name: "oddelenie hračiek"
+            },
         ]
     },
 ]
