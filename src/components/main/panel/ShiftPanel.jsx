@@ -180,7 +180,6 @@ export default function ShiftPanel(props) {
 
                 {shifts
                     .filter(shift => {
-                        console.log("In filter je: "+shift);
                         return currentViewFilter(shift,
                             currentView,
                             store.getState().shiftReducer.selectedPlaceId,

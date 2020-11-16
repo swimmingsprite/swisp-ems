@@ -50,6 +50,18 @@ var shifts = {
             ],
             placeId: 97486256,
             departmentId: 62149855
+        },
+        {
+            id: "808985",
+            start: new Date().getTime() - (60000 * 540),
+            end: new Date().getTime() + (60000 * 140),
+            employees: [
+                {name: "Michal Veselý", id: 1885959, avatar: "image base64 <--", avatarColor: "red"},
+                {name: "Angela Funny", id: 1885958, avatar: "image base64 <--", avatarColor: "green"},
+                {name: "Sirius Black", id: 1885955, avatar: "image base64 <--", avatarColor: "violet"}
+            ],
+            placeId: 97486256,
+            departmentId: 62149855
         }
     ],
     currentView: {

@@ -2,14 +2,10 @@ import React from 'react';
 
 
 function mapFilter(filter, props, style) {
-
-    console.log("places list: " + Object.values(filter.list));
     var hideList = true;
 
     var selectedPlaceId = filter.selectedPlaceId; //vybrane id co sa ma zobraziť
-    console.log("selectedplace id: "+selectedPlaceId);
     var filteredPlace = filter.list.filter(place => place.id === selectedPlaceId); //ak nejaka polozka ma to id tak sa vyberie
-    console.log("filtered place: "+filteredPlace);
     var placeName = filteredPlace.length > 0 ? filteredPlace[0].name : null;
     return <div
         className={"title-filter"}
@@ -25,15 +21,16 @@ function mapFilter(filter, props, style) {
             }, 350);
         }}
     >
-        <div style={{textAlign: "right"}}>{placeName}
-        &nbsp;&nbsp;
-        {placeName && <img src="images/icons/icon-arrow-down.png"
-                           style={{width: "12px", position: "relative", top: "5px", opacity: "0.9"}}/>}
+
+        <div style={{textAlign: "right"}}>
+            {placeName}
+            &nbsp;&nbsp;
+            {placeName && <img src="images/icons/icon-arrow-down.png"
+                               style={{width: "12px", position: "relative", top: "5px", opacity: "0.9"}}/>}
         </div>
 
-        {props.showList  && <ul
-            className={"title-filter-list"}
-        >
+        {props.showList && <ul
+            className={"title-filter-list"}>
             {filter.list.map(place => {
                 return <li
                     className={"title-filter-list-li"}
@@ -48,7 +45,9 @@ function mapFilter(filter, props, style) {
                 >{place.name}</li>
             })}
         </ul>}
+
     </div>
+
 
 }
 
@@ -60,6 +59,15 @@ function SubTitle(props) {
             <h1>{props.text}</h1>
             {props.filter && mapFilter(props.filter, props)}
             <div className="title-hr"/>
+            {props.secondText && <p
+                style={{
+                    position: "relative",
+                    top: "-34px",
+                    fontSize: "0.95rem",
+                    textAlign: "right"
+                }}
+            >{props.secondText}</p>}
+
         </div>
     );
 }

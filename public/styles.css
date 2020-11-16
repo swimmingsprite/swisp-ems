@@ -144,7 +144,10 @@ ul {
     min-width: 384px;
     margin: 0 auto;
     position: relative;
+}
 
+.sub-title h1 {
+    display: inline-block;
 }
 
 .post-status-bar {
@@ -499,7 +502,7 @@ ul {
 .title-filter {
     cursor: pointer;
     position: absolute;
-    top: 0px;
+    top: -2px;
     float: right;
     right: 0px;
     display: inline-block;

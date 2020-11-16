@@ -1,5 +1,6 @@
 import React from 'react';
 import PublishTime from "./status/PublishTime"
+import {timestampToShortDateTime} from "../../logic/time/timeUtils";
 
 
 function OneLineTextTime(props) {
@@ -17,12 +18,7 @@ function OneLineTextTime(props) {
     );
 }
 
-function timestampToShortDateTime(time) {
-    return new Date(time).toLocaleDateString([], {day: '2-digit', month:'2-digit'})
-        + '\u00A0\u00A0\u00A0'
-        + new Date(time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
-}
 
 export default function TwoLineTextTime(props) {
     var dateTimeString = timestampToShortDateTime(props.time)

@@ -2,19 +2,14 @@ import React from 'react';
 import Title, {SubTitle} from "../title/Title";
 import ShiftPanel from "../panel/ShiftPanel";
 import {useDispatch, useSelector} from "react-redux";
+import {timestampsToDateRange} from "../../../logic/time/timeUtils";
 
 
 export default function Shifts(props) {
 
-    /*shifts state*/
-
-    /*
-    * redux ma zoznam miest
-    *
-    * */
     var dispatch = useDispatch();
 
-
+    //filter for subheader
     var shiftHeaderFilter = useSelector((state) => {
         var selectedPlaceId = state.shiftReducer.selectedPlaceId
         if (selectedPlaceId === null) {
@@ -28,22 +23,14 @@ export default function Shifts(props) {
 
     })
 
-   /* function isDepartmentInPlace(state, depId) {
-        var place = state.placeReducer.filter(p => p.id === state.shiftReducer.selectedPlaceId)[0];
-        if (place === undefined) return false;
-        var departments = place.departments.filter(dep => dep === depId);
-        console.log("returning: "+departments.length > 0);
-        return departments.length > 0;
-    }
-*/
+    //filter for subheader
     var shiftSubHeaderFilter = useSelector((state) => {
         var list = [...state.placeReducer.filter(p => p.id === state.shiftReducer.selectedPlaceId)
             .map(p => p.departments)[0]
         ]
 
-
         var selectedDepartmentId = state.shiftReducer.currentShiftSubHeaderDepartmentId
-        if (selectedDepartmentId === null /*|| !isDepartmentInPlace(state, selectedDepartmentId)*/ ) {
+        if (selectedDepartmentId === null) {
             selectedDepartmentId = list[0].id;
             dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: selectedDepartmentId})
         }
@@ -55,11 +42,6 @@ export default function Shifts(props) {
 
     })
 
-    console.log("LIST LENGTH JE: "+shiftSubHeaderFilter.list.length)
-    console.log("LIST name JE: "+shiftSubHeaderFilter.list.length)
-
-    shiftSubHeaderFilter.list.forEach(e => console.log("foreach: "+e.name))
-
     var showHeaderFilterList = useSelector((state) => {
         return state.shiftReducer.headerFilterHover;
     })
@@ -68,7 +50,14 @@ export default function Shifts(props) {
         return state.shiftReducer.currentShiftsSubHeaderFilterHover;
     })
 
-    //todo fix multiple filters bug
+    var currentView = useSelector(state => {
+        return state.shiftReducer.currentView
+    })
+
+    console.log("C VIEW start TIMESTAMP: "+currentView.startTimestamp);
+    console.log("C VIEW end TIMESTAMP: "+currentView.endTimestamp);
+
+    var currentViewTimeRange = timestampsToDateRange(currentView.startTimestamp, currentView.endTimestamp)
 
     return <div>
         <Title text="Smeny"
@@ -87,6 +76,7 @@ export default function Shifts(props) {
                showList={showHeaderFilterList}
         />
         <SubTitle text="Prebiehajúce"
+                  secondText={currentViewTimeRange}
                   filter={shiftSubHeaderFilter}
                   onClickItem={(newId) => {
                       dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: newId});
@@ -99,6 +89,7 @@ export default function Shifts(props) {
                       dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: false})
                   }}
                   showList={showCurrentShiftsSubHeaderFilterList}
+
 
         />
         <ShiftPanel/>
