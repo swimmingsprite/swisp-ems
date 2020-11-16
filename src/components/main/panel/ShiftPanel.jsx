@@ -12,7 +12,7 @@ import RotateRightIcon from '@material-ui/icons/RotateRight';
 import {useDispatch, useSelector, useStore} from "react-redux";
 import {
     currentViewCurrentTimestampLocation,
-    currentViewFilter,
+    currentViewFilter, getCurrentTimestamp,
     getElementLeft,
     getElementWidth,
     getEmployeesShiftNames, getInitCurrentView
@@ -20,13 +20,13 @@ import {
 
 function NextArrow(props) {
     return <div className="arrow next-arrow" onClick={props.onClick}>
-        <NavigateNextIcon style={{fontSize: "5rem", position: "relative",top: "calc(50% - 42px)"}}/>
+        <NavigateNextIcon style={{fontSize: "5rem", position: "relative", top: "calc(50% - 42px)"}}/>
     </div>
 }
 
 function BackArrow(props) {
     return <div className="arrow back-arrow" onClick={props.onClick}>
-        <NavigateBeforeIcon style={{fontSize: "5rem", position: "relative",top: "calc(50% - 42px)"}}/>
+        <NavigateBeforeIcon style={{fontSize: "5rem", position: "relative", top: "calc(50% - 42px)"}}/>
     </div>
 }
 
@@ -56,13 +56,11 @@ function TimePointer(props) {
 
 
 function ShiftElement(props) {
-    /*do propsu cely objekt jednej smeny*/
     var shift = props.value;
 
     var currentView = useSelector((state) => {
         return state.shiftReducer.currentView
     });
-
 
     const styles = makeStyles((theme) => createStyles({
         avatar: {
@@ -74,7 +72,6 @@ function ShiftElement(props) {
 
     const classes = styles();
 
-    /*todo MAP AVATARS FUNCTION*/
 
     const avStyles = makeStyles((theme) => createStyles({
         orange: {
@@ -106,7 +103,6 @@ function ShiftElement(props) {
     }
 
 
-
     return <div className="shift-element"
                 style={{
                     left: left + "%",
@@ -119,8 +115,10 @@ function ShiftElement(props) {
         }>
 
             {width > 15 && <AvatarGroup max={3}
-                         classes={{avatar: classes.avatar}}
-                         style={{marginLeft: "5px"}}>
+                                        classes={{avatar: classes.avatar}}
+                                        style={{marginLeft: "5px"}}>
+
+                {/*todo MAP AVATARS FUNCTION*/}
 
                 <Avatar
                     /*src="https://www.fillmurray.com/500/900"*/
@@ -139,13 +137,13 @@ function ShiftElement(props) {
                     className={avClasses.orange}
                 />
 
-            </AvatarGroup> }
+            </AvatarGroup>}
 
         </div>
 
 
-        {width > 15 && <h1 className={"shift-element-header"}>{getEmployeesShiftNames(shift.employees)}</h1> }
-        {width > 5 && <div className="shift-element-end-tile"> </div>}
+        {width > 15 && <h1 className={"shift-element-header"}>{getEmployeesShiftNames(shift.employees)}</h1>}
+        {width > 5 && <div className="shift-element-end-tile"></div>}
     </div>
 }
 
@@ -179,15 +177,21 @@ export default function ShiftPanel(props) {
     }
 
 
-    return <div className="post-status-bar shift-panel"
+    return <div className="post-status-bar"
                 style={{width: "100%", minWidth: "440px", position: "relative"}}>
 
+        {/*ARROWS and SLIDERS*/}
         {currentViewCurrentTimestampLocation(currentView) === "before" &&
-        <SlideNext onClick={() => {store.dispatch({type: "CURRENT_VIEW_CHANGE", currentView: getInitCurrentView()})}} />}
+        <SlideNext onClick={() => {
+            store.dispatch({type: "CURRENT_VIEW_CHANGE", currentView: getInitCurrentView()})
+        }}/>}
+
+        <NextArrow onClick={() => {
+            store.dispatch({type: "CURRENT_VIEW_ARROW_NEXT_CLICK"})
+        }}/>
 
 
-        <NextArrow onClick={() => {store.dispatch({type: "CURRENT_VIEW_ARROW_NEXT_CLICK"})}}/>
-
+        {/*MAIN CONTENT */}
         <div className="shift-content">
             <div className="shift-content-table">
 
@@ -195,9 +199,10 @@ export default function ShiftPanel(props) {
                     {mapHoursToDivs()}
                 </div>
 
-                {currentViewFilter({start: new Date().getTime()},
-                    currentView) && <TimePointer/>}
+                {/*TIME POINTER*/}
+                {currentViewFilter({start: getCurrentTimestamp()}, currentView) && <TimePointer/>}
 
+                {/*FILTERED SHIFT ELEMENTS*/}
                 {shifts
                     .filter(shift => {
                         return currentViewFilter(shift,
@@ -209,14 +214,18 @@ export default function ShiftPanel(props) {
                     .map(shift => {
                         return <ShiftElement value={shift} currentView={currentView}/>
                     })}
-
-
             </div>
         </div>
-        <BackArrow onClick={() => {store.dispatch({type: "CURRENT_VIEW_ARROW_BACK_CLICK"})}} />
+
+
+        {/*ARROWS and SLIDERS*/}
+        <BackArrow onClick={() => {
+            store.dispatch({type: "CURRENT_VIEW_ARROW_BACK_CLICK"})
+        }}/>
 
         {currentViewCurrentTimestampLocation(currentView) === "after" &&
-        <SlideBack onClick={() => {store.dispatch({type: "CURRENT_VIEW_CHANGE", currentView: getInitCurrentView()})}}/>}
+        <SlideBack onClick={() => {
+            store.dispatch({type: "CURRENT_VIEW_CHANGE", currentView: getInitCurrentView()})
+        }}/>}
     </div>
-    // </div>
 }
