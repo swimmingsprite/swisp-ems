@@ -146,13 +146,11 @@ export default function ShiftPanel(props) {
     });
 
     function mapHoursToDivs() {
-        console.log("MAP HOURS TO DIVS******************")
         var hours = [];
         for (var x = currentView.startTimestamp; x < currentView.endTimestamp;) {
             hours.push(new Date(x).getHours());
             x += 3600000;
         }
-        console.log("HOURS: " + Object.values(hours));
 
         var divs = [];
         hours.forEach(value => {
@@ -187,7 +185,6 @@ export default function ShiftPanel(props) {
                         );
                     })
                     .map(shift => {
-                        console.log("Shift je: "+shift);
                         return <ShiftElement value={shift} currentView={currentView}/>
                     })}
 

@@ -8,7 +8,6 @@ function OneLineTextTime(props) {
         + " "
         + new Date(props.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
-    console.log("************************DATE: "+dateTimeString);
 
     return (
         <div className="two-line-text">

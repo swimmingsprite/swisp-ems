@@ -31,14 +31,14 @@ export default function Shifts(props) {
 
         var selectedDepartmentId = state.shiftReducer.currentShiftSubHeaderDepartmentId
         if (selectedDepartmentId === null) {
-            selectedDepartmentId = list[0].id;
+            selectedDepartmentId = 0//list[0].id;
             dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: selectedDepartmentId})
         }
 
         return  {
                 selectedPlaceId: selectedDepartmentId,
-                list: list
-            }
+                list: [...list, {name: "všetky oddelenia", id: 0}]
+                }
 
     })
 
@@ -53,9 +53,6 @@ export default function Shifts(props) {
     var currentView = useSelector(state => {
         return state.shiftReducer.currentView
     })
-
-    console.log("C VIEW start TIMESTAMP: "+currentView.startTimestamp);
-    console.log("C VIEW end TIMESTAMP: "+currentView.endTimestamp);
 
     var currentViewTimeRange = timestampsToDateRange(currentView.startTimestamp, currentView.endTimestamp)
 
@@ -89,8 +86,6 @@ export default function Shifts(props) {
                       dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: false})
                   }}
                   showList={showCurrentShiftsSubHeaderFilterList}
-
-
         />
         <ShiftPanel/>
 

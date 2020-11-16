@@ -44,7 +44,7 @@ var shifts = {
             start: new Date().getTime() - (60000 * 540),
             end: new Date().getTime() + (60000 * 140),
             employees: [
-                {name: "Michal Veselý", id: 1885959, avatar: "image base64 <--", avatarColor: "red"},
+                {name: "Šamponov2 Veselý", id: 1885959, avatar: "image base64 <--", avatarColor: "red"},
                 {name: "Angela Funny", id: 1885958, avatar: "image base64 <--", avatarColor: "green"},
                 {name: "Sirius Black", id: 1885955, avatar: "image base64 <--", avatarColor: "violet"}
             ],
@@ -56,13 +56,49 @@ var shifts = {
             start: new Date().getTime() - (60000 * 540),
             end: new Date().getTime() + (60000 * 140),
             employees: [
-                {name: "Michal Veselý", id: 1885959, avatar: "image base64 <--", avatarColor: "red"},
+                {name: "Šamponov Veselý", id: 1885959, avatar: "image base64 <--", avatarColor: "red"},
                 {name: "Angela Funny", id: 1885958, avatar: "image base64 <--", avatarColor: "green"},
                 {name: "Sirius Black", id: 1885955, avatar: "image base64 <--", avatarColor: "violet"}
             ],
             placeId: 97486256,
             departmentId: 62149855
-        }
+        },
+        {
+            id: "808985",
+            start: new Date().getTime() - (60000 * 540),
+            end: new Date().getTime() + (60000 * 140),
+            employees: [
+                {name: "Hračiek Veselý", id: 1885959, avatar: "image base64 <--", avatarColor: "red"},
+                {name: "Angela Funny", id: 1885958, avatar: "image base64 <--", avatarColor: "green"},
+                {name: "Sirius Black", id: 1885955, avatar: "image base64 <--", avatarColor: "violet"}
+            ],
+            placeId: 97486256,
+            departmentId: 46749855
+        },
+        {
+            id: "808985",
+            start: new Date().getTime() - (60000 * 540),
+            end: new Date().getTime() + (60000 * 140),
+            employees: [
+                {name: "Zmrzlin Veselý", id: 1885959, avatar: "image base64 <--", avatarColor: "red"},
+                {name: "Angela Funny", id: 1885958, avatar: "image base64 <--", avatarColor: "green"},
+                {name: "Sirius Black", id: 1885955, avatar: "image base64 <--", avatarColor: "violet"}
+            ],
+            placeId: 97486256,
+            departmentId: 98236855
+        },
+        {
+            id: "808985",
+            start: new Date().getTime() - (60000 * 540),
+            end: new Date().getTime() + (60000 * 140),
+            employees: [
+                {name: "Nápoje Veselý", id: 1885959, avatar: "image base64 <--", avatarColor: "red"},
+                {name: "Angela Funny", id: 1885958, avatar: "image base64 <--", avatarColor: "green"},
+                {name: "Sirius Black", id: 1885955, avatar: "image base64 <--", avatarColor: "violet"}
+            ],
+            placeId: 97486256,
+            departmentId: 16549855
+        },
     ],
     currentView: {
         currentTimestamp: getCurrentTimestamp(),

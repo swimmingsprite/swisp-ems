@@ -1,15 +1,17 @@
 import React from 'react';
 
 
-function mapFilter(filter, props, style) {
+function mapFilter(filter, props) {
     var hideList = true;
 
     var selectedPlaceId = filter.selectedPlaceId; //vybrane id co sa ma zobraziť
     var filteredPlace = filter.list.filter(place => place.id === selectedPlaceId); //ak nejaka polozka ma to id tak sa vyberie
-    var placeName = filteredPlace.length > 0 ? filteredPlace[0].name : null;
+    var placeName = filteredPlace.length > 0 ? filteredPlace[0].name : null; //pouzije sa jej nazov vo filtri
+
+
     return <div
         className={"title-filter"}
-        style={style}
+
 
         onMouseOver={() => {
             hideList = false;
