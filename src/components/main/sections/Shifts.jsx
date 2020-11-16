@@ -28,19 +28,17 @@ export default function Shifts(props) {
 
     })
 
-    function isDepartmentInPlace(state, depId) {
+   /* function isDepartmentInPlace(state, depId) {
         var place = state.placeReducer.filter(p => p.id === state.shiftReducer.selectedPlaceId)[0];
         if (place === undefined) return false;
         var departments = place.departments.filter(dep => dep === depId);
+        console.log("returning: "+departments.length > 0);
         return departments.length > 0;
     }
-
+*/
     var shiftSubHeaderFilter = useSelector((state) => {
         var list = [...state.placeReducer.filter(p => p.id === state.shiftReducer.selectedPlaceId)
-            .map(p => {
-                console.log("P JE: "+p.name);
-                console.log("P departments length: "+p.departments.length);
-                return p.departments})[0]
+            .map(p => p.departments)[0]
         ]
 
 
@@ -50,14 +48,11 @@ export default function Shifts(props) {
             dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: selectedDepartmentId})
         }
 
-        /*ked department nepatri currrent place id nastav */
-
-        var a =  {
+        return  {
                 selectedPlaceId: selectedDepartmentId,
                 list: list
             }
-        console.log("koniec");
-        return a;
+
     })
 
     console.log("LIST LENGTH JE: "+shiftSubHeaderFilter.list.length)
@@ -65,15 +60,6 @@ export default function Shifts(props) {
 
     shiftSubHeaderFilter.list.forEach(e => console.log("foreach: "+e.name))
 
-    /*[{
-
-    selectedId: "Kaufland Slovenská,
-    list: [{name: "Kaufland Slovenská", id: 554451}] //list miest, z reduxu
-}]*/
-
-    /*console.log("___*shift title filters* typeof: " + typeof shiftTitleFilters);
-    console.log("___*shift title filters*: " + shiftTitleFilters);
-    console.log("___*shift title filters list*: " + shiftTitleFilters.list);*/
     var showHeaderFilterList = useSelector((state) => {
         return state.shiftReducer.headerFilterHover;
     })
@@ -90,6 +76,7 @@ export default function Shifts(props) {
                onClickItem={(newId) => {
                    dispatch({type: "CURRENT_PLACE_CHANGE", selectedPlaceId: newId});
                    dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilterHover: false})
+                   dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: null});
                }}
                onMouseOver={() => {
                    dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilterHover: true})

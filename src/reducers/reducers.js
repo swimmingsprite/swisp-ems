@@ -36,7 +36,8 @@ var shifts = {
                 {name: "Majko Zguruna", id: 1885958, avatar: "image base64 <--", avatarColor: "green"},
                 {name: "Harry Potter", id: 1885955, avatar: "image base64 <--", avatarColor: "violet"}
             ],
-            placeId: 84486565
+            placeId: 84486565,
+            departmentId: 91359125
         },
         {
             id: "808985",
@@ -47,7 +48,8 @@ var shifts = {
                 {name: "Angela Funny", id: 1885958, avatar: "image base64 <--", avatarColor: "green"},
                 {name: "Sirius Black", id: 1885955, avatar: "image base64 <--", avatarColor: "violet"}
             ],
-            placeId: 97486256
+            placeId: 97486256,
+            departmentId: 62149855
         }
     ],
     currentView: {
@@ -63,21 +65,6 @@ var shifts = {
 
 
 export var shiftReducer = (state = shifts, action) => {
-    /*function handleHoverChange() {
-        if (action.headerFilter.hover === false && action.headerFilter.timeout ) {
-            setTimeout(() => {
-                var headerFilter = useSelector(state => {
-                    return state.shiftReducer.headerFilter.hover
-                });
-                if (headerFilter === false) {
-                    var store = useStore();
-                    store.dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilter: {hover: false, timeout: false}})
-                }
-            }, 500)
-        }
-        //{...state, headerFilter: action.headerFilter };
-    }*/
-
     switch (action.type) {
         case "CURRENT_VIEW_CHANGE": return {...state, currentView: action.currentView};
         case "CURRENT_VIEW_CURRENT_TIMESTAMP_CHANGE": return {...state, currentView: {

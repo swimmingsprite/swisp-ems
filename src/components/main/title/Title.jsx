@@ -7,7 +7,9 @@ function mapFilter(filter, props, style) {
     var hideList = true;
 
     var selectedPlaceId = filter.selectedPlaceId; //vybrane id co sa ma zobraziť
+    console.log("selectedplace id: "+selectedPlaceId);
     var filteredPlace = filter.list.filter(place => place.id === selectedPlaceId); //ak nejaka polozka ma to id tak sa vyberie
+    console.log("filtered place: "+filteredPlace);
     var placeName = filteredPlace.length > 0 ? filteredPlace[0].name : null;
     return <div
         className={"title-filter"}
