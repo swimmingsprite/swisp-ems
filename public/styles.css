@@ -446,6 +446,18 @@ ul {
 
 }
 
+.shift-element-end-tile {
+    background: linear-gradient(90deg,rgba(9, 132, 226, 0.1), rgba(7, 110, 186, 1));
+    /*background: radial-gradient(to right, rgba(9, 132, 226, 0.2), rgba(9, 132, 226, 1));*/
+    width: 77px;
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    display: inline-block;
+    z-index: 31;
+    top: 0;
+}
+
 .avatar-circle {
     height: 25px;
     width: 25px;

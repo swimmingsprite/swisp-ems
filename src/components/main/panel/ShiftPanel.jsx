@@ -130,6 +130,8 @@ function ShiftElement(props) {
 
 
         <h1 className={"shift-element-header"}>{getEmployeesShiftNames(shift.employees)}</h1>
+        <div style={{width: "15px", height: "25px",float: "right", position: "relative"}}> </div>
+        <div className="shift-element-end-tile"> </div>
     </div>
 }
 
