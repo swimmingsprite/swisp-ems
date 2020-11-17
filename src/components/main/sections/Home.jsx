@@ -2,13 +2,14 @@ import React from 'react';
 import Title from "../title/Title"
 import PostStatusBar from "../status/PostStatusBar"
 import Status from "../status/Status"
+import {useSelector} from "react-redux";
 
 export default function Home(props) {
 
 
     /* todo fetch status list, from redux */
 
-    const [statusList, setStatusList] = React.useState([]);
+    var posts = useSelector(state => state.postReducer)
 
 
 
@@ -30,7 +31,7 @@ export default function Home(props) {
         }
 
 
-        setStatusList([newStatus ,...statusList])
+       // setStatusList([newStatus ,...statusList])
 
     }
 
@@ -39,8 +40,8 @@ export default function Home(props) {
         <div>
             <Title text="Príspevky"/>
             <PostStatusBar onNewStatus={onNewStatus} />
-            {statusList.map((status) => <Status values={status}
-                                                key={status.statusId}
+            {posts.map((post) => <Status post={post}
+                                         key={post.id}
             />)}
         </div>
     );

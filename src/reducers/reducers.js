@@ -114,17 +114,29 @@ var shifts = {
 
 export var shiftReducer = (state = shifts, action) => {
     switch (action.type) {
-        case "CURRENT_VIEW_CHANGE": return {...state, currentView: action.currentView};
-        case "CURRENT_VIEW_CURRENT_TIMESTAMP_CHANGE": return {...state, currentView: {
-            ...state.currentView, currentTimestamp: action.payload }};
-        case "CURRENT_VIEW_ARROW_BACK_CLICK": return {...state, currentView: getBackCurrentView(state.currentView)};
-        case "CURRENT_VIEW_ARROW_NEXT_CLICK": return {...state, currentView: getNextCurrentView(state.currentView)};
-        case "CURRENT_PLACE_CHANGE": return {...state, selectedPlaceId: action.selectedPlaceId };
-        case "HEADER_FILTER_HOVER_CHANGE": return {...state, headerFilterHover: action.headerFilterHover};
-        case "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE": return {...state, currentShiftSubHeaderDepartmentId: action.currentShiftSubHeaderDepartmentId };
-        case "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE": return {...state, currentShiftsSubHeaderFilterHover: action.currentShiftsSubHeaderFilterHover};
+        case "CURRENT_VIEW_CHANGE":
+            return {...state, currentView: action.currentView};
+        case "CURRENT_VIEW_CURRENT_TIMESTAMP_CHANGE":
+            return {
+                ...state, currentView: {
+                    ...state.currentView, currentTimestamp: action.payload
+                }
+            };
+        case "CURRENT_VIEW_ARROW_BACK_CLICK":
+            return {...state, currentView: getBackCurrentView(state.currentView)};
+        case "CURRENT_VIEW_ARROW_NEXT_CLICK":
+            return {...state, currentView: getNextCurrentView(state.currentView)};
+        case "CURRENT_PLACE_CHANGE":
+            return {...state, selectedPlaceId: action.selectedPlaceId};
+        case "HEADER_FILTER_HOVER_CHANGE":
+            return {...state, headerFilterHover: action.headerFilterHover};
+        case "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE":
+            return {...state, currentShiftSubHeaderDepartmentId: action.currentShiftSubHeaderDepartmentId};
+        case "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE":
+            return {...state, currentShiftsSubHeaderFilterHover: action.currentShiftsSubHeaderFilterHover};
 
-        default: return state;
+        default:
+            return state;
     }
 }
 
@@ -141,7 +153,7 @@ var places = [
                 id: 91359125,
                 name: "oddelenie drogéria"
             }
-            ,{
+            , {
                 id: 4364565,
                 name: "oddelenie čokolad"
             }
@@ -155,15 +167,15 @@ var places = [
                 id: 16549855,
                 name: "oddelenie nápojov"
             }
-            ,{
+            , {
                 id: 98236855,
                 name: "oddelenie zmrzlín"
             }
-            ,{
+            , {
                 id: 62149855,
                 name: "oddelenie šamponov"
             }
-            ,{
+            , {
                 id: 46749855,
                 name: "oddelenie hračiek"
             },
@@ -173,8 +185,10 @@ var places = [
 
 export var placeReducer = (state = places, action) => {
     switch (action.type) {
-        case "PLACE_ADD": return {...state, places: [state.push(action.payload)]};
-        default: return state;
+        case "PLACE_ADD":
+            return {...state, places: [state.push(action.payload)]};
+        default:
+            return state;
     }
 }
 
@@ -191,6 +205,42 @@ var user = {
 export var userReducer = (state = user, action) => {
     switch (action.type) {
         // case "PLACE_ADD": return {...state, places: [state.push(action.payload)]};
+        default:
+            return state;
+    }
+}
+
+
+var posts =
+    [
+        {
+            id: 1514395584,
+            authorId: 962158763,
+            author: "John Barney",
+            authorRole: "shop manager",
+            text: "Hello World !",
+            timestamp: new Date().getTime(),
+            comments: [
+                {
+                    commentId: Math.floor(Math.random() * 10000000),
+                    statusId: 1514395584,
+                    text: "Some comment !",
+                    timestamp: new Date().getTime()
+                }
+            ],
+            likes: [953232, 966255, 97632323]
+        },
+    ];
+
+
+function deletePostFilter(posts, id) {
+    return posts.filter(p => p !== id);
+}
+
+export var postReducer = (state = posts, action) => {
+    switch (action.type) {
+        case "POST_ADD": return [...state, action.post];
+        case "POST_DELETE": return [...deletePostFilter(action.id)];
         default: return state;
     }
 }

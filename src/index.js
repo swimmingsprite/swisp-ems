@@ -3,7 +3,14 @@ import ReactDOM from "react-dom";
 import App from "./components/App";
 import {Provider} from "react-redux";
 import {combineReducers, createStore} from "redux";
-import {arrowClickReducer, placeReducer, rootReducer, shiftReducer, userReducer} from "./reducers/reducers";
+import {
+    arrowClickReducer,
+    placeReducer,
+    postReducer,
+    rootReducer,
+    shiftReducer,
+    userReducer
+} from "./reducers/reducers";
 import {textEmojisToUnicode} from "./logic/emojis/emojis";
 
 const store = createStore(combineReducers(
@@ -11,7 +18,8 @@ const store = createStore(combineReducers(
         arrowClickReducer: arrowClickReducer,
         shiftReducer: shiftReducer,
         userReducer: userReducer,
-        placeReducer: placeReducer
+        placeReducer: placeReducer,
+        postReducer: postReducer
     }
     ));
 

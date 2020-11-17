@@ -5,13 +5,8 @@ import StatusContent from "./StatusContent"
 import CommentsList from "../comments/CommentsList"
 import PostEmojis from "./PostEmojis"
 
-function isZeroPostInteraction(emojiValues) {
-    if (Object
-        .values(emojiValues)
-        .filter((value) => value !== 0)
-        .length
-        > 0) return false;
-    return true;
+function isZeroPostInteraction(post) {
+    return !(post.likes.length || post.comments.length > 0);
 }
 
 export default function Status(props) {
@@ -28,16 +23,19 @@ export default function Status(props) {
             </Avatar>
 
             <TwoLineTextTime 
-            header={props.values.author}
-            text={props.values.authorRole}
-            time={props.values.timestamp}
+            header={props.post.author}
+            text={props.post.authorRole}
+            time={props.post.timestamp}
             />
 
-            <StatusContent buttons={true} text={props.values.text} />
+            <StatusContent buttons={true} text={props.post.text} />
 
-            {!isZeroPostInteraction(props.values.emojiValues) && <PostEmojis values={props.values.emojiValues}/>}
+            {!isZeroPostInteraction(props.post) && <PostEmojis
+                likes={props.post.likes.length}
+                comments={props.post.comments.length}
+            />}
 
-            <CommentsList statusId={props.values.statusId}  />
+            <CommentsList list={props.post.comments}  />
             
 
 

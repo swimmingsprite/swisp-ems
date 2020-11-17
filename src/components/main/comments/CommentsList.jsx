@@ -4,20 +4,21 @@ import CommentInput from "../input/CommentInput"
 
 
 export default function CommentsList(props) {
-    const [comments, setComments] = React.useState([]);
 
-    comments.forEach(value => {
+    /*do props post id*/
+
+    var comments = props.list;
+
+
+
+   /* comments.forEach(value => {
         console.log("******comments: "+value.text+" statusId: "+value.statusId);
-    })
+    })*/
 
-    // var comments = [];
-
-    /*function setComments(newComments) {
-        comments = newComments
-    }*/
 
     function handleNewComment(text) {
-        /*post on server and fetch new id and timestamp*/
+        /*post async on server and fetch new id and timestamp*/
+        /*dispatch to redux*/
 
         var newComment = {
             commentId: Math.floor(Math.random() * 10000000),
@@ -27,7 +28,7 @@ export default function CommentsList(props) {
         }
 
 
-        setComments([newComment, ...comments]);
+        // setComments([newComment, ...comments]);
     }
 
     return (
@@ -37,8 +38,13 @@ export default function CommentsList(props) {
 
             <CommentInput onNewStatus={handleNewComment}/>
             {comments
-                .filter((comment) => comment.statusId === props.statusId)
-                .map((comment => <Comment text={comment.text} key={comment.commentId} time={comment.timestamp} />))}
+                // .filter((comment) => comment.statusId === props.statusId)
+                .map((comment => <Comment
+                    text={comment.text}
+                    key={comment.commentId}
+                    time={comment.timestamp}
+                    postId = {props.postId}
+                />))}
         </ul>
     );
 }
