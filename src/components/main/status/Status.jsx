@@ -4,12 +4,17 @@ import TwoLineTextTime from "../TextLines"
 import StatusContent from "./StatusContent"
 import CommentsList from "../comments/CommentsList"
 import PostEmojis from "./PostEmojis"
+import {useDispatch, useSelector} from "react-redux";
 
-function isZeroPostInteraction(post) {
-    return !(post.likes.length || post.comments.length > 0);
-}
+
 
 export default function Status(props) {
+    var dispatch = useDispatch();
+    var userId = useSelector(state => state.userReducer.id);
+
+    function isZeroPostInteraction(post) {
+        return !(post.likes.length || post.comments.length > 0);
+    }
 
     return (
         <div className="post-status-bar">
@@ -28,7 +33,11 @@ export default function Status(props) {
             time={props.post.timestamp}
             />
 
-            <StatusContent buttons={true} text={props.post.text} />
+            {/*todo onLikeClick, onCommentClick send to server before dispatch*/}
+            <StatusContent buttons={true} text={props.post.text} postId={props.post.id}
+                onLikeClick={() => dispatch({type: "POST_LIKE_TOGGLE", postId: props.post.id, userId: userId}) }
+                           // onCommentClick={}
+            />
 
             {!isZeroPostInteraction(props.post) && <PostEmojis
                 likes={props.post.likes.length}

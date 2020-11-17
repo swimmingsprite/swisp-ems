@@ -5,7 +5,7 @@ import {
     getInitStartTime,
     getNextCurrentView
 } from "../logic/shifts/currentView";
-import {useDispatch, useSelector, useStore} from "react-redux";
+import {postCompareTo} from "../logic/Posts";
 
 export var arrowClickReducer = (state = {lastAction: null}, action) => {
     console.log("Arrow reducer: " + action.type + " text: " + action.text);
@@ -195,6 +195,7 @@ export var placeReducer = (state = places, action) => {
 var user = {
     id: 1515584841,
     name: "John Barney",
+    employeeRole: "shop manager",
     place: {
         id: 84486565,
         name: "Kaufland Stredočeská"
@@ -214,7 +215,7 @@ export var userReducer = (state = user, action) => {
 var posts =
     [
         {
-            id: 1514395584,
+            id: 151439381,
             authorId: 962158763,
             author: "John Barney",
             authorRole: "shop manager",
@@ -223,7 +224,7 @@ var posts =
             comments: [
                 {
                     commentId: Math.floor(Math.random() * 10000000),
-                    statusId: 1514395584,
+                    statusId: 151439381,
                     text: "Some comment !",
                     timestamp: new Date().getTime()
                 }
@@ -235,12 +236,36 @@ var posts =
 
 function deletePostFilter(posts, id) {
     return posts.filter(p => p !== id);
+} //todo refactor
+
+function getStatePostLikeToggle(posts, postId, userId) {
+    var filteredPost = posts.filter(p => p.id === postId);
+    if (filteredPost.length < 1) return null;
+
+
+    if (filteredPost[0].likes.filter(l => l === userId).length > 0) {
+        filteredPost[0].likes = filteredPost[0].likes.filter(l => l !== userId);
+        return posts;
+    }
+
+    console.log("ADDING LIKE !");
+
+    filteredPost[0].likes.push(userId); //.push(userId);
+
+    console.log("LIKES ARE: "+Object.values(filteredPost[0].likes));
+    return posts;
+
 }
+
 
 export var postReducer = (state = posts, action) => {
     switch (action.type) {
         case "POST_ADD": return [...state, action.post];
         case "POST_DELETE": return [...deletePostFilter(action.id)];
+        case "POST_LIKE_TOGGLE":
+            var newState = getStatePostLikeToggle(state, action.postId, action.userId);
+            if (newState === null) return state;
+            return [...state].sort(postCompareTo); //action.postId, action.userId
         default: return state;
     }
 }
