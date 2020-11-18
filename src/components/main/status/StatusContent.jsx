@@ -8,7 +8,12 @@ export default function StatusContent(props) {
     return (
         <div className="status-content">
             {props.text}
-            {props.buttons && <LikeCommentPanel like="Páči sa mi to" comment="Komentovať" onLikeClick={props.onLikeClick}/>}
+            {props.buttons && <LikeCommentPanel like="Páči sa mi to"
+                                                comment="Komentáre"
+                                                onLikeClick={props.onLikeClick}
+                                                onCommentsClick={props.onCommentsClick}
+
+            />}
         </div>
     );
 }

@@ -33,10 +33,10 @@ export default function Status(props) {
             time={props.post.timestamp}
             />
 
-            {/*todo onLikeClick, onCommentClick send to server before dispatch*/}
+            {/*todo onLikeClick send to server before dispatch, onCommentClick set commentsLimitTo 5*/}
             <StatusContent buttons={true} text={props.post.text} postId={props.post.id}
                 onLikeClick={() => dispatch({type: "POST_LIKE_TOGGLE", postId: props.post.id, userId: userId}) }
-                           // onCommentClick={}
+                onCommentsClick={() => dispatch({type: "COMMENTS_LIMIT_SET", postId: props.post.id, value: 5 })}
             />
 
             {!isZeroPostInteraction(props.post) && <PostEmojis
@@ -44,7 +44,7 @@ export default function Status(props) {
                 comments={props.post.comments.length}
             />}
 
-            <CommentsList list={props.post.comments}  />
+            <CommentsList list={props.post.comments} limit={props.post.commentsLimit}  />
             
 
 

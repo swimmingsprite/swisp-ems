@@ -27,7 +27,8 @@ export default function Home(props) {
             text: newStatusString,
             timestamp: new Date().getTime(),
             comments: [],
-            likes: []
+            likes: [],
+            commentsLimit: 0
         }
 
         dispatch({type: "POST_ADD", post: newPost})

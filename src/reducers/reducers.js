@@ -13,7 +13,7 @@ export var arrowClickReducer = (state = {lastAction: null}, action) => {
     return state;
 }
 
-export var rootReducer = (state = {currentSection: "Shifts"}, action) => {
+export var rootReducer = (state = {currentSection: "Home"}, action) => {
     console.log("REDUCER___________")
     console.log("state: " + state);
     console.log("action: " + {...action});
@@ -226,10 +226,23 @@ var posts =
                     commentId: Math.floor(Math.random() * 10000000),
                     statusId: 151439381,
                     text: "Some comment !",
+                    timestamp: new Date().getTime()+100
+                },
+                {
+                    commentId: Math.floor(Math.random() * 10000000),
+                    statusId: 281459381,
+                    text: "Some second comment !",
                     timestamp: new Date().getTime()
-                }
+                },
+                {
+                    commentId: Math.floor(Math.random() * 10000000),
+                    statusId: 151432591,
+                    text: "Some third comment !",
+                    timestamp: new Date().getTime()-100
+                },
             ],
-            likes: [953232, 966255, 97632323]
+            likes: [953232, 966255, 97632323],
+            commentsLimit: 0
         },
     ];
 
@@ -254,6 +267,20 @@ function getStatePostLikeToggle(posts, postId, userId) {
 
     console.log("LIKES ARE: "+Object.values(filteredPost[0].likes));
     return posts;
+}
+
+function getPostById(posts, postId) {
+    var filteredPost = posts.filter(p => p.id === postId);
+    if (filteredPost.length > 0) {return filteredPost[0]}
+}
+
+function setCommentsLimit(posts, postId, value) {
+    var post = getPostById(posts, postId);
+    if (post !== null) post.commentsLimit = value;
+    return posts;
+}
+
+function addNewComment(posts, postId, comment) {
 
 }
 
@@ -265,7 +292,10 @@ export var postReducer = (state = posts, action) => {
         case "POST_LIKE_TOGGLE":
             var newState = getStatePostLikeToggle(state, action.postId, action.userId);
             if (newState === null) return state;
-            return [...state].sort(postCompareTo); //action.postId, action.userId
+            return [...state].sort(postCompareTo);
+        case "COMMENTS_LIMIT_SET":
+            return [...setCommentsLimit(state, action.postId, action.value)];
+        case "COMMENT_ADD": return [addNewComment(state, action.postId, action.comment)]
         default: return state;
     }
 }

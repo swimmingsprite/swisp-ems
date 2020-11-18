@@ -18,7 +18,8 @@ export default function CommentsList(props) {
 
     function handleNewComment(text) {
         /*post async on server and fetch new id and timestamp*/
-        /*dispatch to redux*/
+        /*todo dispatch to redux*/
+        /*todo commentsLimit + 1 v reduxe*/
 
         var newComment = {
             commentId: Math.floor(Math.random() * 10000000),
@@ -28,7 +29,6 @@ export default function CommentsList(props) {
         }
 
 
-        // setComments([newComment, ...comments]);
     }
 
     return (
@@ -38,7 +38,8 @@ export default function CommentsList(props) {
 
             <CommentInput onNewStatus={handleNewComment}/>
             {comments
-                // .filter((comment) => comment.statusId === props.statusId)
+                //todo first sort by timestamp
+                .slice(0, props.limit)
                 .map((comment => <Comment
                     text={comment.text}
                     key={comment.commentId}
