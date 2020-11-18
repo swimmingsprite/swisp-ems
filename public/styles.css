@@ -329,6 +329,7 @@ ul {
 
 .post-emojis {
     padding-top: 5px;
+    position: relative;
 }
 
 .comment-li {
