@@ -5,7 +5,13 @@ import {
     getInitStartTime,
     getNextCurrentView
 } from "../logic/shifts/currentView";
-import {elementTimestampCompareTo} from "../logic/Posts";
+import {
+    addNewComment,
+    deletePostFilter,
+    elementTimestampCompareTo,
+    getStatePostLikeToggle,
+    setCommentsLimit
+} from "../logic/Posts";
 
 export var arrowClickReducer = (state = {lastAction: null}, action) => {
     if (action.type.startsWith("ARROW")) return {...state, lastAction: action.type};
@@ -241,50 +247,6 @@ var posts =
             commentsLimit: 0
         },
     ];
-
-
-function deletePostFilter(posts, id) {
-    return posts.filter(p => p !== id);
-} //todo refactor
-
-function getStatePostLikeToggle(posts, postId, userId) {
-    var filteredPost = posts.filter(p => p.id === postId);
-    if (filteredPost.length < 1) return null;
-
-
-    if (filteredPost[0].likes.filter(l => l === userId).length > 0) {
-        filteredPost[0].likes = filteredPost[0].likes.filter(l => l !== userId);
-        return posts;
-    }
-
-    console.log("ADDING LIKE !");
-
-    filteredPost[0].likes.push(userId); //.push(userId);
-
-    console.log("LIKES ARE: "+Object.values(filteredPost[0].likes));
-    return posts;
-}
-
-function getPostById(posts, postId) {
-    var filteredPost = posts.filter(p => p.id === postId);
-    if (filteredPost.length > 0) {return filteredPost[0]}
-    return null;
-}
-
-function setCommentsLimit(posts, postId, value) {
-    var post = getPostById(posts, postId);
-    if (post !== null) post.commentsLimit = value;
-    console.log("SETTING LIMIT TO: "+value);
-    return posts;
-}
-
-function addNewComment(posts, postId, comment) {
-    var post = getPostById(posts, postId);
-    if (post !== null) post.comments.unshift(comment);
-    if (post.commentsLimit === 0) post.commentsLimit = 5;
-    else post.commentsLimit++;
-    return posts;
-}
 
 
 export var postReducer = (state = posts, action) => {
