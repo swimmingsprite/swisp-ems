@@ -8,6 +8,13 @@ export default function Comment(props) {
     return (
         <li className="comment-li">
             <div className={"post-status-bar comment-bar"}>
+
+                {/*{userId === props.post.authorId*/}
+
+                {true && <div className="delete-button-comment"
+
+                >x</div>}
+
             <Avatar className="post-avatar" style={
                 {height: "20px", 
                 width: "20px", 

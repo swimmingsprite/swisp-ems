@@ -613,6 +613,21 @@ ul {
 
 .delete-button:hover {
     transform: scale(1.30);
+    font-weight: 900;
+}
+
+.delete-button-comment {
+    position: absolute;
+    cursor: pointer;
+    right: -13px;
+    top: 59px;
+    user-select: none;
+    padding: 5px 10px;
+}
+
+.delete-button-comment:hover {
+    transform: scale(1.30);
+    font-weight: 900;
 }
 
 

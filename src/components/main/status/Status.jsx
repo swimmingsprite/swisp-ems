@@ -15,8 +15,14 @@ export default function Status(props) {
 
     return <div className="post-status-bar">
 
+        {/*delete button*/}
         {userId === props.post.authorId
-        && <div className="delete-button">x</div>}
+        && <div className="delete-button"
+                onClick={() => {dispatch({
+                    type: "POST_DELETE",
+                    postId: props.post.id
+                })}}
+        >x</div>}
 
         <Avatar className="post-avatar" style={
             {

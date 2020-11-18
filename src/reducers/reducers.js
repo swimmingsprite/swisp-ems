@@ -265,7 +265,7 @@ var posts =
 export var postReducer = (state = posts, action) => {
     switch (action.type) {
         case "POST_ADD": return [...state, action.post];//.sort(elementTimestampCompareTo);
-        case "POST_DELETE": return [...deletePostFilter(action.id)];
+        case "POST_DELETE": return [...deletePostFilter(state, action.postId)];
         case "POST_LIKE_TOGGLE":
             var newState = getStatePostLikeToggle(state, action.postId, action.userId);
             if (newState === null) return state;
@@ -273,6 +273,7 @@ export var postReducer = (state = posts, action) => {
         case "COMMENTS_LIMIT_SET":
             return [...setCommentsLimit(state, action.postId, action.value)];//.sort(elementTimestampCompareTo);
         case "COMMENT_ADD": return [...addNewComment(state, action.postId, action.comment)];//.sort(elementTimestampCompareTo);
+        // case "POST_DELETE": return
         default: return state;
     }
 }
