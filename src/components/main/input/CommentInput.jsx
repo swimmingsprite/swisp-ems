@@ -5,7 +5,9 @@ import InputBar from "./InputBar"
 export default function CommentInput(props) {
 
     return (
-        <div className="post-status-bar comment-bar">
+        <div className="post-status-bar comment-bar"
+            style={props.style}
+        >
         <Avatar className="post-avatar" style={
             {height: "30px", 
             width: "30px",  

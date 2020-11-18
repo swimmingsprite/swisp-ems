@@ -31,7 +31,7 @@ export default function InputBar(props) {
             style={{
                 fontSize: "1rem",
                 fontFamily: "'Montserrat', sans-serif",
-                width: "calc(100% - 75px)"
+                width: "calc(100% - 75px)",
 
             }}
             placeholder={props.text}

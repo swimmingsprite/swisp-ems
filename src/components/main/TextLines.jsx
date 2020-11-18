@@ -11,8 +11,8 @@ function OneLineTextTime(props) {
 
     return (
         <div className="two-line-text">
-            <h3 className="two-line-text-header">{props.header}</h3>
-            <PublishTime text={props.time && dateTimeString} />
+            <h3 className="two-line-text-header" style={props.style}>{props.header}</h3>
+            <PublishTime style={props.style} text={props.time && dateTimeString} />
         </div>
     );
 }

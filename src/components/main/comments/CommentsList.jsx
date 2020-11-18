@@ -92,7 +92,7 @@ export default function CommentsList(props) {
                     key={comment.id}
                     postId={props.postId}
                 />))}
-            <CommentInput onNewStatus={handleNewComment}/>
+            <CommentInput onNewStatus={handleNewComment} style={{paddingTop: "20px"}}/>
         </ul>
     );
 }
