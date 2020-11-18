@@ -2,6 +2,7 @@ import React from 'react';
 import Comment from "../comments/Comment";
 import CommentInput from "../input/CommentInput"
 import {useDispatch} from "react-redux";
+import {elementTimestampCompareTo} from "../../../logic/Posts";
 
 
 export default function CommentsList(props) {
@@ -41,6 +42,8 @@ export default function CommentsList(props) {
             <CommentInput onNewStatus={handleNewComment}/>
             {comments
                 //todo first sort by timestamp
+                .sort(elementTimestampCompareTo)
+                .reverse()
                 .slice(0, props.limit)
                 .map((comment => <Comment
                     text={comment.text}

@@ -12,6 +12,7 @@ export default function StatusContent(props) {
                                                 comment="Komentáre"
                                                 onLikeClick={props.onLikeClick}
                                                 onCommentsClick={props.onCommentsClick}
+                                                limit={props.limit}
 
             />}
         </div>

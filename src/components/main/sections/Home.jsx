@@ -3,7 +3,7 @@ import Title from "../title/Title"
 import PostStatusBar from "../status/PostStatusBar"
 import Status from "../status/Status"
 import {useDispatch, useSelector} from "react-redux";
-import {postCompareTo} from "../../../logic/Posts";
+import {elementTimestampCompareTo} from "../../../logic/Posts";
 
 export default function Home(props) {
 
@@ -41,7 +41,9 @@ export default function Home(props) {
         <div>
             <Title text="Príspevky"/>
             <PostStatusBar onNewStatus={onNewStatus}/>
-            {posts.reverse(postCompareTo)
+            {posts
+                .sort(elementTimestampCompareTo)
+                .reverse()
                 .map((post) => {
                     // console.log("POST ID JE: "+post.id)
                     return <Status post={post}

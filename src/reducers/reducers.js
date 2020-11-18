@@ -5,18 +5,14 @@ import {
     getInitStartTime,
     getNextCurrentView
 } from "../logic/shifts/currentView";
-import {postCompareTo} from "../logic/Posts";
+import {elementTimestampCompareTo} from "../logic/Posts";
 
 export var arrowClickReducer = (state = {lastAction: null}, action) => {
-    console.log("Arrow reducer: " + action.type + " text: " + action.text);
     if (action.type.startsWith("ARROW")) return {...state, lastAction: action.type};
     return state;
 }
 
 export var rootReducer = (state = {currentSection: "Home"}, action) => {
-    console.log("REDUCER___________")
-    console.log("state: " + state);
-    console.log("action: " + {...action});
 
     if (action.type === "CURRENT_SECTION") {
         return {...state, currentSection: action.currentSection}
@@ -278,6 +274,7 @@ function getPostById(posts, postId) {
 function setCommentsLimit(posts, postId, value) {
     var post = getPostById(posts, postId);
     if (post !== null) post.commentsLimit = value;
+    console.log("SETTING LIMIT TO: "+value);
     return posts;
 }
 
@@ -292,15 +289,15 @@ function addNewComment(posts, postId, comment) {
 
 export var postReducer = (state = posts, action) => {
     switch (action.type) {
-        case "POST_ADD": return [...state, action.post].sort(postCompareTo);
+        case "POST_ADD": return [...state, action.post];//.sort(elementTimestampCompareTo);
         case "POST_DELETE": return [...deletePostFilter(action.id)];
         case "POST_LIKE_TOGGLE":
             var newState = getStatePostLikeToggle(state, action.postId, action.userId);
             if (newState === null) return state;
-            return [...state].sort(postCompareTo);
+            return [...state].sort(elementTimestampCompareTo);
         case "COMMENTS_LIMIT_SET":
-            return [...setCommentsLimit(state, action.postId, action.value)];
-        case "COMMENT_ADD": return [...addNewComment(state, action.postId, action.comment)]
+            return [...setCommentsLimit(state, action.postId, action.value)];//.sort(elementTimestampCompareTo);
+        case "COMMENT_ADD": return [...addNewComment(state, action.postId, action.comment)];//.sort(elementTimestampCompareTo);
         default: return state;
     }
 }

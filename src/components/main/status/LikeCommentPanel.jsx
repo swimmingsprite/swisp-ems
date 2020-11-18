@@ -18,7 +18,10 @@ export default function LikeCommentPanel(props) {
 
             <button
                 className="like-comment-button comment-button"
-                onClick={props.onCommentsClick}
+                onClick={() => {
+                    if (props.limit > 0) props.onCommentsClick(0);
+                    else props.onCommentsClick(5);
+                }}
             >
                 {props.comment}
             </button>
