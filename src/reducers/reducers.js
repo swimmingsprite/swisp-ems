@@ -218,25 +218,37 @@ var posts =
     [
         {
             id: 151439381,
-            authorId: 962158763,
+            authorId: 1515584841,
             author: "John Barney",
             authorRole: "shop manager",
             text: "Hello World !",
             timestamp: 1605697781225,
             comments: [
                 {
+                    authorId: 1515584841,
+                    author: "John Barney",
+                    avatarImg: "<-----------------------------base64 img",
+                    avatarColor: "#HEXCOLOR",
                     commentId: Math.floor(Math.random() * 10000000),
                     statusId: 151439381,
                     text: "Some comment !",
                     timestamp: 1605697781225-10000
                 },
                 {
+                    authorId: 29895646541,
+                    author: "Titus Augustus",
+                    avatarImg: "<-----------------------------base64 img",
+                    avatarColor: "#HEXCOLOR",
                     commentId: Math.floor(Math.random() * 10000000),
                     statusId: 281459381,
                     text: "Some second comment !",
                     timestamp: 1605697781225-30000
                 },
                 {
+                    authorId: 1254846541,
+                    author: "Mark Twain",
+                    avatarImg: "<-----------------------------base64 img",
+                    avatarColor: "#HEXCOLOR",
                     commentId: Math.floor(Math.random() * 10000000),
                     statusId: 151432591,
                     text: "Some third comment !",
