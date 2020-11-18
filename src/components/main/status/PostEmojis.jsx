@@ -26,6 +26,7 @@ export default function PostEmojis(props) {
                 }}>💬 {props.comments}</p>
             }
 
+
         </div>
     );
 }
