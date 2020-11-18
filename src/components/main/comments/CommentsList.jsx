@@ -1,7 +1,7 @@
 import React from 'react';
 import Comment from "../comments/Comment";
 import CommentInput from "../input/CommentInput"
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {elementTimestampCompareTo} from "../../../logic/Posts";
 import ShowMoreCommentsPanel from "../status/ShowMoreCommentsPanel";
 
@@ -12,6 +12,7 @@ export default function CommentsList(props) {
 
     var comments = props.list;
     var dispatch = useDispatch();
+    var user = useSelector(state => state.userReducer)
     // var postId = props.postId;
 
     /* comments.forEach(value => {
@@ -25,7 +26,11 @@ export default function CommentsList(props) {
         /*todo commentsLimit + 1 v reduxe*/
 
         var newComment = {
-            commentId: Math.floor(Math.random() * 10000000),
+            authorId: user.id,
+            author: user.name,
+            avatarImg: "<-----------------------------base64 img",
+            avatarColor: "#HEXCOLOR",
+            id: Math.floor(Math.random() * 10000000),
             statusId: props.statusId,
             text: text,
             timestamp: new Date().getTime()

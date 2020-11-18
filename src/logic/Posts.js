@@ -54,9 +54,6 @@ export function isPostLiked(post, currentUserId) {
 
 
 export function deleteComment(posts, postId, commentId) {
-    console.log("POSTS: "+posts);
-    console.log("post id: "+postId);
-    console.log("comment id: "+commentId);
     var post = getPostById(posts, postId);
     if (post !== null) {
         if (commentId) post.comments = post.comments.filter(c => c.id !== commentId);

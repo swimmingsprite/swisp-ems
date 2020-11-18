@@ -8,8 +8,6 @@ export default function Comment(props) {
     var dispatch = useDispatch();
     var userId = useSelector(state => state.userReducer.id)
 
-    console.log("comment id: "+props.commentId)
-
 
     return (
         <li className="comment-li">
@@ -31,7 +29,7 @@ export default function Comment(props) {
                 }}>
             </Avatar>
 
-            <OneLineTextTime header="John Barney" time={props.time}/>
+            <OneLineTextTime header="" time={props.time}/>
 
             <StatusContent
                 buttons={false}
