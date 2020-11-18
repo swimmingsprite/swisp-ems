@@ -35,6 +35,7 @@ export default function Status(props) {
 
             {/*todo onLikeClick send to server before dispatch, onCommentClick set commentsLimitTo 5*/}
             <StatusContent buttons={true} text={props.post.text} postId={props.post.id} limit={props.post.commentsLimit}
+                           commentsLength={props.post.comments.length}
                 onLikeClick={() => dispatch({type: "POST_LIKE_TOGGLE", postId: props.post.id, userId: userId}) }
                 onCommentsClick={(val) => dispatch({type: "COMMENTS_LIMIT_SET", postId: props.post.id, value: val })}
             />
@@ -44,7 +45,11 @@ export default function Status(props) {
                 comments={props.post.comments.length}
             />}
 
-            <CommentsList list={props.post.comments} limit={props.post.commentsLimit} postId={props.post.id}  />
+            <CommentsList list={props.post.comments}
+                          limit={props.post.commentsLimit}
+                          postId={props.post.id}
+                          commentsCount={props.post.commentsCount}
+            />
             
 
 

@@ -3,7 +3,6 @@ import LikeCommentPanel from "./LikeCommentPanel"
 
 
 export default function StatusContent(props) {
-    console.log("props buttons: "+props.buttons)
 
     return (
         <div className="status-content">
@@ -13,7 +12,7 @@ export default function StatusContent(props) {
                                                 onLikeClick={props.onLikeClick}
                                                 onCommentsClick={props.onCommentsClick}
                                                 limit={props.limit}
-
+                                                commentsLength={props.commentsLength}
             />}
         </div>
     );

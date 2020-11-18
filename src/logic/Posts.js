@@ -16,6 +16,9 @@ export function setCommentsLimit(posts, postId, value) {
     var post = getPostById(posts, postId);
     if (post !== null) post.commentsLimit = value;
     console.log("SETTING LIMIT TO: " + value);
+    console.log("SETTING POST JE: " + post);
+    console.log("SETTING POSTID JE: " + postId);
+    console.log("SETTING value JE: " + value);
     return posts;
 }
 

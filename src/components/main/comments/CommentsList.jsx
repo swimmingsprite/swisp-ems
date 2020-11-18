@@ -49,25 +49,28 @@ export default function CommentsList(props) {
         if (totalDifference > 0) { //ak sa daju nejake stiahnuť
             if (difference > 5) {
                 /*ak mam dost lokalnych nastav limit na +5*/
-                dispatch({type: "COMMENTS_LIMIT_SET", postId: props.id, value: props.limit + 5});
+                dispatch({type: "COMMENTS_LIMIT_SET", postId: props.postId, value: props.limit + 5});
             }
-            if (difference > 0 && difference < 5) {
+            else if (difference > 0 && difference < 5) {
                 /*ak nemas dost lokalnych, nastav limit na +difference a fetchni zbytok zo servera*/
-                dispatch({type: "COMMENTS_LIMIT_SET", postId: props.id, value: props.limit + difference});
-                /*todo async fetch comments from server, add fetched comments to post comment array*/
+                dispatch({type: "COMMENTS_LIMIT_SET", postId: props.postId, value: props.limit + difference});
+                /*todo async fetch comments from server, add fetched comments to post comment array, increase limit (returned - difference)*/
             }
         } else {//ak uz mam vsetky lokalne
             if (difference > 5) {/*nastav limit na +5*/
-                dispatch({type: "COMMENTS_LIMIT_SET", postId: props.id, value: props.limit + 5});
+                dispatch({type: "COMMENTS_LIMIT_SET", postId: props.postId, value: props.limit + 5});
             }
-            if (difference > 0 && difference < 5) {
+            else if (difference > 0 && difference < 5) {
                 /*nastav limit na comments.length, uz nieje co fetchnut zo servera*/
-                dispatch({type: "COMMENTS_LIMIT_SET", postId: props.id, value:  comments.length});
+                dispatch({type: "COMMENTS_LIMIT_SET", postId: props.postId, value:  comments.length});
             }
         }
 
     }
 
+
+        console.log("LIMIT JE: "+props.limit)
+        console.log("COMMENTS COUNT JE: "+props.commentsCount)
     return (
 
 
