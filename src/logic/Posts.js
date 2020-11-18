@@ -1,6 +1,4 @@
 export function elementTimestampCompareTo(element1, element2) {
-    console.log("POST1 " + element1.timestamp);
-    console.log("POST2 " + element2.timestamp);
     if (element1.timestamp > element2.timestamp) return 1;
     if (element1.timestamp < element2.timestamp) return -1;
     return 0;
@@ -23,7 +21,7 @@ export function setCommentsLimit(posts, postId, value) {
 
 export function addNewComment(posts, postId, comment) {
     var post = getPostById(posts, postId);
-    if (post !== null) post.comments.unshift(comment);
+    if (post !== null) {post.comments.push(comment); post.commentsCount++}
     if (post.commentsLimit === 0) post.commentsLimit = 5;
     else post.commentsLimit++;
     return posts;

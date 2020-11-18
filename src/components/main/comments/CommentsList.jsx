@@ -14,9 +14,9 @@ export default function CommentsList(props) {
     var dispatch = useDispatch();
     // var postId = props.postId;
 
-   /* comments.forEach(value => {
-        console.log("******comments: "+value.text+" statusId: "+value.statusId);
-    })*/
+    /* comments.forEach(value => {
+         console.log("******comments: "+value.text+" statusId: "+value.statusId);
+     })*/
 
 
     function handleNewComment(text) {
@@ -35,24 +35,58 @@ export default function CommentsList(props) {
 
     }
 
+    function showMoreCommentsFilter() {
+        /*todo comments.length replace for status commentsCount*/
+        if (props.limit !== 0 && props.limit < comments.length) return true;
+        return false;
+    }
+
+    function handleShowMoreComments() {
+        console.log("HANDLE SHOW MORE COMMENTS");
+        var difference = comments.length - props.limit;
+        var totalDifference = props.commentsCount - comments.length; //vsetky co existuju - vsetky ktore mam = zvysok ktore nemam lokalne
+
+        if (totalDifference > 0) { //ak sa daju nejake stiahnuť
+            if (difference > 5) {
+                /*ak mam dost lokalnych nastav limit na +5*/
+                dispatch({type: "COMMENTS_LIMIT_SET", postId: props.id, value: props.limit + 5});
+            }
+            if (difference > 0 && difference < 5) {
+                /*ak nemas dost lokalnych, nastav limit na +difference a fetchni zbytok zo servera*/
+                dispatch({type: "COMMENTS_LIMIT_SET", postId: props.id, value: props.limit + difference});
+                /*todo async fetch comments from server, add fetched comments to post comment array*/
+            }
+        } else {//ak uz mam vsetky lokalne
+            if (difference > 5) {/*nastav limit na +5*/
+                dispatch({type: "COMMENTS_LIMIT_SET", postId: props.id, value: props.limit + 5});
+            }
+            if (difference > 0 && difference < 5) {
+                /*nastav limit na comments.length, uz nieje co fetchnut zo servera*/
+                dispatch({type: "COMMENTS_LIMIT_SET", postId: props.id, value:  comments.length});
+            }
+        }
+
+    }
+
     return (
 
 
         <ul className="comments-list">
 
-            <CommentInput onNewStatus={handleNewComment}/>
-            <ShowMoreCommentsPanel />
+            {/*todo comment delete button if its written by current user*/}
+            {showMoreCommentsFilter() && <ShowMoreCommentsPanel onClick={handleShowMoreComments}/>}
             {comments
-                //todo first sort by timestamp
                 .sort(elementTimestampCompareTo)
                 .reverse()
                 .slice(0, props.limit)
+                .reverse()
                 .map((comment => <Comment
                     text={comment.text}
                     key={comment.commentId}
                     time={comment.timestamp}
-                    postId = {props.postId}
+                    postId={props.postId}
                 />))}
+            <CommentInput onNewStatus={handleNewComment}/>
         </ul>
     );
 }

@@ -244,7 +244,8 @@ var posts =
                 },
             ],
             likes: [953232, 966255, 97632323],
-            commentsLimit: 0
+            commentsLimit: 0,
+            commentsCount: 3
         },
     ];
 
