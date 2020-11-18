@@ -31,7 +31,7 @@ export function addNewComment(posts, postId, comment) {
 
 export function deletePostFilter(posts, id) {
     return posts.filter(p => p !== id);
-}  //todo refactor
+}
 
 export function getStatePostLikeToggle(posts, postId, userId) {
     var post = getPostById(posts, postId);

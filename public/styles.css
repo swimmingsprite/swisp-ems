@@ -586,5 +586,16 @@ ul {
     cursor: pointer
 }
 
+.show-more-comments-panel {
+    padding-top: 15px;
+    text-align: center;
+    user-select: none;
+}
+
+.show-more-comments-panel:hover {
+    color: white;
+    cursor: pointer;
+}
+
 
 /* ffc93c yellow */

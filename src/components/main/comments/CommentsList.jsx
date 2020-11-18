@@ -3,6 +3,7 @@ import Comment from "../comments/Comment";
 import CommentInput from "../input/CommentInput"
 import {useDispatch} from "react-redux";
 import {elementTimestampCompareTo} from "../../../logic/Posts";
+import ShowMoreCommentsPanel from "../status/ShowMoreCommentsPanel";
 
 
 export default function CommentsList(props) {
@@ -40,6 +41,7 @@ export default function CommentsList(props) {
         <ul className="comments-list">
 
             <CommentInput onNewStatus={handleNewComment}/>
+            <ShowMoreCommentsPanel />
             {comments
                 //todo first sort by timestamp
                 .sort(elementTimestampCompareTo)
