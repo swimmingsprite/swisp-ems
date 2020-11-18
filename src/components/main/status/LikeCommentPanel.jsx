@@ -3,11 +3,14 @@ import React from 'react';
 
 export default function LikeCommentPanel(props) {
 
+    var likedStyle = props.liked ? {color: "#0984e3"} : null
+
     return (
         <div className="like-comment-panel">
          <hr className="like-comment-hr" />
 
          <button
+             style={likedStyle}
              className="like-comment-button like-button"
             onClick={props.onLikeClick}
          >

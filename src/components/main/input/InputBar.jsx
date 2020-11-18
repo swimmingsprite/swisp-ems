@@ -8,8 +8,11 @@ export default function InputBar(props) {
     function handleKeyDown(event) {
         if (event.key === "Enter" && !event.shiftKey) {
             event.preventDefault();
-            props.onNewStatus(statusInput);
-            setStatusInput("");
+            console.log("STATUS INPUT JE:" + statusInput + ":")
+            if ((" " + statusInput).trim() !== "" && statusInput.trim().length > 1) {
+                props.onNewStatus(statusInput);
+                setStatusInput("");
+            }
         }
 
 
@@ -20,7 +23,8 @@ export default function InputBar(props) {
         <TextareaAutosize
             onChange={(event) => {
                 // setStatusInput(event.target.value)}}
-                setStatusInput(textEmojisToUnicode(event.target.value))}}
+                setStatusInput(textEmojisToUnicode(event.target.value))
+            }}
             onKeyDown={handleKeyDown}
             className={props.isComment ? "input-bar input-bar-comment" : "input-bar"}
 

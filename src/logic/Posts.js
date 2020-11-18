@@ -46,3 +46,65 @@ export function getStatePostLikeToggle(posts, postId, userId) {
     post.likes.push(userId);
     return posts;
 }
+
+export function isZeroPostInteraction(post) {
+    return !(post.likes.length || post.comments.length > 0);
+}
+
+export function isPostLiked(post, currentUserId) {
+    return post.likes.filter(id => id === currentUserId).length > 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

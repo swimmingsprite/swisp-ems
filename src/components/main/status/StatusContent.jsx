@@ -13,6 +13,7 @@ export default function StatusContent(props) {
                                                 onCommentsClick={props.onCommentsClick}
                                                 limit={props.limit}
                                                 commentsLength={props.commentsLength}
+                                                liked={props.liked}
             />}
         </div>
     );
