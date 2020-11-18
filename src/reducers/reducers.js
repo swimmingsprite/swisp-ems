@@ -6,7 +6,7 @@ import {
     getNextCurrentView
 } from "../logic/shifts/currentView";
 import {
-    addNewComment,
+    addNewComment, deleteComment,
     deletePostFilter,
     elementTimestampCompareTo,
     getStatePostLikeToggle,
@@ -229,7 +229,7 @@ var posts =
                     author: "John Barney",
                     avatarImg: "<-----------------------------base64 img",
                     avatarColor: "#HEXCOLOR",
-                    commentId: Math.floor(Math.random() * 10000000),
+                    id: Math.floor(Math.random() * 10000000),
                     statusId: 151439381,
                     text: "Some comment !",
                     timestamp: 1605697781225-10000
@@ -239,7 +239,7 @@ var posts =
                     author: "Titus Augustus",
                     avatarImg: "<-----------------------------base64 img",
                     avatarColor: "#HEXCOLOR",
-                    commentId: Math.floor(Math.random() * 10000000),
+                    id: Math.floor(Math.random() * 10000000),
                     statusId: 281459381,
                     text: "Some second comment !",
                     timestamp: 1605697781225-30000
@@ -249,7 +249,7 @@ var posts =
                     author: "Mark Twain",
                     avatarImg: "<-----------------------------base64 img",
                     avatarColor: "#HEXCOLOR",
-                    commentId: Math.floor(Math.random() * 10000000),
+                    id: Math.floor(Math.random() * 10000000),
                     statusId: 151432591,
                     text: "Some third comment !",
                     timestamp: 1605697781225-50000
@@ -273,6 +273,7 @@ export var postReducer = (state = posts, action) => {
         case "COMMENTS_LIMIT_SET":
             return [...setCommentsLimit(state, action.postId, action.value)];//.sort(elementTimestampCompareTo);
         case "COMMENT_ADD": return [...addNewComment(state, action.postId, action.comment)];//.sort(elementTimestampCompareTo);
+        case "COMMENT_DELETE": return [...deleteComment(state, action.postId, action.commentId)];//.sort(elementTimestampCompareTo);
         // case "POST_DELETE": return
         default: return state;
     }

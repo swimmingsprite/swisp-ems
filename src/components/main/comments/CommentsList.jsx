@@ -69,8 +69,7 @@ export default function CommentsList(props) {
     }
 
 
-        console.log("LIMIT JE: "+props.limit)
-        console.log("COMMENTS COUNT JE: "+props.commentsCount)
+
     return (
 
 
@@ -85,9 +84,11 @@ export default function CommentsList(props) {
                 .reverse()
                 .map((comment => <Comment
                     text={comment.text}
-                    key={comment.commentId}
+                    key={comment.id}
                     time={comment.timestamp}
                     postId={props.postId}
+                    commentId={comment.id}
+                    authorId={comment.authorId}
                 />))}
             <CommentInput onNewStatus={handleNewComment}/>
         </ul>
