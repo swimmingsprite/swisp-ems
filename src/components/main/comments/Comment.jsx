@@ -13,27 +13,27 @@ export default function Comment(props) {
         <li className="comment-li">
             <div className={"post-status-bar comment-bar"}>
 
-                {userId === props.authorId && <div className="delete-button-comment"
+                {userId === props.comment.authorId && <div className="delete-button-comment"
                                                         onClick={() => {dispatch({
                                                             type: "COMMENT_DELETE",
                                                             postId: props.postId,
-                                                            commentId: props.commentId
+                                                            commentId: props.comment.id
                                                         })}}
                 >x</div>}
 
             <Avatar className="post-avatar" style={
                 {height: "20px", 
                 width: "20px", 
-                backgroundColor: "red",
+                backgroundColor: props.comment.avatarColor,
                 transform: "translateY(0%)"
                 }}>
             </Avatar>
 
-            <OneLineTextTime header="" time={props.time}/>
+            <OneLineTextTime header={props.comment.author} time={props.comment.timestamp}/>
 
             <StatusContent
                 buttons={false}
-                text={props.text}
+                text={props.comment.text}
                 statusId={props.postId}
             />
             

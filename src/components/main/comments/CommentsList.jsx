@@ -28,8 +28,8 @@ export default function CommentsList(props) {
         var newComment = {
             authorId: user.id,
             author: user.name,
-            avatarImg: "<-----------------------------base64 img",
-            avatarColor: "#HEXCOLOR",
+            avatarImg: user.avatarImg,
+            avatarColor: user.avatarColor,
             id: Math.floor(Math.random() * 10000000),
             statusId: props.statusId,
             text: text,
@@ -88,12 +88,9 @@ export default function CommentsList(props) {
                 .slice(0, props.limit)
                 .reverse()
                 .map((comment => <Comment
-                    text={comment.text}
+                    comment={comment}
                     key={comment.id}
-                    time={comment.timestamp}
                     postId={props.postId}
-                    commentId={comment.id}
-                    authorId={comment.authorId}
                 />))}
             <CommentInput onNewStatus={handleNewComment}/>
         </ul>
