@@ -20,7 +20,7 @@ export default function Home(props) {
         /*todo dispatch post from server to redux*/
 
         var newPost = {
-            id: 158484468, //from server
+            id: Math.floor(Math.random()*1000000000), //from server
             authorId: user.id,
             author: user.name,
             authorRole: user.employeeRole,
