@@ -220,25 +220,25 @@ var posts =
             author: "John Barney",
             authorRole: "shop manager",
             text: "Hello World !",
-            timestamp: new Date().getTime(),
+            timestamp: 1605697781225,
             comments: [
                 {
                     commentId: Math.floor(Math.random() * 10000000),
                     statusId: 151439381,
                     text: "Some comment !",
-                    timestamp: new Date().getTime()+100
+                    timestamp: 1605697781225-10000
                 },
                 {
                     commentId: Math.floor(Math.random() * 10000000),
                     statusId: 281459381,
                     text: "Some second comment !",
-                    timestamp: new Date().getTime()
+                    timestamp: 1605697781225-30000
                 },
                 {
                     commentId: Math.floor(Math.random() * 10000000),
                     statusId: 151432591,
                     text: "Some third comment !",
-                    timestamp: new Date().getTime()-100
+                    timestamp: 1605697781225-50000
                 },
             ],
             likes: [953232, 966255, 97632323],
@@ -272,6 +272,7 @@ function getStatePostLikeToggle(posts, postId, userId) {
 function getPostById(posts, postId) {
     var filteredPost = posts.filter(p => p.id === postId);
     if (filteredPost.length > 0) {return filteredPost[0]}
+    return null;
 }
 
 function setCommentsLimit(posts, postId, value) {
@@ -281,13 +282,17 @@ function setCommentsLimit(posts, postId, value) {
 }
 
 function addNewComment(posts, postId, comment) {
-
+    var post = getPostById(posts, postId);
+    if (post !== null) post.comments.unshift(comment);
+    if (post.commentsLimit === 0) post.commentsLimit = 5;
+    else post.commentsLimit++;
+    return posts;
 }
 
 
 export var postReducer = (state = posts, action) => {
     switch (action.type) {
-        case "POST_ADD": return [...state, action.post];
+        case "POST_ADD": return [...state, action.post].sort(postCompareTo);
         case "POST_DELETE": return [...deletePostFilter(action.id)];
         case "POST_LIKE_TOGGLE":
             var newState = getStatePostLikeToggle(state, action.postId, action.userId);
@@ -295,7 +300,7 @@ export var postReducer = (state = posts, action) => {
             return [...state].sort(postCompareTo);
         case "COMMENTS_LIMIT_SET":
             return [...setCommentsLimit(state, action.postId, action.value)];
-        case "COMMENT_ADD": return [addNewComment(state, action.postId, action.comment)]
+        case "COMMENT_ADD": return [...addNewComment(state, action.postId, action.comment)]
         default: return state;
     }
 }

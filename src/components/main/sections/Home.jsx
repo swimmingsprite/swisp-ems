@@ -43,7 +43,7 @@ export default function Home(props) {
             <PostStatusBar onNewStatus={onNewStatus}/>
             {posts.reverse(postCompareTo)
                 .map((post) => {
-                    console.log("POST ID JE: "+post.id)
+                    // console.log("POST ID JE: "+post.id)
                     return <Status post={post}
                                        key={post.id}/>
             }

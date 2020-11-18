@@ -3,20 +3,15 @@ import TextareaAutosize from 'react-autosize-textarea';
 import {textEmojisToUnicode} from "../../../logic/emojis/emojis";
 
 export default function InputBar(props) {
-    console.log("INPUT BAR props: " + typeof props.handleChange)
     const [statusInput, setStatusInput] = React.useState([]);
 
     function handleKeyDown(event) {
-        console.log("event: "+event.key);
         if (event.key === "Enter" && !event.shiftKey) {
             event.preventDefault();
-            /*spell check*/
             props.onNewStatus(statusInput);
             setStatusInput("");
-            console.log("ENTER STLAčENY")
         }
-        console.log("Event target value je: "+event.target.value)
-        console.log("ENTER NEBOL STLAčENY")
+
 
     }
 

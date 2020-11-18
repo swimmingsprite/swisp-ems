@@ -44,7 +44,7 @@ export default function Status(props) {
                 comments={props.post.comments.length}
             />}
 
-            <CommentsList list={props.post.comments} limit={props.post.commentsLimit}  />
+            <CommentsList list={props.post.comments} limit={props.post.commentsLimit} postId={props.post.id}  />
             
 
 
