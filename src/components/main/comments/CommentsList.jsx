@@ -80,7 +80,6 @@ export default function CommentsList(props) {
 
         <ul className="comments-list">
 
-            {/*todo comment delete button if its written by current user*/}
             {showMoreCommentsFilter() && <ShowMoreCommentsPanel onClick={handleShowMoreComments}/>}
             {comments
                 .sort(elementTimestampCompareTo)

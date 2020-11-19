@@ -27,8 +27,6 @@ export default function Status(props) {
                 })}}
         >x</div>}
 
-
-
         <Avatar className="post-avatar" style={
             {
                 height: "30px",
@@ -37,8 +35,6 @@ export default function Status(props) {
                 left: "5px",
                 // objectFit: "contain",
                 backgroundColor: avatarStyle.backgroundColor,
-
-
             }}
         src={avatarStyle.backgroundImage}
         >{props.post.author.charAt(0)}

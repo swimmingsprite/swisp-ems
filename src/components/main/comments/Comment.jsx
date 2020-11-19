@@ -3,18 +3,20 @@ import Avatar from '@material-ui/core/Avatar';
 import {OneLineTextTime} from "../../main/TextLines"
 import StatusContent from "../status/StatusContent"
 import {useDispatch, useSelector} from "react-redux";
+import isBase64 from "is-base64";
 
 export default function Comment(props) {
     var dispatch = useDispatch();
-    var userId = useSelector(state => state.userReducer.id)
-
+    var user = useSelector(state => state.userReducer)
+    let avatarStyle = props.comment.avatarImg && isBase64(props.comment.avatarImg, {allowMime: true})
+        ? {backgroundImage: props.comment.avatarImg} : {backgroundColor: props.comment.avatarColor};
 
     return (
         <li className="comment-li">
             <div className={"comment-status-bar comment-bar"}>
 
                 {/*COMMENT DELETE BUTTON*/}
-                {userId === props.comment.authorId &&
+                {user.userId === props.comment.authorId &&
                 <div className="delete-button-comment"
                      onClick={() => {
                          /*todo first send request to server*/
@@ -26,12 +28,15 @@ export default function Comment(props) {
                      }}
                 >x</div>}
 
-                <Avatar className="comment-avatar" style={
+                <Avatar className="post-avatar" style={
                     {
                         height: "20px",
                         width: "20px",
-                        backgroundColor: props.comment.avatarColor
-                    }}>
+                        backgroundColor: avatarStyle.backgroundColor,
+                        fontSize: "0.85rem"
+                    }}
+                        src={avatarStyle.backgroundImage}>
+                    {props.comment.author.charAt(0)}
                 </Avatar>
 
                 <OneLineTextTime header={props.comment.author} time={props.comment.timestamp}
