@@ -30,7 +30,8 @@ export default function Status(props) {
                 width: "30px",
                 backgroundColor: "red",
                 transform: "translateY(10%)",
-                backgroundImage: "url(" + props.src + ")"
+                backgroundImage: "url(" + props.src + ")",
+                left: "5px"
             }}>
         </Avatar>
 
