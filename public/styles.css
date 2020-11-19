@@ -347,6 +347,35 @@ ul {
     /*max-width: 48%;*/
 }
 
+/*PANEL QUERY
+/*.panel {*/
+/*    display: block;*/
+/*    border-radius: 10px;*/
+/*    !* background-color: violet; *!*/
+/*width: calc(50% - 22.5px);*/
+/*position: relative;*/
+/*margin-left: 15px;*/
+/*!* display: flex; *!*/
+/*!* max-width: 48%; *!*/
+/*min-width: 315px;*/
+/*}*/
+
+/*POST STATUS BAR QUERY*/
+/*post-status-bar {*/
+/*    margin: 0 auto;*/
+/*    padding-top: 20px;*/
+/*    padding-bottom: 20px;*/
+/*    position: relative;*/
+/*    !* margin: 0 15%; *!*/
+/*    margin-bottom: 40px;*/
+/*    max-width: 680px;*/
+/*    min-width: 345px;*/
+/*    width: min-content;*/
+/*    height: fit-content;*/
+/*    background-color: #d7d7d7;*/
+/*    outline: none;*/
+/*}*/
+
 .panel-content {
     border-radius: 10px;
     background-color: white;
