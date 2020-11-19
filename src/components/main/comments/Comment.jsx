@@ -11,12 +11,15 @@ export default function Comment(props) {
     let avatarStyle = props.comment.avatarImg && isBase64(props.comment.avatarImg, {allowMime: true})
         ? {backgroundImage: props.comment.avatarImg} : {backgroundColor: props.comment.avatarColor};
 
+    console.log("USER ID: "+user.userId);
+    console.log("COMMENT AUTHOR ID: "+props.comment.authorId);
     return (
         <li className="comment-li">
             <div className={"comment-status-bar comment-bar"}>
 
+
                 {/*COMMENT DELETE BUTTON*/}
-                {user.userId === props.comment.authorId &&
+                {user.id === props.comment.authorId &&
                 <div className="delete-button-comment"
                      onClick={() => {
                          /*todo first send request to server*/

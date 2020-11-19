@@ -501,7 +501,7 @@ ul {
     margin-left: 5px;
     white-space: nowrap;
     padding-right: 5px;
-    transform: translateY(-3px);
+    /*transform: translateY(-3px);*/
     user-select: none;
 
 }

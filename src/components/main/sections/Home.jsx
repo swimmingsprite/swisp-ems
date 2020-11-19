@@ -24,6 +24,8 @@ export default function Home(props) {
             authorId: user.id,
             author: user.name,
             authorRole: user.employeeRole,
+            avatarColor: user.avatarColor,
+            avatarImg: user.avatarImg,
             text: newStatusString,
             timestamp: new Date().getTime(),
             comments: [],

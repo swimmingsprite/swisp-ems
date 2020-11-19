@@ -17,6 +17,7 @@ import {
     getElementWidth,
     getEmployeesShiftNames, getInitCurrentView
 } from "../../../logic/shifts/currentView";
+import isBase64 from "is-base64";
 
 function NextArrow(props) {
     return <div className="arrow next-arrow" onClick={props.onClick}>
@@ -62,32 +63,6 @@ function ShiftElement(props) {
         return state.shiftReducer.currentView
     });
 
-    const styles = makeStyles((theme) => createStyles({
-        avatar: {
-            width: "25px",
-            height: "25px",
-            fontSize: "0.8rem"
-        }
-    }))
-
-    const classes = styles();
-
-
-    const avStyles = makeStyles((theme) => createStyles({
-        orange: {
-            color: theme.palette.getContrastText(deepOrange[500]),
-            backgroundColor: "red",
-            backgroundSize: "cover",
-            backgroundPosition: "top center"
-
-        },
-        purple: {
-            color: theme.palette.getContrastText(deepPurple[500]),
-            backgroundColor: deepPurple[500],
-        }
-    }))
-
-    var avClasses = avStyles();
 
     var left = getElementLeft(shift.start, currentView)
     var width = getElementWidth(shift, currentView)
@@ -102,6 +77,23 @@ function ShiftElement(props) {
         }
     }
 
+    function mapAvatars(employee) {
+        let avatarStyle = employee.avatarImg && isBase64(employee.avatarImg, {allowMime: true})
+            ? {backgroundImage: employee.avatarImg} : {backgroundColor: employee.avatarColor};
+
+        return <Avatar style={
+            {
+                height: "25px",
+                width: "25px",
+                backgroundColor: avatarStyle.backgroundColor,
+                fontSize: "0.80rem",
+                fontWeight: "600",
+                backgroundPosition: "top center"
+            }}
+                src={avatarStyle.backgroundImage}>
+            {employee.name.charAt(0)}
+        </Avatar>
+    }
 
     return <div className="shift-element"
                 style={{
@@ -115,27 +107,13 @@ function ShiftElement(props) {
         }>
 
             {width > 15 && <AvatarGroup max={3}
-                                        classes={{avatar: classes.avatar}}
-                                        style={{marginLeft: "5px"}}>
+                                        classes={{avatar: {height: "25px",
+                                                width: "25px",}}}
+                                        style={{marginLeft: "5px"}}
+            >
 
                 {/*todo MAP AVATARS FUNCTION*/}
-
-                <Avatar
-                    /*src="https://www.fillmurray.com/500/900"*/
-                    className={avClasses.orange}
-                />
-                <Avatar
-                    /*src="https://www.fillmurray.com/500/900"*/
-                    className={avClasses.orange}
-                />
-                <Avatar
-                    /*src="https://www.fillmurray.com/500/900"*/
-                    className={avClasses.orange}
-                />
-                <Avatar
-                    /*src="https://www.fillmurray.com/500/900"*/
-                    className={avClasses.orange}
-                />
+                {shift.employees.map(mapAvatars)}
 
             </AvatarGroup>}
 
