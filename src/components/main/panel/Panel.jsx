@@ -2,22 +2,26 @@ import React from 'react';
 import {Avatar} from "@material-ui/core";
 import PublishTime from "../status/PublishTime";
 import {timestampToShortDateTime} from "../TextLines";
+import isBase64 from "is-base64";
 
 function mapValuesToPanel(value) {
-    console.log("values in map: " + value)
+    let avatarStyle = value.avatarImg && isBase64(value.avatarImg, {allowMime: true})
+        ? {backgroundImage: value.avatarImg} : {backgroundColor: value.avatarColor};
 
     return <li className={"panel-content-li"}>
         <Avatar className="post-avatar" style={
             {
                 height: "20px",
                 width: "20px",
-                backgroundColor: "red",
+                backgroundColor: avatarStyle.backgroundColor,
+                fontSize: "0.85rem",
                 margin: "0 5px",
                 transform: "none",
-                /*float: "none",
-                display: "inline-block"*/
-            }}>
+            }}
+                src={avatarStyle.backgroundImage}>
+            {value.name.charAt(0)}
         </Avatar>
+
 
         <h2 className={"panel-content-name"}
             style={{display: "inline-block"}}

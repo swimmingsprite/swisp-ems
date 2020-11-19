@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Shifts from "./main/sections/Shifts";
-import {useSelector, useStore} from "react-redux";
+import {useSelector} from "react-redux";
 import Home from "./main/sections/Home";
 import Employees from "./main/sections/Employees";
-import ShiftPanel from "./main/panel/ShiftPanel";
 
 export default function Content(props) {
 

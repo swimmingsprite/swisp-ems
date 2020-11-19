@@ -1,21 +1,19 @@
 import React from 'react';
 import {Avatar} from "@material-ui/core";
 import {AvatarGroup} from '@material-ui/lab';
-import {makeStyles} from '@material-ui/core/styles';
-import createStyles from "@material-ui/styles/createStyles";
-import deepOrange from "@material-ui/core/colors/deepOrange";
-import deepPurple from "@material-ui/core/colors/deepPurple";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 import RotateRightIcon from '@material-ui/icons/RotateRight';
-import {useDispatch, useSelector, useStore} from "react-redux";
+import {useSelector, useStore} from "react-redux";
 import {
     currentViewCurrentTimestampLocation,
-    currentViewFilter, getCurrentTimestamp,
+    currentViewFilter,
+    getCurrentTimestamp,
     getElementLeft,
     getElementWidth,
-    getEmployeesShiftNames, getInitCurrentView
+    getEmployeesShiftNames,
+    getInitCurrentView
 } from "../../../logic/shifts/currentView";
 import isBase64 from "is-base64";
 

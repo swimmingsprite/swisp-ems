@@ -11,7 +11,6 @@ import {
     shiftReducer,
     userReducer
 } from "./reducers/reducers";
-import {textEmojisToUnicode} from "./logic/emojis/emojis";
 
 const store = createStore(combineReducers(
     {rootReducer: rootReducer,

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import TwoLineTextTime from "../TextLines"
 import StatusContent from "./StatusContent"

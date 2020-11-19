@@ -5,13 +5,7 @@ import {
     getInitStartTime,
     getNextCurrentView
 } from "../logic/shifts/currentView";
-import {
-    addNewComment, deleteComment,
-    deletePostFilter,
-    elementTimestampCompareTo,
-    getStatePostLikeToggle,
-    setCommentsLimit
-} from "../logic/Posts";
+import {addNewComment, deleteComment, deletePostFilter, getStatePostLikeToggle, setCommentsLimit} from "../logic/Posts";
 
 export var arrowClickReducer = (state = {lastAction: null}, action) => {
     if (action.type.startsWith("ARROW")) return {...state, lastAction: action.type};
