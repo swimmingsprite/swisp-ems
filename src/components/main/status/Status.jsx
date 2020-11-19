@@ -11,12 +11,15 @@ import {isPostLiked, isZeroPostInteraction} from "../../../logic/Posts";
 export default function Status(props) {
     var dispatch = useDispatch();
     var userId = useSelector(state => state.userReducer.id);
+    let avatarStyle = props.post.avatarImg ? {backgroundImage: props.post.avatarImg} : {backgroundColor: props.post.avatarColor};
+    let currentUserIsAuthor = userId === props.post.authorId
 
+    console.log("AVATAR STYLE: "+Object.keys(avatarStyle))
 
     return <div className="post-status-bar">
 
         {/*delete button*/}
-        {userId === props.post.authorId
+        {currentUserIsAuthor
         && <div className="delete-button"
                 onClick={() => {dispatch({
                     type: "POST_DELETE",
@@ -24,15 +27,21 @@ export default function Status(props) {
                 })}}
         >x</div>}
 
+
+
         <Avatar className="post-avatar" style={
             {
                 height: "30px",
                 width: "30px",
-                backgroundColor: "red",
                 transform: "translateY(10%)",
-                backgroundImage: "url(" + props.src + ")",
-                left: "5px"
-            }}>
+                left: "5px",
+                // objectFit: "contain",
+                backgroundColor: avatarStyle.backgroundColor,
+
+
+            }}
+        src={avatarStyle.backgroundImage}
+        >{props.post.author.charAt(0)}
         </Avatar>
 
         <TwoLineTextTime

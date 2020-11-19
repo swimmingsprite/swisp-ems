@@ -34,7 +34,7 @@ setInterval(() => {
     })
 },20000)
 
-console.log(textEmojisToUnicode("Toto je sranda :o :* :'( ToT ;* :D :) :P haha"));
+
 
 
 ReactDOM.render(<Provider store={store}> <App /> </Provider>, document.getElementById("root"));

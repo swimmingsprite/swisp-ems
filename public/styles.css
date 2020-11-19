@@ -570,7 +570,7 @@ ul {
     border-left: 1px solid black;
     width: 0px;
     height: 100%;
-    z-index: 40;
+    z-index: 19;
 }
 
 .title-filter {
