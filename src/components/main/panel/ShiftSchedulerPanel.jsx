@@ -67,11 +67,9 @@ export default function ShiftSchedulerPanel(props) {
                             border: "1px solid black",
                             outline: "none",
                             resize: "vertical",
-                            // marginLeft: "15px",
                             borderRadius: "10px",
-                            padding: "7px",
+                            padding: "10px",
                             position: "relative",
-                            //top: "-6px",
                             right: "0",
                             display: "block"
                         }}
@@ -80,11 +78,17 @@ export default function ShiftSchedulerPanel(props) {
                     >
 
                     </TextareaAutosize>
-                    <ul style={{position: "absolute"}}>
-                        <li>Ahahahahah</li>
-                        <li>Ahahahahah</li>
-                        <li>Ahahahahah</li>
-                        <li>Ahahahahah</li>
+                    <ul className="shift-scheduler-ul">
+                        <li className="shift-scheduler-li">Ahahahahah</li>
+                        <li className="shift-scheduler-li">Ahahahahah</li>
+                        <li className="shift-scheduler-li">Ahahahahah</li>
+                        <li className="shift-scheduler-li">Ahahahahah</li>
+                        <li className="shift-scheduler-li">Ahahahahah</li>
+                        <li className="shift-scheduler-li">Ahahahahah</li>
+                        <li className="shift-scheduler-li">Ahahahahah</li>
+                        <li className="shift-scheduler-li">Ahahahahah</li>
+                        <li className="shift-scheduler-li">Ahahahahah</li>
+                        <li className="shift-scheduler-li">Ahahahahah</li>
                     </ul>
                 </div>
 

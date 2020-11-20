@@ -691,6 +691,12 @@ ul {
     font-weight: 900;
 }
 
+.scheduler-content {
+    overflow: visible;
+    height: 500px;
+}
+
+
 .scheduler-control-panel-line {
     display: block;
     margin-bottom: 5px;
@@ -739,6 +745,35 @@ ul {
     /*left: 25px*/
     /*float: right;*/
     top: -2px;
+}
+
+.shift-scheduler-ul {
+    position: absolute;
+    width: 100%;
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.shift-scheduler-li {
+    padding: 10px;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    cursor: pointer;
+}
+
+.shift-scheduler-li:nth-of-type(1) {
+    border-top: 1px solid black;
+}
+
+.shift-scheduler-li:last-of-type {
+    margin-bottom: 5px;
+}
+
+.shift-scheduler-li:hover {
+    background-color: rgba(238, 238, 238, 0.4);
 }
 
 
