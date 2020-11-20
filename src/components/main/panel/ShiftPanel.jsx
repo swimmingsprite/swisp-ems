@@ -1,8 +1,6 @@
 import React from 'react';
 import {Avatar} from "@material-ui/core";
 import {AvatarGroup} from '@material-ui/lab';
-import RotateLeftIcon from '@material-ui/icons/RotateLeft';
-import RotateRightIcon from '@material-ui/icons/RotateRight';
 import {useSelector, useStore} from "react-redux";
 import {
     currentViewCurrentTimestampLocation,
@@ -15,18 +13,7 @@ import {
 } from "../../../logic/shifts/currentView";
 import isBase64 from "is-base64";
 import {BackArrow, NextArrow} from "../arrows and sliders/Arrows";
-
-function SlideNext(props) {
-    return <div className="slide next-slide" onClick={props.onClick}>
-        <RotateRightIcon style={{fontSize: "1.5rem", position: "relative"}}/>
-    </div>
-}
-
-function SlideBack(props) {
-    return <div className="slide back-slide" onClick={props.onClick}>
-        <RotateLeftIcon style={{fontSize: "1.5rem", position: "relative"}}/>
-    </div>
-}
+import {SlideBack, SlideNext} from "../arrows and sliders/Sliders";
 
 function TimePointer(props) {
     var currentView = useSelector((state) => {
