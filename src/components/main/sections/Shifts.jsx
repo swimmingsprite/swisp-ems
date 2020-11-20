@@ -3,6 +3,7 @@ import Title, {SubTitle} from "../title/Title";
 import ShiftPanel from "../panel/ShiftPanel";
 import {useDispatch, useSelector} from "react-redux";
 import {timestampsToDateRange} from "../../../logic/time/timeUtils";
+import ShiftSchedulerPanel from "../panel/ShiftSchedulerPanel";
 
 
 export default function Shifts(props) {
@@ -88,6 +89,24 @@ export default function Shifts(props) {
                   showList={showCurrentShiftsSubHeaderFilterList}
         />
         <ShiftPanel/>
+
+
+        <SubTitle text="Plánovanie"
+                  // secondText={currentViewTimeRange}
+                  //filter={shiftSubHeaderFilter}
+                  onClickItem={(newId) => {
+                      dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: newId});
+                      dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: false})
+                  }}
+                  onMouseOver={() => {
+                      dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: true})
+                  }}
+                  onMouseOut={() => {
+                      dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: false})
+                  }}
+                  showList={showCurrentShiftsSubHeaderFilterList}
+        />
+        <ShiftSchedulerPanel />
 
 
     </div>

@@ -12,7 +12,7 @@ export var arrowClickReducer = (state = {lastAction: null}, action) => {
     return state;
 }
 
-export var rootReducer = (state = {currentSection: "Home"}, action) => {
+export var rootReducer = (state = {currentSection: "Shifts"}, action) => {
 
     if (action.type === "CURRENT_SECTION") {
         return {...state, currentSection: action.currentSection}

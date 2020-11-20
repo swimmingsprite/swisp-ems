@@ -1,8 +1,6 @@
 import React from 'react';
 import {Avatar} from "@material-ui/core";
 import {AvatarGroup} from '@material-ui/lab';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 import RotateRightIcon from '@material-ui/icons/RotateRight';
 import {useSelector, useStore} from "react-redux";
@@ -16,18 +14,7 @@ import {
     getInitCurrentView
 } from "../../../logic/shifts/currentView";
 import isBase64 from "is-base64";
-
-function NextArrow(props) {
-    return <div className="arrow next-arrow" onClick={props.onClick}>
-        <NavigateNextIcon className="arrow-icon" style={{fontSize: "5rem", position: "relative", top: "calc(50% - 42px)"}}/>
-    </div>
-}
-
-function BackArrow(props) {
-    return <div className="arrow back-arrow" onClick={props.onClick}>
-        <NavigateBeforeIcon className="arrow-icon" style={{fontSize: "5rem", position: "relative", top: "calc(50% - 42px)"}}/>
-    </div>
-}
+import {BackArrow, NextArrow} from "../arrows and sliders/Arrows";
 
 function SlideNext(props) {
     return <div className="slide next-slide" onClick={props.onClick}>
