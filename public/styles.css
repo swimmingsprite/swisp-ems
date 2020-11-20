@@ -693,7 +693,7 @@ ul {
 
 .scheduler-content {
     overflow: visible;
-    height: 500px;
+    height: fit-content;
 }
 
 
@@ -747,34 +747,88 @@ ul {
     top: -2px;
 }
 
-.shift-scheduler-ul {
+.shift-scheduler-input-ul {
     position: absolute;
     width: 100%;
     margin-top: 10px;
     max-height: 200px;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
-.shift-scheduler-li {
+.shift-scheduler-input-li {
     padding: 10px;
     border-bottom: 1px solid black;
     border-left: 1px solid black;
     border-right: 1px solid black;
     cursor: pointer;
+    overflow: hidden;
 }
 
-.shift-scheduler-li:nth-of-type(1) {
+.shift-scheduler-input-li:nth-of-type(1) {
     border-top: 1px solid black;
 }
 
-.shift-scheduler-li:last-of-type {
+.shift-scheduler-input-li:last-of-type {
     margin-bottom: 5px;
 }
 
-.shift-scheduler-li:hover {
+.shift-scheduler-input-li:hover {
     background-color: rgba(238, 238, 238, 0.4);
 }
 
+.shift-scheduler-textarea {
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    border: 1px solid black;
+    outline: none;
+    resize: vertical;
+    border-radius: 10px;
+    padding: 10px;
+    position: relative;
+    right: 0;
+    display: block;
+}
+
+.shift-scheduler-calendar {
+    margin-top: 20px;
+    /*background-color: #d7d7d7;*/
+    background-color: rgba(238, 238, 238, 0.6);
+    height: fit-content;
+    border-radius: 10px;
+}
+
+.shift-scheduler-calendar-ul {
+    /*max-height: 400px;*/
+}
+
+.shift-scheduler-calendar-li {
+    position: relative;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    display: inline-block;
+    /*height: ;*/
+    width: 88.57px;
+    height: 88.57px;
+    cursor: pointer;
+}
+
+.shift-scheduler-calendar-li:hover {
+    background-color: rgba(9, 132, 226, 0.5);
+}
+
+.shift-scheduler-calendar-li:nth-child(7n) {
+    border-right: none;
+}
+
+.shift-scheduler-calendar-header {
+    background-color: #0984e3;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+    border-bottom: 1px solid white;
+    padding: 15px;
+}
 
 /* ffc93c yellow */

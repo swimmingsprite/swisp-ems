@@ -53,43 +53,71 @@ export default function ShiftSchedulerPanel(props) {
                     </div>
                 </div>
 
-                <div className="scheduler-control-panel-line" style={{width: "100%", marginTop: "20px", position: "relative"}}>
-                    <h3 style={{minWidth: "114px", paddingBottom: "5px"}} className="scheduler-control-panel-header">Zamestnanec:</h3>
+                <div className="scheduler-control-panel-line"
+                     style={{width: "100%", marginTop: "20px", position: "relative"}}>
+                    <h3 style={{minWidth: "114px", paddingBottom: "5px"}}
+                        className="scheduler-control-panel-header">Zamestnanec:</h3>
                     <TextareaAutosize
                         // onChange={(event) => {}}
                         // onKeyDown={}
-                        // className={"input-bar"}
+                        className={"shift-scheduler-textarea"}
 
-                        style={{
-                            fontSize: "0.9rem",
-                            fontFamily: "'Montserrat', sans-serif",
-                            width: "100%",
-                            border: "1px solid black",
-                            outline: "none",
-                            resize: "vertical",
-                            borderRadius: "10px",
-                            padding: "10px",
-                            position: "relative",
-                            right: "0",
-                            display: "block"
-                        }}
-                        placeholder="Napíšte meno zamestnanca..."
+                        placeholder="Hľadať zamestnanca..."
                         // value=""
-                    >
+                    ></TextareaAutosize>
 
-                    </TextareaAutosize>
-                    <ul className="shift-scheduler-ul">
-                        <li className="shift-scheduler-li">Ahahahahah</li>
-                        <li className="shift-scheduler-li">Ahahahahah</li>
-                        <li className="shift-scheduler-li">Ahahahahah</li>
-                        <li className="shift-scheduler-li">Ahahahahah</li>
-                        <li className="shift-scheduler-li">Ahahahahah</li>
-                        <li className="shift-scheduler-li">Ahahahahah</li>
-                        <li className="shift-scheduler-li">Ahahahahah</li>
-                        <li className="shift-scheduler-li">Ahahahahah</li>
-                        <li className="shift-scheduler-li">Ahahahahah</li>
-                        <li className="shift-scheduler-li">Ahahahahah</li>
-                    </ul>
+
+                    {/*<ul className="shift-scheduler-input-ul">
+                        <li className="shift-scheduler-input-li">Ahahahahah</li>
+
+                    </ul>*/}
+
+                    <div className="shift-scheduler-calendar">
+                        <div className="shift-scheduler-calendar-header"><h2>August</h2></div>
+                        <ul className="shift-scheduler-calendar-ul">
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+
+
+
+
+                        </ul>
+                    </div>
+
+
                 </div>
 
 
