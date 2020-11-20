@@ -725,7 +725,7 @@ ul {
     /*color: white;*/
     padding: 2px;
 
-    margin-left: 0px;
+    margin-left: 15px;
     white-space: nowrap;
     border-radius: 10px;
     font-size: 1rem;
@@ -735,6 +735,12 @@ ul {
 
 .scheduler-control-panel-arrow{
     font-size: 1rem;
+    cursor: pointer;
+    position: absolute;
+}
+
+.scheduler-control-panel-arrow:hover{
+    transform: scale(1.25);
 }
 
 .scheduler-control-panel-wrapper{
@@ -745,7 +751,12 @@ ul {
     /*left: 25px*/
     /*float: right;*/
     top: -2px;
+    user-select: none;
 }
+
+
+
+
 
 .shift-scheduler-input-ul {
     position: absolute;

@@ -29,12 +29,11 @@ export default function ShiftSchedulerPanel(props) {
                     <h3 className="scheduler-control-panel-header">Začiatok:</h3>
                     <div className="scheduler-control-panel-wrapper">
                         <span className="scheduler-control-panel-arrow">⯇</span>
-                        &nbsp;
                         <h3 className="scheduler-control-panel-time">
                             {/*6.8.2020&nbsp;&nbsp;*/}
-                            &nbsp;16:58&nbsp;
+                            16:58
                         </h3>
-                        &nbsp;
+
                         <span className="scheduler-control-panel-arrow">⯈</span>
                     </div>
                 </div>
@@ -43,12 +42,12 @@ export default function ShiftSchedulerPanel(props) {
                     <h3 className="scheduler-control-panel-header">Koniec:</h3>
                     <div className="scheduler-control-panel-wrapper">
                         <span className="scheduler-control-panel-arrow">⯇</span>
-                        &nbsp;
+
                         <h3 className="scheduler-control-panel-time">
                             {/*6.8.2020&nbsp;&nbsp;*/}
-                            &nbsp;18:58&nbsp;
+                            18:58
                         </h3>
-                        &nbsp;
+
                         <span className="scheduler-control-panel-arrow">⯈</span>
                     </div>
                 </div>
@@ -75,43 +74,54 @@ export default function ShiftSchedulerPanel(props) {
                     <div className="shift-scheduler-calendar">
                         <div className="shift-scheduler-calendar-header"><h2>August</h2></div>
                         <ul className="shift-scheduler-calendar-ul">
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">
+                                <h2 style={{
+                                    textAlign: "center",
+                                    fontSize: "2rem"
+                                }}>2.</h2>
+                                <p style={{
+                                    textAlign: "center",
+                                    fontSize: "0.8rem"
+                                }}>Streda</p>
+
+                            </li>
 
 
+                            {/*          <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
+*/}
 
 
                         </ul>
