@@ -32,7 +32,6 @@ export default function InputBar(props) {
                 fontSize: "1rem",
                 fontFamily: "'Montserrat', sans-serif",
                 width: "calc(100% - 75px)",
-
             }}
             placeholder={props.text}
             value={statusInput}
