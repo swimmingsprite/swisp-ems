@@ -45,7 +45,7 @@ export default function ShiftSchedulerPanel(props) {
     var [inputListHoverIndex, setInputListHoverIndex] = useState(-1);
     var filteredEmployeeList = schedulerInputFilter(scheduler.employees, selectedPlaceId, input);
 
-    var change = useEffect(() => setInputListHoverIndex(-1), filteredEmployeeList)
+    //var change = useEffect(() => setInputListHoverIndex(-1), filteredEmployeeList)
 
     scheduler.selectedDays.forEach(e => {
         console.log("SELECTED DAY: "+e);})
