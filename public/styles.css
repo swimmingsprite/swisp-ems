@@ -456,9 +456,7 @@ ul {
     min-height: 170px;
 }
 
-.scheduler-content {
-    padding: 15px;
-}
+
 
 
 /*.shift-content-table > :not(.time-pointer) {
@@ -499,7 +497,7 @@ ul {
     background-color: #0984e3;
     height: 35px;
     padding: 5px 0;
-    width: 40%;
+    /*width: 40%;*/
     white-space: nowrap;
 
     /*width: fit-content;*/
@@ -694,95 +692,55 @@ ul {
 .scheduler-content {
     overflow: visible;
     height: fit-content;
-}
-
-
-.scheduler-control-panel-line {
-    display: block;
-    margin-bottom: 5px;
-    position: relative;
-    /*width: 29%;*/
-}
-
-.scheduler-control-panel-header {
-    font-size: 1rem;
-    display: inline-block;
-    /*padding: 5px;*/
-    /*border-radius: 10px;*/
-    /*background-color: #d7d7d7;*/
-    /*background-color: #0984e3;*/
-
-
-}
-
-.scheduler-control-panel-time {
-    display: inline-block;
-    /*position: absolute;*/
-    /*right: 15px;*/
-    /*background-color: #d7d7d7;*/
-    /*background-color: #0984e3;*/
-    /*background-color: black;*/
-    /*color: white;*/
-    padding: 2px;
-
-    margin-left: 15px;
-    white-space: nowrap;
+    margin: 15px;
+    background-color: white;
     border-radius: 10px;
+    padding: 15px;
+}
+
+
+
+.scheduler-content .title-hr {
+    margin-bottom: 5px;
+}
+
+.scheduler-date {
+    display: block;
+    text-align: center;
     font-size: 1rem;
-    /*width: 83%;*/
-    top: 9px;
 }
 
-.scheduler-control-panel-arrow{
-    font-size: 1rem;
-    cursor: pointer;
-    position: absolute;
+.selected-item {
+
 }
 
-.scheduler-control-panel-arrow:hover{
-    transform: scale(1.25);
-}
 
-.scheduler-control-panel-wrapper{
-    display: inline-block;
-    margin-left: 5px;
-    position: absolute;
-    right: 65%;
-    /*left: 25px*/
-    /*float: right;*/
-    top: -2px;
-    user-select: none;
-}
+
 
 
 
 
 
 .shift-scheduler-input-ul {
-    position: absolute;
-    width: 100%;
+    background-color: white;
+    margin: 0 15px;
+    position: relative;
     margin-top: 10px;
     max-height: 200px;
     overflow-x: hidden;
     overflow-y: auto;
+    border-radius: 10px;
 }
 
 .shift-scheduler-input-li {
     padding: 10px;
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    /*border-bottom: 1px solid black;*/
+    /*border-left: 1px solid black;*/
+    /*border-right: 1px solid black;*/
     cursor: pointer;
     overflow: hidden;
 }
 
-.shift-scheduler-input-li:nth-of-type(1) {
-    border-top: 1px solid black;
-}
-
-.shift-scheduler-input-li:last-of-type {
-    margin-bottom: 5px;
-}
 
 .shift-scheduler-input-li:hover {
     background-color: rgba(238, 238, 238, 0.4);
@@ -791,8 +749,9 @@ ul {
 .shift-scheduler-textarea {
     font-size: 1rem;
     font-family: 'Montserrat', sans-serif;
-    width: 100%;
-    border: 1px solid black;
+    width: 650px;
+    margin: 0 15px;
+    border: none;
     outline: none;
     resize: vertical;
     border-radius: 10px;
@@ -800,10 +759,12 @@ ul {
     position: relative;
     right: 0;
     display: block;
+    margin-bottom: 15px;
+
 }
 
 .shift-scheduler-calendar {
-    margin-top: 20px;
+    margin: 15px 15px;
     /*background-color: #d7d7d7;*/
     background-color: rgba(238, 238, 238, 0.6);
     height: fit-content;
@@ -826,7 +787,7 @@ ul {
 }
 
 .shift-scheduler-calendar-li:hover {
-    background-color: rgba(9, 132, 226, 0.5);
+    background-color: rgba(9, 132, 226, 0.2);
 }
 
 .shift-scheduler-calendar-li:nth-child(7n) {
@@ -835,6 +796,7 @@ ul {
 
 .shift-scheduler-calendar-header {
     background-color: #0984e3;
+    /*background: linear-gradient(90deg,rgba(9, 132, 226, 0.7), rgba(7, 110, 186, 0.9));;*/
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     text-align: center;

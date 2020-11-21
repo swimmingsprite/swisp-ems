@@ -5,6 +5,7 @@ import {BackArrow, NextArrow} from "../arrows and sliders/Arrows";
 import InputBar from "../input/InputBar";
 import {textEmojisToUnicode} from "../../../logic/emojis/emojis";
 import TextareaAutosize from "react-autosize-textarea";
+import Title, {SubTitle} from "../title/Title";
 
 export default function ShiftSchedulerPanel(props) {
 
@@ -22,116 +23,87 @@ export default function ShiftSchedulerPanel(props) {
         }}/>
 
 
+        {/*SEARCH BAR*/}
+        <div>
+            <TextareaAutosize
+                // onChange={(event) => {}}
+                // onKeyDown={}
+                className={"shift-scheduler-textarea"}
+
+                placeholder="Hľadať zamestnanca..."
+                // value=""
+            ></TextareaAutosize>
+
+
+
+        </div>
+
+        <ul className="shift-scheduler-input-ul">
+            <li className="shift-scheduler-input-li">Ahahahahah</li>
+            <li className="shift-scheduler-input-li">Ahahahahah</li>
+            <li className="shift-scheduler-input-li">Ahahahahah</li>
+            <li className="shift-scheduler-input-li">Ahahahahah</li>
+
+        </ul>
+
         {/*MAIN CONTENT */}
-        <div className="shift-content scheduler-content">
-            <div className="scheduler-control-panel">
-                <div className="scheduler-control-panel-line">
-                    <h3 className="scheduler-control-panel-header">Začiatok:</h3>
-                    <div className="scheduler-control-panel-wrapper">
-                        <span className="scheduler-control-panel-arrow">⯇</span>
-                        <h3 className="scheduler-control-panel-time">
-                            {/*6.8.2020&nbsp;&nbsp;*/}
-                            16:58
-                        </h3>
-
-                        <span className="scheduler-control-panel-arrow">⯈</span>
-                    </div>
-                </div>
-
-                <div className="scheduler-control-panel-line">
-                    <h3 className="scheduler-control-panel-header">Koniec:</h3>
-                    <div className="scheduler-control-panel-wrapper">
-                        <span className="scheduler-control-panel-arrow">⯇</span>
-
-                        <h3 className="scheduler-control-panel-time">
-                            {/*6.8.2020&nbsp;&nbsp;*/}
-                            18:58
-                        </h3>
-
-                        <span className="scheduler-control-panel-arrow">⯈</span>
-                    </div>
-                </div>
-
-                <div className="scheduler-control-panel-line"
-                     style={{width: "100%", marginTop: "20px", position: "relative"}}>
-                    <h3 style={{minWidth: "114px", paddingBottom: "5px"}}
-                        className="scheduler-control-panel-header">Zamestnanec:</h3>
-                    <TextareaAutosize
-                        // onChange={(event) => {}}
-                        // onKeyDown={}
-                        className={"shift-scheduler-textarea"}
-
-                        placeholder="Hľadať zamestnanca..."
-                        // value=""
-                    ></TextareaAutosize>
 
 
-                    {/*<ul className="shift-scheduler-input-ul">
-                        <li className="shift-scheduler-input-li">Ahahahahah</li>
+        <div className="scheduler-content" style={{minHeight: 0}}>
 
-                    </ul>*/}
+                <SubTitle text="Kaufland Stredočeská" />
+                <h8>oddelenie záhrad: </h8>
+                <h2 className="scheduler-date">28.12.2020, Utorok</h2>
+                <ul>
+                    <li className="selected-item">
+                        <div className="shift-element">
+                            <p>John Barney</p>
+                        </div>
+                    </li>
 
-                    <div className="shift-scheduler-calendar">
-                        <div className="shift-scheduler-calendar-header"><h2>August</h2></div>
-                        <ul className="shift-scheduler-calendar-ul">
-                            <li className="shift-scheduler-calendar-li">
-                                <h2 style={{
-                                    textAlign: "center",
-                                    fontSize: "2rem"
-                                }}>2.</h2>
-                                <p style={{
-                                    textAlign: "center",
-                                    fontSize: "0.8rem"
-                                }}>Streda</p>
+                </ul>
 
-                            </li>
+        </div>
 
+        <div className="shift-scheduler-calendar">
+            <div className="shift-scheduler-calendar-header"><h2>August</h2></div>
+            <ul className="shift-scheduler-calendar-ul">
+                <li className="shift-scheduler-calendar-li">
+                    <h2 style={{
+                        textAlign: "center",
+                        fontSize: "2rem"
+                    }}>2.</h2>
+                    <p style={{
+                        textAlign: "center",
+                        fontSize: "0.8rem"
+                    }}>Streda</p>
 
-                            {/*          <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                            <li className="shift-scheduler-calendar-li">Ahahhah</li>
-*/}
+                </li>
 
+                <li className="shift-scheduler-calendar-li">
+                    <h2 style={{
+                        textAlign: "center",
+                        fontSize: "2rem"
+                    }}>2.</h2>
+                    <p style={{
+                        textAlign: "center",
+                        fontSize: "0.8rem"
+                    }}>Streda</p>
 
-                        </ul>
-                    </div>
-
-
-                </div>
-
-
-            </div>
+                </li>
+                {/*todo bude zoznam zamestnancov z daneho miesta a z neho sa iba bude filtrovať*/}
+                {/* <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
+                    <li className="shift-scheduler-calendar-li">Ahahhah</li>*/}
+            </ul>
         </div>
 
 

@@ -20,6 +20,7 @@ function mapFilter(filter, props, style) {
         }}
         onMouseOut={() => {
             setTimeout(() => {
+                console.log("mouse out props1: "+props.onMouseOut)
                 hideList && props.onMouseOut()
             }, 350);
         }}
@@ -45,6 +46,13 @@ function mapFilter(filter, props, style) {
                     onMouseOver={() => {
                         hideList = false;
                         props.onMouseOver()
+                    }}
+
+                    onMouseOut={() => {
+                        console.log("mouse out props2: "+props.onMouseOut)
+                        setTimeout(() => {
+                            hideList && props.onMouseOut()
+                        }, 350);
                     }}
 
                 >{place.name}</li>

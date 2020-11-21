@@ -84,7 +84,6 @@ function ShiftElement(props) {
                                         style={{marginLeft: "5px"}}
             >
 
-                {/*todo MAP AVATARS FUNCTION*/}
                 {shift.employees.map(mapAvatars)}
 
             </AvatarGroup>}

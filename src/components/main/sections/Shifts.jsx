@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Title, {SubTitle} from "../title/Title";
 import ShiftPanel from "../panel/ShiftPanel";
 import {useDispatch, useSelector} from "react-redux";
@@ -55,6 +55,8 @@ export default function Shifts(props) {
         return state.shiftReducer.currentView
     })
 
+    var [showCalendarSubHeaderList, setShowCalendarSubHeaderList] = useState(false);
+
     var currentViewTimeRange = timestampsToDateRange(currentView.startTimestamp, currentView.endTimestamp)
 
     return <div>
@@ -93,18 +95,20 @@ export default function Shifts(props) {
 
         <SubTitle text="Plánovanie"
                   // secondText={currentViewTimeRange}
-                  //filter={shiftSubHeaderFilter}
+                  filter={shiftSubHeaderFilter}
                   onClickItem={(newId) => {
                       dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: newId});
                       dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: false})
                   }}
                   onMouseOver={() => {
-                      dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: true})
+                      console.log("***********setting cal to true")
+                      setShowCalendarSubHeaderList(true);
                   }}
                   onMouseOut={() => {
-                      dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: false})
+                      console.log("***********setting cal to false")
+                      setShowCalendarSubHeaderList(false);
                   }}
-                  showList={showCurrentShiftsSubHeaderFilterList}
+                  showList={showCalendarSubHeaderList}
         />
         <ShiftSchedulerPanel />
 
