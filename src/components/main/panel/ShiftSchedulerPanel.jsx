@@ -37,9 +37,13 @@ export default function ShiftSchedulerPanel(props) {
     var scheduler = useSelector(state => state.shiftSchedulerReducer)
     var dispatch = useDispatch();
 
+
     scheduler.selectedDays.forEach(e => {
         console.log("SELECTED DAY: "+e);})
     console.log("____________________________")
+
+    console.log("current month je: "+scheduler.currentMonth)
+    console.log("current month je: "+scheduler.currentMonth.getMonth())
 
     var currentDate = new Date(2020, 11, 0);
     /*  let avatarStyle = props.comment.avatarImg && isBase64(props.comment.avatarImg, {allowMime: true})
@@ -80,21 +84,31 @@ export default function ShiftSchedulerPanel(props) {
         return array;
     }
 
+    function getMonthName(num) {
+        let months = ["Január","Február","Marec","Apríl","Máj","Jún","Júl","August","September","Október","November","December"]
+        return months[num];
+    }
+
+
     return <div className="post-status-bar"
                 style={{width: "100%", minWidth: "440px", position: "relative"}}>
 
         {/*ARROW */}
 
 
-        <NextArrow onClick={() => {
-            store.dispatch({type: "SHIFT_SCHEDULER_ARROW_NEXT_CLICK"})
+        <NextArrow
+            style={{top: "200px"}}
+            onClick={() => {
+            dispatch({type: "SHIFT_SCHEDULER_ARROW_NEXT_CLICK"})
         }}/>
 
         <div className="shift-scheduler-calendar">
-            <div className="shift-scheduler-calendar-header"><h2>August</h2></div>
+            <div className="shift-scheduler-calendar-header">
+                <h2>{getMonthName(scheduler.currentMonth.getMonth())+" "+scheduler.currentMonth.getFullYear()}</h2>
+            </div>
             <ul className="shift-scheduler-calendar-ul">
 
-                {mapDateToCalendar(currentDate)}
+                {mapDateToCalendar(scheduler.currentMonth)}
 
 
                 {/*todo bude zoznam zamestnancov z daneho miesta a z neho sa iba bude filtrovať*/}
@@ -330,14 +344,6 @@ export default function ShiftSchedulerPanel(props) {
                 <span className="scheduler-arrow">⯈</span>
 
                 </div>
-
-                {/*  16:58
-                    <span className="scheduler-arrow">⯈</span>
-
-                <span style={{transform: "translateY(-2px)", display: "inline-block"}}>&nbsp;-&nbsp;</span>
-                    <span className="scheduler-arrow">⯇</span>
-                    18:58
-                    <span className="scheduler-arrow">⯈</span>*/}
             </div>
 
         </div>
@@ -345,8 +351,10 @@ export default function ShiftSchedulerPanel(props) {
 
 
         {/*ARROW */}
-        <BackArrow onClick={() => {
-            store.dispatch({type: "SHIFT_SCHEDULER_ARROW_BACK_CLICK"})
+        <BackArrow
+            style={{top: "200px"}}
+            onClick={() => {
+            dispatch({type: "SHIFT_SCHEDULER_ARROW_BACK_CLICK"})
         }}/>
 
     </div>

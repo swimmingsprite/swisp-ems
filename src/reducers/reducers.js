@@ -310,9 +310,52 @@ var scheduler = {
                 name: "Kaufland Stredočeská"
             }},
     ],
-    selectedDays: []
+    selectedDays: [],
+    currentMonth: new Date(new Date().getFullYear(), new Date().getMonth()+1, 0)
 
 };
+
+
+
+
+export var shiftSchedulerReducer = (state = scheduler, action) => {
+    switch (action.type) {
+        case "CALENDAR_DATE_CLICK": return {...state, selectedDays: handleDateClick(state, action.dayTimestamp) };
+        case "SHIFT_SCHEDULER_ARROW_NEXT_CLICK": return {...state, currentMonth: addMonth(state.currentMonth) };
+        case "SHIFT_SCHEDULER_ARROW_BACK_CLICK": return {...state, currentMonth: subMonth(state.currentMonth) };
+
+        default: return state;
+    }
+}
+
+
+function addMonth(date) {
+    console.log("adding month...");
+    if (date.getMonth() === 11) {
+        var a = new Date(date.getFullYear() + 1, 1, 0);
+        console.log("ADD DECEMBER RETURN: "+a);
+        return a;
+    }
+    else {
+        var a = new Date(date.getFullYear(), date.getMonth()+2, 0)
+        console.log("ADD ELSE RETURN: "+a);
+        return a;
+    }
+}
+
+function subMonth(date) {
+    console.log("substracting month...");
+    if (date.getMonth() === 0) {
+        var a = new Date(date.getFullYear() - 1, 12, 0);
+        console.log("SUB JANUARY RETURN: "+a);
+        return a;
+    }
+    else {
+        var a =new Date(date.getFullYear(), date.getMonth(), 0)
+        console.log("SUB NORMAL RETURN: "+a);
+        return a;
+    }
+}
 
 function handleDateClick(state, dayTimestamp) {
     //ak sa den nachadza medzi selectnutymi dnami
@@ -328,20 +371,6 @@ function handleDateClick(state, dayTimestamp) {
         return [...state.selectedDays];
     }
 }
-
-
-export var shiftSchedulerReducer = (state = scheduler, action) => {
-    switch (action.type) {
-        case "CALENDAR_DATE_CLICK": return {...state, selectedDays: handleDateClick(state, action.dayTimestamp) };
-
-        default: return state;
-    }
-}
-
-
-
-
-
 
 
 
