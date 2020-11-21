@@ -283,6 +283,45 @@ export var postReducer = (state = posts, action) => {
 }
 
 
+var employees = [
+    {name: "Jozef Veselý", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red", place: {
+            id: 84486565,
+            name: "Kaufland Stredočeská"
+        }},
+    {name: "Jozef Funny", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green" , place: {
+            id: 84486565,
+            name: "Kaufland Stredočeská"
+        }},
+    {name: "Sirius Black", id: 1885957, avatarImg: "image base64 <--", avatarColor: "blue", place: {
+            id: 84486565,
+            name: "Kaufland Stredočeská"
+        }},
+    {name: "Sirius White", id: 1885956, avatarImg: "image base64 <--", avatarColor: "orange", place: {
+            id: 84486565,
+            name: "Kaufland Stredočeská"
+        }},
+    {name: "Amanda Hamlet", id: 1885955, avatarImg: "image base64 <--", avatarColor: "brown", place: {
+            id: 84486565,
+            name: "Kaufland Stredočeská"
+        }},
+    {name: "George Stuff", id: 1885954, avatarImg: "image base64 <--", avatarColor: "violet", place: {
+            id: 84486565,
+            name: "Kaufland Stredočeská"
+        }},
+];
+
+export var shiftSchedulerReducer = (state = employees, action) => {
+    switch (action.type) {
+        case "POST_ADD": return [...state, action.post];
+
+        default: return state;
+    }
+}
+
+
+
+
+
 
 
 

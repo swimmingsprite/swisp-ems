@@ -1,6 +1,6 @@
 import {useSelector, useStore} from "react-redux";
 
-import React from "react";
+import React, {useState} from "react";
 import {BackArrow, NextArrow} from "../arrows and sliders/Arrows";
 import InputBar from "../input/InputBar";
 import {textEmojisToUnicode} from "../../../logic/emojis/emojis";
@@ -9,10 +9,28 @@ import Title, {SubTitle} from "../title/Title";
 import Avatar from "@material-ui/core/Avatar";
 import isBase64 from "is-base64";
 
+function InputList(props) {
+    console.log("input list: "+props.list);
+    return <ul className="shift-scheduler-input-ul">
+        {props.list.map(e => {
+            return <li className="shift-scheduler-input-li">{e.name}</li>
+        })}
+    </ul>
+}
+
+function schedulerInputFilter(list, placeId) {
+    console.log("list: "+list);
+    console.log("placeId: "+placeId);
+    return list.filter(e => e.place.id === placeId)
+}
+
+
 export default function ShiftSchedulerPanel(props) {
 
     var store = useStore();
-
+    const [input, setInput] = useState("");
+    var selectedPlaceId = useSelector(state => state.shiftReducer.selectedPlaceId)
+    var employees = useSelector(state => state.shiftSchedulerReducer)
     /*  let avatarStyle = props.comment.avatarImg && isBase64(props.comment.avatarImg, {allowMime: true})
           ? {backgroundImage: props.comment.avatarImg} : {backgroundColor: props.comment.avatarColor};
   */
@@ -31,24 +49,20 @@ export default function ShiftSchedulerPanel(props) {
         {/*SEARCH BAR*/}
         <div>
             <TextareaAutosize
-                // onChange={(event) => {}}
+                onChange={(event) => {
+                    console.log("aahahah: "+event.target.value)
+                    setInput(event.value)}}
                 // onKeyDown={}
                 className={"shift-scheduler-textarea"}
 
                 placeholder="Hľadať zamestnanca..."
-                // value=""
-            ></TextareaAutosize>
+                value={input}
+            />
 
 
         </div>
 
-        <ul className="shift-scheduler-input-ul">
-            <li className="shift-scheduler-input-li">Ahahahahah</li>
-            <li className="shift-scheduler-input-li">Ahahahahah</li>
-            <li className="shift-scheduler-input-li">Ahahahahah</li>
-            <li className="shift-scheduler-input-li">Ahahahahah</li>
-
-        </ul>
+        <InputList list={schedulerInputFilter(employees, selectedPlaceId)}/>
 
         {/*MAIN CONTENT */}
 
@@ -58,7 +72,7 @@ export default function ShiftSchedulerPanel(props) {
             <SubTitle text="Kaufland Stredočeská"/>
             <h8>oddelenie záhrad:</h8>
             <h2 className="scheduler-date">28.12.2020, Utorok</h2>
-            <p style={{fontSize: "0.9rem"}}>16:58 - 18:58:</p>
+            <p style={{fontSize: "0.9rem", marginTop: "15px"}}>16:58 - 18:58:</p>
             <ul style={{marginTop: "0px"}}>
                 <li className="selected-item">
                     <div className="shift-element" style={{display: "inline-block"}}>

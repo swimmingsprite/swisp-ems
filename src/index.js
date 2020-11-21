@@ -8,7 +8,7 @@ import {
     placeReducer,
     postReducer,
     rootReducer,
-    shiftReducer,
+    shiftReducer, shiftSchedulerReducer,
     userReducer
 } from "./reducers/reducers";
 
@@ -18,7 +18,8 @@ const store = createStore(combineReducers(
         shiftReducer: shiftReducer,
         userReducer: userReducer,
         placeReducer: placeReducer,
-        postReducer: postReducer
+        postReducer: postReducer,
+        shiftSchedulerReducer: shiftSchedulerReducer
     }
     ));
 
