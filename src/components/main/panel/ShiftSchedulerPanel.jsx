@@ -9,6 +9,7 @@ import Title, {SubTitle} from "../title/Title";
 import Avatar from "@material-ui/core/Avatar";
 import isBase64 from "is-base64";
 import {isSelected} from "../../../logic/shifts/scheduler";
+import {AvatarGroup} from "@material-ui/lab";
 
 function InputList(props) {
     if (props.hover.index > props.list.length-1) props.hover.setIndex(0);
@@ -46,6 +47,8 @@ export default function ShiftSchedulerPanel(props) {
     var filteredEmployeeList = schedulerInputFilter(scheduler.employees, selectedPlaceId, input);
 
     //var change = useEffect(() => setInputListHoverIndex(-1), filteredEmployeeList)
+
+
 
     scheduler.selectedDays.forEach(e => {
         console.log("SELECTED DAY: "+e);})

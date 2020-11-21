@@ -840,4 +840,10 @@ ul {
     color: black;
 }
 
+.shift-element .MuiAvatar-root {
+    width: 25px;
+    height: 25px;
+    font-size: 0.8rem;
+}
+
 /* ffc93c yellow */

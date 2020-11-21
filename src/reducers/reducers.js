@@ -24,7 +24,7 @@ export var rootReducer = (state = {currentSection: "Shifts"}, action) => {
 var shifts = {
     shifts: [
         {
-            id: "6562656",
+            id: 68468484,
             start: new Date().getTime() - (60000 * 540),
             end: new Date().getTime() + (60000 * 240),
             employees: [
@@ -36,7 +36,7 @@ var shifts = {
             departmentId: 91359125
         },
         {
-            id: "808985",
+            id: 485545543,
             start: new Date().getTime() - (60000 * 540),
             end: new Date().getTime() + (60000 * 140),
             employees: [
@@ -48,7 +48,7 @@ var shifts = {
             departmentId: 62149855
         },
         {
-            id: "808985",
+            id: 97615486,
             start: new Date().getTime() - (60000 * 540),
             end: new Date().getTime() + (60000 * 140),
             employees: [
@@ -60,7 +60,7 @@ var shifts = {
             departmentId: 62149855
         },
         {
-            id: "808985",
+            id: 9745659795,
             start: new Date().getTime() - (60000 * 540),
             end: new Date().getTime() + (60000 * 140),
             employees: [
@@ -72,7 +72,7 @@ var shifts = {
             departmentId: 46749855
         },
         {
-            id: "808985",
+            id: 9846546546884,
             start: new Date().getTime() - (60000 * 540),
             end: new Date().getTime() + (60000 * 140),
             employees: [
@@ -84,13 +84,14 @@ var shifts = {
             departmentId: 98236855
         },
         {
-            id: "808985",
+            id: 9846848484,
             start: new Date().getTime() - (60000 * 540),
             end: new Date().getTime() + (60000 * 140),
             employees: [
                 {name: "Nápoje Veselý", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red"},
                 {name: "Angela Funny", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green"},
-                {name: "Sirius Black", id: 1885955, avatarImg: "image base64 <--", avatarColor: "violet"}
+                {name: "Sirius Black", id: 1885955, avatarImg: "image base64 <--", avatarColor: "violet"},
+                {name: "Sirius Black", id: 18887855, avatarImg: "image base64 <--", avatarColor: "violet"}
             ],
             placeId: 97486256,
             departmentId: 16549855

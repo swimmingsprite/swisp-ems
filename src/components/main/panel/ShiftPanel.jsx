@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Avatar} from "@material-ui/core";
 import {AvatarGroup} from '@material-ui/lab';
 import {useSelector, useStore} from "react-redux";
@@ -14,6 +14,8 @@ import {
 import isBase64 from "is-base64";
 import {BackArrow, NextArrow} from "../arrows and sliders/Arrows";
 import {SlideBack, SlideNext} from "../arrows and sliders/Sliders";
+import {makeStyles} from "@material-ui/styles";
+import {width} from "@material-ui/system";
 
 function TimePointer(props) {
     var currentView = useSelector((state) => {
@@ -26,6 +28,9 @@ function TimePointer(props) {
         ></div>
     </div>
 }
+
+//var classes = todo najdi ako dat avatarovi spravnu velkost na + kruh
+
 
 
 function ShiftElement(props) {
@@ -48,6 +53,11 @@ function ShiftElement(props) {
             borderTopLeftRadius: 0
         }
     }
+
+  /*  var classes = makeStyles(theme => (
+        {avatar: {width: theme.spacing(1),
+                height: theme.spacing(1)}}
+    ));*/
 
     function mapAvatars(employee) {
         let avatarStyle = employee.avatarImg && isBase64(employee.avatarImg, {allowMime: true})
@@ -79,7 +89,8 @@ function ShiftElement(props) {
         }>
 
             {width > 15 && <AvatarGroup max={3}
-                                        style={{marginLeft: "5px",height: "25px", width: "25px"}}
+                                        //classes={classes.avatar}
+                                        style={{marginLeft: "5px"}}
             >
 
                 {shift.employees.map(mapAvatars)}
@@ -159,6 +170,7 @@ export default function ShiftPanel(props) {
                         );
                     })
                     .map(shift => {
+                        console.log("SHIFT ID: "+shift.id)
                         return <ShiftElement key={shift.id} value={shift} currentView={currentView}/>
                     })}
             </div>
