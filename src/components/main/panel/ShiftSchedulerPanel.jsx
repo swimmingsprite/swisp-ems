@@ -13,9 +13,9 @@ export default function ShiftSchedulerPanel(props) {
 
     var store = useStore();
 
-  /*  let avatarStyle = props.comment.avatarImg && isBase64(props.comment.avatarImg, {allowMime: true})
-        ? {backgroundImage: props.comment.avatarImg} : {backgroundColor: props.comment.avatarColor};
-*/
+    /*  let avatarStyle = props.comment.avatarImg && isBase64(props.comment.avatarImg, {allowMime: true})
+          ? {backgroundImage: props.comment.avatarImg} : {backgroundColor: props.comment.avatarColor};
+  */
 
     return <div className="post-status-bar"
                 style={{width: "100%", minWidth: "440px", position: "relative"}}>
@@ -40,7 +40,6 @@ export default function ShiftSchedulerPanel(props) {
             ></TextareaAutosize>
 
 
-
         </div>
 
         <ul className="shift-scheduler-input-ul">
@@ -56,31 +55,70 @@ export default function ShiftSchedulerPanel(props) {
 
         <div className="scheduler-content" style={{minHeight: 0}}>
 
-                <SubTitle text="Kaufland Stredočeská" />
-                <h8>oddelenie záhrad: </h8>
-                <h2 className="scheduler-date">28.12.2020, Utorok</h2>
-                <ul>
-                    <li className="selected-item">
-                        <div className="shift-element" style={{display: "inline-block"}}>
-                            <Avatar className="post-avatar" style={
-                                {
-                                    height: "20px",
-                                    width: "20px",
-                                    backgroundColor: "red",//avatarStyle.backgroundColor,
-                                    fontSize: "0.85rem",
-                                    marginRight: 0,
-                                    marginLeft: "5px",
-                                }}
-                                    // src={avatarStyle.backgroundImage}
-                            >
-                                J
-                            </Avatar>
-                            <h2 className="shift-element-header" style={{margin: "5px", marginRight: "0px"}} >John Barney</h2>
-                            <span className="scheduler-delete-button">x</span>
-                        </div>
-                    </li>
+            <SubTitle text="Kaufland Stredočeská"/>
+            <h8>oddelenie záhrad:</h8>
+            <h2 className="scheduler-date">28.12.2020, Utorok</h2>
+            <p style={{fontSize: "0.9rem"}}>16:58 - 18:58:</p>
+            <ul style={{marginTop: "0px"}}>
+                <li className="selected-item">
+                    <div className="shift-element" style={{display: "inline-block"}}>
+                        <Avatar className="post-avatar" style={
+                            {
+                                height: "20px",
+                                width: "20px",
+                                backgroundColor: "red",//avatarStyle.backgroundColor,
+                                fontSize: "0.85rem",
+                                marginRight: 0,
+                                marginLeft: "5px",
+                            }}
+                            // src={avatarStyle.backgroundImage}
+                        >
+                            J
+                        </Avatar>
+                        <h2 className="shift-element-header" style={{margin: "5px", marginRight: "0px"}}>John
+                            Barney</h2>
+                        <span className="scheduler-delete-button">x</span>
+                    </div>
 
-                </ul>
+
+                </li>
+
+
+                <li className="selected-item">
+                    <div className="shift-element" style={{display: "inline-block"}}>
+                        <Avatar className="post-avatar" style={
+                            {
+                                height: "20px",
+                                width: "20px",
+                                backgroundColor: "red",//avatarStyle.backgroundColor,
+                                fontSize: "0.85rem",
+                                marginRight: 0,
+                                marginLeft: "5px",
+                            }}
+                            // src={avatarStyle.backgroundImage}
+                        >
+                            J
+                        </Avatar>
+                        <h2 className="shift-element-header" style={{margin: "5px", marginRight: "0px"}}>John
+                            Barney</h2>
+                        <span className="scheduler-delete-button">x</span>
+                    </div>
+                </li>
+
+            </ul>
+
+            {/*TIME CHANGE*/}
+            <p style={{display: "block", textAlign: "center"}}>
+
+                    <span className="scheduler-arrow">⯇</span>
+                    16:58
+                    <span className="scheduler-arrow">⯈</span>
+
+                <span style={{transform: "translateY(-2px)", display: "inline-block"}}>&nbsp;-&nbsp;</span>
+                    <span className="scheduler-arrow">⯇</span>
+                    18:58
+                    <span className="scheduler-arrow">⯈</span>
+            </p>
 
         </div>
 
