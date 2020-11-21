@@ -107,6 +107,132 @@ export default function ShiftSchedulerPanel(props) {
 
             </ul>
 
+            <div style={{display: "block"}}>
+
+                <div style={{margin: "0 auto", width: "fit-content", userSelect: "none"}}>
+
+                    <span className="scheduler-arrow">⯇</span>
+                    <span className="">18:48</span>
+                    <span className="scheduler-arrow">⯈</span>
+                    <span style={{transform: "translateY(-2px)", display: "inline-block"}}>-</span>
+                    <span className="scheduler-arrow">⯇</span>
+                    <span className="">20:48</span>
+                    <span className="scheduler-arrow">⯈</span>
+
+                </div>
+            </div>
+
+                {/*..........*/}
+
+            <p style={{fontSize: "0.9rem"}}>16:58 - 18:58:</p>
+            <ul style={{marginTop: "0px"}}>
+                <li className="selected-item">
+                    <div className="shift-element" style={{display: "inline-block"}}>
+                        <Avatar className="post-avatar" style={
+                            {
+                                height: "20px",
+                                width: "20px",
+                                backgroundColor: "red",//avatarStyle.backgroundColor,
+                                fontSize: "0.85rem",
+                                marginRight: 0,
+                                marginLeft: "5px",
+                            }}
+                            // src={avatarStyle.backgroundImage}
+                        >
+                            J
+                        </Avatar>
+                        <h2 className="shift-element-header" style={{margin: "5px", marginRight: "0px"}}>John
+                            Barney</h2>
+                        <span className="scheduler-delete-button">x</span>
+                    </div>
+
+
+                </li>
+
+
+                <li className="selected-item">
+                    <div className="shift-element" style={{display: "inline-block"}}>
+                        <Avatar className="post-avatar" style={
+                            {
+                                height: "20px",
+                                width: "20px",
+                                backgroundColor: "red",//avatarStyle.backgroundColor,
+                                fontSize: "0.85rem",
+                                marginRight: 0,
+                                marginLeft: "5px",
+                            }}
+                            // src={avatarStyle.backgroundImage}
+                        >
+                            J
+                        </Avatar>
+                        <h2 className="shift-element-header" style={{margin: "5px", marginRight: "0px"}}>John
+                            Barney</h2>
+                        <span className="scheduler-delete-button">x</span>
+                    </div>
+                </li>
+ <li className="selected-item">
+                    <div className="shift-element" style={{display: "inline-block"}}>
+                        <Avatar className="post-avatar" style={
+                            {
+                                height: "20px",
+                                width: "20px",
+                                backgroundColor: "red",//avatarStyle.backgroundColor,
+                                fontSize: "0.85rem",
+                                marginRight: 0,
+                                marginLeft: "5px",
+                            }}
+                            // src={avatarStyle.backgroundImage}
+                        >
+                            J
+                        </Avatar>
+                        <h2 className="shift-element-header" style={{margin: "5px", marginRight: "0px"}}>John
+                            Barney</h2>
+                        <span className="scheduler-delete-button">x</span>
+                    </div>
+                </li>
+ <li className="selected-item">
+                    <div className="shift-element" style={{display: "inline-block"}}>
+                        <Avatar className="post-avatar" style={
+                            {
+                                height: "20px",
+                                width: "20px",
+                                backgroundColor: "red",//avatarStyle.backgroundColor,
+                                fontSize: "0.85rem",
+                                marginRight: 0,
+                                marginLeft: "5px",
+                            }}
+                            // src={avatarStyle.backgroundImage}
+                        >
+                            J
+                        </Avatar>
+                        <h2 className="shift-element-header" style={{margin: "5px", marginRight: "0px"}}>John
+                            Barney</h2>
+                        <span className="scheduler-delete-button">x</span>
+                    </div>
+                </li>
+                <li className="selected-item">
+                    <div className="shift-element" style={{display: "inline-block"}}>
+                        <Avatar className="post-avatar" style={
+                            {
+                                height: "20px",
+                                width: "20px",
+                                backgroundColor: "red",//avatarStyle.backgroundColor,
+                                fontSize: "0.85rem",
+                                marginRight: 0,
+                                marginLeft: "5px",
+                            }}
+                            // src={avatarStyle.backgroundImage}
+                        >
+                            J
+                        </Avatar>
+                        <h2 className="shift-element-header" style={{margin: "5px", marginRight: "0px"}}>John
+                            Barney</h2>
+                        <span className="scheduler-delete-button">x</span>
+                    </div>
+                </li>
+
+            </ul>
+
             {/*TIME CHANGE*/}
 
 

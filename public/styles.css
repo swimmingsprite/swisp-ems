@@ -712,7 +712,8 @@ ul {
 
 .selected-item {
     display: inline-block;
-    margin-right: 15px;
+    margin-right: 10px;
+    user-select: none;
 }
 
 
@@ -826,12 +827,13 @@ ul {
     /*position: absolute;*/
     margin: 0 5px;
     cursor: pointer;
+    color: #d7d7d7;
     /*transform: scale(1.30);*/
 }
 
 .scheduler-arrow:hover {
     font-size: 1rem;
-
+    color: black;
 }
 
 /* ffc93c yellow */
