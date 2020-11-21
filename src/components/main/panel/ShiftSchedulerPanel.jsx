@@ -10,7 +10,6 @@ import Avatar from "@material-ui/core/Avatar";
 import isBase64 from "is-base64";
 
 function InputList(props) {
-    console.log("input list: "+props.list);
     return <ul className="shift-scheduler-input-ul">
         {props.list.map(e => {
             return <li className="shift-scheduler-input-li">{e.name}</li>
@@ -18,10 +17,14 @@ function InputList(props) {
     </ul>
 }
 
-function schedulerInputFilter(list, placeId) {
-    console.log("list: "+list);
-    console.log("placeId: "+placeId);
-    return list.filter(e => e.place.id === placeId)
+function schedulerInputFilter(list, placeId, input) {
+/*    console.log("list: "+list);
+    console.log("placeId: "+placeId);*/
+    return list
+        .filter(e => e.place.id === placeId)
+        .filter(e => {
+            return e.name.toLowerCase().indexOf(input.toLowerCase()) !== -1
+        });
 }
 
 
@@ -51,7 +54,7 @@ export default function ShiftSchedulerPanel(props) {
             <TextareaAutosize
                 onChange={(event) => {
                     console.log("aahahah: "+event.target.value)
-                    setInput(event.value)}}
+                    setInput(event.target.value)}}
                 // onKeyDown={}
                 className={"shift-scheduler-textarea"}
 
@@ -62,7 +65,7 @@ export default function ShiftSchedulerPanel(props) {
 
         </div>
 
-        <InputList list={schedulerInputFilter(employees, selectedPlaceId)}/>
+        <InputList list={schedulerInputFilter(employees, selectedPlaceId, input)}/>
 
         {/*MAIN CONTENT */}
 
