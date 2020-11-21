@@ -751,7 +751,7 @@ ul {
 .shift-scheduler-textarea {
     font-size: 1rem;
     font-family: 'Montserrat', sans-serif;
-    width: 650px;
+    width: calc(100% - 30px);
     margin: 0 15px;
     border: none;
     outline: none;
