@@ -780,11 +780,14 @@ ul {
 .shift-scheduler-calendar-li {
     position: relative;
     border-top: 2px solid white;
-    border-right: 2px solid white;
+    /*border-right: 2px solid white;*/
     display: inline-block;
+    padding-top: 10px;
     /*height: ;*/
-    width: 88.57px;
-    height: 88.57px;
+    /*width: 88.57px;*/
+    width: 81.25px;
+    /*height: 88.57px;*/
+    height: 81.25px;
     cursor: pointer;
 }
 
@@ -792,9 +795,9 @@ ul {
     background-color: rgba(9, 132, 226, 0.2);
 }
 
-.shift-scheduler-calendar-li:nth-child(7n) {
+/*.shift-scheduler-calendar-li:nth-child(7n) {
     border-right: none;
-}
+}*/
 
 .shift-scheduler-calendar-header {
     background-color: #0984e3;

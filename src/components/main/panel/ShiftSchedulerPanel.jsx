@@ -40,7 +40,8 @@ export default function ShiftSchedulerPanel(props) {
     function mapDateToCalendar() {
         var array = [];
         for (let x = 1; x < 32; x++) {
-            array.push(<li className="shift-scheduler-calendar-li">
+            array.push(
+                <li className="shift-scheduler-calendar-li">
                 <h2 style={{
                     textAlign: "center",
                     fontSize: "2rem"
