@@ -21,7 +21,6 @@ export function currentViewFilter(element, currentView, selectedPlaceId, depId) 
         if (element.end >= currentView.startTimestamp && element.end < currentView.endTimestamp) return true;
         if (element.start < currentView.startTimestamp && element.end > currentView.endTimestamp) return true;
     }
-    console.log("returning false");
     return false;
 
 }

@@ -1,4 +1,4 @@
-import {useSelector, useStore} from "react-redux";
+import {useDispatch, useSelector, useStore} from "react-redux";
 
 import React, {useState} from "react";
 import {BackArrow, NextArrow} from "../arrows and sliders/Arrows";
@@ -12,7 +12,7 @@ import isBase64 from "is-base64";
 function InputList(props) {
     return <ul className="shift-scheduler-input-ul">
         {props.list.map(e => {
-            return <li className="shift-scheduler-input-li">{e.name}</li>
+            return <li key={e.id} className="shift-scheduler-input-li">{e.name}</li>
         })}
     </ul>
 }
@@ -33,15 +33,31 @@ export default function ShiftSchedulerPanel(props) {
     var store = useStore();
     const [input, setInput] = useState("");
     var selectedPlaceId = useSelector(state => state.shiftReducer.selectedPlaceId)
-    var employees = useSelector(state => state.shiftSchedulerReducer)
+    var scheduler = useSelector(state => state.shiftSchedulerReducer)
+    var dispatch = useDispatch();
+
+    scheduler.selectedDays.forEach(e => {
+        console.log("SELECTED DAY: "+e);})
+    console.log("____________________________")
+
+    var currentDate = new Date(2020, 11, 0);
     /*  let avatarStyle = props.comment.avatarImg && isBase64(props.comment.avatarImg, {allowMime: true})
           ? {backgroundImage: props.comment.avatarImg} : {backgroundColor: props.comment.avatarColor};
   */
-    function mapDateToCalendar() {
+    function mapDateToCalendar(date) {
+
+        //return new Date(year, month, 0).getDate();
+        let numberOfDays = date.getDate();
+        var days = ['Nedeľa', 'Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota']; //todo fetch translation from redux
+        // var dayDate;
         var array = [];
-        for (let x = 1; x < 32; x++) {
+        for (let x = 1; x <= numberOfDays ; x++) {
+            let dayDate = new Date(date.getFullYear(), date.getMonth(), x)
             array.push(
-                <li className="shift-scheduler-calendar-li">
+                <li className="shift-scheduler-calendar-li"
+                    key={dayDate.getTime()}
+                    onClick={() => {dispatch({type: "CALENDAR_DATE_CLICK", dayTimestamp: dayDate.getTime()})}}
+                >
                 <h2 style={{
                     textAlign: "center",
                     fontSize: "2rem"
@@ -49,12 +65,11 @@ export default function ShiftSchedulerPanel(props) {
                 <p style={{
                     textAlign: "center",
                     fontSize: "0.8rem"
-                }}>Streda</p>
-
-            </li>)
-
+                }}>{days[dayDate.getDay()]}</p>
+                </li>)
         }
-
+        //console.log("day date je: "+dayDate.getTime())
+        //console.log("day date je: "+dayDate.toLocaleDateString())
         return array;
     }
 
@@ -72,7 +87,7 @@ export default function ShiftSchedulerPanel(props) {
             <div className="shift-scheduler-calendar-header"><h2>August</h2></div>
             <ul className="shift-scheduler-calendar-ul">
 
-                {mapDateToCalendar()}
+                {mapDateToCalendar(currentDate)}
 
 
                 {/*todo bude zoznam zamestnancov z daneho miesta a z neho sa iba bude filtrovať*/}
@@ -106,7 +121,7 @@ export default function ShiftSchedulerPanel(props) {
 
         </div>
 
-        <InputList list={schedulerInputFilter(employees, selectedPlaceId, input)}/>
+        <InputList list={schedulerInputFilter(scheduler.employees, selectedPlaceId, input)}/>
 
         {/*MAIN CONTENT */}
 
@@ -115,7 +130,7 @@ export default function ShiftSchedulerPanel(props) {
         <div className="scheduler-content" style={{minHeight: 0}}>
 
             <SubTitle text="Kaufland Stredočeská"/>
-            <h8>oddelenie záhrad:</h8>
+            <h5>oddelenie záhrad:</h5>
             <h2 className="scheduler-date">28.12.2020, Utorok</h2>
             <p style={{fontSize: "0.9rem", marginTop: "15px"}}>16:58 - 18:58:</p>
             <ul style={{marginTop: "0px"}}>

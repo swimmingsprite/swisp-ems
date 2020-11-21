@@ -53,7 +53,7 @@ function ShiftElement(props) {
         let avatarStyle = employee.avatarImg && isBase64(employee.avatarImg, {allowMime: true})
             ? {backgroundImage: employee.avatarImg} : {backgroundColor: employee.avatarColor};
 
-        return <Avatar style={
+        return <Avatar key={employee.id} style={
             {
                 height: "25px",
                 width: "25px",
@@ -79,9 +79,7 @@ function ShiftElement(props) {
         }>
 
             {width > 15 && <AvatarGroup max={3}
-                                        classes={{avatar: {height: "25px",
-                                                width: "25px",}}}
-                                        style={{marginLeft: "5px"}}
+                                        style={{marginLeft: "5px",height: "25px", width: "25px"}}
             >
 
                 {shift.employees.map(mapAvatars)}
@@ -118,7 +116,7 @@ export default function ShiftPanel(props) {
         var divs = [];
         hours.forEach(value => {
             divs.push(
-                <div className="shift-content-div">{value}:00</div>
+                <div key={value} className="shift-content-div">{value}:00</div>
             );
         })
 
@@ -161,7 +159,7 @@ export default function ShiftPanel(props) {
                         );
                     })
                     .map(shift => {
-                        return <ShiftElement value={shift} currentView={currentView}/>
+                        return <ShiftElement key={shift.id} value={shift} currentView={currentView}/>
                     })}
             </div>
         </div>
