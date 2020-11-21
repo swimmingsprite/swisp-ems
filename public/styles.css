@@ -819,7 +819,19 @@ ul {
 }
 
 .scheduler-time {
-    display: inline-block;
+    position: absolute;
+}
+
+.scheduler-arrow {
+    /*position: absolute;*/
+    margin: 0 5px;
+    cursor: pointer;
+    /*transform: scale(1.30);*/
+}
+
+.scheduler-arrow:hover {
+    font-size: 1rem;
+
 }
 
 /* ffc93c yellow */

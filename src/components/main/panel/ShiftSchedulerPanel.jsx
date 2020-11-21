@@ -108,17 +108,30 @@ export default function ShiftSchedulerPanel(props) {
             </ul>
 
             {/*TIME CHANGE*/}
-            <p style={{display: "block", textAlign: "center"}}>
 
-                    <span className="scheduler-arrow">⯇</span>
-                    16:58
+
+            <div style={{display: "block"}}>
+
+                <div style={{margin: "0 auto", width: "fit-content"}}>
+
+                <span className="scheduler-arrow">⯇</span>
+                <span className="">18:48</span>
+                <span className="scheduler-arrow">⯈</span>
+                <span style={{transform: "translateY(-2px)", display: "inline-block"}}>-</span>
+                <span className="scheduler-arrow">⯇</span>
+                <span className="">20:48</span>
+                <span className="scheduler-arrow">⯈</span>
+
+                </div>
+
+                {/*  16:58
                     <span className="scheduler-arrow">⯈</span>
 
                 <span style={{transform: "translateY(-2px)", display: "inline-block"}}>&nbsp;-&nbsp;</span>
                     <span className="scheduler-arrow">⯇</span>
                     18:58
-                    <span className="scheduler-arrow">⯈</span>
-            </p>
+                    <span className="scheduler-arrow">⯈</span>*/}
+            </div>
 
         </div>
 
