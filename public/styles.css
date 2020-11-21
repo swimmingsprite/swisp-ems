@@ -804,4 +804,17 @@ ul {
     padding: 15px;
 }
 
+.scheduler-delete-button {
+    margin-right: 5px;
+    padding: 0 0px;
+    cursor: pointer;
+    display: inline-block;
+    transform: translateY(0.5px);
+}
+
+.scheduler-delete-button:hover{
+    transform: scale(1.30);
+    font-weight: 900;
+}
+
 /* ffc93c yellow */

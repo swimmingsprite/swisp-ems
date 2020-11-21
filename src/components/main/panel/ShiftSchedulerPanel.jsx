@@ -6,11 +6,16 @@ import InputBar from "../input/InputBar";
 import {textEmojisToUnicode} from "../../../logic/emojis/emojis";
 import TextareaAutosize from "react-autosize-textarea";
 import Title, {SubTitle} from "../title/Title";
+import Avatar from "@material-ui/core/Avatar";
+import isBase64 from "is-base64";
 
 export default function ShiftSchedulerPanel(props) {
 
     var store = useStore();
 
+  /*  let avatarStyle = props.comment.avatarImg && isBase64(props.comment.avatarImg, {allowMime: true})
+        ? {backgroundImage: props.comment.avatarImg} : {backgroundColor: props.comment.avatarColor};
+*/
 
     return <div className="post-status-bar"
                 style={{width: "100%", minWidth: "440px", position: "relative"}}>
@@ -56,8 +61,22 @@ export default function ShiftSchedulerPanel(props) {
                 <h2 className="scheduler-date">28.12.2020, Utorok</h2>
                 <ul>
                     <li className="selected-item">
-                        <div className="shift-element">
-                            <p>John Barney</p>
+                        <div className="shift-element" style={{display: "inline-block"}}>
+                            <Avatar className="post-avatar" style={
+                                {
+                                    height: "20px",
+                                    width: "20px",
+                                    backgroundColor: "red",//avatarStyle.backgroundColor,
+                                    fontSize: "0.85rem",
+                                    marginRight: 0,
+                                    marginLeft: "5px",
+                                }}
+                                    // src={avatarStyle.backgroundImage}
+                            >
+                                J
+                            </Avatar>
+                            <h2 className="shift-element-header" style={{margin: "5px", marginRight: "0px"}} >John Barney</h2>
+                            <span className="scheduler-delete-button">x</span>
                         </div>
                     </li>
 
