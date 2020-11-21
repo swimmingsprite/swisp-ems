@@ -789,6 +789,7 @@ ul {
     /*height: 88.57px;*/
     height: 81.25px;
     cursor: pointer;
+    user-select: none;
 }
 
 .shift-scheduler-calendar-li:hover {

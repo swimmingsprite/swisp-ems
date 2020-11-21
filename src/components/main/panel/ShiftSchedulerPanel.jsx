@@ -8,6 +8,7 @@ import TextareaAutosize from "react-autosize-textarea";
 import Title, {SubTitle} from "../title/Title";
 import Avatar from "@material-ui/core/Avatar";
 import isBase64 from "is-base64";
+import {isSelected} from "../../../logic/shifts/scheduler";
 
 function InputList(props) {
     return <ul className="shift-scheduler-input-ul">
@@ -53,8 +54,15 @@ export default function ShiftSchedulerPanel(props) {
         var array = [];
         for (let x = 1; x <= numberOfDays ; x++) {
             let dayDate = new Date(date.getFullYear(), date.getMonth(), x)
+            let selected = isSelected(scheduler.selectedDays, dayDate.getTime());
+            let selectedStyle = selected ? {
+                backgroundColor: "rgba(9, 132, 226, 0.8)",
+                border: "2px solid rgb(9,132,226)",
+                borderRadius: "3px"} : null;
+
             array.push(
                 <li className="shift-scheduler-calendar-li"
+                    style={selectedStyle}
                     key={dayDate.getTime()}
                     onClick={() => {dispatch({type: "CALENDAR_DATE_CLICK", dayTimestamp: dayDate.getTime()})}}
                 >
@@ -68,8 +76,7 @@ export default function ShiftSchedulerPanel(props) {
                 }}>{days[dayDate.getDay()]}</p>
                 </li>)
         }
-        //console.log("day date je: "+dayDate.getTime())
-        //console.log("day date je: "+dayDate.toLocaleDateString())
+
         return array;
     }
 
