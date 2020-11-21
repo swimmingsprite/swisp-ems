@@ -1,6 +1,6 @@
 import {useDispatch, useSelector, useStore} from "react-redux";
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {BackArrow, NextArrow} from "../arrows and sliders/Arrows";
 import InputBar from "../input/InputBar";
 import {textEmojisToUnicode} from "../../../logic/emojis/emojis";
@@ -11,9 +11,15 @@ import isBase64 from "is-base64";
 import {isSelected} from "../../../logic/shifts/scheduler";
 
 function InputList(props) {
+    if (props.hover.index > props.list.length-1) props.hover.setIndex(0);
     return <ul className="shift-scheduler-input-ul">
-        {props.list.map(e => {
-            return <li key={e.id} className="shift-scheduler-input-li">{e.name}</li>
+        {props.list.map((e, i) => {
+            let style = props.hover.index === i ? {backgroundColor: "rgba(238, 238, 238, 0.4)"} : null
+            return <li
+                key={e.id}
+                className="shift-scheduler-input-li"
+                style={style}
+            >{e.name}</li>
         })}
     </ul>
 }
@@ -36,14 +42,17 @@ export default function ShiftSchedulerPanel(props) {
     var selectedPlaceId = useSelector(state => state.shiftReducer.selectedPlaceId)
     var scheduler = useSelector(state => state.shiftSchedulerReducer)
     var dispatch = useDispatch();
+    var [inputListHoverIndex, setInputListHoverIndex] = useState(-1);
+    var filteredEmployeeList = schedulerInputFilter(scheduler.employees, selectedPlaceId, input);
 
+    var change = useEffect(() => setInputListHoverIndex(-1), filteredEmployeeList)
 
     scheduler.selectedDays.forEach(e => {
         console.log("SELECTED DAY: "+e);})
     console.log("____________________________")
 
-    console.log("current month je: "+scheduler.currentMonth)
-    console.log("current month je: "+scheduler.currentMonth.getMonth())
+    console.log("input list hover index je: "+inputListHoverIndex)
+
 
     var currentDate = new Date(2020, 11, 0);
     /*  let avatarStyle = props.comment.avatarImg && isBase64(props.comment.avatarImg, {allowMime: true})
@@ -89,6 +98,18 @@ export default function ShiftSchedulerPanel(props) {
         return months[num];
     }
 
+    function handleKeyDown(event) {
+        if (event.key === "ArrowDown") {
+            event.preventDefault();
+            setInputListHoverIndex(inputListHoverIndex + 1);
+        }
+        if (event.key === "ArrowUp") {
+            event.preventDefault();
+            if (inputListHoverIndex > -1) setInputListHoverIndex(inputListHoverIndex - 1);
+        }
+
+    }
+
 
     return <div className="post-status-bar"
                 style={{width: "100%", minWidth: "440px", position: "relative"}}>
@@ -127,12 +148,12 @@ export default function ShiftSchedulerPanel(props) {
         </div>
 
 
-        {/*SEARCH BAR*/}
+        {/* SEARCH BAR*/}
         <div>
             <TextareaAutosize
                 onChange={(event) => {
                     setInput(event.target.value)}}
-                // onKeyDown={}
+                onKeyDown={handleKeyDown}
                 className={"shift-scheduler-textarea"}
 
                 placeholder="Hľadať zamestnanca..."
@@ -142,7 +163,8 @@ export default function ShiftSchedulerPanel(props) {
 
         </div>
 
-        <InputList list={schedulerInputFilter(scheduler.employees, selectedPlaceId, input)}/>
+        <InputList list={filteredEmployeeList}
+                   hover={{index: inputListHoverIndex, setIndex: setInputListHoverIndex}}/>
 
         {/*MAIN CONTENT */}
 
