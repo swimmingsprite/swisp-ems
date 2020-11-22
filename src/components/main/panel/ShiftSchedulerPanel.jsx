@@ -1,15 +1,11 @@
 import {useDispatch, useSelector, useStore} from "react-redux";
 
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {BackArrow, NextArrow} from "../arrows and sliders/Arrows";
-import InputBar from "../input/InputBar";
-import {textEmojisToUnicode} from "../../../logic/emojis/emojis";
 import TextareaAutosize from "react-autosize-textarea";
-import Title, {SubTitle} from "../title/Title";
+import {SubTitle} from "../title/Title";
 import Avatar from "@material-ui/core/Avatar";
-import isBase64 from "is-base64";
 import {isSelected} from "../../../logic/shifts/scheduler";
-import {AvatarGroup} from "@material-ui/lab";
 
 function InputList(props) {
     if (props.hover.index > props.list.length-1) props.hover.setIndex(0);

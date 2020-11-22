@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Avatar} from "@material-ui/core";
 import {AvatarGroup} from '@material-ui/lab';
 import {useSelector, useStore} from "react-redux";
@@ -14,8 +14,6 @@ import {
 import isBase64 from "is-base64";
 import {BackArrow, NextArrow} from "../arrows and sliders/Arrows";
 import {SlideBack, SlideNext} from "../arrows and sliders/Sliders";
-import {makeStyles} from "@material-ui/styles";
-import {width} from "@material-ui/system";
 
 function TimePointer(props) {
     var currentView = useSelector((state) => {

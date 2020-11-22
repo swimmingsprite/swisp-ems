@@ -8,7 +8,8 @@ import {
     placeReducer,
     postReducer,
     rootReducer,
-    shiftReducer, shiftSchedulerReducer,
+    shiftReducer,
+    shiftSchedulerReducer,
     userReducer
 } from "./reducers/reducers";
 

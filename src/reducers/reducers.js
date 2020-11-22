@@ -338,9 +338,9 @@ function addMonth(date) {
         return a;
     }
     else {
-        var a = new Date(date.getFullYear(), date.getMonth()+2, 0)
+        var b = new Date(date.getFullYear(), date.getMonth()+2, 0)
         console.log("ADD ELSE RETURN: "+a);
-        return a;
+        return b;
     }
 }
 
