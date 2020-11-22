@@ -6,6 +6,10 @@ export function timestampToShortDateTime(time) {
         + new Date(time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 }
 
+export function timestampToShortTime(time) {
+    return new Date(time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+}
+
 
 export function timestampsToDateRange(time, time2) {
     var date = new Date(time > time2 ? time2 : time)
@@ -36,20 +40,16 @@ export function isSameDate(date1, date2) {
 }
 
 
+export function getDayRangeWithDayOfWeek(st, e) {
+    let start = new Date(st > e ? e : st);
+    let end = new Date(st > e ? st : e);
+
+    var days = ['Nedeľa', 'Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota']; //todo refctor to redux
+    if (!start || !end) return "";
+    if (isSameDate(start, end)) return start.toLocaleDateString() + ", " + days[start.getDay()];
+
+    else return start.toLocaleDateString() + ", " + days[start.getDay()] +
+        end.toLocaleDateString() + ", " + days[end.getDay()];
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
