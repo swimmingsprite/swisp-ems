@@ -89,15 +89,6 @@ export default function Shifts(props) {
                       dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: newId});
                       dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: false})
                   }}
-                  onMouseOver={() => {
-                      console.log("***********setting cal to true")
-                      setShowCalendarSubHeaderList(true);
-                  }}
-                  onMouseOut={() => {
-                      console.log("***********setting cal to false")
-                      setShowCalendarSubHeaderList(false);
-                  }}
-                  showList={showCalendarSubHeaderList}
         />
         <ShiftSchedulerPanel />
 

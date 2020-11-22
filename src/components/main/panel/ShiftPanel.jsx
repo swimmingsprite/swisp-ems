@@ -170,7 +170,6 @@ export default function ShiftPanel(props) {
                         );
                     })
                     .map(shift => {
-                        console.log("SHIFT ID: "+shift.id)
                         return <ShiftElement key={shift.id} value={shift} currentView={currentView}/>
                     })}
             </div>

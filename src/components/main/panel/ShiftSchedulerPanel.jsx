@@ -50,11 +50,11 @@ export default function ShiftSchedulerPanel(props) {
 
 
 
-    scheduler.selectedDays.forEach(e => {
+ /*   scheduler.selectedDays.forEach(e => {
         console.log("SELECTED DAY: "+e);})
     console.log("____________________________")
 
-    console.log("input list hover index je: "+inputListHoverIndex)
+    console.log("input list hover index je: "+inputListHoverIndex)*/
 
 
     var currentDate = new Date(2020, 11, 0);
