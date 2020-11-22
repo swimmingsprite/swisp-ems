@@ -7,7 +7,7 @@ function mapEmployees(employee) {
         ? {backgroundImage: employee.avatarImg} : {backgroundColor: employee.avatarColor};
 
 
-    return <li className="selected-item">
+    return <li key={employee.id} className="selected-item">
         <div className="shift-element" style={{display: "inline-block"}}>
             <Avatar className="post-avatar" style={
                 {
@@ -22,7 +22,7 @@ function mapEmployees(employee) {
             >
                 {employee.name.charAt(0)}
             </Avatar>
-            <h2 className="shift-element-header" style={{margin: "5px", marginRight: "0px"}}>
+            <h2 className="shift-element-header" style={{margin: "5px", marginRight: "15px"}}>
                 {employee.name}
             </h2>
             <span className="scheduler-delete-button">x</span>

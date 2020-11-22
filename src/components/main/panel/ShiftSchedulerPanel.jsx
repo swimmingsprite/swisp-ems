@@ -13,7 +13,7 @@ function InputList(props) {
     if (props.hover.index > props.list.length - 1) props.hover.setIndex(0);
     return <ul className="shift-scheduler-input-ul">
         {props.list.map((e, i) => {
-            let style = props.hover.index === i ? {backgroundColor: "rgba(238, 238, 238, 0.4)"} : null
+            let style = props.hover.index === i ? {backgroundColor: "rgb(238, 238, 238)"} : null
             return <li
                 key={e.id}
                 className="shift-scheduler-input-li"

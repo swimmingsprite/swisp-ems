@@ -48,8 +48,9 @@ export function getDayRangeWithDayOfWeek(st, e) {
     if (!start || !end) return "";
     if (isSameDate(start, end)) return start.toLocaleDateString() + ", " + days[start.getDay()];
 
-    else return start.toLocaleDateString() + ", " + days[start.getDay()] +
-        end.toLocaleDateString() + ", " + days[end.getDay()];
+    else return start.toLocaleDateString() + " - " +end.toLocaleDateString()
+        + ", " + days[start.getDay()]
+        + " - " + days[end.getDay()];
 
 
 }

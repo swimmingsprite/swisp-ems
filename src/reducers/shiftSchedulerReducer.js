@@ -53,7 +53,7 @@ var scheduler = {
                     days: [
                         {
                             start: getCurrentTimestamp(),
-                            end: getCurrentTimestamp(),//+3600000*5,
+                            end: getCurrentTimestamp()+3600000*5,
                             times: [
                                 {
                                     start: getCurrentTimestamp(),
