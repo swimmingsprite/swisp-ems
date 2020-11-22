@@ -72,7 +72,79 @@ var scheduler = {
                     ]
                 }
             ]
-        }
+        },
+        {
+            id: 123,
+            name: "Kaufland Stredočeská",
+            departments: [
+                {
+                    id: 45454,
+                    name: "oddelenie záhrad",
+                    days: [
+                        {
+                            start: getCurrentTimestamp(),
+                            end: getCurrentTimestamp(),//+3600000*5,
+                            times: [
+                                {
+                                    start: getCurrentTimestamp(),
+                                    end: getCurrentTimestamp(),
+                                    employees: [
+                                        {
+                                            id: 789,
+                                            name: "John Barney",
+                                            avatarColor: "orange",
+                                            avatarImg: "base 64"
+                                        },
+                                        {
+                                            id: 789,
+                                            name: "John Barney",
+                                            avatarColor: "orange",
+                                            avatarImg: "base 64"
+                                        },
+                                        {
+                                            id: 789,
+                                            name: "John Barney",
+                                            avatarColor: "orange",
+                                            avatarImg: "base 64"
+                                        },
+                                        {
+                                            id: 789,
+                                            name: "John Barney",
+                                            avatarColor: "orange",
+                                            avatarImg: "base 64"
+                                        },
+                                        {
+                                            id: 789,
+                                            name: "John Barney",
+                                            avatarColor: "orange",
+                                            avatarImg: "base 64"
+                                        },
+                                        {
+                                            id: 789,
+                                            name: "John Barney",
+                                            avatarColor: "orange",
+                                            avatarImg: "base 64"
+                                        }
+                                    ]
+                                },
+                                {
+                                    start: getCurrentTimestamp(),
+                                    end: getCurrentTimestamp(),
+                                    employees: [
+                                        {
+                                            id: 789,
+                                            name: "John Barney",
+                                            avatarColor: "orange",
+                                            avatarImg: "base 64"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
     ]
 
 };

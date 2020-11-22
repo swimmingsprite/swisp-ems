@@ -33,7 +33,7 @@ function mapEmployees(employee) {
 }
 
 export default function EmployeesList(props) {
-    return <ul style={{marginTop: "0px"}}>
+    return <ul style={{textAlign: "center"}}>
         {props.employees.map(mapEmployees)}
     </ul>
 }

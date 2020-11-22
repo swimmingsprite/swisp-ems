@@ -14,8 +14,6 @@ export default function Status(props) {
     let avatarStyle = props.post.avatarImg ? {backgroundImage: props.post.avatarImg} : {backgroundColor: props.post.avatarColor};
     let currentUserIsAuthor = userId === props.post.authorId
 
-    console.log("AVATAR STYLE: "+Object.keys(avatarStyle))
-
     return <div className="post-status-bar">
 
         {/*delete button*/}
@@ -31,7 +29,8 @@ export default function Status(props) {
             {
                 height: "30px",
                 width: "30px",
-                transform: "translateY(10%)",
+                transform: "translateY(1%)",
+                // /top: "0px",
                 left: "5px",
                 // objectFit: "contain",
                 backgroundColor: avatarStyle.backgroundColor,

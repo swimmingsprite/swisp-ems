@@ -10,7 +10,7 @@ import {getCurrentTimestamp} from "../../../logic/shifts/currentView";
 import Department from "./Department";
 
 function InputList(props) {
-    if (props.hover.index > props.list.length-1) props.hover.setIndex(0);
+    if (props.hover.index > props.list.length - 1) props.hover.setIndex(0);
     return <ul className="shift-scheduler-input-ul">
         {props.list.map((e, i) => {
             let style = props.hover.index === i ? {backgroundColor: "rgba(238, 238, 238, 0.4)"} : null
@@ -24,8 +24,8 @@ function InputList(props) {
 }
 
 function schedulerInputFilter(list, placeId, input) {
-/*    console.log("list: "+list);
-    console.log("placeId: "+placeId);*/
+    /*    console.log("list: "+list);
+        console.log("placeId: "+placeId);*/
     return list
         .filter(e => e.place.id === placeId)
         .filter(e => {
@@ -47,12 +47,11 @@ export default function ShiftSchedulerPanel(props) {
     //var change = useEffect(() => setInputListHoverIndex(-1), filteredEmployeeList)
 
 
+    /*   scheduler.selectedDays.forEach(e => {
+           console.log("SELECTED DAY: "+e);})
+       console.log("____________________________")
 
- /*   scheduler.selectedDays.forEach(e => {
-        console.log("SELECTED DAY: "+e);})
-    console.log("____________________________")
-
-    console.log("input list hover index je: "+inputListHoverIndex)*/
+       console.log("input list hover index je: "+inputListHoverIndex)*/
 
 
     /*  let avatarStyle = props.comment.avatarImg && isBase64(props.comment.avatarImg, {allowMime: true})
@@ -65,28 +64,31 @@ export default function ShiftSchedulerPanel(props) {
         var days = ['Nedeľa', 'Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota']; //todo fetch translation from redux
         // var dayDate;
         var array = [];
-        for (let x = 1; x <= numberOfDays ; x++) {
+        for (let x = 1; x <= numberOfDays; x++) {
             let dayDate = new Date(date.getFullYear(), date.getMonth(), x)
             let selected = isSelected(scheduler.selectedDays, dayDate.getTime());
             let selectedStyle = selected ? {
                 backgroundColor: "rgba(9, 132, 226, 0.8)",
                 border: "2px solid rgb(9,132,226)",
-                borderRadius: "3px"} : null;
+                borderRadius: "3px"
+            } : null;
 
             array.push(
                 <li className="shift-scheduler-calendar-li"
                     style={selectedStyle}
                     key={dayDate.getTime()}
-                    onClick={() => {dispatch({type: "CALENDAR_DATE_CLICK", dayTimestamp: dayDate.getTime()})}}
+                    onClick={() => {
+                        dispatch({type: "CALENDAR_DATE_CLICK", dayTimestamp: dayDate.getTime()})
+                    }}
                 >
-                <h2 style={{
-                    textAlign: "center",
-                    fontSize: "2rem"
-                }}>{x}.</h2>
-                <p style={{
-                    textAlign: "center",
-                    fontSize: "0.8rem"
-                }}>{days[dayDate.getDay()]}</p>
+                    <h2 style={{
+                        textAlign: "center",
+                        fontSize: "2rem"
+                    }}>{x}.</h2>
+                    <p style={{
+                        textAlign: "center",
+                        fontSize: "0.8rem"
+                    }}>{days[dayDate.getDay()]}</p>
                 </li>)
         }
 
@@ -94,7 +96,7 @@ export default function ShiftSchedulerPanel(props) {
     }
 
     function getMonthName(num) {
-        let months = ["Január","Február","Marec","Apríl","Máj","Jún","Júl","August","September","Október","November","December"]
+        let months = ["Január", "Február", "Marec", "Apríl", "Máj", "Jún", "Júl", "August", "September", "Október", "November", "December"]
         return months[num];
     }
 
@@ -120,12 +122,14 @@ export default function ShiftSchedulerPanel(props) {
         <NextArrow
             style={{top: "200px"}}
             onClick={() => {
-            dispatch({type: "SHIFT_SCHEDULER_ARROW_NEXT_CLICK"})
-        }}/>
+                dispatch({type: "SHIFT_SCHEDULER_ARROW_NEXT_CLICK"})
+            }}
+            timeout={450}
+        />
 
         <div className="shift-scheduler-calendar">
             <div className="shift-scheduler-calendar-header">
-                <h2>{getMonthName(scheduler.currentMonth.getMonth())+" "+scheduler.currentMonth.getFullYear()}</h2>
+                <h2>{getMonthName(scheduler.currentMonth.getMonth()) + " " + scheduler.currentMonth.getFullYear()}</h2>
             </div>
             <ul className="shift-scheduler-calendar-ul">
 
@@ -139,7 +143,8 @@ export default function ShiftSchedulerPanel(props) {
         <div>
             <TextareaAutosize
                 onChange={(event) => {
-                    setInput(event.target.value)}}
+                    setInput(event.target.value)
+                }}
                 onKeyDown={handleKeyDown}
                 className={"shift-scheduler-textarea"}
 
@@ -156,7 +161,6 @@ export default function ShiftSchedulerPanel(props) {
         {/*MAIN CONTENT */}
 
 
-
         <div className="scheduler-content" style={{minHeight: 0}}>
 
             {scheduler.selected.map(place => {
@@ -169,19 +173,17 @@ export default function ShiftSchedulerPanel(props) {
         </div>
 
 
-
         {/*ARROW */}
         <BackArrow
             style={{top: "200px"}}
             onClick={() => {
-            dispatch({type: "SHIFT_SCHEDULER_ARROW_BACK_CLICK"})
-        }}/>
+                dispatch({type: "SHIFT_SCHEDULER_ARROW_BACK_CLICK"})
+            }}
+            timeout={450}
+        />
 
     </div>
 }
-
-
-
 
 
 /*
