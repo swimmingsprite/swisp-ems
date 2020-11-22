@@ -7,6 +7,7 @@ import {SubTitle} from "../title/Title";
 import Avatar from "@material-ui/core/Avatar";
 import {isSelected} from "../../../logic/shifts/scheduler";
 import {getCurrentTimestamp} from "../../../logic/shifts/currentView";
+import Department from "./Department";
 
 function InputList(props) {
     if (props.hover.index > props.list.length-1) props.hover.setIndex(0);
@@ -158,7 +159,12 @@ export default function ShiftSchedulerPanel(props) {
 
         <div className="scheduler-content" style={{minHeight: 0}}>
 
-
+            {scheduler.selected.map(place => {
+                return <div>
+                    <SubTitle text={place.name}/>
+                    {place.departments.map(dep => <Department department={dep}/>)}
+                </div>
+            })}
 
         </div>
 
