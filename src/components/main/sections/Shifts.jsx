@@ -18,44 +18,64 @@ export default function Shifts(props) {
             dispatch({type: "CURRENT_PLACE_CHANGE", selectedPlaceId: state.userReducer.place.id})
         }
         return {
-                selectedPlaceId: selectedPlaceId,
-                list: state.placeReducer
-            }
+            selectedPlaceId: selectedPlaceId,
+            list: state.placeReducer
+        }
 
     })
 
-    //filter for subheader
+    function getCurrentPlaceDepartments(state) {
+        return [...state.placeReducer
+            .filter(p => p.id === state.shiftReducer.selectedPlaceId)
+            .map(p => p.departments)[0]]
+    }
+
     var shiftSubHeaderFilter = useSelector((state) => {
-        var list = [...state.placeReducer.filter(p => p.id === state.shiftReducer.selectedPlaceId)
-            .map(p => p.departments)[0]
-        ]
+        var list = getCurrentPlaceDepartments(state);
 
         var selectedDepartmentId = state.shiftReducer.currentShiftSubHeaderDepartmentId
         if (selectedDepartmentId === null) {
-            selectedDepartmentId = 0//list[0].id;
-            dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: selectedDepartmentId})
+            selectedDepartmentId = 0
+            dispatch({
+                type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE",
+                currentShiftSubHeaderDepartmentId: selectedDepartmentId
+            })
         }
 
-        return  {
-                selectedPlaceId: selectedDepartmentId,
-                list: [{name: "všetky oddelenia", id: 0} ,...list]
-                }
-
+        return {
+            selectedPlaceId: selectedDepartmentId,
+            list: [{name: "všetky oddelenia", id: 0}, ...list]
+        }
     })
 
-    var showHeaderFilterList = useSelector((state) => {
-        return state.shiftReducer.headerFilterHover;
+    var schedulerSubHeaderFilter = useSelector((state) => {
+        var list = getCurrentPlaceDepartments(state);
+
+        var selectedDepartmentId = state.shiftReducer.schedulerSubHeaderDepartmentId
+        console.log("0Selected dep id: "+selectedDepartmentId);
+
+        if (selectedDepartmentId === null) {
+            selectedDepartmentId = list[0].id
+            dispatch({
+                type: "SCHEDULER_SUBHEADER_DEPARTMENT_CHANGE",
+                schedulerSubHeaderDepartmentId: selectedDepartmentId
+            })
+        }
+
+        console.log("list length: "+list.length);
+        console.log("Selected dep id: "+selectedDepartmentId);
+
+        return {
+            selectedPlaceId: selectedDepartmentId,
+            list: [...list]
+        }
     })
 
-    var showCurrentShiftsSubHeaderFilterList = useSelector((state) => {
-        return state.shiftReducer.currentShiftsSubHeaderFilterHover;
-    })
 
     var currentView = useSelector(state => {
         return state.shiftReducer.currentView
     })
 
-    var [showCalendarSubHeaderList, setShowCalendarSubHeaderList] = useState(false);
 
     var currentViewTimeRange = timestampsToDateRange(currentView.startTimestamp, currentView.endTimestamp)
 
@@ -66,7 +86,10 @@ export default function Shifts(props) {
                onClickItem={(newId) => {
                    dispatch({type: "CURRENT_PLACE_CHANGE", selectedPlaceId: newId});
                    dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilterHover: false})
-                   dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: null});
+                   dispatch({
+                       type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE",
+                       currentShiftSubHeaderDepartmentId: null
+                   });
                }}
         />
         <SubTitle text="Prebiehajúce"
@@ -74,23 +97,27 @@ export default function Shifts(props) {
                   secondText={currentViewTimeRange}
                   filter={shiftSubHeaderFilter}
                   onClickItem={(newId) => {
-                      dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: newId});
-                      dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: false})
+                      dispatch({
+                          type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE",
+                          currentShiftSubHeaderDepartmentId: newId
+                      });
                   }}
         />
         <ShiftPanel/>
 
 
         <SubTitle text="Plánovanie"
-                  // secondText={currentViewTimeRange}
+            // secondText={currentViewTimeRange}
                   id={45454548276845}
-                  filter={shiftSubHeaderFilter}
+                  filter={schedulerSubHeaderFilter}
                   onClickItem={(newId) => {
-                      dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: newId});
-                      dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: false})
+                      dispatch({
+                          type: "SCHEDULER_SUBHEADER_DEPARTMENT_CHANGE",
+                          schedulerSubHeaderDepartmentId: newId
+                      });
                   }}
         />
-        <ShiftSchedulerPanel />
+        <ShiftSchedulerPanel/>
 
 
     </div>

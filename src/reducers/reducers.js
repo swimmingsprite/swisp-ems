@@ -104,8 +104,7 @@ var shifts = {
     },
     selectedPlaceId: null,
     currentShiftSubHeaderDepartmentId: null,
-    headerFilterHover: false,
-    currentShiftsSubHeaderFilterHover: false
+    schedulerSubHeaderDepartmentId: null,
 }
 
 
@@ -125,12 +124,11 @@ export var shiftReducer = (state = shifts, action) => {
             return {...state, currentView: getNextCurrentView(state.currentView)};
         case "CURRENT_PLACE_CHANGE":
             return {...state, selectedPlaceId: action.selectedPlaceId};
-        case "HEADER_FILTER_HOVER_CHANGE":
-            return {...state, headerFilterHover: action.headerFilterHover};
         case "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE":
             return {...state, currentShiftSubHeaderDepartmentId: action.currentShiftSubHeaderDepartmentId};
-        case "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE":
-            return {...state, currentShiftsSubHeaderFilterHover: action.currentShiftsSubHeaderFilterHover};
+        case "SCHEDULER_SUBHEADER_DEPARTMENT_CHANGE":
+            return {...state, schedulerSubHeaderDepartmentId: action.schedulerSubHeaderDepartmentId};
+
 
         default:
             return state;
@@ -236,7 +234,7 @@ var posts =
                     id: Math.floor(Math.random() * 10000000),
                     statusId: 151439381,
                     text: "Some comment !",
-                    timestamp: 1605697781225-10000
+                    timestamp: 1605697781225 - 10000
                 },
                 {
                     authorId: 29895646541,
@@ -246,7 +244,7 @@ var posts =
                     id: Math.floor(Math.random() * 10000000),
                     statusId: 281459381,
                     text: "Some second comment !",
-                    timestamp: 1605697781225-30000
+                    timestamp: 1605697781225 - 30000
                 },
                 {
                     authorId: 1254846541,
@@ -256,7 +254,7 @@ var posts =
                     id: Math.floor(Math.random() * 10000000),
                     statusId: 151432591,
                     text: "Some third comment !",
-                    timestamp: 1605697781225-50000
+                    timestamp: 1605697781225 - 50000
                 },
             ],
             likes: [953232, 966255, 97632323],
@@ -268,92 +266,105 @@ var posts =
 
 export var postReducer = (state = posts, action) => {
     switch (action.type) {
-        case "POST_ADD": return [...state, action.post];
-        case "POST_DELETE": return [...deletePostFilter(state, action.postId)];
+        case "POST_ADD":
+            return [...state, action.post];
+        case "POST_DELETE":
+            return [...deletePostFilter(state, action.postId)];
         case "POST_LIKE_TOGGLE":
             let newState = getStatePostLikeToggle(state, action.postId, action.userId);
             if (newState === null) return state;
             return [...state]
         case "COMMENTS_LIMIT_SET":
             return [...setCommentsLimit(state, action.postId, action.value)];
-        case "COMMENT_ADD": return [...addNewComment(state, action.postId, action.comment)];
-        case "COMMENT_DELETE": return [...deleteComment(state, action.postId, action.commentId)];
+        case "COMMENT_ADD":
+            return [...addNewComment(state, action.postId, action.comment)];
+        case "COMMENT_DELETE":
+            return [...deleteComment(state, action.postId, action.commentId)];
 
-        default: return state;
+        default:
+            return state;
     }
 }
 
 
 var scheduler = {
     employees: [
-        {name: "Jozef Veselý", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red", place: {
+        {
+            name: "Jozef Veselý", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red", place: {
                 id: 84486565,
                 name: "Kaufland Stredočeská"
-            }},
-        {name: "Jozef Funny", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green" , place: {
+            }
+        },
+        {
+            name: "Jozef Funny", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green", place: {
                 id: 84486565,
                 name: "Kaufland Stredočeská"
-            }},
-        {name: "Sirius Black", id: 1885957, avatarImg: "image base64 <--", avatarColor: "blue", place: {
+            }
+        },
+        {
+            name: "Sirius Black", id: 1885957, avatarImg: "image base64 <--", avatarColor: "blue", place: {
                 id: 84486565,
                 name: "Kaufland Stredočeská"
-            }},
-        {name: "Sirius White", id: 1885956, avatarImg: "image base64 <--", avatarColor: "orange", place: {
+            }
+        },
+        {
+            name: "Sirius White", id: 1885956, avatarImg: "image base64 <--", avatarColor: "orange", place: {
                 id: 84486565,
                 name: "Kaufland Stredočeská"
-            }},
-        {name: "Amanda Hamlet", id: 1885955, avatarImg: "image base64 <--", avatarColor: "brown", place: {
+            }
+        },
+        {
+            name: "Amanda Hamlet", id: 1885955, avatarImg: "image base64 <--", avatarColor: "brown", place: {
                 id: 84486565,
                 name: "Kaufland Stredočeská"
-            }},
-        {name: "George Stuff", id: 1885954, avatarImg: "image base64 <--", avatarColor: "violet", place: {
+            }
+        },
+        {
+            name: "George Stuff", id: 1885954, avatarImg: "image base64 <--", avatarColor: "violet", place: {
                 id: 84486565,
                 name: "Kaufland Stredočeská"
-            }},
+            }
+        },
     ],
     selectedDays: [],
-    currentMonth: new Date(new Date().getFullYear(), new Date().getMonth()+1, 0)
+    currentMonth: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)
 
 };
 
 
-
-
 export var shiftSchedulerReducer = (state = scheduler, action) => {
     switch (action.type) {
-        case "CALENDAR_DATE_CLICK": return {...state, selectedDays: handleDateClick(state, action.dayTimestamp) };
-        case "SHIFT_SCHEDULER_ARROW_NEXT_CLICK": return {...state, currentMonth: addMonth(state.currentMonth) };
-        case "SHIFT_SCHEDULER_ARROW_BACK_CLICK": return {...state, currentMonth: subMonth(state.currentMonth) };
+        case "CALENDAR_DATE_CLICK":
+            return {...state, selectedDays: handleDateClick(state, action.dayTimestamp)};
+        case "SHIFT_SCHEDULER_ARROW_NEXT_CLICK":
+            return {...state, currentMonth: addMonth(state.currentMonth)};
+        case "SHIFT_SCHEDULER_ARROW_BACK_CLICK":
+            return {...state, currentMonth: subMonth(state.currentMonth)};
 
-        default: return state;
+        default:
+            return state;
     }
 }
 
 
 function addMonth(date) {
-    console.log("adding month...");
     if (date.getMonth() === 11) {
-        var a = new Date(date.getFullYear() + 1, 1, 0);
-        console.log("ADD DECEMBER RETURN: "+a);
-        return a;
-    }
-    else {
-        var b = new Date(date.getFullYear(), date.getMonth()+2, 0)
-        console.log("ADD ELSE RETURN: "+a);
-        return b;
+        var date1 = new Date(date.getFullYear() + 1, 1, 0);
+        return date1;
+    } else {
+        var date2 = new Date(date.getFullYear(), date.getMonth() + 2, 0)
+        return date2;
     }
 }
 
 function subMonth(date) {
-    console.log("substracting month...");
     if (date.getMonth() === 0) {
         var a = new Date(date.getFullYear() - 1, 12, 0);
-        console.log("SUB JANUARY RETURN: "+a);
+        console.log("SUB JANUARY RETURN: " + a);
         return a;
-    }
-    else {
-        var a =new Date(date.getFullYear(), date.getMonth(), 0)
-        console.log("SUB NORMAL RETURN: "+a);
+    } else {
+        var a = new Date(date.getFullYear(), date.getMonth(), 0)
+        console.log("SUB NORMAL RETURN: " + a);
         return a;
     }
 }
@@ -365,8 +376,7 @@ function handleDateClick(state, dayTimestamp) {
     if (filteredDays.length > 0) {
         console.log("DESELECTUJEM DEN")
         return state.selectedDays.filter(d => d !== filteredDays[0]);
-    }
-    else if (filteredDays.length < 1) {
+    } else if (filteredDays.length < 1) {
         console.log("SELECTUJEM DEN");
         state.selectedDays.push(dayTimestamp);
         return [...state.selectedDays];

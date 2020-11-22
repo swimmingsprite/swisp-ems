@@ -18,19 +18,10 @@ function endSlide() {
 
 export function NextArrow(props) {
     return <div className="arrow next-arrow"
-                onMouseDown={() => {
-                    startSlide(props)
-                }}
-                onMouseUp={() => {
-                    endSlide()
-                }}
-                onTouchStart={() => {
-                    startSlide(props)
-                }
-                }
-                onTouchEnd={() => {
-                    endSlide()
-                }}>
+                onMouseDown={() => {startSlide(props)}}
+                onMouseUp={() => {endSlide()}}
+                onTouchStart={() => {startSlide(props)}}
+                onTouchEnd={() => {endSlide()}}>
 
         <NavigateNextIcon className="arrow-icon"
                           style={{fontSize: "5rem", position: "relative", top: "calc(50% - 42px)", ...props.style}}/>
@@ -40,19 +31,10 @@ export function NextArrow(props) {
 export function BackArrow(props) {
 
     return <div className="arrow back-arrow"
-                onMouseDown={() => {
-                    startSlide(props)
-                }}
-                onMouseUp={() => {
-                    endSlide()
-                }}
-                onTouchStart={() => {
-                    startSlide(props)
-                }
-                }
-                onTouchEnd={() => {
-                    endSlide()
-                }}>
+                onMouseDown={() => {startSlide(props)}}
+                onMouseUp={() => {endSlide()}}
+                onTouchStart={() => {startSlide(props)}}
+                onTouchEnd={() => {endSlide()}}>
         <NavigateBeforeIcon className="arrow-icon"
                             style={{fontSize: "5rem", position: "relative", top: "calc(50% - 42px)", ...props.style}}/>
     </div>
