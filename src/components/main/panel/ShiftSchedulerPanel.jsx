@@ -6,6 +6,7 @@ import TextareaAutosize from "react-autosize-textarea";
 import {SubTitle} from "../title/Title";
 import Avatar from "@material-ui/core/Avatar";
 import {isSelected} from "../../../logic/shifts/scheduler";
+import {getCurrentTimestamp} from "../../../logic/shifts/currentView";
 
 function InputList(props) {
     if (props.hover.index > props.list.length-1) props.hover.setIndex(0);
@@ -53,11 +54,10 @@ export default function ShiftSchedulerPanel(props) {
     console.log("input list hover index je: "+inputListHoverIndex)*/
 
 
-    var currentDate = new Date(2020, 11, 0);
     /*  let avatarStyle = props.comment.avatarImg && isBase64(props.comment.avatarImg, {allowMime: true})
           ? {backgroundImage: props.comment.avatarImg} : {backgroundColor: props.comment.avatarColor};
   */
-    function mapDateToCalendar(date) {
+    function mapDateToDays(date) {
 
         //return new Date(year, month, 0).getDate();
         let numberOfDays = date.getDate();
@@ -128,21 +128,8 @@ export default function ShiftSchedulerPanel(props) {
             </div>
             <ul className="shift-scheduler-calendar-ul">
 
-                {mapDateToCalendar(scheduler.currentMonth)}
+                {mapDateToDays(scheduler.currentMonth)}
 
-
-                {/*todo bude zoznam zamestnancov z daneho miesta a z neho sa iba bude filtrovať*/}
-                {/* <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                    <li className="shift-scheduler-calendar-li">Ahahhah</li>
-                    <li className="shift-scheduler-calendar-li">Ahahhah</li>*/}
             </ul>
         </div>
 
@@ -174,6 +161,7 @@ export default function ShiftSchedulerPanel(props) {
             <SubTitle text="Kaufland Stredočeská"/>
             <h5>oddelenie záhrad:</h5>
             <h2 className="scheduler-date">28.12.2020, Utorok</h2>
+
             <p style={{fontSize: "0.9rem", marginTop: "15px"}}>16:58 - 18:58:</p>
             <ul style={{marginTop: "0px"}}>
                 <li className="selected-item">
@@ -223,22 +211,8 @@ export default function ShiftSchedulerPanel(props) {
 
             </ul>
 
-            <div style={{display: "block"}}>
 
-                <div style={{margin: "0 auto", width: "fit-content", userSelect: "none"}}>
 
-                    <span className="scheduler-arrow">⯇</span>
-                    <span className="">18:48</span>
-                    <span className="scheduler-arrow">⯈</span>
-                    <span style={{transform: "translateY(-2px)", display: "inline-block"}}>-</span>
-                    <span className="scheduler-arrow">⯇</span>
-                    <span className="">20:48</span>
-                    <span className="scheduler-arrow">⯈</span>
-
-                </div>
-            </div>
-
-                {/*..........*/}
 
             <p style={{fontSize: "0.9rem"}}>16:58 - 18:58:</p>
             <ul style={{marginTop: "0px"}}>
@@ -286,86 +260,8 @@ export default function ShiftSchedulerPanel(props) {
                         <span className="scheduler-delete-button">x</span>
                     </div>
                 </li>
- <li className="selected-item">
-                    <div className="shift-element" style={{display: "inline-block"}}>
-                        <Avatar className="post-avatar" style={
-                            {
-                                height: "20px",
-                                width: "20px",
-                                backgroundColor: "red",//avatarStyle.backgroundColor,
-                                fontSize: "0.85rem",
-                                marginRight: 0,
-                                marginLeft: "5px",
-                            }}
-                            // src={avatarStyle.backgroundImage}
-                        >
-                            J
-                        </Avatar>
-                        <h2 className="shift-element-header" style={{margin: "5px", marginRight: "0px"}}>John
-                            Barney</h2>
-                        <span className="scheduler-delete-button">x</span>
-                    </div>
-                </li>
- <li className="selected-item">
-                    <div className="shift-element" style={{display: "inline-block"}}>
-                        <Avatar className="post-avatar" style={
-                            {
-                                height: "20px",
-                                width: "20px",
-                                backgroundColor: "red",//avatarStyle.backgroundColor,
-                                fontSize: "0.85rem",
-                                marginRight: 0,
-                                marginLeft: "5px",
-                            }}
-                            // src={avatarStyle.backgroundImage}
-                        >
-                            J
-                        </Avatar>
-                        <h2 className="shift-element-header" style={{margin: "5px", marginRight: "0px"}}>John
-                            Barney</h2>
-                        <span className="scheduler-delete-button">x</span>
-                    </div>
-                </li>
-                <li className="selected-item">
-                    <div className="shift-element" style={{display: "inline-block"}}>
-                        <Avatar className="post-avatar" style={
-                            {
-                                height: "20px",
-                                width: "20px",
-                                backgroundColor: "red",//avatarStyle.backgroundColor,
-                                fontSize: "0.85rem",
-                                marginRight: 0,
-                                marginLeft: "5px",
-                            }}
-                            // src={avatarStyle.backgroundImage}
-                        >
-                            J
-                        </Avatar>
-                        <h2 className="shift-element-header" style={{margin: "5px", marginRight: "0px"}}>John
-                            Barney</h2>
-                        <span className="scheduler-delete-button">x</span>
-                    </div>
-                </li>
-
             </ul>
 
-            {/*TIME CHANGE*/}
-
-
-            <div style={{display: "block"}}>
-
-                <div style={{margin: "0 auto", width: "fit-content"}}>
-
-                <span className="scheduler-arrow">⯇</span>
-                <span className="">18:48</span>
-                <span className="scheduler-arrow">⯈</span>
-                <span style={{transform: "translateY(-2px)", display: "inline-block"}}>-</span>
-                <span className="scheduler-arrow">⯇</span>
-                <span className="">20:48</span>
-                <span className="scheduler-arrow">⯈</span>
-
-                </div>
-            </div>
 
         </div>
 
@@ -380,3 +276,93 @@ export default function ShiftSchedulerPanel(props) {
 
     </div>
 }
+
+
+
+
+
+/*
+TIME CHANGE
+
+
+<div style={{display: "block"}}>
+
+<div style={{margin: "0 auto", width: "fit-content"}}>
+
+<span className="scheduler-arrow">⯇</span>
+<span className="">18:48</span>
+<span className="scheduler-arrow">⯈</span>
+<span style={{transform: "translateY(-2px)", display: "inline-block"}}>-</span>
+<span className="scheduler-arrow">⯇</span>
+<span className="">20:48</span>
+<span className="scheduler-arrow">⯈</span>
+
+</div>
+</div>
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

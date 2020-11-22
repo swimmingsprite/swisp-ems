@@ -5,17 +5,17 @@ import {Provider} from "react-redux";
 import {combineReducers, createStore} from "redux";
 import {
     arrowClickReducer,
-    placeReducer,
-    postReducer,
-    rootReducer,
-    shiftReducer,
-    shiftSchedulerReducer,
-    userReducer
-} from "./reducers/reducers";
+    rootReducer
+} from "./reducers/rootReducer";
+import {shiftReducer} from "./reducers/shiftReducer";
+import {placeReducer} from "./reducers/placeReducer";
+import {userReducer} from "./reducers/userReducer";
+import {postReducer} from "./reducers/postReducer";
+import {shiftSchedulerReducer} from "./reducers/shiftSchedulerReducer";
 
 const store = createStore(combineReducers(
     {rootReducer: rootReducer,
-        arrowClickReducer: arrowClickReducer,
+        // arrowClickReducer: arrowClickReducer,
         shiftReducer: shiftReducer,
         userReducer: userReducer,
         placeReducer: placeReducer,
@@ -24,7 +24,6 @@ const store = createStore(combineReducers(
     }
     ));
 
-console.log("STORE VALUES: "+Object.keys(store));
 
 /*todo activate only if shift section is active*/
 setInterval(() => {

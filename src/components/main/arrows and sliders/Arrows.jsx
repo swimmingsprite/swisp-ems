@@ -8,7 +8,7 @@ function startSlide(props) {
     props.onClick();
     intervalId = setInterval(() => {
         props.onClick();
-    }, 200);
+    }, props.timeout ? props.timeout : 200);
 }
 
 function endSlide() {
@@ -21,7 +21,9 @@ export function NextArrow(props) {
                 onMouseDown={() => {startSlide(props)}}
                 onMouseUp={() => {endSlide()}}
                 onTouchStart={() => {startSlide(props)}}
-                onTouchEnd={() => {endSlide()}}>
+                onTouchEnd={() => {endSlide()}}
+                onMouseOut={() => endSlide()}
+    >
 
         <NavigateNextIcon className="arrow-icon"
                           style={{fontSize: "5rem", position: "relative", top: "calc(50% - 42px)", ...props.style}}/>
@@ -34,7 +36,9 @@ export function BackArrow(props) {
                 onMouseDown={() => {startSlide(props)}}
                 onMouseUp={() => {endSlide()}}
                 onTouchStart={() => {startSlide(props)}}
-                onTouchEnd={() => {endSlide()}}>
+                onTouchEnd={() => {endSlide()}}
+                onMouseOut={() => endSlide()}
+    >
         <NavigateBeforeIcon className="arrow-icon"
                             style={{fontSize: "5rem", position: "relative", top: "calc(50% - 42px)", ...props.style}}/>
     </div>

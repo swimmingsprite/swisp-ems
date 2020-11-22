@@ -52,7 +52,6 @@ export default function Shifts(props) {
         var list = getCurrentPlaceDepartments(state);
 
         var selectedDepartmentId = state.shiftReducer.schedulerSubHeaderDepartmentId
-        console.log("0Selected dep id: "+selectedDepartmentId);
 
         if (selectedDepartmentId === null) {
             selectedDepartmentId = list[0].id
@@ -61,9 +60,6 @@ export default function Shifts(props) {
                 schedulerSubHeaderDepartmentId: selectedDepartmentId
             })
         }
-
-        console.log("list length: "+list.length);
-        console.log("Selected dep id: "+selectedDepartmentId);
 
         return {
             selectedPlaceId: selectedDepartmentId,

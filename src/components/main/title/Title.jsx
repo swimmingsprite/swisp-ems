@@ -72,12 +72,10 @@ function mapFilter(filter, handleOnMouseOver, handleOnMouseOut, onClick, showLis
 
 
         onMouseOver={() => {
-            console.log("HEADER MOUSE OVER")
             hideList = false;
             handleOnMouseOver();
         }}
         onMouseOut={() => {
-            console.log("HEADER MOUSE OUT")
             hideList = true
             setTimeout(() => {
                 hideList && handleOnMouseOut()
@@ -105,13 +103,11 @@ function mapFilter(filter, handleOnMouseOver, handleOnMouseOut, onClick, showLis
                             onClick(place.id);
                         }}
                         onMouseOver={() => {
-                            console.log("LIST MOUSE OVER")
                             hideList = false;
                             handleOnMouseOver();
                         }}
 
                         onMouseOut={() => {
-                            console.log("LIST MOUSE OUT")
                             hideList = true
                             setTimeout(() => {
                                 hideList && handleOnMouseOut()
