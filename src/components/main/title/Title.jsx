@@ -66,6 +66,13 @@ function mapFilter(filter, handleOnMouseOver, handleOnMouseOut, onClick, showLis
     var filteredPlace = filter.list.filter(place => place.id === selectedPlaceId); //ak nejaka polozka ma to id tak sa vyberie
     var placeName = filteredPlace.length > 0 ? filteredPlace[0].name : null; //pouzije sa jej nazov vo filtri
 
+    if (!placeName) filter.list.forEach(e => {
+        console.log("list place id je: "+e.id + " depId: "+selectedPlaceId);
+    })
+
+    // console.log("selected place id: "+selectedPlaceId);
+    // console.log("filtered place: "+filteredPlace.name);
+
     return <div
         className={"title-filter"}
         style={style}

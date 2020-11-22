@@ -61,6 +61,9 @@ export default function Shifts(props) {
             })
         }
 
+        console.log("departments length: "+list.length);
+        console.log("selected dep id: "+selectedDepartmentId);
+
         return {
             selectedPlaceId: selectedDepartmentId,
             list: [...list]
@@ -81,10 +84,13 @@ export default function Shifts(props) {
                filter={shiftHeaderFilter}
                onClickItem={(newId) => {
                    dispatch({type: "CURRENT_PLACE_CHANGE", selectedPlaceId: newId});
-                   dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilterHover: false})
                    dispatch({
                        type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE",
                        currentShiftSubHeaderDepartmentId: null
+                   });
+                   dispatch({
+                       type: "SCHEDULER_SUBHEADER_DEPARTMENT_CHANGE",
+                       schedulerSubHeaderDepartmentId: null
                    });
                }}
         />
