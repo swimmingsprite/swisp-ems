@@ -61,56 +61,45 @@ export default function Shifts(props) {
 
     return <div>
         <Title text="Smeny"
+               id={165698563265}
                filter={shiftHeaderFilter}
                onClickItem={(newId) => {
                    dispatch({type: "CURRENT_PLACE_CHANGE", selectedPlaceId: newId});
                    dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilterHover: false})
                    dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: null});
                }}
-               onMouseOver={() => {
-                   dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilterHover: true})
-               }}
-               onMouseOut={() => {
-                   dispatch({type: "HEADER_FILTER_HOVER_CHANGE", headerFilterHover: false})
-               }}
-               showList={showHeaderFilterList}
         />
         <SubTitle text="Prebiehajúce"
+                  id={8645165468468}
                   secondText={currentViewTimeRange}
                   filter={shiftSubHeaderFilter}
                   onClickItem={(newId) => {
                       dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: newId});
                       dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: false})
                   }}
-                  onMouseOver={() => {
-                      dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: true})
-                  }}
-                  onMouseOut={() => {
-                      dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: false})
-                  }}
-                  showList={showCurrentShiftsSubHeaderFilterList}
         />
         <ShiftPanel/>
 
 
-        {/*<SubTitle text="Plánovanie"*/}
-        {/*          // secondText={currentViewTimeRange}*/}
-        {/*          filter={shiftSubHeaderFilter}*/}
-        {/*          onClickItem={(newId) => {*/}
-        {/*              dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: newId});*/}
-        {/*              dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: false})*/}
-        {/*          }}*/}
-        {/*          onMouseOver={() => {*/}
-        {/*              console.log("***********setting cal to true")*/}
-        {/*              setShowCalendarSubHeaderList(true);*/}
-        {/*          }}*/}
-        {/*          onMouseOut={() => {*/}
-        {/*              console.log("***********setting cal to false")*/}
-        {/*              setShowCalendarSubHeaderList(false);*/}
-        {/*          }}*/}
-        {/*          showList={showCalendarSubHeaderList}*/}
-        {/*/>*/}
-        {/*<ShiftSchedulerPanel />*/}
+        <SubTitle text="Plánovanie"
+                  // secondText={currentViewTimeRange}
+                  id={45454548276845}
+                  filter={shiftSubHeaderFilter}
+                  onClickItem={(newId) => {
+                      dispatch({type: "CURRENT_SHIFT_SUBHEADER_DEPARTMENT_CHANGE", currentShiftSubHeaderDepartmentId: newId});
+                      dispatch({type: "CURRENT_SHIFT_SUBHEADER_HOVER_CHANGE", currentShiftsSubHeaderFilterHover: false})
+                  }}
+                  onMouseOver={() => {
+                      console.log("***********setting cal to true")
+                      setShowCalendarSubHeaderList(true);
+                  }}
+                  onMouseOut={() => {
+                      console.log("***********setting cal to false")
+                      setShowCalendarSubHeaderList(false);
+                  }}
+                  showList={showCalendarSubHeaderList}
+        />
+        <ShiftSchedulerPanel />
 
 
     </div>

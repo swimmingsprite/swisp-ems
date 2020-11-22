@@ -545,7 +545,8 @@ ul {
     color: #d7d7d7;
     display: inline-block;
     user-select: none;
-    //max-width: 70px;
+    touch-action: manipulation;
+
 
 
     /*background-color: rgba(0,0,0,0.5);*/
