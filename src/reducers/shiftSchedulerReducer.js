@@ -85,10 +85,24 @@ var scheduler = {
                     avatarColor: "orange",
                     avatarImg: "base 64",
 
-                    dayStart: 1646099204314+3600000*5,
-                    dayEnd: 1646099204314+3600000*5,
-                    shiftStart: 1646099204314+3600000*2,
-                    shiftEnd: 1646099204314+3600000*10,
+                    dayStart: 1646099204314 + 3600000 * 5,
+                    dayEnd: 1646099204314 + 3600000 * 5,
+                    shiftStart: 1646099204314 + 3600000 * 2,
+                    shiftEnd: 1646099204314 + 3600000 * 10,
+                },
+                {
+                    departmentId: 25454,
+                    departmentName: "oddelenie hračiek",
+
+                    id: 65432454,
+                    name: "Niekto Spriezviskom",
+                    avatarColor: "orange",
+                    avatarImg: "base 64",
+
+                    dayStart: 1646099204314 + 3600000 * 5,
+                    dayEnd: 1646099204314 + 3600000 * 5,
+                    shiftStart: 1646099204314 + 3600000 * 2,
+                    shiftEnd: 1646099204314 + 3600000 * 10,
                 }
             ],
         },
@@ -176,10 +190,45 @@ export function uniqueDepartmentsFilter(v, i, a) {
     return a.findIndex(t => (t.departmentId === v.departmentId)) === i;
 }
 
+export function uniqueDaysFilter(v, i, a) {
+    return a.findIndex(t => (t.dayStart === v.dayStart) && (t.dayEnd === v.dayEnd)) === i;
+}
+
 export function uniqueDayStarts(v, i, a, depId) {
     // return a.findIndex(t => (t.departmentId === v.departmentId) && t.departmentId === depId) === i;
     return a.findIndex(t => (t.departmentId === depId)) === i;
 }
 
 //arr2.filter((v, i, a) => a.findIndex(t => (t.label === v.label && t.value === v.value)) === i)
+
+export function uniqueDayReducer(
+    unique, o) {
+    if (!unique.some(obj => obj.dayStart === o.dayStart && obj.dayEnd === o.dayEnd)) {
+        unique.push(o);
+    }
+    return unique;
+}
+
+export function uniqueTimeReducer(
+    unique, o) {
+    if (!unique.some(obj => obj.shiftStart === o.shiftStart && obj.shiftEnd === o.shiftEnd)) {
+        unique.push(o);
+    }
+    return unique;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
