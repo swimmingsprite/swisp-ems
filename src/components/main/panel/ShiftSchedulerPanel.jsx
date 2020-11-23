@@ -15,7 +15,7 @@ function InputList(props) {
     var currentDepartmentId = 91354565;//useSelector(state => state.shiftReducer.schedulerSubHeaderDepartmentId);
     var currentPlaceId = 84486565;//useSelector(state => state.shiftReducer.selectedPlaceId);
 
-    console.log("SEL DEP ID: "+currentDepartmentId);
+  //  console.log("SEL DEP ID: "+currentDepartmentId);
 
 
     if (props.hover.index > props.list.length - 1) props.hover.setIndex(0);
@@ -54,7 +54,7 @@ export default function ShiftSchedulerPanel(props) {
     var [inputListHoverIndex, setInputListHoverIndex] = useState(-1);
     var filteredEmployeeList = schedulerInputFilter(scheduler.employees, selectedPlaceId, input);
 
-    console.log("SEL PLACE ID: "+selectedPlaceId);
+    //console.log("SEL PLACE ID: "+selectedPlaceId);
     //var change = useEffect(() => setInputListHoverIndex(-1), filteredEmployeeList)
 
 

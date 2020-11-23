@@ -57,8 +57,8 @@ var scheduler = {
                     avatarColor: "orange",
                     avatarImg: "base 64",
 
-                    dayStart: 1606149204314,
-                    dayEnd: 1606149204314,//+3600000*5,
+                    // dayStart: 1606149204314,
+                    // dayEnd: 1606149204314,//+3600000*5,
                     shiftStart: getCurrentTimestamp(),
                     shiftEnd: getCurrentTimestamp(),
                 },
@@ -71,8 +71,8 @@ var scheduler = {
                     avatarColor: "orange",
                     avatarImg: "base 64",
 
-                    dayStart: 1656149204314,
-                    dayEnd: 1656149204314,
+                    // dayStart: 1656149204314,
+                    // dayEnd: 1656149204314,
                     shiftStart: getCurrentTimestamp(),
                     shiftEnd: getCurrentTimestamp(),
                 },
@@ -109,7 +109,7 @@ var scheduler = {
                     departmentName: "oddelenie hračiek",
 
                     id: 654324456454,
-                    name: "Hračka Spriezviskom",
+                    name: "Unikatne Meno",
                     avatarColor: "orange",
                     avatarImg: "base 64",
 
@@ -226,8 +226,10 @@ export function uniqueDayReducer(
 export function uniqueTimeReducer(
     unique, o) {
     if (!unique.some(obj => {
-        console.log("unique: "+unique+" o: "+o)
-        return obj.shiftStart === o.shiftStart && obj.shiftEnd === o.shiftEnd})) {
+        //console.log("unique: "+unique+" o: "+o)
+        return (obj.shiftStart === o.shiftStart && obj.shiftEnd === o.shiftEnd)
+        //|| (obj.shiftStart === o.shiftStart && obj.shiftEnd !== o.shiftEnd)
+    })) {
         unique.push(o);
     }
     return unique;
