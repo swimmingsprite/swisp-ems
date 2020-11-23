@@ -709,6 +709,7 @@ ul {
     display: block;
     text-align: center;
     font-size: 1rem;
+    margin-top: 15px;
 }
 
 .selected-item {

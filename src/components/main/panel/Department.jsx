@@ -10,7 +10,7 @@ export default function Department(props) {
 
     let dayStarts = props.employees.filter(e => e.departmentId === props.id);
 
-    return <div style={{marginBottom: "15px"}}>
+    return <div /*style={{marginBottom: "15px"}}*/>
         <h5>{props.name}:</h5>
 
 

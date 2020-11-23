@@ -103,7 +103,21 @@ var scheduler = {
                     dayEnd: 1646099204314 + 3600000 * 5,
                     shiftStart: 1646099204314 + 3600000 * 2,
                     shiftEnd: 1646099204314 + 3600000 * 10,
-                }
+                },
+                {
+                    departmentId: 25454,
+                    departmentName: "oddelenie hračiek",
+
+                    id: 654324456454,
+                    name: "Hračka Spriezviskom",
+                    avatarColor: "orange",
+                    avatarImg: "base 64",
+
+                    dayStart: 1646199204314 + 3600000 * 5,
+                    dayEnd: 1646199204314 + 3600000 * 5,
+                    shiftStart: 1646099204314 + 3600000 * 2,
+                    shiftEnd: 1646099204314 + 3600000 * 10,
+                },
             ],
         },
     ]
@@ -212,6 +226,15 @@ export function uniqueDayReducer(
 export function uniqueTimeReducer(
     unique, o) {
     if (!unique.some(obj => obj.shiftStart === o.shiftStart && obj.shiftEnd === o.shiftEnd)) {
+        unique.push(o);
+    }
+    return unique;
+}
+
+
+export function uniqueDepartmentsReducer(
+    unique, o) {
+    if (!unique.some(obj => obj.departmentId === o.departmentId)) {
         unique.push(o);
     }
     return unique;

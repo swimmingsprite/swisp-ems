@@ -8,12 +8,15 @@ import Avatar from "@material-ui/core/Avatar";
 import {isSelected} from "../../../logic/shifts/scheduler";
 import {getCurrentTimestamp} from "../../../logic/shifts/currentView";
 import Department from "./Department";
-import {uniqueDepartmentsFilter} from "../../../reducers/shiftSchedulerReducer";
+import {uniqueDepartmentsFilter, uniqueDepartmentsReducer} from "../../../reducers/shiftSchedulerReducer";
 
 function InputList(props) {
     let dispatch = useDispatch();
-    var currentDepartmentId = useSelector(state => state.shiftReducer.schedulerSubHeaderDepartmentId);
-    var currentPlaceId = useSelector(state => state.shiftReducer.selectedPlaceId);
+    var currentDepartmentId = 91354565;//useSelector(state => state.shiftReducer.schedulerSubHeaderDepartmentId);
+    var currentPlaceId = 84486565;//useSelector(state => state.shiftReducer.selectedPlaceId);
+
+    console.log("SEL DEP ID: "+currentDepartmentId);
+
 
     if (props.hover.index > props.list.length - 1) props.hover.setIndex(0);
     return <ul className="shift-scheduler-input-ul">
@@ -34,8 +37,6 @@ function InputList(props) {
 }
 
 function schedulerInputFilter(list, placeId, input) {
-    /*    console.log("list: "+list);
-        console.log("placeId: "+placeId);*/
     return list
         .filter(e => e.place.id === placeId)
         .filter(e => {
@@ -46,14 +47,14 @@ function schedulerInputFilter(list, placeId, input) {
 
 export default function ShiftSchedulerPanel(props) {
 
-    var store = useStore();
     const [input, setInput] = useState("");
-    var selectedPlaceId = useSelector(state => state.shiftReducer.selectedPlaceId)
+    var selectedPlaceId = 84486565;//useSelector(state => state.shiftReducer.selectedPlaceId)
     var scheduler = useSelector(state => state.shiftSchedulerReducer)
     var dispatch = useDispatch();
     var [inputListHoverIndex, setInputListHoverIndex] = useState(-1);
     var filteredEmployeeList = schedulerInputFilter(scheduler.employees, selectedPlaceId, input);
 
+    console.log("SEL PLACE ID: "+selectedPlaceId);
     //var change = useEffect(() => setInputListHoverIndex(-1), filteredEmployeeList)
 
 
@@ -176,7 +177,8 @@ export default function ShiftSchedulerPanel(props) {
                     <SubTitle text={place.name}/>
                     {/*{place.employees.map(e => <Department department={dep}/>)}*/}
                     {place.employees
-                        .filter(uniqueDepartmentsFilter)
+                        //.filter(uniqueDepartmentsFilter)
+                        .reduce(uniqueDepartmentsReducer, [])
                         .map((e,i,a) =>
                             <Department key={e.departmentId}
                                         name={e.departmentName}
