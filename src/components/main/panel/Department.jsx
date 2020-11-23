@@ -1,12 +1,17 @@
 import React from "react";
 import EmployeesList from "./EmployeesList";
 import {getDayRangeWithDayOfWeek, timestampToShortTime} from "../../../logic/time/timeUtils";
-import {uniqueDayReducer, uniqueDayStarts, uniqueTimeReducer} from "../../../reducers/shiftSchedulerReducer";
+import {
+    uniqueDateTimeReducer,
+    uniqueDayReducer,
+    uniqueDayStarts,
+    uniqueTimeReducer
+} from "../../../reducers/shiftSchedulerReducer";
 
 export default function Department(props) {
 
-    props.employees.forEach(e => console.log("EMPLOYEE: " + e.name + " id: " + e.id + " depId: " + e.departmentId))
-    console.log("_____________")
+/*    props.employees.forEach(e => console.log("EMPLOYEE: " + e.name + " id: " + e.id + " depId: " + e.departmentId))
+    console.log("_____________")*/
 
     let dayStarts = props.employees.filter(e => e.departmentId === props.id);
 
@@ -22,19 +27,23 @@ export default function Department(props) {
                 return {start: e.dayStart, end: e.dayEnd}
             })*/
             // .filter(uniqueDayStarts)
-            .reduce(uniqueDayReducer, [])
-            .map(e => {
-                console.log("employee start: "+e.dayStart);
-                return e;
-            })
+
+            .reduce(uniqueTimeReducer, [])
+            .reduce(uniqueDateTimeReducer, [])
             .map((day) => {
                 return <div key={Math.random()}>
-                    <h2 className="scheduler-date">{getDayRangeWithDayOfWeek(new Date(day.dayStart), new Date(day.dayEnd))}</h2>
+                    {/*<h2 className="scheduler-date">{getDayRangeWithDayOfWeek(new Date(day.dayStart), new Date(day.dayEnd))}</h2>*/}
+                    <h2 className="scheduler-date">{getDayRangeWithDayOfWeek(new Date(day.shiftStart), new Date(day.shiftEnd))}</h2>
 
                     {dayStarts
-                        .filter(d => d.dayStart === day.dayStart && d.dayEnd === day.dayEnd)
+                        // .filter(d => d.dayStart === day.dayStart && d.dayEnd === day.dayEnd)
+                        .filter(d => d.shiftStart === day.shiftStart && d.shiftEnd === day.shiftEnd
+                            || d.shiftStart === day.shiftStart && d.shiftEnd !== day.shiftEnd
+                        )
                         //distinct
                         .reduce(uniqueTimeReducer, [])
+
+                        // .reduce(uniqueDateTimeReducer, [])
                         //.map(d => {return {start: d.shiftStart, end: d.shiftEnd, employee: d}})
                         .map(e => {
                             return <div>
@@ -48,7 +57,7 @@ export default function Department(props) {
                                     &nbsp;-&nbsp;
                                     {timestampToShortTime(e.shiftEnd)}</p>
                                 <EmployeesList
-                                    employees={dayStarts.filter(d => d.dayStart === day.dayStart && d.dayEnd === day.dayEnd)}/> {/*todo filte addr*/}
+                                    employees={dayStarts.filter(d => d.shiftStart === day.shiftStart && d.shiftEnd === day.shiftEnd)}/> {/*todo filte addr*/}
                             </div>
                         })}
 

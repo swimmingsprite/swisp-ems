@@ -85,8 +85,8 @@ var scheduler = {
                     avatarColor: "orange",
                     avatarImg: "base 64",
 
-                    dayStart: 1646099204314 + 3600000 * 5,
-                    dayEnd: 1646099204314 + 3600000 * 5,
+                    //dayStart: 1646099204314 + 3600000 * 5,
+                    //dayEnd: 1646099204314 + 3600000 * 5,
                     shiftStart: 1646099204314 + 3600000 * 2,
                     shiftEnd: 1646099204314 + 3600000 * 10,
                 },
@@ -99,8 +99,8 @@ var scheduler = {
                     avatarColor: "orange",
                     avatarImg: "base 64",
 
-                    dayStart: 1646099204314 + 3600000 * 5,
-                    dayEnd: 1646099204314 + 3600000 * 5,
+                    //dayStart: 1646099204314 + 3600000 * 5,
+                    //dayEnd: 1646099204314 + 3600000 * 5,
                     shiftStart: 1646099204314 + 3600000 * 2,
                     shiftEnd: 1646099204314 + 3600000 * 10,
                 },
@@ -113,10 +113,10 @@ var scheduler = {
                     avatarColor: "orange",
                     avatarImg: "base 64",
 
-                    dayStart: 1646199204314 + 3600000 * 5,
-                    dayEnd: 1646199204314 + 3600000 * 5,
+                    //dayStart: 1646199204314 + 3600000 * 5,
+                    //dayEnd: 1646199204314 + 3600000 * 5,
                     shiftStart: 1646099204314 + 3600000 * 2,
-                    shiftEnd: 1646099204314 + 3600000 * 10,
+                    shiftEnd: 1646099204314 + 3600000 * 20,
                 },
             ],
         },
@@ -225,7 +225,9 @@ export function uniqueDayReducer(
 
 export function uniqueTimeReducer(
     unique, o) {
-    if (!unique.some(obj => obj.shiftStart === o.shiftStart && obj.shiftEnd === o.shiftEnd)) {
+    if (!unique.some(obj => {
+        console.log("unique: "+unique+" o: "+o)
+        return obj.shiftStart === o.shiftStart && obj.shiftEnd === o.shiftEnd})) {
         unique.push(o);
     }
     return unique;
@@ -234,11 +236,32 @@ export function uniqueTimeReducer(
 
 export function uniqueDepartmentsReducer(
     unique, o) {
-    if (!unique.some(obj => obj.departmentId === o.departmentId)) {
+    if (!unique.some(obj => {
+        //console.log("unique: "+unique+" o: "+o)
+        return obj.departmentId === o.departmentId})) {
         unique.push(o);
     }
     return unique;
 }
+
+
+
+
+
+export function uniqueDateTimeReducer(
+    unique, o) {
+
+    // console.log("unique: "+unique+" o: "+o)
+
+    if (!unique.some(obj => {
+        // console.log("obj end: "+obj.shiftEnd+" o end: "+o.shiftEnd)
+        return (obj.shiftStart === o.shiftStart && obj.shiftEnd !== o.shiftEnd)}
+    )) {
+        unique.push(o);
+    }
+    return unique;
+}
+
 
 
 
