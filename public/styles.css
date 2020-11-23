@@ -495,7 +495,7 @@ ul {
     overflow: hidden;
     position: relative;
     background-color: #0984e3;
-    height: 35px;
+    /*height: 35px;*/
     padding: 5px 0;
     /*width: 40%;*/
     white-space: nowrap;

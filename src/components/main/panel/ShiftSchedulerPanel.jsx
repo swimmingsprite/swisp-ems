@@ -10,11 +10,20 @@ import {getCurrentTimestamp} from "../../../logic/shifts/currentView";
 import Department from "./Department";
 
 function InputList(props) {
+    let dispatch = useDispatch();
+    var currentDepartmentId = useSelector(state => state.shiftReducer.schedulerSubHeaderDepartmentId);
+    var currentPlaceId = useSelector(state => state.shiftReducer.selectedPlaceId);
+
     if (props.hover.index > props.list.length - 1) props.hover.setIndex(0);
     return <ul className="shift-scheduler-input-ul">
         {props.list.map((e, i) => {
             let style = props.hover.index === i ? {backgroundColor: "rgb(238, 238, 238)"} : null
             return <li
+                onClick={() => dispatch({type: "SCHEDULER_EMPLOYEE_ADD",
+                    employeeId: e.id,
+                    selectedPlaceId: currentPlaceId,
+                    selectedDepartmentId: currentDepartmentId
+                }) }
                 key={e.id}
                 className="shift-scheduler-input-li"
                 style={style}
