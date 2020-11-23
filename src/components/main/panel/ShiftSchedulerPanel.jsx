@@ -8,6 +8,7 @@ import Avatar from "@material-ui/core/Avatar";
 import {isSelected} from "../../../logic/shifts/scheduler";
 import {getCurrentTimestamp} from "../../../logic/shifts/currentView";
 import Department from "./Department";
+import {uniqueDepartmentsFilter} from "../../../reducers/shiftSchedulerReducer";
 
 function InputList(props) {
     let dispatch = useDispatch();
@@ -160,8 +161,6 @@ export default function ShiftSchedulerPanel(props) {
                 placeholder="Hľadať zamestnanca..."
                 value={input}
             />
-
-
         </div>
 
         <InputList list={filteredEmployeeList}
@@ -173,13 +172,32 @@ export default function ShiftSchedulerPanel(props) {
         <div className="scheduler-content" style={{minHeight: 0}}>
 
             {scheduler.selected.map(place => {
-                return <div>
+                return <div key={place.id}>
                     <SubTitle text={place.name}/>
-                    {place.departments.map(dep => <Department department={dep}/>)}
+                    {/*{place.employees.map(e => <Department department={dep}/>)}*/}
+                    {place.employees
+                        .filter(uniqueDepartmentsFilter)
+                        .map((e,i,a) =>
+                            <Department key={e.departmentId}
+                                        name={e.departmentName}
+                                        employees={place.employees}
+                                        id={e.departmentId}
+                            />)}
                 </div>
             })}
 
         </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
         {/*ARROW */}

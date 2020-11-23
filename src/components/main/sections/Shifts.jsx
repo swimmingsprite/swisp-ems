@@ -61,8 +61,8 @@ export default function Shifts(props) {
             })
         }
 
-        console.log("departments length: "+list.length);
-        console.log("selected dep id: "+selectedDepartmentId);
+        /*console.log("departments length: "+list.length);
+        console.log("selected dep id: "+selectedDepartmentId);*/
 
         return {
             selectedPlaceId: selectedDepartmentId,
