@@ -5,7 +5,7 @@ import LikeCommentPanel from "./LikeCommentPanel"
 export default function StatusContent(props) {
 
     return (
-        <div className="status-content">
+        <div className="status-content" style={{...props.style}}>
             {props.text}
             {props.buttons && <LikeCommentPanel like="Páči sa mi to"
                                                 comment="Komentáre"

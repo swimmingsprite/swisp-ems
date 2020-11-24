@@ -36,7 +36,8 @@ export default function Comment(props) {
                         height: "20px",
                         width: "20px",
                         backgroundColor: avatarStyle.backgroundColor,
-                        fontSize: "0.85rem"
+                        fontSize: "0.85rem",
+                        left: "5px"
                     }}
                         src={avatarStyle.backgroundImage}>
                     {props.comment.author.charAt(0)}
@@ -49,6 +50,7 @@ export default function Comment(props) {
                     buttons={false}
                     text={props.comment.text}
                     statusId={props.postId}
+                    style={{marginTop: "10px"}}
                 />
 
 
