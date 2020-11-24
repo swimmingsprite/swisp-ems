@@ -1,5 +1,6 @@
 import {getCurrentTimestamp} from "../logic/shifts/currentView";
 import {addMonth, handleDateClick, subMonth} from "../logic/shifts/scheduler";
+import {isSameDate} from "../logic/time/timeUtils";
 
 var scheduler = {
     employees: [
@@ -116,7 +117,7 @@ var scheduler = {
                     //dayStart: 1646199204314 + 3600000 * 5,
                     //dayEnd: 1646199204314 + 3600000 * 5,
                     shiftStart: 1646099204314 + 3600000 * 2,
-                    shiftEnd: 1646099204314 + 3600000 * 20,
+                    shiftEnd: 1646099204314 + 3600000 * 11,
                 },
                 {
                     departmentId: 25454,
@@ -132,6 +133,20 @@ var scheduler = {
                     shiftStart: 1646099204314 + 3600000 * 2,
                     shiftEnd: 1646099204314 + 3600000 * 250,
                 },
+                /*{
+                    departmentId: 25454,
+                    departmentName: "oddelenie hračiek",
+
+                    id: 55555324456454,
+                    name: "Super Unikatnemeno2",
+                    avatarColor: "orange",
+                    avatarImg: "base 64",
+
+                    //dayStart: 1646199204314 + 3600000 * 5,
+                    //dayEnd: 1646199204314 + 3600000 * 5,
+                    shiftStart: 1646099204314 + 3600000 * 2,
+                    shiftEnd: 1646099204314 + 3600000 * 251,
+                },*/
             ],
         },
     ]
@@ -241,7 +256,11 @@ export function uniqueTimeReducer(
     unique, o) {
     if (!unique.some(obj => {
         //console.log("unique: "+unique+" o: "+o)
-        return (obj.shiftStart === o.shiftStart && obj.shiftEnd === o.shiftEnd)
+        return ((obj.shiftStart === o.shiftStart && obj.shiftEnd === o.shiftEnd)
+            //m|| (obj.shiftStart === o.shiftStart) //&& obj.shiftEnd !== o.shiftEnd)
+        )
+        //return isSameDateRange(obj,o)
+
         //|| (obj.shiftStart === o.shiftStart && obj.shiftEnd !== o.shiftEnd)
     })) {
         unique.push(o);
@@ -264,6 +283,21 @@ export function uniqueDepartmentsReducer(
 
 
 
+export function uniqueDateReducer(
+    unique, o) {
+
+    // console.log("unique: "+unique+" o: "+o)
+
+    if (!unique.some(obj => {
+        // console.log("obj end: "+obj.shiftEnd+" o end: "+o.shiftEnd)
+        //return (obj.shiftStart === o.shiftStart && obj.shiftEnd !== o.shiftEnd)
+        return isSameDateRange(obj,o)
+    }
+    )) {
+        unique.push(o);
+    }
+    return unique;
+}
 export function uniqueDateTimeReducer(
     unique, o) {
 
@@ -271,11 +305,34 @@ export function uniqueDateTimeReducer(
 
     if (!unique.some(obj => {
         // console.log("obj end: "+obj.shiftEnd+" o end: "+o.shiftEnd)
-        return (obj.shiftStart === o.shiftStart && obj.shiftEnd !== o.shiftEnd)}
+        return (obj.shiftStart === o.shiftStart && obj.shiftEnd !== o.shiftEnd)
+        // return isSameDateRange(obj,o)
+    }
     )) {
         unique.push(o);
     }
     return unique;
+}
+
+
+export function isSameDateRange(o1, o2) {
+
+    //if (o1.shiftStart === o2.shiftStart && o1.shiftEnd === o2.shiftEnd) return true;
+    if (isSameDate(new Date(o1.shiftStart), new Date(o2.shiftStart))
+        && isSameDate(new Date(o1.shiftEnd), new Date(o2.shiftEnd))
+        && isSameDate(new Date(o1.shiftStart), new Date(o1.shiftEnd))
+        ) return true;
+   /* if ((o1.shiftStart === o2.shiftStart && isSameDate(new Date(o1.shiftStart), new Date(o2.shiftStart)))
+        && (o1.shiftEnd !== o2.shiftEnd) && isSameDate(new Date(o1.shiftEnd), new Date(o2.shiftEnd))
+    ) return true;
+    */
+    if ((o1.shiftStart === o2.shiftStart && isSameDate(new Date(o1.shiftStart), new Date(o2.shiftStart)))
+        && (o1.shiftEnd !== o2.shiftEnd) && isSameDate(new Date(o1.shiftEnd), new Date(o2.shiftEnd))
+    ) return true;
+    return false;
+
+
+
 }
 
 
