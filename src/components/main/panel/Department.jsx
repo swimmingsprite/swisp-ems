@@ -44,35 +44,7 @@ export default function Department(props) {
                     <h2 className="scheduler-date">{getDayRangeWithDayOfWeek(new Date(day.shiftStart), new Date(day.shiftEnd))}</h2>
 
                     {dayStarts
-                        // .filter(d => d.dayStart === day.dayStart && d.dayEnd === day.dayEnd)
-                        /*.filter(d => d.shiftStart === day.shiftStart && d.shiftEnd === day.shiftEnd
-                            || d.shiftStart === day.shiftStart && d.shiftEnd !== day.shiftEnd
-                        )*/
-                        /*.filter(d => {return isSameDateRange(day, d)}
-                            /!*
-                            || d.shiftStart === day.shiftStart && d.shiftEnd !== day.shiftEnd*!/
-                        )
-                        */
-                        /* .map(e => {
-                             if (e.id === 654324456454) console.log("UNIKATNE MENO________---")
-                             return e;
-                     })*/
-                        /*.filter(d => {
-                                if (d.id === 654324456454)
-                                    console.log("______________------UNIKATNE MENO start: " + new Date(d.shiftStart)
-                                        + " end: " + new Date(d.shiftEnd)
-                                    );
-                                    console.log("day start: " + new Date(day.shiftStart)
-                                    + " end: " + new Date(day.shiftEnd)
-                                );
-                                if ((d.shiftStart >= day.shiftStart && d.shiftStart <= day.shiftEnd)
-                                    && (d.shiftEnd <= day.shiftEnd && d.shiftStart >= day.shiftStart)
-                                )
-                                    return true
-                            }
-                            /!*
-                            || d.shiftStart === day.shiftStart && d.shiftEnd !== day.shiftEnd*!/
-                        )*/
+
                         .filter(d => {
                             //datumy su rovnake
                             if (isSameDate(new Date(day.shiftStart), new Date(day.shiftEnd))) {
@@ -91,7 +63,9 @@ export default function Department(props) {
                                     && isSameDate(new Date(d.shiftEnd), new Date(day.shiftEnd))
                                     && isSameDate(new Date(d.shiftStart), new Date(d.shiftEnd))
                                     ) return true;*/
-                                if (!isSameDate(new Date(d.shiftStart), new Date(d.shiftEnd))) return true
+                                if (!isSameDate(new Date(d.shiftStart), new Date(d.shiftEnd))
+                                    && d.shiftEnd <= day.shiftEnd
+                                ) return true
 
                                 /*else {
 
