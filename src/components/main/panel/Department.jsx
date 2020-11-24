@@ -84,13 +84,22 @@ export default function Department(props) {
 
                             //datumy su rozdielne
                             else {
-                                if (isSameDate(new Date(d.shiftStart), new Date(day.shiftStart))
+                                //ak koniec a zaciatok su rovnaky den ako day zaciatok return false
+
+                                /*if (
+                                    isSameDate(new Date(d.shiftStart), new Date(day.shiftStart))
                                     && isSameDate(new Date(d.shiftEnd), new Date(day.shiftEnd))
-                                ) return true;
+                                    && isSameDate(new Date(d.shiftStart), new Date(d.shiftEnd))
+                                    ) return true;*/
+                                if (!isSameDate(new Date(d.shiftStart), new Date(d.shiftEnd))) return true
+
+                                /*else {
+
+                                }*/
                                 /*if (isSameDate(new Date(d.shiftStart), new Date(day.shiftStart))
                                 && (d.shiftEnd <= day.shiftEnd)
                                 ) return true;*/
-                                return true;
+                                return false;
                             }
                             //&& d.shiftStart <= day.shiftEnd)
                             //&& (d.shiftEnd <= day.shiftEnd && d.shiftStart >= day.shiftStart)
