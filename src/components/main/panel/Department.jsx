@@ -64,7 +64,7 @@ export default function Department(props) {
                                     && isSameDate(new Date(d.shiftStart), new Date(d.shiftEnd))
                                     ) return true;*/
                                 if (!isSameDate(new Date(d.shiftStart), new Date(d.shiftEnd))
-                                    && d.shiftEnd <= day.shiftEnd
+                                    && d.shiftEnd <= day.shiftEnd && d.shiftStart >= day.shiftStart
                                 ) return true
 
                                 /*else {

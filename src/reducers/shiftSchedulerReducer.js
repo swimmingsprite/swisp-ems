@@ -138,14 +138,14 @@ var scheduler = {
                     departmentName: "oddelenie hračiek",
 
                     id: 11555324456454,
-                    name: "Super Unikatnemeno",
+                    name: "Super Unikatnemeno2",
                     avatarColor: "orange",
                     avatarImg: "base 64",
 
                     //dayStart: 1646199204314 + 3600000 * 5,
                     //dayEnd: 1646199204314 + 3600000 * 5,
-                    shiftStart: 1646099204314 + 3600000 * 2,
-                    shiftEnd: 1646099204314 + 3600000 * 268,
+                    shiftStart: 1646996400000 + 3600000 * 0,
+                    shiftEnd: 1646996400000 + 3600000 * 14,
                 },
                 /*{
                     departmentId: 25454,
