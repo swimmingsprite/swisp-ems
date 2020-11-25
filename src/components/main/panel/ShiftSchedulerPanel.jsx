@@ -12,10 +12,8 @@ import {uniqueDepartmentsFilter, uniqueDepartmentsReducer} from "../../../reduce
 
 function InputList(props) {
     let dispatch = useDispatch();
-    var currentDepartmentId = 91354565;//useSelector(state => state.shiftReducer.schedulerSubHeaderDepartmentId);
-    var currentPlaceId = 84486565;//useSelector(state => state.shiftReducer.selectedPlaceId);
-
-  //  console.log("SEL DEP ID: "+currentDepartmentId);
+    var currentDepartmentId = useSelector(state => state.shiftReducer.schedulerSubHeaderDepartmentId);
+    var currentPlaceId = useSelector(state => state.shiftReducer.selectedPlaceId);
 
 
     if (props.hover.index > props.list.length - 1) props.hover.setIndex(0);
@@ -24,7 +22,7 @@ function InputList(props) {
             let style = props.hover.index === i ? {backgroundColor: "rgb(238, 238, 238)"} : null
             return <li
                 onClick={() => dispatch({type: "SCHEDULER_EMPLOYEE_ADD",
-                    employeeId: e.id,
+                    employee: e,
                     selectedPlaceId: currentPlaceId,
                     selectedDepartmentId: currentDepartmentId
                 }) }

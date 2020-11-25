@@ -46,12 +46,12 @@ var scheduler = {
     currentMonth: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
     selected: [
         {
-            id: 123,
+            id: 97486256,
             name: "Kaufland Stredočeská",
             employees: [
                 {
-                    departmentId: 45454,
-                    departmentName: "oddelenie záhrad",
+                    departmentId: 16549855,
+                    departmentName: "oddelenie nápojov",
 
                     id: 789849,
                     name: "John Barney",
@@ -64,8 +64,8 @@ var scheduler = {
                     shiftEnd: getCurrentTimestamp(),
                 },
                 {
-                    departmentId: 25454,
-                    departmentName: "oddelenie hračiek",
+                    departmentId: 16549855,
+                    departmentName: "oddelenie nápojov",
 
                     id: 289849,
                     name: "Jozo Banksy",
@@ -78,8 +78,8 @@ var scheduler = {
                     shiftEnd: getCurrentTimestamp(),
                 },
                 {
-                    departmentId: 25454,
-                    departmentName: "oddelenie hračiek",
+                    departmentId: 98236855,
+                    departmentName: "oddelenie zmrzlín",
 
                     id: 54549849,
                     name: "Majo Random",
@@ -92,8 +92,8 @@ var scheduler = {
                     shiftEnd: 1646099204314 + 3600000 * 10,
                 },
                 {
-                    departmentId: 25454,
-                    departmentName: "oddelenie hračiek",
+                    departmentId: 62149855,
+                    departmentName: "oddelenie šamponov",
 
                     id: 65432454,
                     name: "Niekto Spriezviskom",
@@ -106,8 +106,8 @@ var scheduler = {
                     shiftEnd: 1646099204314 + 3600000 * 10,
                 },
                 {
-                    departmentId: 25454,
-                    departmentName: "oddelenie hračiek",
+                    departmentId: 62149855,
+                    departmentName: "oddelenie šamponov",
 
                     id: 654324456454,
                     name: "Unikatne Meno",
@@ -120,8 +120,8 @@ var scheduler = {
                     shiftEnd: 1646099204314 + 3600000 * 11,
                 },
                 {
-                    departmentId: 25454,
-                    departmentName: "oddelenie hračiek",
+                    departmentId: 62149855,
+                    departmentName: "oddelenie šamponov",
 
                     id: 55555324456454,
                     name: "Super Unikatnemeno",
@@ -134,8 +134,8 @@ var scheduler = {
                     shiftEnd: 1646099204314 + 3600000 * 250,
                 },
                 {
-                    departmentId: 25454,
-                    departmentName: "oddelenie hračiek",
+                    departmentId: 62149855,
+                    departmentName: "oddelenie šamponov",
 
                     id: 11555324456454,
                     name: "Super Unikatnemeno2",
@@ -167,13 +167,34 @@ var scheduler = {
 };
 
 
-function addEmployee(state, employeeId, selectedPlaceId, selectedDepartmentId) {
+function addEmployee(state, employee, selectedPlaceId, selectedDepartmentId) {
     var places = state.selected; //todo rename selected
+    console.log("sel place id: " + selectedPlaceId)
+    console.log("places length: " + places.length)
     if (!isPlacePresent(places, selectedPlaceId)) places.push(getNewPlace(selectedPlaceId));
     var place = getElementById(places, selectedPlaceId);
 
-    if (!isDepartmentPresent(place, selectedDepartmentId)) place.departments.push(getNewDepartment(selectedDepartmentId));
-    var department = getElementById(place.departments, selectedDepartmentId);
+    console.log("place: "+place.length);
+
+    state.selectedDays.forEach(d => {
+        place.employees.push({
+            departmentId: selectedDepartmentId,
+            departmentName: "department " + selectedDepartmentId,
+
+            id: employee.id,
+            name: employee.name,
+            avatarColor: employee.avatarColor,
+            avatarImg: employee.avatarImg,
+
+            shiftStart: d,
+            shiftEnd: d,
+        })
+    })
+    places.forEach(e => {
+
+        console.log("place val: " + e.name);
+    })
+    return state;
 }
 
 
@@ -186,7 +207,7 @@ export var shiftSchedulerReducer = (state = scheduler, action) => {
         case "SHIFT_SCHEDULER_ARROW_BACK_CLICK":
             return {...state, currentMonth: subMonth(state.currentMonth)};
         case "SCHEDULER_EMPLOYEE_ADD":
-            return addEmployee(state, action.employeeId, action.selectedPlaceId, action.selectedDepartmentId)
+            return addEmployee(state, action.employee, action.selectedPlaceId, action.selectedDepartmentId)
 
         default:
             return state;
@@ -201,13 +222,19 @@ function getNewPlace(id) {
     }
     return {
         id: id,
-        departments: []
+        name: "Place " + id,   //todo fetch name from redux placeReducer
+        employees: []
     }
 }
 
 function isPlacePresent(places, placeId) {
     let filteredPlace = places.filter(p => p.id === placeId);
     //place ešte nieje v state
+    // console.log("filteredPlace))
+    console.log("fil places length: " + places.length)
+    console.log("fil placeId: " + placeId)
+    console.log("fil places Id: " + places[0].id)
+    console.log("is empty : " + isEmpty(filteredPlace));
     if (isEmpty(filteredPlace)) return false;
     return true;
 }
@@ -219,7 +246,7 @@ function isDepartmentPresent(place, depId) {
 function getElementById(array, id) {
     let element = array.filter(p => p.id === id);
     if (isEmpty(element)) return null;
-    return element;
+    return element[0];
 
 }
 
@@ -233,7 +260,8 @@ function getNewDepartment(depId) {
 /*______-*/
 
 function isEmpty(array) {
-    return !(array && array.length > 0);
+    console.log("isempty array length: " + array.length);
+    return !(array.length > 0);
 }
 
 function selectEmployee(state, employeeId) {
@@ -287,14 +315,12 @@ export function uniqueDepartmentsReducer(
     unique, o) {
     if (!unique.some(obj => {
         //console.log("unique: "+unique+" o: "+o)
-        return obj.departmentId === o.departmentId})) {
+        return obj.departmentId === o.departmentId
+    })) {
         unique.push(o);
     }
     return unique;
 }
-
-
-
 
 
 export function uniqueDateReducer(
@@ -303,10 +329,10 @@ export function uniqueDateReducer(
     // console.log("unique: "+unique+" o: "+o)
 
     if (!unique.some(obj => {
-        // console.log("obj end: "+obj.shiftEnd+" o end: "+o.shiftEnd)
-        //return (obj.shiftStart === o.shiftStart && obj.shiftEnd !== o.shiftEnd)
-        return isSameDateRange(obj,o)
-    }
+            // console.log("obj end: "+obj.shiftEnd+" o end: "+o.shiftEnd)
+            //return (obj.shiftStart === o.shiftStart && obj.shiftEnd !== o.shiftEnd)
+            return isSameDateRange(obj, o)
+        }
     )) {
         unique.push(o);
     }
@@ -319,10 +345,10 @@ export function uniqueDateTimeReducer(
     // console.log("unique: "+unique+" o: "+o)
 
     if (!unique.some(obj => {
-        // console.log("obj end: "+obj.shiftEnd+" o end: "+o.shiftEnd)
-        return (obj.shiftStart === o.shiftStart && obj.shiftEnd !== o.shiftEnd)
-        // return isSameDateRange(obj,o)
-    }
+            // console.log("obj end: "+obj.shiftEnd+" o end: "+o.shiftEnd)
+            return (obj.shiftStart === o.shiftStart && obj.shiftEnd !== o.shiftEnd)
+            // return isSameDateRange(obj,o)
+        }
     )) {
         unique.push(o);
     }
@@ -336,11 +362,8 @@ export function isSameDateRange(o1, o2) {
     if (isSameDate(new Date(o1.shiftStart), new Date(o2.shiftStart))
         && isSameDate(new Date(o1.shiftEnd), new Date(o2.shiftEnd))
         && isSameDate(new Date(o1.shiftStart), new Date(o1.shiftEnd))
-        ) return true;
-   /* if ((o1.shiftStart === o2.shiftStart && isSameDate(new Date(o1.shiftStart), new Date(o2.shiftStart)))
-        && (o1.shiftEnd !== o2.shiftEnd) && isSameDate(new Date(o1.shiftEnd), new Date(o2.shiftEnd))
     ) return true;
-    */
+
     if ((o1.shiftStart === o2.shiftStart && isSameDate(new Date(o1.shiftStart), new Date(o2.shiftStart)))
         && (o1.shiftEnd !== o2.shiftEnd) && isSameDate(new Date(o1.shiftEnd), new Date(o2.shiftEnd))
     ) return true;
@@ -349,7 +372,6 @@ export function isSameDateRange(o1, o2) {
         && (o1.shiftEnd === o2.shiftEnd) && isSameDate(new Date(o1.shiftEnd), new Date(o2.shiftEnd))
     ) return true;
     return false;
-
 
 
 }
