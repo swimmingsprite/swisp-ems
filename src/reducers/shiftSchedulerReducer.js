@@ -44,6 +44,7 @@ var scheduler = {
     selectedDays: [],
     selectedEmployees: [],
     currentMonth: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
+    calendarLock: false,
     selected: [
         {
             id: 97486256,
@@ -182,6 +183,9 @@ function addEmployee(state, employee, selectedPlaceId, selectedDepartmentId) {
     state.selectedDays.forEach(d => {
         let date = new Date(d);
         let trackId = Math.floor(Math.random() * 100000000000);
+
+        /*najdi či už taky neexistuje*/
+
         place.employees.push({
             departmentId: selectedDepartmentId,
             departmentName: "department " + selectedDepartmentId,
@@ -196,6 +200,7 @@ function addEmployee(state, employee, selectedPlaceId, selectedDepartmentId) {
             shiftEnd: new Date(date.getFullYear(), date.getMonth()+1, date.getDate(), 12).getTime(),
         })
         state.selectedEmployees.push(trackId);
+        state.calendarLock = true;
     })
 
     return state;
@@ -205,13 +210,15 @@ function addEmployee(state, employee, selectedPlaceId, selectedDepartmentId) {
 export var shiftSchedulerReducer = (state = scheduler, action) => {
     switch (action.type) {
         case "CALENDAR_DATE_CLICK":
-            return {...state, selectedDays: handleDateClick(state, action.dayTimestamp)};
+            return {...handleDateClick(state, action.dayTimestamp)};
         case "SHIFT_SCHEDULER_ARROW_NEXT_CLICK":
             return {...state, currentMonth: addMonth(state.currentMonth)};
         case "SHIFT_SCHEDULER_ARROW_BACK_CLICK":
             return {...state, currentMonth: subMonth(state.currentMonth)};
         case "SCHEDULER_EMPLOYEE_ADD":
             return addEmployee(state, action.employee, action.selectedPlaceId, action.selectedDepartmentId)
+        case "CALENDAR_UNLOCK":
+            return {...state, calendarLock: false};
 
         default:
             return state;

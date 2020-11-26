@@ -30,10 +30,12 @@ export function handleDateClick(state, dayTimestamp) {
     let filteredDays = state.selectedDays.filter(d => d === dayTimestamp);
     if (filteredDays.length > 0) {
         console.log("DESELECTUJEM DEN")
-        return state.selectedDays.filter(d => d !== filteredDays[0]);
+        state.selectedDays = state.selectedDays.filter(d => d !== filteredDays[0]);
+        return state;
     } else if (filteredDays.length < 1) {
-        console.log("SELECTUJEM DEN");
+        console.log("SELECTUJEM DEN")
         state.selectedDays.push(dayTimestamp);
-        return [...state.selectedDays];
+        if (state.calendarLock) {state.calendarLock = false; state.selectedEmployees = []}
+        return state;
     }
 }
