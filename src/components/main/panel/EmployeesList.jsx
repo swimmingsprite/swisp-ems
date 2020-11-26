@@ -20,7 +20,10 @@ export default function EmployeesList(props) {
         let employeeStyle = filteredSelectedEmp.length > 0 ? {border: "3px solid black"} : null;
 
 
-        return <li key={employee.id} className="selected-item">
+        return <li key={employee.id}
+                   className="selected-item"
+                   onClick={() => {dispatch({type: "SELECTED_CLICK", employee: employee})}}
+        >
             <div className="shift-element" style={{display: "inline-block", ...employeeStyle}}>
                 <Avatar className="post-avatar" style={
                     {

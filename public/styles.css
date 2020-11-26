@@ -500,6 +500,7 @@ ul {
     padding: 5px 0;
     /*width: 40%;*/
     white-space: nowrap;
+    cursor: pointer;
 
     /*width: fit-content;*/
     /*left: 10%;*/

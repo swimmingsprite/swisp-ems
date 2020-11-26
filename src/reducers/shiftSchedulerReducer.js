@@ -218,6 +218,14 @@ function removeSelected(state, employee) {
     return state;
 }
 
+function selectedClick(state, employee) {
+    let filteredEmp = state.selectedEmployees.filter(e => e === employee.trackId);
+    if (filteredEmp.length > 0) state.selectedEmployees = state.selectedEmployees.filter(e => e !== employee.trackId);
+    else state.selectedEmployees.push(employee.trackId)
+    return state;
+
+}
+
 export var shiftSchedulerReducer = (state = scheduler, action) => {
     switch (action.type) {
         case "CALENDAR_DATE_CLICK":
@@ -231,6 +239,7 @@ export var shiftSchedulerReducer = (state = scheduler, action) => {
         case "CALENDAR_UNLOCK":
             return {...state, calendarLock: false};
         case "SELECTED_REMOVE": return {...removeSelected(state, action.employee)}
+        case "SELECTED_CLICK": return {...selectedClick(state, action.employee)}
 
         default:
             return state;
@@ -254,10 +263,10 @@ function isPlacePresent(places, placeId) {
     let filteredPlace = places.filter(p => p.id === placeId);
     //place ešte nieje v state
     // console.log("filteredPlace))
-    console.log("fil places length: " + places.length)
+    /*console.log("fil places length: " + places.length)
     console.log("fil placeId: " + placeId)
     console.log("fil places Id: " + places[0].id)
-    console.log("is empty : " + isEmpty(filteredPlace));
+    console.log("is empty : " + isEmpty(filteredPlace));*/
     if (isEmpty(filteredPlace)) return false;
     return true;
 }
