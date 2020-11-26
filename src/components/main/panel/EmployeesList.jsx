@@ -16,10 +16,7 @@ export default function EmployeesList(props) {
             ? {backgroundImage: employee.avatarImg} : {backgroundColor: employee.avatarColor};
 
         let filteredSelectedEmp = selectedEmployees.filter(trackId => trackId === employee.trackId);
-        console.log("filtered selected emp length: "+filteredSelectedEmp.length)
-        console.log("employee track id: "+employee.trackId)
-        console.log("employee name: "+employee.name)
-        console.log("_____________________________");
+
         let employeeStyle = filteredSelectedEmp.length > 0 ? {border: "3px solid black"} : null;
 
 
@@ -42,7 +39,9 @@ export default function EmployeesList(props) {
                     {employee.name}
                 </h2>
                 <span className="scheduler-delete-button"
-                      //onClick={}
+                      onClick={() => {
+                          dispatch({type: "SELECTED_REMOVE", employee: employee})
+                      }}
                 >x</span>
             </div>
 

@@ -207,6 +207,17 @@ function addEmployee(state, employee, selectedPlaceId, selectedDepartmentId) {
 }
 
 
+function removeSelected(state, employee) {
+    state.selected.forEach(place => {
+        place.employees = place.employees.filter(e => e.trackId !== employee.trackId);
+        state.selectedEmployees = state.selectedEmployees.filter(trackId => trackId !== employee.trackId)
+        if (place.employees.length < 1) state.selected = state.selected.filter(p => p.id !== place.id)
+        // let filtered = place.employees.filter(e => e === employee.trackId);
+    })
+    console.log("Remove selected...")
+    return state;
+}
+
 export var shiftSchedulerReducer = (state = scheduler, action) => {
     switch (action.type) {
         case "CALENDAR_DATE_CLICK":
@@ -219,6 +230,7 @@ export var shiftSchedulerReducer = (state = scheduler, action) => {
             return addEmployee(state, action.employee, action.selectedPlaceId, action.selectedDepartmentId)
         case "CALENDAR_UNLOCK":
             return {...state, calendarLock: false};
+        case "SELECTED_REMOVE": return {...removeSelected(state, action.employee)}
 
         default:
             return state;
