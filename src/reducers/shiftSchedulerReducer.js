@@ -210,7 +210,9 @@ function addEmployee(state, employee, selectedPlaceId, selectedDepartmentId) {
 function removeSelected(state, employee) {
     state.selected.forEach(place => {
         place.employees = place.employees.filter(e => e.trackId !== employee.trackId);
+        console.log("TRACK ID: "+employee.trackId+" name: "+employee.name);
         state.selectedEmployees = state.selectedEmployees.filter(trackId => trackId !== employee.trackId)
+        state.selectedEmployees.forEach(e => console.log("SELECTED: "+e))
         if (place.employees.length < 1) state.selected = state.selected.filter(p => p.id !== place.id)
         // let filtered = place.employees.filter(e => e === employee.trackId);
     })
@@ -219,6 +221,7 @@ function removeSelected(state, employee) {
 }
 
 function selectedClick(state, employee) {
+    console.log("CLICK SELECTED!")
     let filteredEmp = state.selectedEmployees.filter(e => e === employee.trackId);
     if (filteredEmp.length > 0) state.selectedEmployees = state.selectedEmployees.filter(e => e !== employee.trackId);
     else state.selectedEmployees.push(employee.trackId)

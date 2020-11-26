@@ -26,12 +26,12 @@ const store = createStore(combineReducers(
 
 
 /*todo activate only if shift section is active*/
-setInterval(() => {
+/*setInterval(() => {
     store.dispatch({
         type: "CURRENT_VIEW_CURRENT_TIMESTAMP_CHANGE",
         payload: new Date().getTime()
     })
-},20000)
+},20000)*/
 
 
 

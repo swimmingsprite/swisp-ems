@@ -9,7 +9,7 @@ export default function EmployeesList(props) {
     let selectedEmployees = useSelector(state => state.shiftSchedulerReducer.selectedEmployees);
     let dispatch = useDispatch();
 
-    console.log("SELECTED EMPLOYEES: "+selectedEmployees)
+    console.log("SELECTED EMPLOYEES: " + selectedEmployees)
 
     function mapEmployees(employee, selectedEmployees) {
         let avatarStyle = employee.avatarImg && isBase64(employee.avatarImg, {allowMime: true})
@@ -21,10 +21,14 @@ export default function EmployeesList(props) {
 
 
         return <li key={employee.id}
-                   className="selected-item"
-                   onClick={() => {dispatch({type: "SELECTED_CLICK", employee: employee})}}
-        >
-            <div className="shift-element" style={{display: "inline-block", ...employeeStyle}}>
+                   style={{position: "relative"}}
+                   className="selected-item">
+            <div className="shift-element"
+                 style={{display: "inline-block", ...employeeStyle}}
+                 onClick={() => {
+                     dispatch({type: "SELECTED_CLICK", employee: employee})
+                 }}
+            >
                 <Avatar className="post-avatar" style={
                     {
                         height: "20px",
@@ -41,19 +45,19 @@ export default function EmployeesList(props) {
                 <h2 className="shift-element-header" style={{margin: "5px", marginRight: "15px"}}>
                     {employee.name}
                 </h2>
-                <span className="scheduler-delete-button"
-                      onClick={() => {
-                          dispatch({type: "SELECTED_REMOVE", employee: employee})
-                      }}
-                >x</span>
+
+            </div>
+
+            <div className="scheduler-delete-button"
+                 onClick={() => {
+                     dispatch({type: "SELECTED_REMOVE", employee: employee})
+                 }}
+            >x
             </div>
 
 
         </li>
     }
-
-
-
 
 
     return <ul style={{textAlign: "center"}}
