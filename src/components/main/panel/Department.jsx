@@ -55,7 +55,9 @@ export default function Department(props) {
 
                         .map(e => {
 
-                        return <div>
+                        return <div
+                        key={e.id}
+                        >
                         <p style={{
                         fontSize: "0.9rem",
                         marginTop: "15px",

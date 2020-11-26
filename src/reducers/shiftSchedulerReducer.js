@@ -171,29 +171,31 @@ function addEmployee(state, employee, selectedPlaceId, selectedDepartmentId) {
     var places = state.selected; //todo rename selected
     console.log("sel place id: " + selectedPlaceId)
     console.log("places length: " + places.length)
-    if (!isPlacePresent(places, selectedPlaceId)) places.push(getNewPlace(selectedPlaceId));
+
+    if (!isPlacePresent(places, selectedPlaceId)
+        && employee
+        && state.selectedDays && state.selectedDays.length > 0) places.push(getNewPlace(selectedPlaceId));
     var place = getElementById(places, selectedPlaceId);
 
-    console.log("place: "+place.length);
+
 
     state.selectedDays.forEach(d => {
+        let date = new Date(d);
         place.employees.push({
             departmentId: selectedDepartmentId,
             departmentName: "department " + selectedDepartmentId,
+            trackId: Math.floor(Math.random() * 100000000000),
 
             id: employee.id,
             name: employee.name,
             avatarColor: employee.avatarColor,
             avatarImg: employee.avatarImg,
 
-            shiftStart: d,
-            shiftEnd: d,
+            shiftStart: new Date(date.getFullYear(), date.getMonth()+1, date.getDate(), 12).getTime(),
+            shiftEnd: new Date(date.getFullYear(), date.getMonth()+1, date.getDate(), 12).getTime(),
         })
     })
-    places.forEach(e => {
 
-        console.log("place val: " + e.name);
-    })
     return state;
 }
 

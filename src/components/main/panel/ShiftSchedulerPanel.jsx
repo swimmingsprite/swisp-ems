@@ -17,8 +17,20 @@ function InputList(props) {
 
 
     if (props.hover.index > props.list.length - 1) props.hover.setIndex(0);
+
     return <ul className="shift-scheduler-input-ul">
         {props.list.map((e, i) => {
+            //console.log("ENTER JE: "+props.enter)
+            if (props.enter && props.hover.index === i) {
+                dispatch({
+                    type: "SCHEDULER_EMPLOYEE_ADD",
+                    employee: e,
+                    selectedPlaceId: currentPlaceId,
+                    selectedDepartmentId: currentDepartmentId
+                });
+                props.setEnter(false);
+            }
+
             let style = props.hover.index === i ? {backgroundColor: "rgb(238, 238, 238)"} : null
             return <li
                 onClick={() => dispatch({type: "SCHEDULER_EMPLOYEE_ADD",
@@ -50,22 +62,10 @@ export default function ShiftSchedulerPanel(props) {
     var scheduler = useSelector(state => state.shiftSchedulerReducer)
     var dispatch = useDispatch();
     var [inputListHoverIndex, setInputListHoverIndex] = useState(-1);
+    var [enterPressed, setEnterPressed] = useState(false);
     var filteredEmployeeList = schedulerInputFilter(scheduler.employees, selectedPlaceId, input);
 
-    //console.log("SEL PLACE ID: "+selectedPlaceId);
-    //var change = useEffect(() => setInputListHoverIndex(-1), filteredEmployeeList)
 
-
-    /*   scheduler.selectedDays.forEach(e => {
-           console.log("SELECTED DAY: "+e);})
-       console.log("____________________________")
-
-       console.log("input list hover index je: "+inputListHoverIndex)*/
-
-
-    /*  let avatarStyle = props.comment.avatarImg && isBase64(props.comment.avatarImg, {allowMime: true})
-          ? {backgroundImage: props.comment.avatarImg} : {backgroundColor: props.comment.avatarColor};
-  */
     function mapDateToDays(date) {
 
         //return new Date(year, month, 0).getDate();
@@ -119,6 +119,12 @@ export default function ShiftSchedulerPanel(props) {
             if (inputListHoverIndex > -1) setInputListHoverIndex(inputListHoverIndex - 1);
         }
 
+        if (event.key === "Enter") {
+            event.preventDefault();
+            if (inputListHoverIndex > -1) setEnterPressed(true);
+        }
+
+
     }
 
 
@@ -163,7 +169,9 @@ export default function ShiftSchedulerPanel(props) {
         </div>
 
         <InputList list={filteredEmployeeList}
-                   hover={{index: inputListHoverIndex, setIndex: setInputListHoverIndex}}/>
+                   hover={{index: inputListHoverIndex, setIndex: setInputListHoverIndex}}
+                   enter={enterPressed} setEnter={setEnterPressed}
+        />
 
         {/*MAIN CONTENT */}
 
