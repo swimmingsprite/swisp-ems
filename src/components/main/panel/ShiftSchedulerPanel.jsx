@@ -15,6 +15,14 @@ function InputList(props) {
     var currentDepartmentId = useSelector(state => state.shiftReducer.schedulerSubHeaderDepartmentId);
     var currentPlaceId = useSelector(state => state.shiftReducer.selectedPlaceId);
 
+    let notification = (text) => {
+        let id = Math.floor(Math.random() * 10000);
+        console.log("ID JE: "+id)
+        dispatch({type: "NOTIFICATION_ADD", id: id, text: text});
+        setTimeout(() => {
+            dispatch({type: "NOTIFICATION_REMOVE", id: id})
+        }, 2000)
+    }
 
     if (props.hover.index > props.list.length - 1) props.hover.setIndex(0);
 
@@ -28,16 +36,21 @@ function InputList(props) {
                     selectedPlaceId: currentPlaceId,
                     selectedDepartmentId: currentDepartmentId
                 });
+                notification("Zamestnanec " + e.name + " bol pridaný.")
                 props.setEnter(false);
             }
 
             let style = props.hover.index === i ? {backgroundColor: "rgb(238, 238, 238)"} : null
             return <li
-                onClick={() => dispatch({type: "SCHEDULER_EMPLOYEE_ADD",
-                    employee: e,
-                    selectedPlaceId: currentPlaceId,
-                    selectedDepartmentId: currentDepartmentId
-                }) }
+                onClick={() => {
+                    dispatch({
+                        type: "SCHEDULER_EMPLOYEE_ADD",
+                        employee: e,
+                        selectedPlaceId: currentPlaceId,
+                        selectedDepartmentId: currentDepartmentId
+                    })
+                    notification("Zamestnanec " + e.name + " bol pridaný.")
+                }}
                 key={e.id}
                 className="shift-scheduler-input-li"
                 style={style}
@@ -185,7 +198,7 @@ export default function ShiftSchedulerPanel(props) {
                     {place.employees
                         //.filter(uniqueDepartmentsFilter)
                         .reduce(uniqueDepartmentsReducer, [])
-                        .map((e,i,a) =>
+                        .map((e, i, a) =>
                             <Department key={e.departmentId}
                                         name={e.departmentName}
                                         employees={place.employees}
@@ -195,17 +208,6 @@ export default function ShiftSchedulerPanel(props) {
             })}
 
         </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
         {/*ARROW */}

@@ -12,7 +12,7 @@ export default function NavList() {
   return (<ul className="nav-ul">
     <li className="nav-li" onClick={() => {store.dispatch({type: "CURRENT_SECTION", currentSection: "Home"})}}>Domov</li>
     <li className="nav-li" onClick={() => {store.dispatch({type: "CURRENT_SECTION", currentSection: "Employees"})}}>Zamestnanci</li>
-    <li className="nav-li" onClick={() => {store.dispatch({type: "CURRENT_SECTION", currentSection: "Shifts"})}}>Smeny</li>
+    <li className="nav-li" onClick={() => {store.dispatch({type: "CURRENT_SECTION", currentSection: "Shifts"})}}>Zmeny</li>
     <li className="nav-li">Udalosti</li>
     <li className="nav-li">Ponuky práce</li>
     <li className="nav-li">Správy</li>

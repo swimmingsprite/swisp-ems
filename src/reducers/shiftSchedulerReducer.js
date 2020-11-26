@@ -181,10 +181,11 @@ function addEmployee(state, employee, selectedPlaceId, selectedDepartmentId) {
 
     state.selectedDays.forEach(d => {
         let date = new Date(d);
+        let trackId = Math.floor(Math.random() * 100000000000);
         place.employees.push({
             departmentId: selectedDepartmentId,
             departmentName: "department " + selectedDepartmentId,
-            trackId: Math.floor(Math.random() * 100000000000),
+            trackId: trackId,
 
             id: employee.id,
             name: employee.name,
@@ -194,6 +195,7 @@ function addEmployee(state, employee, selectedPlaceId, selectedDepartmentId) {
             shiftStart: new Date(date.getFullYear(), date.getMonth()+1, date.getDate(), 12).getTime(),
             shiftEnd: new Date(date.getFullYear(), date.getMonth()+1, date.getDate(), 12).getTime(),
         })
+        state.selectedEmployees.push(trackId);
     })
 
     return state;
@@ -261,7 +263,7 @@ function getNewDepartment(depId) {
 
 /*______-*/
 
-function isEmpty(array) {
+export function isEmpty(array) {
     console.log("isempty array length: " + array.length);
     return !(array.length > 0);
 }

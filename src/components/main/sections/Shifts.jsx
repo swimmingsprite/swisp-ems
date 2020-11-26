@@ -79,7 +79,7 @@ export default function Shifts(props) {
     var currentViewTimeRange = timestampsToDateRange(currentView.startTimestamp, currentView.endTimestamp)
 
     return <div>
-        <Title text="Smeny"
+        <Title text="Zmeny"
                id={165698563265}
                filter={shiftHeaderFilter}
                onClickItem={(newId) => {
