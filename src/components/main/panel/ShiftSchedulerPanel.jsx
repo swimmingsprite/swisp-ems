@@ -155,7 +155,7 @@ export default function ShiftSchedulerPanel(props) {
             timeout={450}
         />
 
-        <div className="shift-scheduler-calendar">
+        <div className="shift-scheduler-calendar" style={{marginTop: 0}}>
             <div className="shift-scheduler-calendar-header">
                 <h2>{getMonthName(scheduler.currentMonth.getMonth()) + " " + scheduler.currentMonth.getFullYear()}</h2>
             </div>
@@ -189,7 +189,7 @@ export default function ShiftSchedulerPanel(props) {
         {/*MAIN CONTENT */}
 
 
-        <div className="scheduler-content" style={{minHeight: 0}}>
+        {scheduler.selected.length > 0 && <div className="scheduler-content" style={{minHeight: 0}}>
 
             {scheduler.selected.map(place => {
                 return <div key={place.id}>
@@ -207,7 +207,7 @@ export default function ShiftSchedulerPanel(props) {
                 </div>
             })}
 
-        </div>
+        </div>}
 
 
         {/*ARROW */}
