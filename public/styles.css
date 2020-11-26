@@ -496,16 +496,13 @@ ul {
     overflow: hidden;
     position: relative;
     background-color: #0984e3;
-    /*height: 35px;*/
+
     padding: 5px 0;
-    /*width: 40%;*/
+
     white-space: nowrap;
     cursor: pointer;
 
-    /*width: fit-content;*/
-    /*left: 10%;*/
     border-radius: 10px;
-    /*border: 2px solid black;*/
 
 }
 
@@ -719,7 +716,21 @@ ul {
 .selected-item {
     display: inline-block;
     margin: 0 5px;
+    margin-top: 5px;
     user-select: none;
+    height: 25px;
+
+    overflow: hidden;
+    position: relative;
+    background-color: #0984e3;
+
+    padding: 5px 0;
+
+    white-space: nowrap;
+    cursor: pointer;
+
+    border-radius: 10px;
+    box-sizing: content-box;
 }
 
 
@@ -824,8 +835,8 @@ ul {
     transform: translateY(0.5px);
     position: absolute;
     right: 2.5px;
-    top: 25%;
-    height: 100%;
+    top: 17%;
+    /*height: 100%;*/
 }
 
 .scheduler-delete-button:hover{

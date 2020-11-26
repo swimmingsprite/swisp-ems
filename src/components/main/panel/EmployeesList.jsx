@@ -21,10 +21,11 @@ export default function EmployeesList(props) {
 
 
         return <li key={employee.id}
-                   style={{position: "relative"}}
+                   style={{...employeeStyle}}
                    className="selected-item">
-            <div className="shift-element"
-                 style={{display: "inline-block", ...employeeStyle}}
+            <div
+                //className="shift-element"
+                 style={{display: "inline-block", marginTop: "0"}}
                  onClick={() => {
                      dispatch({type: "SELECTED_CLICK", employee: employee})
                  }}
@@ -42,7 +43,7 @@ export default function EmployeesList(props) {
                 >
                     {employee.name.charAt(0)}
                 </Avatar>
-                <h2 className="shift-element-header" style={{margin: "5px", marginRight: "15px"}}>
+                <h2 className="shift-element-header" style={{marginLeft: "5px", marginRight: "15px", top: "2px"}}>
                     {employee.name}
                 </h2>
 
