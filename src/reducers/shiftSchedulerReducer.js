@@ -271,7 +271,10 @@ function handleStartClick(state, type, value) {
     state.selected.forEach(place => {
         place.employees.filter(e => {
             let filEmp = selEmp.filter(s => {
-                if (s === e.trackId) {selEmp = selEmp.filter(s => s !== e.trackId); return true;}
+                if (s === e.trackId) {
+                    selEmp = selEmp.filter(s => s !== e.trackId);
+                    return true;
+                }
                 return false;
             });
             if (!isEmpty(filEmp))
@@ -291,26 +294,34 @@ function handleStartClick(state, type, value) {
         * */
         if (type === "START_ADD") {
             if (e.shiftStart + value <= e.shiftEnd
-                && isSameDate(new Date(e.shiftStart + value), new Date(e.shiftStart) )) {
+                && isSameDate(new Date(e.shiftStart + value), new Date(e.shiftStart))) {
+                e.shiftStart += value;
+            } else {
+                if (isSameDate(new Date(e.shiftStart), new Date(e.shiftEnd))) {
+                    e.shiftStart = e.shiftEnd;
+                }
+                else {
+                    let shDate = new Date(e.shiftStart);
+                    e.shiftStart = new Date(shDate.getFullYear(), shDate.getMonth(), shDate.getDate(), 23, 55).getTime();
+                }
 
-                e.shiftStart += value;}
-        }
-        else if (type === "START_SUB") {
-            if (isSameDate(new Date(e.shiftStart - value), new Date(e.shiftStart) )) {
+                }
+        } else if (type === "START_SUB") {
+            if (isSameDate(new Date(e.shiftStart - value), new Date(e.shiftStart))) {
                 e.shiftStart -= value;
-            }
-        }
-        else if (type === "END_ADD") {
+            } else {
+                let shDate = new Date(e.shiftStart);
+                e.shiftStart = new Date(shDate.getFullYear(), shDate.getMonth(), shDate.getDate()).getTime();
+            };
+        } else if (type === "END_ADD") {
             if ((e.shiftEnd + value) - e.shiftStart <= (3600000 * 24)) {
                 e.shiftEnd += value;
-            }
-        }
-        else if (type === "END_SUB") {
+            } else e.shiftEnd = e.shiftStart + 3600000 * 24;
+        } else if (type === "END_SUB") {
             if ((e.shiftEnd - value) >= e.shiftStart) {
                 e.shiftEnd -= value;
-            }
+            } else e.shiftEnd = e.shiftStart;
         }
-
 
 
     })
@@ -334,10 +345,14 @@ export var shiftSchedulerReducer = (state = scheduler, action) => {
             return {...removeSelected(state, action.employee)}
         case "SELECTED_CLICK":
             return {...selectedClick(state, action.employee)}
-        case "SHIFT_START_BACK_CLICK": return {...handleStartClick(state, "START_SUB", action.value)};
-        case "SHIFT_START_NEXT_CLICK": return {...handleStartClick(state, "START_ADD", action.value)};
-        case "SHIFT_END_BACK_CLICK": return {...handleStartClick(state, "END_SUB", action.value)};
-        case "SHIFT_END_NEXT_CLICK": return {...handleStartClick(state, "END_ADD", action.value)};
+        case "SHIFT_START_BACK_CLICK":
+            return {...handleStartClick(state, "START_SUB", action.value)};
+        case "SHIFT_START_NEXT_CLICK":
+            return {...handleStartClick(state, "START_ADD", action.value)};
+        case "SHIFT_END_BACK_CLICK":
+            return {...handleStartClick(state, "END_SUB", action.value)};
+        case "SHIFT_END_NEXT_CLICK":
+            return {...handleStartClick(state, "END_ADD", action.value)};
 
         default:
             return state;
