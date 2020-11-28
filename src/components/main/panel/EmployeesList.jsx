@@ -9,7 +9,7 @@ export default function EmployeesList(props) {
     let selectedEmployees = useSelector(state => state.shiftSchedulerReducer.selectedEmployees);
     let dispatch = useDispatch();
 
-    console.log("SELECTED EMPLOYEES: " + selectedEmployees)
+    // console.log("SELECTED EMPLOYEES: " + selectedEmployees)
 
     function mapEmployees(employee, selectedEmployees) {
         let avatarStyle = employee.avatarImg && isBase64(employee.avatarImg, {allowMime: true})

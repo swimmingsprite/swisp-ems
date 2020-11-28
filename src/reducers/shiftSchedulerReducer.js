@@ -170,8 +170,6 @@ var scheduler = {
 
 function addEmployee(state, employee, selectedPlaceId, selectedDepartmentId) {
     var places = state.selected; //todo rename selected
-    console.log("sel place id: " + selectedPlaceId)
-    console.log("places length: " + places.length)
 
     if (!isPlacePresent(places, selectedPlaceId)
         && employee
@@ -231,12 +229,10 @@ function removeSelected(state, employee) {
             return e.trackId !== employee.trackId
         });
 
-        console.log("TRACK ID: " + employee.trackId + " name: " + employee.name);
 
         //vymaz employeeho zo selected employees
         state.selectedEmployees = state.selectedEmployees.filter(trackId => trackId !== employee.trackId)
 
-        state.selectedEmployees.forEach(e => console.log("SELECTED: " + e))
 
         //ak place nema ani jednoho employee vymza ho
         if (place.employees.length < 1) state.selected = state.selected.filter(p => p.id !== place.id)
@@ -255,12 +251,10 @@ function removeSelected(state, employee) {
     })
 
 
-    console.log("Remove selected...")
     return state;
 }
 
 function selectedClick(state, employee) {
-    console.log("CLICK SELECTED!")
     let filteredEmp = state.selectedEmployees.filter(e => e === employee.trackId);
     //unselect if was selected
     if (filteredEmp.length > 0) state.selectedEmployees = state.selectedEmployees.filter(e => e !== employee.trackId);
@@ -270,18 +264,21 @@ function selectedClick(state, employee) {
 
 }
 
-function handleStartClick(state, type) {
-    var selectedEmployees = [];
+function handleStartClick(state, type, value) {
+    let selectedEmployees = [];
+    let selEmp = [...state.selectedEmployees];
     //find all selected employees
-    console.log("HANDLE START CLICK")
     state.selected.forEach(place => {
         place.employees.filter(e => {
-            var filEmp = state.selectedEmployees.filter(s => s === e.trackId);
-            if (!isEmpty(filEmp)) selectedEmployees.push(e);
+            let filEmp = selEmp.filter(s => {
+                if (s === e.trackId) {selEmp = selEmp.filter(s => s !== e.trackId); return true;}
+                return false;
+            });
+            //if (!isEmpty(filEmp))
+                selectedEmployees.push(e);
         })
     });
 
-    console.log("SELECTED EMLPOYEES LENGTH "+selectedEmployees.length)
     selectedEmployees.forEach((e) => {
         /*
         * posun dopredu ak nebude cas väčší ako end a bude to rovnaky deň
@@ -299,12 +296,8 @@ function handleStartClick(state, type) {
                 e.shiftStart += (60000 * 5);}
         }
         else if (type === "START_SUB") {
-            console.log("START SUB........... ")
-            console.log("EMPLOYEE JE:........... "+e);
             if (isSameDate(new Date(e.shiftStart - (60000 * 5)), new Date(e.shiftStart) )) {
-                console.log("SHIFT START: "+e.shiftStart);
                 e.shiftStart -= (60000 * 5);
-                console.log("SHIFT START AFTER: "+e.shiftStart);
             }
         }
         else if (type === "END_ADD") {
@@ -391,7 +384,6 @@ function getNewDepartment(depId) {
 /*______-*/
 
 export function isEmpty(array) {
-    console.log("isempty array length: " + array.length);
     return !(array.length > 0);
 }
 
