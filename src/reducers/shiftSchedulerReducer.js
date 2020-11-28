@@ -168,6 +168,12 @@ var scheduler = {
 };
 
 
+function empComparator(e1, e2) {
+    if (e1.shiftStart > e2.shiftStart) return 1;
+    if (e1.shiftStart < e2.shiftStart) return -1;
+    return 0;
+}
+
 function addEmployee(state, employee, selectedPlaceId, selectedDepartmentId) {
     var places = state.selected; //todo rename selected
 
@@ -193,12 +199,15 @@ function addEmployee(state, employee, selectedPlaceId, selectedDepartmentId) {
             avatarColor: employee.avatarColor,
             avatarImg: employee.avatarImg,
 
-            shiftStart: new Date(date.getFullYear(), date.getMonth() + 1, date.getDate(), 12).getTime(),
-            shiftEnd: new Date(date.getFullYear(), date.getMonth() + 1, date.getDate(), 12).getTime(),
+            shiftStart: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12).getTime(),
+            shiftEnd: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12).getTime(),
         })
         state.selectedEmployees.push(trackId);
         state.calendarLock = true;
     })
+
+    place.employees.sort(empComparator).reverse();
+
 
     return state;
 }

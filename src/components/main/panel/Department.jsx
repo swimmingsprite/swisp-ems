@@ -20,7 +20,9 @@ function startSlide(dispatchFunc) {
     intervalId = setInterval(() => {
         slideCount++;
 
-        if (slideCount > 5) timeValue = 60000 * 60;
+        if (slideCount > 30) endSlide();
+        if (slideCount > 8) timeValue = 60000 * 180;
+        else if (slideCount > 5) timeValue = 60000 * 60;
         else if (slideCount > 2) timeValue = 60000 * 15;
         dispatchFunc(timeValue);
     }, 200);
