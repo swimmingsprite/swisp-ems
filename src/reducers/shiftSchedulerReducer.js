@@ -262,10 +262,67 @@ function removeSelected(state, employee) {
 function selectedClick(state, employee) {
     console.log("CLICK SELECTED!")
     let filteredEmp = state.selectedEmployees.filter(e => e === employee.trackId);
+    //unselect if was selected
     if (filteredEmp.length > 0) state.selectedEmployees = state.selectedEmployees.filter(e => e !== employee.trackId);
+    //select if wasn't selected
     else state.selectedEmployees.push(employee.trackId)
     return state;
 
+}
+
+function handleStartClick(state, type) {
+    var selectedEmployees = [];
+    //find all selected employees
+    console.log("HANDLE START CLICK")
+    state.selected.forEach(place => {
+        place.employees.filter(e => {
+            var filEmp = state.selectedEmployees.filter(s => s === e.trackId);
+            if (!isEmpty(filEmp)) selectedEmployees.push(e);
+        })
+    });
+
+    console.log("SELECTED EMLPOYEES LENGTH "+selectedEmployees.length)
+    selectedEmployees.forEach((e) => {
+        /*
+        * posun dopredu ak nebude cas väčší ako end a bude to rovnaky deň
+        * posuň dozadu ak to bude stale rovnaky deň
+        *
+        *
+        * posun dopredu ak nie je viac ako 24h
+        * posun dozadu ak je viac ako start
+        *
+        * */
+        if (type === "START_ADD") {
+            if (e.shiftStart + (60000 * 5) <= e.shiftEnd
+                && isSameDate(new Date(e.shiftStart + (60000 * 5)), new Date(e.shiftStart) )) {
+
+                e.shiftStart += (60000 * 5);}
+        }
+        else if (type === "START_SUB") {
+            console.log("START SUB........... ")
+            console.log("EMPLOYEE JE:........... "+e);
+            if (isSameDate(new Date(e.shiftStart - (60000 * 5)), new Date(e.shiftStart) )) {
+                console.log("SHIFT START: "+e.shiftStart);
+                e.shiftStart -= (60000 * 5);
+                console.log("SHIFT START AFTER: "+e.shiftStart);
+            }
+        }
+        else if (type === "END_ADD") {
+            if ((e.shiftEnd + (60000 * 5)) - e.shiftStart <= (3600000 * 24)) {
+                e.shiftEnd += (60000 * 5);
+            }
+        }
+        else if (type === "END_SUB") {
+            if ((e.shiftEnd - (60000 * 5)) >= e.shiftStart) {
+                e.shiftEnd -= (60000 * 5);
+            }
+        }
+
+
+
+    })
+
+    return state;
 }
 
 export var shiftSchedulerReducer = (state = scheduler, action) => {
@@ -284,6 +341,10 @@ export var shiftSchedulerReducer = (state = scheduler, action) => {
             return {...removeSelected(state, action.employee)}
         case "SELECTED_CLICK":
             return {...selectedClick(state, action.employee)}
+        case "SHIFT_START_BACK_CLICK": return {...handleStartClick(state, "START_SUB")};
+        case "SHIFT_START_NEXT_CLICK": return {...handleStartClick(state, "START_ADD")};
+        case "SHIFT_END_BACK_CLICK": return {...handleStartClick(state, "END_SUB")};
+        case "SHIFT_END_NEXT_CLICK": return {...handleStartClick(state, "END_ADD")};
 
         default:
             return state;
@@ -305,12 +366,6 @@ function getNewPlace(id) {
 
 function isPlacePresent(places, placeId) {
     let filteredPlace = places.filter(p => p.id === placeId);
-    //place ešte nieje v state
-    // console.log("filteredPlace))
-    /*console.log("fil places length: " + places.length)
-    console.log("fil placeId: " + placeId)
-    console.log("fil places Id: " + places[0].id)
-    console.log("is empty : " + isEmpty(filteredPlace));*/
     if (isEmpty(filteredPlace)) return false;
     return true;
 }

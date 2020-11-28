@@ -9,10 +9,27 @@ import {
     uniqueDayStarts,
     uniqueTimeReducer
 } from "../../../reducers/shiftSchedulerReducer";
+import {useDispatch, useSelector} from "react-redux";
+
+var intervalId = null;
+
+function startSlide(dispatchFunc) {
+    dispatchFunc();
+    intervalId = setInterval(() => {
+        dispatchFunc();
+    }, 100);
+}
+
+function endSlide() {
+    clearInterval(intervalId);
+    intervalId = null;
+}
 
 export default function Department(props) {
 
+    let isEmployeesSelected = useSelector(state => state.shiftSchedulerReducer.selectedEmployees).length > 0;
     let dayStarts = props.employees.filter(e => e.departmentId === props.id);
+    let dispatch = useDispatch();
 
     return <div /*style={{marginBottom: "15px"}}*/>
         <h5>{props.name}:</h5>
@@ -55,27 +72,63 @@ export default function Department(props) {
 
                         .map(e => {
 
-                        return <div
-                        key={e.id}
-                        >
-                        <p style={{
-                        fontSize: "0.9rem",
-                        marginTop: "15px",
-                        textAlign: "center",
-                        marginBottom: "2px"
-                    }}>
-                        {timestampToShortTime(e.shiftStart)}
-                        &nbsp;-&nbsp;
-                        {timestampToShortTime(e.shiftEnd)}</p>
-                        <EmployeesList
-                        employees={
-                        dayStarts.filter(d => {
-                            return d.shiftStart === e.shiftStart && d.shiftEnd === e.shiftEnd
-                        })
+                            return <div
+                                key={e.id}
+                            >
+                                {isEmployeesSelected ?
+                                <div className="scheduler-date">
+                                    <span className="scheduler-arrow"
+                                          onMouseDown={() => {startSlide(() => dispatch({type: "SHIFT_START_BACK_CLICK"}))}}
+                                          onMouseUp={() => {endSlide()}}
+                                          onTouchStart={() => {startSlide(() => dispatch({type: "SHIFT_START_BACK_CLICK"}))}}
+                                          onTouchEnd={() => {endSlide()}}
+                                          onMouseOut={() => endSlide()}
+                                    >⯇</span>
+                                    <span >{timestampToShortTime(e.shiftStart)}</span>
+                                    <span className="scheduler-arrow"
+                                          onMouseDown={() => {startSlide(() => dispatch({type: "SHIFT_START_NEXT_CLICK"}))}}
+                                          onMouseUp={() => {endSlide()}}
+                                          onTouchStart={() => {startSlide(() => dispatch({type: "SHIFT_START_NEXT_CLICK"}))}}
+                                          onTouchEnd={() => {endSlide()}}
+                                          onMouseOut={() => endSlide()}
+                                    >⯈</span>
+                                    <span style={{transform: "translateY(-2px)", display: "inline-block"}}>-</span>
+                                    <span className="scheduler-arrow"
+                                          onMouseDown={() => {startSlide(() => dispatch({type: "SHIFT_END_BACK_CLICK"}))}}
+                                          onMouseUp={() => {endSlide()}}
+                                          onTouchStart={() => {startSlide(() => dispatch({type: "SHIFT_END_BACK_CLICK"}))}}
+                                          onTouchEnd={() => {endSlide()}}
+                                          onMouseOut={() => endSlide()}
+                                    >⯇</span>
+                                    <span >{timestampToShortTime(e.shiftEnd)}</span>
+                                    <span className="scheduler-arrow"
+                                          onMouseDown={() => {startSlide(() => dispatch({type: "SHIFT_END_NEXT_CLICK"}))}}
+                                          onMouseUp={() => {endSlide()}}
+                                          onTouchStart={() => {startSlide(() => dispatch({type: "SHIFT_END_NEXT_CLICK"}))}}
+                                          onTouchEnd={() => {endSlide()}}
+                                          onMouseOut={() => endSlide()}
+                                    >⯈</span>
+                                </div>
+                                :
+                                <p style={{
+                                    fontSize: "0.9rem",
+                                    marginTop: "15px",
+                                    textAlign: "center",
+                                    marginBottom: "2px"
+                                }}>
+                                    {timestampToShortTime(e.shiftStart)}
+                                    &nbsp;-&nbsp;
+                                    {timestampToShortTime(e.shiftEnd)}</p>}
 
-                    }/> {/*todo filte addr*/}
-                        </div>
-                    })}
+                                <EmployeesList
+                                    employees={
+                                        dayStarts.filter(d => {
+                                            return d.shiftStart === e.shiftStart && d.shiftEnd === e.shiftEnd
+                                        })
+
+                                    }/> {/*todo filte addr*/}
+                            </div>
+                        })}
 
                 </div>
             })}
