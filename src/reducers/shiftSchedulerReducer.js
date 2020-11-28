@@ -179,7 +179,6 @@ function addEmployee(state, employee, selectedPlaceId, selectedDepartmentId) {
     var place = getElementById(places, selectedPlaceId);
 
 
-
     state.selectedDays.forEach(d => {
         let date = new Date(d);
         let trackId = Math.floor(Math.random() * 100000000000);
@@ -196,8 +195,8 @@ function addEmployee(state, employee, selectedPlaceId, selectedDepartmentId) {
             avatarColor: employee.avatarColor,
             avatarImg: employee.avatarImg,
 
-            shiftStart: new Date(date.getFullYear(), date.getMonth()+1, date.getDate(), 12).getTime(),
-            shiftEnd: new Date(date.getFullYear(), date.getMonth()+1, date.getDate(), 12).getTime(),
+            shiftStart: new Date(date.getFullYear(), date.getMonth() + 1, date.getDate(), 12).getTime(),
+            shiftEnd: new Date(date.getFullYear(), date.getMonth() + 1, date.getDate(), 12).getTime(),
         })
         state.selectedEmployees.push(trackId);
         state.calendarLock = true;
@@ -208,14 +207,54 @@ function addEmployee(state, employee, selectedPlaceId, selectedDepartmentId) {
 
 
 function removeSelected(state, employee) {
-    state.selected.forEach(place => {
-        place.employees = place.employees.filter(e => e.trackId !== employee.trackId);
-        console.log("TRACK ID: "+employee.trackId+" name: "+employee.name);
+    /*
+    * ak je selectnuty - vymaz vsetkych selectnutych
+    *   1. filtruj selectnutych a ked sa nejaky rovna nejakemu v selectedDays,
+    *  tak ho vymaz so selectnutych aj so selected days
+    * ak selected length === 0 return
+    *
+    * ak nieje selectnuty - vymaz iba jeho
+    *
+    * */
+
+    let isSelected = state.selectedEmployees.filter(trackId => trackId === employee.trackId).length > 0;
+
+
+    //if (e.trackId === employee.trackId) found = true;
+
+    if (!isSelected) state.selected.forEach(place => {
+        let found = false;
+
+        //vymaz zmenu zamestnanca
+        place.employees = place.employees.filter(e => {
+            if (e.trackId === employee.trackId) found = true;
+            return e.trackId !== employee.trackId
+        });
+
+        console.log("TRACK ID: " + employee.trackId + " name: " + employee.name);
+
+        //vymaz employeeho zo selected employees
         state.selectedEmployees = state.selectedEmployees.filter(trackId => trackId !== employee.trackId)
-        state.selectedEmployees.forEach(e => console.log("SELECTED: "+e))
+
+        state.selectedEmployees.forEach(e => console.log("SELECTED: " + e))
+
+        //ak place nema ani jednoho employee vymza ho
         if (place.employees.length < 1) state.selected = state.selected.filter(p => p.id !== place.id)
-        // let filtered = place.employees.filter(e => e === employee.trackId);
+        if (found) return state;
     })
+    else state.selected.forEach(place => {
+        place.employees = place.employees.filter(e => {
+            let returnValue = true;
+            state.selectedEmployees = state.selectedEmployees.filter(trackId => {
+                if (trackId === e.trackId) returnValue = false;
+                return trackId !== e.trackId
+            })
+            return returnValue;
+        })
+        if (place.employees.length < 1) state.selected = state.selected.filter(p => p.id !== place.id)
+    })
+
+
     console.log("Remove selected...")
     return state;
 }
@@ -241,8 +280,10 @@ export var shiftSchedulerReducer = (state = scheduler, action) => {
             return addEmployee(state, action.employee, action.selectedPlaceId, action.selectedDepartmentId)
         case "CALENDAR_UNLOCK":
             return {...state, calendarLock: false};
-        case "SELECTED_REMOVE": return {...removeSelected(state, action.employee)}
-        case "SELECTED_CLICK": return {...selectedClick(state, action.employee)}
+        case "SELECTED_REMOVE":
+            return {...removeSelected(state, action.employee)}
+        case "SELECTED_CLICK":
+            return {...selectedClick(state, action.employee)}
 
         default:
             return state;
