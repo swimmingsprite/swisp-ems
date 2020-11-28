@@ -274,7 +274,7 @@ function handleStartClick(state, type, value) {
                 if (s === e.trackId) {selEmp = selEmp.filter(s => s !== e.trackId); return true;}
                 return false;
             });
-            //if (!isEmpty(filEmp))
+            if (!isEmpty(filEmp))
                 selectedEmployees.push(e);
         })
     });
@@ -290,24 +290,24 @@ function handleStartClick(state, type, value) {
         *
         * */
         if (type === "START_ADD") {
-            if (e.shiftStart + (60000 * 5) <= e.shiftEnd
-                && isSameDate(new Date(e.shiftStart + (60000 * 5)), new Date(e.shiftStart) )) {
+            if (e.shiftStart + value <= e.shiftEnd
+                && isSameDate(new Date(e.shiftStart + value), new Date(e.shiftStart) )) {
 
-                e.shiftStart += (60000 * 5);}
+                e.shiftStart += value;}
         }
         else if (type === "START_SUB") {
-            if (isSameDate(new Date(e.shiftStart - (60000 * 5)), new Date(e.shiftStart) )) {
-                e.shiftStart -= (60000 * 5);
+            if (isSameDate(new Date(e.shiftStart - value), new Date(e.shiftStart) )) {
+                e.shiftStart -= value;
             }
         }
         else if (type === "END_ADD") {
-            if ((e.shiftEnd + (60000 * 5)) - e.shiftStart <= (3600000 * 24)) {
-                e.shiftEnd += (60000 * 5);
+            if ((e.shiftEnd + value) - e.shiftStart <= (3600000 * 24)) {
+                e.shiftEnd += value;
             }
         }
         else if (type === "END_SUB") {
-            if ((e.shiftEnd - (60000 * 5)) >= e.shiftStart) {
-                e.shiftEnd -= (60000 * 5);
+            if ((e.shiftEnd - value) >= e.shiftStart) {
+                e.shiftEnd -= value;
             }
         }
 
@@ -334,10 +334,10 @@ export var shiftSchedulerReducer = (state = scheduler, action) => {
             return {...removeSelected(state, action.employee)}
         case "SELECTED_CLICK":
             return {...selectedClick(state, action.employee)}
-        case "SHIFT_START_BACK_CLICK": return {...handleStartClick(state, "START_SUB")};
-        case "SHIFT_START_NEXT_CLICK": return {...handleStartClick(state, "START_ADD")};
-        case "SHIFT_END_BACK_CLICK": return {...handleStartClick(state, "END_SUB")};
-        case "SHIFT_END_NEXT_CLICK": return {...handleStartClick(state, "END_ADD")};
+        case "SHIFT_START_BACK_CLICK": return {...handleStartClick(state, "START_SUB", action.value)};
+        case "SHIFT_START_NEXT_CLICK": return {...handleStartClick(state, "START_ADD", action.value)};
+        case "SHIFT_END_BACK_CLICK": return {...handleStartClick(state, "END_SUB", action.value)};
+        case "SHIFT_END_NEXT_CLICK": return {...handleStartClick(state, "END_ADD", action.value)};
 
         default:
             return state;

@@ -11,18 +11,26 @@ import {
 } from "../../../reducers/shiftSchedulerReducer";
 import {useDispatch, useSelector} from "react-redux";
 
-var intervalId = null;
+let intervalId = null;
+let timeValue = 60000 * 5;
+let slideCount = 0;
 
 function startSlide(dispatchFunc) {
-    dispatchFunc();
+    dispatchFunc(timeValue);
     intervalId = setInterval(() => {
-        dispatchFunc();
-    }, 100);
+        slideCount++;
+
+        if (slideCount > 5) timeValue = 60000 * 60;
+        else if (slideCount > 2) timeValue = 60000 * 15;
+        dispatchFunc(timeValue);
+    }, 200);
 }
 
 function endSlide() {
     clearInterval(intervalId);
     intervalId = null;
+    timeValue = 60000 * 5;
+    slideCount = 0;
 }
 
 export default function Department(props) {
@@ -78,33 +86,41 @@ export default function Department(props) {
                                 {isEmployeesSelected ?
                                 <div className="scheduler-date">
                                     <span className="scheduler-arrow"
-                                          onMouseDown={() => {startSlide(() => dispatch({type: "SHIFT_START_BACK_CLICK"}))}}
+                                          onMouseDown={() => {startSlide(() => dispatch({type: "SHIFT_START_BACK_CLICK"
+                                              , value: timeValue}))}}
                                           onMouseUp={() => {endSlide()}}
-                                          onTouchStart={() => {startSlide(() => dispatch({type: "SHIFT_START_BACK_CLICK"}))}}
+                                          onTouchStart={() => {startSlide(() => dispatch({type: "SHIFT_START_BACK_CLICK"
+                                              , value: timeValue}))}}
                                           onTouchEnd={() => {endSlide()}}
                                           onMouseOut={() => endSlide()}
                                     >⯇</span>
                                     <span >{timestampToShortTime(e.shiftStart)}</span>
                                     <span className="scheduler-arrow"
-                                          onMouseDown={() => {startSlide(() => dispatch({type: "SHIFT_START_NEXT_CLICK"}))}}
+                                          onMouseDown={() => {startSlide(() => dispatch({type: "SHIFT_START_NEXT_CLICK"
+                                              , value: timeValue}))}}
                                           onMouseUp={() => {endSlide()}}
-                                          onTouchStart={() => {startSlide(() => dispatch({type: "SHIFT_START_NEXT_CLICK"}))}}
+                                          onTouchStart={() => {startSlide(() => dispatch({type: "SHIFT_START_NEXT_CLICK"
+                                              , value: timeValue}))}}
                                           onTouchEnd={() => {endSlide()}}
                                           onMouseOut={() => endSlide()}
                                     >⯈</span>
                                     <span style={{transform: "translateY(-2px)", display: "inline-block"}}>-</span>
                                     <span className="scheduler-arrow"
-                                          onMouseDown={() => {startSlide(() => dispatch({type: "SHIFT_END_BACK_CLICK"}))}}
+                                          onMouseDown={() => {startSlide(() => dispatch({type: "SHIFT_END_BACK_CLICK"
+                                              , value: timeValue}))}}
                                           onMouseUp={() => {endSlide()}}
-                                          onTouchStart={() => {startSlide(() => dispatch({type: "SHIFT_END_BACK_CLICK"}))}}
+                                          onTouchStart={() => {startSlide(() => dispatch({type: "SHIFT_END_BACK_CLICK"
+                                              , value: timeValue}))}}
                                           onTouchEnd={() => {endSlide()}}
                                           onMouseOut={() => endSlide()}
                                     >⯇</span>
                                     <span >{timestampToShortTime(e.shiftEnd)}</span>
                                     <span className="scheduler-arrow"
-                                          onMouseDown={() => {startSlide(() => dispatch({type: "SHIFT_END_NEXT_CLICK"}))}}
+                                          onMouseDown={() => {startSlide(() => dispatch({type: "SHIFT_END_NEXT_CLICK"
+                                              , value: timeValue}))}}
                                           onMouseUp={() => {endSlide()}}
-                                          onTouchStart={() => {startSlide(() => dispatch({type: "SHIFT_END_NEXT_CLICK"}))}}
+                                          onTouchStart={() => {startSlide(() => dispatch({type: "SHIFT_END_NEXT_CLICK"
+                                              , value: timeValue}))}}
                                           onTouchEnd={() => {endSlide()}}
                                           onMouseOut={() => endSlide()}
                                     >⯈</span>
