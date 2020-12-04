@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo, useState} from "react";
 import EmployeesList from "./EmployeesList";
 import {getDayRangeWithDayOfWeek, isSameDate, timestampToShortTime} from "../../../logic/time/timeUtils";
 import {
@@ -14,6 +14,8 @@ import {useDispatch, useSelector} from "react-redux";
 let intervalId = null;
 let timeValue = 60000 * 5;
 let slideCount = 0;
+
+
 
 function startSlide(dispatchFunc) {
     dispatchFunc(timeValue);
@@ -40,9 +42,26 @@ export default function Department(props) {
     let isEmployeesSelected = useSelector(state => state.shiftSchedulerReducer.selectedEmployees).length > 0;
     let dayStarts = props.employees.filter(e => e.departmentId === props.id);
     let dispatch = useDispatch();
+    let [selectedDepartments, setSelectedDepartments] = useState(new Map());
+   // let getSelected = useMemo(() => allSelected, [allSelected]);
 
-    return <div /*style={{marginBottom: "15px"}}*/>
+
+    return <div /*style={{marginBottom: "15px"}}*/ style={{position: "relative"}}>
         <h5>{props.name}:</h5>
+        <input
+             onChange={(event) => {
+                 if (event.target.checked) {
+                     selectedDepartments.set(props.id, props.id)
+                     setSelectedDepartments(new Map(selectedDepartments));
+                 }
+                 else {
+                     selectedDepartments.delete(props.id);
+                     //dispatch
+                     setSelectedDepartments(new Map(selectedDepartments))
+                 }
+             }}
+            style={{top: 0, right: "15px", position: "absolute"}}
+            type={"checkbox"} />
 
 
         {dayStarts
@@ -81,12 +100,17 @@ export default function Department(props) {
                         .reduce(uniqueTimeReducer, [])
 
                         .map(e => {
+                            //todo if all selected is true add to selected
+                            if (selectedDepartments.has(props.id)) {
+                                console.log("SELECTED JE TRUE");
+                                dispatch({type: "SELECTED_CLICK", employee: e})
+                            }
 
                             return <div
                                 key={e.id}
                             >
                                 {isEmployeesSelected ?
-                                <div className="scheduler-date">
+                                <div className="scheduler-date" style={{userSelect: "none"}}>
                                     <span className="scheduler-arrow"
                                           onMouseDown={() => {startSlide(() => dispatch({type: "SHIFT_START_BACK_CLICK"
                                               , value: timeValue}))}}
