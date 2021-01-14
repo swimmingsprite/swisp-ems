@@ -2,3 +2,8 @@
 node_modules/
 build/
 /debug.log
+server/target
+server/.idea
+server/spring.iml
+server/HELP.md
+server/.gitignore

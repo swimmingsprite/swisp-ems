@@ -44,14 +44,15 @@ export default function Department(props) {
     let dispatch = useDispatch();
     let [selectedDepartments, setSelectedDepartments] = useState(new Map());
    // let getSelected = useMemo(() => allSelected, [allSelected]);
-
+    var dispatchedAll = false;
 
     return <div /*style={{marginBottom: "15px"}}*/ style={{position: "relative"}}>
         <h5>{props.name}:</h5>
         <input
              onChange={(event) => {
                  if (event.target.checked) {
-                     selectedDepartments.set(props.id, props.id)
+                     console.log("selecting");
+                     selectedDepartments.set(props.id, false)
                      setSelectedDepartments(new Map(selectedDepartments));
                  }
                  else {
@@ -99,12 +100,9 @@ export default function Department(props) {
                         //distinct
                         .reduce(uniqueTimeReducer, [])
 
-                        .map(e => {
+                        .map((e,i, a) => {
                             //todo if all selected is true add to selected
-                            if (selectedDepartments.has(props.id)) {
-                                console.log("SELECTED JE TRUE");
-                                dispatch({type: "SELECTED_CLICK", employee: e})
-                            }
+
 
                             return <div
                                 key={e.id}
@@ -164,9 +162,19 @@ export default function Department(props) {
 
                                 <EmployeesList
                                     employees={
-                                        dayStarts.filter(d => {
+                                        dayStarts
+                                            .map((e, i, a) => {
+                                                if (selectedDepartments.has(props.id) && !selectedDepartments.get(props.id)) {
+                                                    console.log("SELECTED JE TRUE");
+                                                    dispatch({type: "MULTIPLE_SELECTED", employees: a});
+                                                    selectedDepartments.set(props.id, true);
+                                                }
+                                                return e
+                                            })
+                                            .filter(d => {
                                             return d.shiftStart === e.shiftStart && d.shiftEnd === e.shiftEnd
                                         })
+
 
                                     }/> {/*todo filte addr*/}
                             </div>

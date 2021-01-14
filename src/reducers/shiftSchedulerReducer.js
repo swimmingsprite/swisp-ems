@@ -354,6 +354,12 @@ export var shiftSchedulerReducer = (state = scheduler, action) => {
             return {...removeSelected(state, action.employee)}
         case "SELECTED_CLICK":
             return {...selectedClick(state, action.employee)}
+        case "MULTIPLE_SELECTED":
+            let st = state;
+            action.employees.forEach(e => {
+                st = selectedClick(st, e)
+            })
+            return {state, ...st}
         case "SHIFT_START_BACK_CLICK":
             return {...handleStartClick(state, "START_SUB", action.value)};
         case "SHIFT_START_NEXT_CLICK":
