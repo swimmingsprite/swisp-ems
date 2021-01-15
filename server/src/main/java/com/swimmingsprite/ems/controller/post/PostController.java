@@ -14,14 +14,18 @@ public class PostController {
     @Autowired
     PostService service;
 
-    @GetMapping("/posts")
-    public List<Post> getNextPostsSequence(long lastTimestamp) {
-        return service.getNextPostsSequence(lastTimestamp);
+    @GetMapping("/posts/nextSequence/{lastPostTimestamp}")
+    public List<Post> getNextPostsSequence(@PathVariable long lastPostTimestamp) {
+        return service.getNextPostsSequence(lastPostTimestamp);
     }
 
-    @PostMapping
+    @PostMapping("/posts")
     public Post addPost(@Valid @RequestBody Post post) {
         return service.save(post);
     }
 
+    @DeleteMapping("/posts/{id}")
+    public void deletePost(@PathVariable String id) {
+        service.delete(id);
+    }
 }

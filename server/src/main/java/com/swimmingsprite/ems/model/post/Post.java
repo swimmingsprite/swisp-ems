@@ -19,6 +19,7 @@ public class Post implements Publishable<String> {
     @ManyToOne
     private AvatarUserImpl author;
     @NonNull
+    @Column(name = "publish_time", columnDefinition = "TIMESTAMP")
     private Instant publishTime;
     @NonNull
     private String publishContent;
