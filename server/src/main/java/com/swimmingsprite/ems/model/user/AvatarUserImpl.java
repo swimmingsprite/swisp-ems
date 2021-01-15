@@ -5,7 +5,7 @@ import org.springframework.lang.NonNull;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "employees")
+@Table(name = "avatar_users")
 public class AvatarUserImpl implements AvatarUser {
     @Id
     @GeneratedValue
@@ -64,10 +64,6 @@ public class AvatarUserImpl implements AvatarUser {
     @Override
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public void setName(String name) {
