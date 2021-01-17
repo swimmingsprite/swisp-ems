@@ -45,7 +45,6 @@ public class PostController {
         service.deleteById(postId, userId);
     }
 
-    // TODO: 16. 1. 2021 fetch current user from header token
     @PostMapping("/posts/{postId}/like")
     public void addLikeToPost(
             @PathVariable String postId,
@@ -53,7 +52,6 @@ public class PostController {
         service.giveLike(postId, userId);
     }
 
-    // TODO: 16. 1. 2021 fetch current user from header token
     @DeleteMapping("/posts/{postId}/like")
     public void removeLikeFromPost(
             @PathVariable String postId,
@@ -67,7 +65,6 @@ public class PostController {
         service.addComment(postId, comment, userId);
     }
 
-    // TODO: 16. 1. 2021 fetch current user from header token
     @DeleteMapping("/posts/comment/{commentId}")
     public void deleteCommentFromPost(
             @PathVariable String commentId,

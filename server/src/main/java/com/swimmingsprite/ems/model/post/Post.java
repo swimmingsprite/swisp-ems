@@ -1,7 +1,9 @@
 package com.swimmingsprite.ems.model.post;
 
+import com.swimmingsprite.ems.model.user.AvatarUser;
 import com.swimmingsprite.ems.model.user.AvatarUserImpl;
 import com.swimmingsprite.ems.model.user.Publishable;
+import com.swimmingsprite.ems.model.user.User;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 
@@ -12,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "post")
-public class Post implements Publishable<String> {
+public class Post implements Publishable<String, AvatarUserImpl> {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")

@@ -18,6 +18,10 @@ public class PostService {
         return repository.getNextPostsSequence(lastPostTimestamp);
     }
 
+    public List<Comment> getNextCommentsSequence(String postId, long lastCommentTimestamp, String userId) {
+        return repository.getNextCommentsSequence(lastCommentTimestamp, postId);
+    }
+
     public Post save(Post post, String userId) {
         return repository.save(post);
     }

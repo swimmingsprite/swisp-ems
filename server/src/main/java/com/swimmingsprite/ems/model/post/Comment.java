@@ -10,11 +10,14 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "comment")
-public class Comment implements Publishable<String> {
+public class Comment implements Publishable<String, AvatarUserImpl> {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
+
+    @ManyToOne
+    private Post post;
 
     @ManyToOne
     private AvatarUserImpl author;
@@ -30,8 +33,12 @@ public class Comment implements Publishable<String> {
         return id;
     }
 
-    public void setAuthor(AvatarUserImpl author) {
-        this.author = author;
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     public void setPublishTime(Instant publishTime) {
@@ -43,7 +50,7 @@ public class Comment implements Publishable<String> {
     }
 
     @Override
-    public User getAuthor() {
+    public AvatarUserImpl getAuthor() {
         return author;
     }
 
@@ -55,5 +62,9 @@ public class Comment implements Publishable<String> {
     @Override
     public String getPublishContent() {
         return publishContent;
+    }
+
+    public void setAuthor(AvatarUserImpl author) {
+        this.author = author;
     }
 }
