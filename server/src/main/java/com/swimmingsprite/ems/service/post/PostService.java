@@ -4,21 +4,20 @@ import com.swimmingsprite.ems.model.post.Comment;
 import com.swimmingsprite.ems.model.post.Post;
 import com.swimmingsprite.ems.repository.post.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class PostService {
     @Autowired
     PostRepository repository;
 
-    public List<Post> getNextPostsSequence(long lastPostTimestamp, String userId) {
+    public Set<Post> getNextPostsSequence(long lastPostTimestamp, String userId) {
         return repository.getNextPostsSequence(lastPostTimestamp);
     }
 
-    public List<Comment> getNextCommentsSequence(String postId, long lastCommentTimestamp, String userId) {
+    public Set<Comment> getNextCommentsSequence(String postId, long lastCommentTimestamp, String userId) {
         return repository.getNextCommentsSequence(lastCommentTimestamp, postId);
     }
 

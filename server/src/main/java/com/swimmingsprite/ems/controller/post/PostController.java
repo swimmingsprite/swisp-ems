@@ -2,17 +2,13 @@ package com.swimmingsprite.ems.controller.post;
 
 import com.swimmingsprite.ems.model.post.Comment;
 import com.swimmingsprite.ems.model.post.Post;
-import com.swimmingsprite.ems.model.user.AvatarUser;
-import com.swimmingsprite.ems.model.user.AvatarUserImpl;
 import com.swimmingsprite.ems.service.post.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.time.Instant;
-import java.util.List;
+import java.util.Set;
 
 @RestController
 public class PostController {
@@ -25,10 +21,18 @@ public class PostController {
     //todo AUTHENTICATION in INTERCEPTOR, AUTHORIZATION in SERVICE
 
     @GetMapping("/posts/nextSequence/{lastPostTimestamp}")
-    public List<Post> getNextPostsSequence(
+    public Set<Post> getNextPostsSequence(
             @PathVariable long lastPostTimestamp,
             @RequestHeader("userId") String userId) {
         return service.getNextPostsSequence(lastPostTimestamp, userId);
+    }
+
+    @GetMapping("/posts/{postId}/nextSequence/{lastPostTimestamp}")
+    public Set<Comment> getNextCommentsSequence(
+            @PathVariable long lastPostTimestamp,
+            @PathVariable String postId,
+            @RequestHeader("userId") String userId) {
+        return service.getNextCommentsSequence(postId,lastPostTimestamp, userId);
     }
 
     @PostMapping("/posts")

@@ -3,13 +3,11 @@ package com.swimmingsprite.ems.model.post;
 import com.swimmingsprite.ems.model.user.AvatarUser;
 import com.swimmingsprite.ems.model.user.AvatarUserImpl;
 import com.swimmingsprite.ems.model.user.Publishable;
-import com.swimmingsprite.ems.model.user.User;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.time.Instant;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -34,7 +32,7 @@ public class Post implements Publishable<String, AvatarUserImpl> {
     @OneToMany
     private Set<AvatarUserImpl> likes;
     @OneToMany
-    private List<Comment> comments;
+    private Set<Comment> comments;
 
     public Post() {}
 
@@ -79,11 +77,11 @@ public class Post implements Publishable<String, AvatarUserImpl> {
         this.likes = likes;
     }
 
-    public List<Comment> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
 }

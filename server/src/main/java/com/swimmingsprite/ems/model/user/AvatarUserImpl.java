@@ -14,8 +14,8 @@ public class AvatarUserImpl implements AvatarUser {
     private String id;
 
     @NonNull
-    @Column(name = "name")
-    private String name;
+    @OneToOne
+    private UserImpl user;
 
     @Column(name = "role")
     private String employeeRole;
@@ -28,47 +28,60 @@ public class AvatarUserImpl implements AvatarUser {
     @Column(name = "avatar_image", columnDefinition = "LONGTEXT")
     private String avatarImage;
 
-    public AvatarUserImpl(String name) {
-        this.name = name;
-    }
-
     public AvatarUserImpl() {}
-
-    public String getRole() {
-        return employeeRole;
-    }
-
-    public void setEmployeeRole(String employeeRole) {
-        this.employeeRole = employeeRole;
-    }
-
-    public String getAvatarColor() {
-        return avatarColor;
-    }
-
-    public void setAvatarColor(String avatarColor) {
-        this.avatarColor = avatarColor;
-    }
-
-    public String getAvatarImage() {
-        return avatarImage;
-    }
-
-    public void setAvatarImage(String avatarImage) {
-        this.avatarImage = avatarImage;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
 
     @Override
     public String getId() {
         return id;
     }
 
+    @Override
+    public String getAvatarColor() {
+        return avatarColor;
+    }
+
+    @Override
+    public void setAvatarColor(String avatarColor) {
+        this.avatarColor = avatarColor;
+    }
+
+    @Override
+    public String getAvatarImage() {
+        return avatarImage;
+    }
+
+    @Override
+    public void setAvatarImage(String avatarImage) {
+        this.avatarImage = avatarImage;
+    }
+
+    @Override
+    public User getUser() {
+        return user;
+    }
+
+    @Override
+    public void setUser(UserImpl avatarUser) {
+        this.user = avatarUser;
+    }
+
+    @Override
+    public String getRole() {
+        return employeeRole;
+    }
+
+    @Override
+    public void setRole(String role) {
+        this.employeeRole = role;
+    }
+
+    @Override
+    public String getName() {
+        return user.getName();
+    }
+
+    @Override
     public void setName(String name) {
-        this.name = name;
+        user.setName(name);
     }
 }
