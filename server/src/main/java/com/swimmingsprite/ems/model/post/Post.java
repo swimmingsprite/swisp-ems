@@ -2,30 +2,35 @@ package com.swimmingsprite.ems.model.post;
 
 import com.swimmingsprite.ems.model.user.AvatarUserImpl;
 import com.swimmingsprite.ems.model.user.Publishable;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "post")
 public class Post implements Publishable<String> {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
     @NonNull
     @ManyToOne
     private AvatarUserImpl author;
+
     @NonNull
     @Column(name = "publish_time", columnDefinition = "TIMESTAMP")
     private Instant publishTime;
+
     @NonNull
     private String publishContent;
 
     @OneToMany
-    private List<AvatarUserImpl> likes;
+    private Set<AvatarUserImpl> likes;
     @OneToMany
     private List<Comment> comments;
 
@@ -64,11 +69,11 @@ public class Post implements Publishable<String> {
         this.publishContent = content;
     }
 
-    public List<AvatarUserImpl> getLikes() {
+    public Set<AvatarUserImpl> getLikes() {
         return likes;
     }
 
-    public void setLikes(List<AvatarUserImpl> likes) {
+    public void setLikes(Set<AvatarUserImpl> likes) {
         this.likes = likes;
     }
 

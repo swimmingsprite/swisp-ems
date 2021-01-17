@@ -1,5 +1,6 @@
 package com.swimmingsprite.ems.model.user;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
@@ -8,7 +9,8 @@ import javax.persistence.*;
 @Table(name = "avatar_users")
 public class AvatarUserImpl implements AvatarUser {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
     @NonNull

@@ -1,5 +1,6 @@
 package com.swimmingsprite.ems.model;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
@@ -9,7 +10,8 @@ import java.util.Locale;
 @Table(name = "Address")
 public class Address {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
     @NonNull
     private String name;

@@ -3,6 +3,7 @@ package com.swimmingsprite.ems.model.post;
 import com.swimmingsprite.ems.model.user.AvatarUserImpl;
 import com.swimmingsprite.ems.model.user.Publishable;
 import com.swimmingsprite.ems.model.user.User;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -11,11 +12,16 @@ import java.time.Instant;
 @Table(name = "comment")
 public class Comment implements Publishable<String> {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
+
     @ManyToOne
     private AvatarUserImpl author;
+
+    @Column(name = "publish_time", columnDefinition = "TIMESTAMP")
     private Instant publishTime;
+
     private String publishContent;
 
     public Comment() {}
