@@ -11,7 +11,7 @@ import java.time.Instant;
 import java.util.List;
 
 @Repository
-public interface AbsenceRepository extends JpaRepository<Absence, Integer> {
+public interface AbsenceRepository extends JpaRepository<Absence, String> {
    /* @Query("select a from Absence a where a.shift.endTime >= ?1 and a.shift.endTime <= ?2")
     List<Absence> findAllByDate(Instant dayStartTimestamp, Instant dayEndTimestamp);
 

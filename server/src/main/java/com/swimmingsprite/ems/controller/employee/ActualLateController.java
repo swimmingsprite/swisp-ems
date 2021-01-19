@@ -14,7 +14,7 @@ public class ActualLateController {
     @Autowired
     private ActualService actualService;
 
-    @GetMapping("/actual/lates/{placeId}")
+    @GetMapping("/actual/late/{placeId}")
     public List<CurrentLateDTO> getAllCurrentLatesByPlace(
             @PathVariable("placeId") String placeId
     ) {

@@ -1,6 +1,7 @@
 package com.swimmingsprite.ems.controller.employee;
 
 
+import com.swimmingsprite.ems.dto.employee.ArrivalDTO;
 import com.swimmingsprite.ems.service.employee.ActualService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,21 +13,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/employees")
-public class ActualController {
-    /*@Autowired
+public class ActualPresentController {
+    @Autowired
     ActualService service;
 
-    @GetMapping("/actual/departments/{PlaceId}")
-    public List<ActualDepartmentsDTO> getEmployeesByDepartment(
-            @PathVariable("PlaceId") Integer placeId
+    @GetMapping("/actual/present/{placeId}")
+    public List<ArrivalDTO> getAllCurrentPresentByPlace(
+            @PathVariable("placeId") String placeId
     ) {
-        return service.getEmployeesByDepartmentsAndPlace(placeId);
+        return service.getAllCurrentPresentByPlace(placeId);
     }
 
-    @GetMapping("/actual/employees/{PlaceId}")
-    public List<PersonIdNameEntity> getAllEmployeesInDepartment(
-            @PathVariable("PlaceId") Integer placeId
-    ) {
-        return service.getEmployeesList(placeId);
-    }*/
 }

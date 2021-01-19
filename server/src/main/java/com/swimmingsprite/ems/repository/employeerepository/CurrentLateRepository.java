@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CurrentLateRepository extends JpaRepository<CurrentLate, Integer> {
+public interface CurrentLateRepository extends JpaRepository<CurrentLate, String> {
     @Query("select new com.swimmingsprite.ems.dto.employee.CurrentLateDTO(c.shift.startTime, c.shift.id, c.employee) " +
             "from  CurrentLate c " +
             "where c.shift.department.place.id = ?1 " +

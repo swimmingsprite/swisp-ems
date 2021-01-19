@@ -39,9 +39,10 @@ public interface AttendanceRepository extends JpaRepository<InOut, String> {
             "order by i.exit desc")
     List<ExitDTO> findAllExitsByTimeRangeAndPlace(long start, long end, String placeId);
 
-
-
-
-
-
+    @Query("select new com.swimmingsprite.ems.dto.employee.ArrivalDTO(i.arrival, i.employee) " +
+            "from  InOut i " +
+            "where i.place.id = ?1 " +
+            "and (i.arrival is not null and i.exit is null) " +
+            "order by i.arrival desc")
+    List<ArrivalDTO> getAllCurrentPresentByPlace(String placeId);
 }

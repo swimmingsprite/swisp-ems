@@ -1,6 +1,7 @@
 package com.swimmingsprite.ems.service.employee;
 
 
+import com.swimmingsprite.ems.dto.employee.ArrivalDTO;
 import com.swimmingsprite.ems.dto.employee.CurrentLateDTO;
 import com.swimmingsprite.ems.model.attendance.CurrentLate;
 import com.swimmingsprite.ems.repository.employeerepository.AttendanceRepository;
@@ -20,5 +21,10 @@ public class ActualService {
     public List<CurrentLateDTO> getAllCurrentLatesByPlace(String placeId) {
         //authorization
         return currentLateRepository.getAllCurrentLatesByPlace(placeId);
+    }
+
+    public List<ArrivalDTO> getAllCurrentPresentByPlace(String placeId) {
+        //authorization
+        return attendanceRepository.getAllCurrentPresentByPlace(placeId);
     }
 }
