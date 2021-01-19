@@ -1,6 +1,6 @@
 package com.swimmingsprite.ems.repository.employeerepository;
 
-import com.swimmingsprite.ems.entity.InOut;
+import com.swimmingsprite.ems.model.attendance.InOut;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -23,8 +23,8 @@ public interface AttendanceRepository extends JpaRepository<InOut, Integer> {
     @Query("select i from InOut i where i.arrival < ?1 and i.exit is null")
     List<InOut> findAllArrivalsWithoutExit(Instant currentInstant);
 
-    @Query("select i from InOut i where i.arrival < ?1 and i.exit is null and i.terminal.place.id = ?2")
-    List<InOut> findAllArrivalsWithoutExitByPlace(Instant currentInstant, int placeId);
+    /*@Query("select i from InOut i where i.arrival < ?1 and i.exit is null and i.terminal.place.id = ?2")
+    List<InOut> findAllArrivalsWithoutExitByPlace(Instant currentInstant, int placeId);*/
 
 
 }

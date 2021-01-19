@@ -18,8 +18,9 @@ public interface AbsenceRepository extends JpaRepository<Absence, Integer> {
             "where a.shift.endTime >= ?1 " +
             "and a.shift.endTime <= ?2 " +
             "and a.shift.department.place.id = ?3")
-    List<Absence> findAllByDateAndPlace(Instant dayStartTimestamp, Instant dayEndTimestamp, int placeId);
+    List<Absence> findAllByDateAndPlace(Instant dayStartTimestamp, Instant dayEndTimestamp, String placeId);
 
+    // TODO: 17. 1. 2021 repositories check
     @Query("select a from Absence a where (a.employee.user.id = ?1)")
     List<Absence> findAllByEmployeeId(String employeeId);
 
@@ -27,5 +28,5 @@ public interface AbsenceRepository extends JpaRepository<Absence, Integer> {
             "where (a.shift.endTime >= ?1 " +
             "and a.shift.endTime <= ?2) " +
             "and a.employee.id = ?3")
-    List<Absence> findAllByEmployeeIdAndDate(Instant dayStartTimestamp, Instant dayEndTimestamp, Integer employeeId);
+    List<Absence> findAllByEmployeeIdAndDate(Instant dayStartTimestamp, Instant dayEndTimestamp, String employeeId);
 }
