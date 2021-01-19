@@ -24,10 +24,6 @@ public class CurrentLate {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public Shift getShift() {
         return shift;
     }

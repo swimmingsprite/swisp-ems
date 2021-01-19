@@ -1,24 +1,24 @@
 package com.swimmingsprite.ems.controller.employee;
 
 
+import com.swimmingsprite.ems.dto.employee.CurrentLateDTO;
+import com.swimmingsprite.ems.service.employee.ActualService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/employees")
 public class ActualLateController {
-    /*@Autowired
+    @Autowired
     private ActualService actualService;
 
-    @GetMapping("/actual/lates/{PlaceId}")
+    @GetMapping("/actual/lates/{placeId}")
     public List<CurrentLateDTO> getAllCurrentLatesByPlace(
-            @PathVariable("PlaceId") int placeId,
-            @RequestParam(value = "minutesOffset", required = false) Integer minutesOffset
-            ) {
-        return actualService.getAllCurrentLatesByPlace(placeId, Optional.ofNullable(minutesOffset).orElse(0));
-    }*/
+            @PathVariable("placeId") String placeId
+    ) {
+        return actualService.getAllCurrentLatesByPlace(placeId);
+    }
 
 }
