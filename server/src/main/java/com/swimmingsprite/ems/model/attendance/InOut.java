@@ -1,5 +1,6 @@
 package com.swimmingsprite.ems.model.attendance;
 
+import com.swimmingsprite.ems.model.Place;
 import com.swimmingsprite.ems.model.user.AvatarUserImpl;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -21,6 +22,10 @@ public class InOut {
 
     @Column(name = "_exit")
     private Instant exit;
+
+    @ManyToOne
+    @Column(name = "place_id")
+    private Place place;
 
     @NotNull
     @OneToOne(fetch = FetchType.LAZY)
