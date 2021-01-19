@@ -30,14 +30,14 @@ public interface AttendanceRepository extends JpaRepository<InOut, String> {
             "where i.place.id = ?3 " +
             "and (i.arrival >= ?1 and i.arrival <= ?2) " +
             "order by i.arrival desc")
-    List<ArrivalDTO> findAllArrivalsByTimeRangeAndPlace(Instant start, Instant end, String placeId);
+    List<ArrivalDTO> findAllArrivalsByTimeRangeAndPlace(long start, long end, String placeId);
 
     @Query("select new com.swimmingsprite.ems.dto.employee.ExitDTO(i.exit, i.employee) " +
             "from  InOut i " +
             "where i.place.id = ?3 " +
             "and (i.exit >= ?1 and i.exit <= ?2) " +
             "order by i.exit desc")
-    List<ExitDTO> findAllExitsByTimeRangeAndPlace(Instant start, Instant end, String placeId);
+    List<ExitDTO> findAllExitsByTimeRangeAndPlace(long start, long end, String placeId);
 
 
 
