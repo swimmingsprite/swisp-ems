@@ -6,7 +6,6 @@ import com.swimmingsprite.ems.model.user.AvatarUserImpl;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.persistence.Id;
 
 @Entity
 @Table(name = "absence")
@@ -21,7 +20,6 @@ public class Absence {
     private Shift shift;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "employee_id")
     private AvatarUserImpl employee;
 
     public String getId() {

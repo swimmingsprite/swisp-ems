@@ -8,6 +8,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "avatar_users")
 public class AvatarUserImpl implements AvatarUser {
+
+    // TODO: 19. 1. 2021 AvatarUserImpl should extends User
+
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")

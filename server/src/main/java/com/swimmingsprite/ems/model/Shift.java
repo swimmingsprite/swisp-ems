@@ -4,7 +4,6 @@ import com.swimmingsprite.ems.model.user.AvatarUserImpl;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.Instant;

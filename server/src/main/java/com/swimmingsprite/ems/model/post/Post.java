@@ -1,6 +1,5 @@
 package com.swimmingsprite.ems.model.post;
 
-import com.swimmingsprite.ems.model.user.AvatarUser;
 import com.swimmingsprite.ems.model.user.AvatarUserImpl;
 import com.swimmingsprite.ems.model.user.Publishable;
 import org.hibernate.annotations.GenericGenerator;

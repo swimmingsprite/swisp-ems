@@ -24,7 +24,6 @@ public class InOut {
     private Instant exit;
 
     @ManyToOne
-    @Column(name = "place_id")
     private Place place;
 
     @NotNull

@@ -5,7 +5,6 @@ import com.swimmingsprite.ems.model.user.AvatarUser;
 import com.swimmingsprite.ems.model.user.AvatarUserImpl;
 
 import javax.persistence.*;
-import javax.persistence.Id;
 
 @Entity
 @Table(name = "current_late")

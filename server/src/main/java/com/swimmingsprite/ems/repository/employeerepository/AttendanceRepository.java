@@ -1,6 +1,7 @@
 package com.swimmingsprite.ems.repository.employeerepository;
 
 import com.swimmingsprite.ems.dto.employee.ArrivalDTO;
+import com.swimmingsprite.ems.dto.employee.ExitDTO;
 import com.swimmingsprite.ems.model.attendance.InOut;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -31,12 +32,12 @@ public interface AttendanceRepository extends JpaRepository<InOut, String> {
             "order by i.arrival desc")
     List<ArrivalDTO> findAllArrivalsByTimeRangeAndPlace(Instant start, Instant end, String placeId);
 
-    @Query("select new com.swimmingsprite.ems.dto.employee.ExitDTO(i.arrival, i.employee) " +
+    @Query("select new com.swimmingsprite.ems.dto.employee.ExitDTO(i.exit, i.employee) " +
             "from  InOut i " +
             "where i.place.id = ?3 " +
             "and (i.exit >= ?1 and i.exit <= ?2) " +
             "order by i.exit desc")
-    List<ArrivalDTO> findAllExitsByTimeRangeAndPlace(Instant start, Instant end, String placeId);
+    List<ExitDTO> findAllExitsByTimeRangeAndPlace(Instant start, Instant end, String placeId);
 
 
 

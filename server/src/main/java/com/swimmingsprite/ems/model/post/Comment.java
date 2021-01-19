@@ -2,7 +2,6 @@ package com.swimmingsprite.ems.model.post;
 
 import com.swimmingsprite.ems.model.user.AvatarUserImpl;
 import com.swimmingsprite.ems.model.user.Publishable;
-import com.swimmingsprite.ems.model.user.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

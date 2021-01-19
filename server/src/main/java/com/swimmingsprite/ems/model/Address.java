@@ -3,8 +3,10 @@ package com.swimmingsprite.ems.model;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 
-import javax.persistence.*;
-import java.util.Locale;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "Address")

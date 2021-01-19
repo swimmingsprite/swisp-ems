@@ -1,11 +1,13 @@
 package com.swimmingsprite.ems.controller.employee;
 
-import com.swimmingsprite.ems.dto.AttendanceDTO;
-import com.swimmingsprite.ems.service.employeeservice.AttendanceService;
+import com.swimmingsprite.ems.dto.employee.ExitDTO;
+import com.swimmingsprite.ems.service.employee.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -16,37 +18,17 @@ public class AttendanceController {
     @Autowired
     AttendanceService service;
 
-    @GetMapping("/attendances")
-    public List<AttendanceDTO> attendancesToday(
-            @RequestParam(value = "minutesOffset", required = false) Integer minutesOffset,
-            @PathVariable("placeId") int placeId
+
+    @GetMapping("/arrival/all/{placeId}")
+    public List<ExitDTO> findAllExitsByTimeRangeAndPlace(
+            @NotNull @PathVariable("placeId") String placeId,
+            @RequestHeader("startTimestamp") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) Instant startTimestamp,
+            @RequestHeader("endTimestamp") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) Instant endTimestamp
     ) {
-        return service.attendancesToday(Optional.ofNullable(minutesOffset).orElse(0), placeId);
-    }
-
-    @GetMapping("/attendances/{placeId}/date/{date}")
-    public List<AttendanceDTO> attendancesByDate(
-            @PathVariable("date")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate,
-            @RequestParam(value = "minutesOffset", required = false) Integer minutesOffset,
-            @PathVariable("placeId") int placeId
-            ) {
-        return service.attendancesByDateAndPlace(localDate, Optional.ofNullable(minutesOffset).orElse(0), placeId);
-    }
-
-    @GetMapping("/attendances/{employeeId}")
-    public List<AttendanceDTO> attendancesByEmployeeId(@PathVariable Integer employeeId,
-                                                       @RequestParam(value = "minutesOffset", required = false) Integer minutesOffset) {
-        return service.attendancesByEmployeeId(employeeId, Optional.ofNullable(minutesOffset).orElse(0));
-    }
-
-    @GetMapping("/attendances/{employeeId}/date/{date}")
-    public List<AttendanceDTO> attendancesByEmployeeIdAndDate(@PathVariable int employeeId,
-                                                          @PathVariable("date")
-                                                          @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate,
-                                                          @RequestParam(value = "minutesOffset", required = false) Integer minutesOffset
-    ) {
-        return service.attendancesByEmployeeIdAndDate(employeeId, localDate, Optional.ofNullable(minutesOffset).orElse(0));
+        System.out.println("start je: "+startTimestamp);
+        System.out.println("end je: "+endTimestamp);
+        return null;
+        //return service.attendancesByEmployeeIdAndDate(employeeId, localDate, Optional.ofNullable(minutesOffset).orElse(0));
     }
 
 
