@@ -14,6 +14,7 @@ public class ShiftDTO {
     private Set<AvatarUserImpl> employees;
     private String placeId;
     private String departmentId;
+    private String departmentName;
     private Instant start;
     private Instant end;
 
@@ -21,12 +22,14 @@ public class ShiftDTO {
                     Set<AvatarUserImpl> employees,
                     String placeId,
                     String departmentId,
+                    String departmentName,
                     Instant startTime,
                     Instant endTime) {
         this.id = id;
         this.employees = employees;
         this.placeId = placeId;
         this.departmentId = departmentId;
+        this.departmentName = departmentName;
         this.start = startTime;
         this.end = endTime;
     }
@@ -77,5 +80,13 @@ public class ShiftDTO {
 
     public void setEnd(Instant end) {
         this.end = end;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 }
