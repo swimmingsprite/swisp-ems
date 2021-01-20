@@ -2,13 +2,13 @@ package com.swimmingsprite.ems.dto.shift;
 
 import java.util.Set;
 
-public class ShiftSchedulerDTO {
+public class ShiftScheduleDTO {
     private long start;
     private long end;
     private String departmentId;
     private Set<String> shiftEmployeesIds;
 
-    public ShiftSchedulerDTO(long start, long end, String departmentId, Set<String> shiftEmployeesIds) {
+    public ShiftScheduleDTO(long start, long end, String departmentId, Set<String> shiftEmployeesIds) {
         this.start = start;
         this.end = end;
         this.departmentId = departmentId;
