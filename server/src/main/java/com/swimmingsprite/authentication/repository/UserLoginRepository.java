@@ -11,5 +11,5 @@ public interface UserLoginRepository extends JpaRepository<UserLogin, String> {
             "from UserLogin u " +
             "where u.login = ?1 " +
             "and u.password = ?2")
-    String getUserId(String login, String passwordHash);
+    String getUserIdByCredentials(String login, String passwordHash);
 }

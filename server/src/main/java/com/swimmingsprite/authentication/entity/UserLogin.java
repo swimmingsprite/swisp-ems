@@ -1,6 +1,7 @@
 package com.swimmingsprite.authentication.entity;
 
 import com.swimmingsprite.ems.model.user.UserImpl;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -8,7 +9,12 @@ import javax.persistence.*;
 @Table(name = "user_login")
 public class UserLogin {
     @Id
-    @OneToOne
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private String id;
+
+
+    @ManyToOne
     private UserImpl user;
 
     @Column(name = "login")

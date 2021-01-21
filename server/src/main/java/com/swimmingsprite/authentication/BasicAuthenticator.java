@@ -5,6 +5,8 @@ import com.swimmingsprite.authentication.login.LoginAuthenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class BasicAuthenticator implements AuthenticationManager {
     @Autowired
@@ -13,8 +15,9 @@ public class BasicAuthenticator implements AuthenticationManager {
     @Override
     public Token login(String login, String password) {
         if (login == null || password == null) throw new InvalidCredentialsException("Login and password can't be empty!");
-        if (!loginAuthenticator.validate(login, password))
-            throw new InvalidCredentialsException("Wrong login or password!");
+        String userId = Optional
+                .ofNullable(loginAuthenticator.validate(login, password))
+                .orElseThrow(() -> new InvalidCredentialsException("Wrong login or password!"));
 
     }
 
@@ -24,12 +27,12 @@ public class BasicAuthenticator implements AuthenticationManager {
     }
 
     @Override
-    public void logout(Token token) {
+    public void logout(String token) {
 
     }
 
     @Override
-    public String getUserId(Token token) {
+    public String getUserId(String token) {
         return null;
     }
 
