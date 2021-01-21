@@ -3,6 +3,7 @@ package com.swimmingsprite.ems.model.attendance;
 import com.swimmingsprite.ems.model.Shift;
 import com.swimmingsprite.ems.model.user.AvatarUser;
 import com.swimmingsprite.ems.model.user.AvatarUserImpl;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -10,7 +11,9 @@ import javax.persistence.*;
 @Table(name = "current_late")
 public class CurrentLate {
     @Id
-    private int id;
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private String id;
 
     @OneToOne
     @JoinColumn(name = "shift_id")
@@ -20,7 +23,7 @@ public class CurrentLate {
     @JoinColumn(name = "employee_id")
     private AvatarUserImpl employee;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

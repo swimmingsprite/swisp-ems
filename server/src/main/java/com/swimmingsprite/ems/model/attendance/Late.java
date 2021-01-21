@@ -3,6 +3,7 @@ package com.swimmingsprite.ems.model.attendance;
 import com.swimmingsprite.ems.model.Shift;
 import com.swimmingsprite.ems.model.user.AvatarUser;
 import com.swimmingsprite.ems.model.user.AvatarUserImpl;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -10,10 +11,10 @@ import java.time.Instant;
 @Entity
 @Table(name = "late")
 public class Late {
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int Id;
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private String id;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "shift_id")
@@ -26,12 +27,12 @@ public class Late {
     @Column(name = "arrived_time")
     private Instant arrivedTime;
 
-    public int getId() {
-        return Id;
+    public String getId() {
+        return id;
     }
 
-    public void setId(int id) {
-        Id = id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Shift getShift() {
