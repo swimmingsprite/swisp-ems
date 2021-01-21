@@ -22,16 +22,7 @@ public class BasicAuthenticator implements AuthenticationManager {
                 .ofNullable(loginAuthenticator.validate(login, password))
                 .orElseThrow(() -> new InvalidCredentialsException("Wrong login or password!"));
 
-        //try again in case if non unique token was generated
-        for (int x = 0; x < 5; x++) {
-            Token newToken = new TokenGenerator().generate(userId);
-            if (tokenService.isUnique(newToken)) {
-                tokenService.addToken(newToken);
-                return newToken;
-            }
-        }
-
-        throw new RuntimeException("Server error.");
+        return tokenService.generateToken(userId);
     }
 
     @Override
