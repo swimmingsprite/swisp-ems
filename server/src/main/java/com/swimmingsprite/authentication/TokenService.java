@@ -3,15 +3,17 @@ package com.swimmingsprite.authentication;
 import com.swimmingsprite.authentication.repository.TokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-@Component
+@Service
 public class TokenService {
     @Autowired
-    TokenRepository tokenRepository;
+    private TokenRepository tokenRepository;
 
-    Map<String, Token> tokens;
+    private Map<String, Token> tokens = new ConcurrentHashMap<>();
 
     protected void addToken(Token token) {
         Token newToken = tokenRepository.save(token);
