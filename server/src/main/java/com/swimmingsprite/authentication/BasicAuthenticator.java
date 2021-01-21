@@ -7,10 +7,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BasicAuthenticator implements AuthenticationManager {
-
+    @Autowired
+    LoginAuthenticator loginAuthenticator;
 
     @Override
     public Token login(String login, String password) {
+        return null;
+    }
+
+    @Override
+    public Token refresh(String refreshToken) {
         return null;
     }
 
