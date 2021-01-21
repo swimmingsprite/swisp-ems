@@ -11,6 +11,9 @@ public class UserLogin {
     @OneToOne
     private UserImpl user;
 
+    @Column(name = "login")
+    private String login;
+
     @Column(name = "password")
     private String password;
 
@@ -20,6 +23,10 @@ public class UserLogin {
     }
 
     public UserLogin() {}
+
+    public String getLogin() {
+        return login;
+    }
 
     public UserImpl getUser() {
         return user;

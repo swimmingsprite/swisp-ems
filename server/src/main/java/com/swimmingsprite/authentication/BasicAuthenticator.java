@@ -13,9 +13,9 @@ public class BasicAuthenticator implements AuthenticationManager {
     @Override
     public Token login(String login, String password) {
         if (login == null || password == null) throw new InvalidCredentialsException("Login and password can't be empty!");
-        if (!loginAuthenticator.isLoginValid(login, password))
+        if (!loginAuthenticator.validate(login, password))
             throw new InvalidCredentialsException("Wrong login or password!");
-        
+
     }
 
     @Override

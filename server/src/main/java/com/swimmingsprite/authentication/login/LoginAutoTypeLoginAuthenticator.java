@@ -1,5 +1,6 @@
 package com.swimmingsprite.authentication.login;
 
+import com.swimmingsprite.authentication.exception.InvalidCredentialsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,16 +10,16 @@ public class LoginAutoTypeLoginAuthenticator implements LoginAuthenticator {
     LoginAuthenticatorProvider loginAuthenticatorProvider;
 
     @Override
-    public boolean isLoginValid(String login, String password) {
+    public String validate(String login, String password) {
         if (LoginUtils.isEmail(login)) return loginAuthenticatorProvider
                 .getEmailLoginAuthenticator()
-                .isLoginValid(login, password);
+                .validate(login, password);
 
         else if (LoginUtils.isPhoneNumber(login)) return loginAuthenticatorProvider
                 .getPhoneNumberLoginAuthenticator()
-                .isLoginValid(login, password);
+                .validate(login, password);
 
-        return false;
+        throw new InvalidCredentialsException("Wrong login or password!");
     }
 
 
