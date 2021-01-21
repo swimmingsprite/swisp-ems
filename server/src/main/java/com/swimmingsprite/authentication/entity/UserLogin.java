@@ -1,8 +1,6 @@
-package com.swimmingsprite.ems.model.login;
+package com.swimmingsprite.authentication.entity;
 
 import com.swimmingsprite.ems.model.user.UserImpl;
-import org.springframework.context.annotation.Primary;
-import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 

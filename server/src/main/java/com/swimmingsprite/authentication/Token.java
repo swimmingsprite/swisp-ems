@@ -1,12 +1,9 @@
-package com.swimmingsprite.ems.authentication;
+package com.swimmingsprite.authentication;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.Instant;
 
 @Entity
