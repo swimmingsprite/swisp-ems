@@ -1,10 +1,14 @@
 package com.swimmingsprite.authentication;
 
+import com.swimmingsprite.authentication.exception.UnknownTokenException;
 import com.swimmingsprite.authentication.repository.TokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -14,6 +18,16 @@ public class TokenService {
     private TokenRepository tokenRepository;
 
     private Map<String, Token> tokens = new ConcurrentHashMap<>();
+
+    @EventListener(ApplicationReadyEvent.class)
+    public void fetchAllTokensAfterStart() {
+        List<Token> dbTokens = tokenRepository.findAll();
+        dbTokens.forEach(token -> {
+            tokens.put(token.getToken(), token);
+            tokens.put(token.getRefreshToken(), token);
+            tokens.put(token.getUserId(), token);
+        });
+    }
 
     protected void addToken(Token token) {
         Token newToken = tokenRepository.save(token);
@@ -27,5 +41,57 @@ public class TokenService {
                 && tokens.get(token.getRefreshToken()) == null
                 && tokens.get(token.getUserId()) == null) return true;
         return false;
+    }
+
+    protected Token refreshToken(String refreshToken) {
+        Token token = tokens.get(refreshToken);
+        if (token == null || !token.getRefreshToken().equals(refreshToken))
+            throw new UnknownTokenException("Unknown refresh token!");
+
+        Token newToken = generateToken(token.getUserId());
+        removeToken(token);
+        return newToken;
+    }
+
+    protected void removeToken(String deleteToken) {
+        Token token = tokens.get(deleteToken);
+        if (token != null
+                && token.getToken().equals(deleteToken)) {
+            tokenRepository.delete(token);
+            tokens.remove(token.getUserId());
+            tokens.remove(token.getRefreshToken());
+            tokens.remove(token.getToken());
+        }
+        else {
+            throw new UnknownTokenException("Unknown token.");
+        }
+
+    }
+
+    protected void removeToken(Token token) {
+        tokenRepository.delete(token);
+        tokens.remove(token.getUserId());
+        tokens.remove(token.getRefreshToken());
+        tokens.remove(token.getToken());
+    }
+
+    protected String getUserId(String clientToken) {
+        Token token = tokens.get(clientToken);
+        if (token != null
+                && token.getToken().equals(clientToken)) {
+            return token.getUserId();
+        }
+        throw new UnknownTokenException("Unknown token.");
+    }
+
+    protected Token generateToken(String userId) {
+        for (int x = 0; x < 5; x++) {
+            Token newToken = new TokenGenerator().generate(userId);
+            if (isUnique(newToken)) {
+                addToken(newToken);
+                return newToken;
+            }
+        }
+        throw new RuntimeException("Server error.");
     }
 }

@@ -22,6 +22,7 @@ public class BasicAuthenticator implements AuthenticationManager {
                 .ofNullable(loginAuthenticator.validate(login, password))
                 .orElseThrow(() -> new InvalidCredentialsException("Wrong login or password!"));
 
+        //try again in case if non unique token was generated
         for (int x = 0; x < 5; x++) {
             Token newToken = new TokenGenerator().generate(userId);
             if (tokenService.isUnique(newToken)) {
@@ -35,17 +36,17 @@ public class BasicAuthenticator implements AuthenticationManager {
 
     @Override
     public Token refresh(String refreshToken) {
-        return null;
+        return tokenService.refreshToken(refreshToken);
     }
 
     @Override
     public void logout(String token) {
-
+        tokenService.removeToken(token);
     }
 
     @Override
     public String getUserId(String token) {
-        return null;
+        return tokenService.getUserId(token);
     }
 
 }
