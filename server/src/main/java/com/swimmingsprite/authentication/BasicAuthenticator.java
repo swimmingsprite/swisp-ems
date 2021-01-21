@@ -1,6 +1,6 @@
 package com.swimmingsprite.authentication;
 
-import com.swimmingsprite.authentication.login.EmailLoginAuthenticator;
+import com.swimmingsprite.authentication.exception.InvalidCredentialsException;
 import com.swimmingsprite.authentication.login.LoginAuthenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,10 @@ public class BasicAuthenticator implements AuthenticationManager {
 
     @Override
     public Token login(String login, String password) {
-        return null;
+        if (login == null || password == null) throw new InvalidCredentialsException("Login and password can't be empty!");
+        if (!loginAuthenticator.isLoginValid(login, password))
+            throw new InvalidCredentialsException("Wrong login or password!");
+        
     }
 
     @Override

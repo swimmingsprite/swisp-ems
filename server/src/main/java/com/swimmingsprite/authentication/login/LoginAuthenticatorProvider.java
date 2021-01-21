@@ -9,6 +9,7 @@ public class LoginAuthenticatorProvider {
     private EmailLoginAuthenticator emailLoginAuthenticator;
     @Autowired
     private PhoneNumberLoginAuthenticator phoneNumberLoginAuthenticator;
+
     protected EmailLoginAuthenticator getEmailLoginAuthenticator() {
         return emailLoginAuthenticator;
     }
