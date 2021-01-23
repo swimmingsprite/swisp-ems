@@ -57,7 +57,7 @@ public class TokenService {
 
     protected void removeToken(String deleteToken) {
         Token token = tokens.get(deleteToken);
-        if (token == null && token.getToken().equals(deleteToken))
+        if (token == null || !token.getToken().equals(deleteToken))
             throw new UnknownTokenException("Unknown token!");
         if (isExpired(token)) throw new ExpiredTokenException("Token expired!");
 

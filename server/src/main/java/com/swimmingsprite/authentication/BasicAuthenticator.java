@@ -1,6 +1,7 @@
 package com.swimmingsprite.authentication;
 
 import com.swimmingsprite.authentication.exception.InvalidCredentialsException;
+import com.swimmingsprite.authentication.exception.UnknownTokenException;
 import com.swimmingsprite.authentication.login.LoginAuthenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,16 +28,19 @@ public class BasicAuthenticator implements AuthenticationManager {
 
     @Override
     public Token refresh(String refreshToken) {
+        if (refreshToken == null) throw new UnknownTokenException("Unknown token!");
         return tokenService.refreshToken(refreshToken);
     }
 
     @Override
     public void logout(String token) {
+        if (token == null) throw new UnknownTokenException("Unknown token!");
         tokenService.removeToken(token);
     }
 
     @Override
     public String getUserId(String token) {
+        if (token == null) throw new UnknownTokenException("Unknown token!");
         return tokenService.getUserId(token);
     }
 
