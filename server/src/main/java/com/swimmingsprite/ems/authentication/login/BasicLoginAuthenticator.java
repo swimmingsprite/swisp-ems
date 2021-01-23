@@ -1,15 +1,12 @@
-package com.swimmingsprite.authentication.login;
+package com.swimmingsprite.ems.authentication.login;
 
-import com.swimmingsprite.authentication.exception.InvalidCredentialsException;
-import com.swimmingsprite.authentication.repository.UserLoginRepository;
+import com.swimmingsprite.ems.authentication.repository.UserLoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-import java.util.Optional;
 
 @Component
 public class BasicLoginAuthenticator implements LoginAuthenticator {

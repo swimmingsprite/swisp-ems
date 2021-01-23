@@ -1,12 +1,11 @@
-package com.swimmingsprite.authentication;
+package com.swimmingsprite.ems.authentication;
 
-import com.swimmingsprite.authentication.exception.ExpiredTokenException;
-import com.swimmingsprite.authentication.exception.UnknownTokenException;
-import com.swimmingsprite.authentication.repository.TokenRepository;
+import com.swimmingsprite.ems.authentication.exception.ExpiredTokenException;
+import com.swimmingsprite.ems.authentication.exception.UnknownTokenException;
+import com.swimmingsprite.ems.authentication.repository.TokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;

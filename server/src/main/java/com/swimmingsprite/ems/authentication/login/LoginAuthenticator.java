@@ -1,6 +1,5 @@
-package com.swimmingsprite.authentication.login;
+package com.swimmingsprite.ems.authentication.login;
 
-import com.swimmingsprite.authentication.exception.InvalidCredentialsException;
 import org.springframework.stereotype.Component;
 
 @Component

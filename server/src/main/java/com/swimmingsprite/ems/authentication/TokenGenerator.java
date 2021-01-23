@@ -1,9 +1,7 @@
-package com.swimmingsprite.authentication;
+package com.swimmingsprite.ems.authentication;
 
-import javax.persistence.TemporalType;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAdjusters;
 import java.util.UUID;
 
 public class TokenGenerator {

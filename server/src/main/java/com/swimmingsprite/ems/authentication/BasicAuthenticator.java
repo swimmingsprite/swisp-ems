@@ -1,8 +1,8 @@
-package com.swimmingsprite.authentication;
+package com.swimmingsprite.ems.authentication;
 
-import com.swimmingsprite.authentication.exception.InvalidCredentialsException;
-import com.swimmingsprite.authentication.exception.UnknownTokenException;
-import com.swimmingsprite.authentication.login.LoginAuthenticator;
+import com.swimmingsprite.ems.authentication.exception.InvalidCredentialsException;
+import com.swimmingsprite.ems.authentication.exception.UnknownTokenException;
+import com.swimmingsprite.ems.authentication.login.LoginAuthenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

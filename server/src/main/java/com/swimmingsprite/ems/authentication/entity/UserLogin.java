@@ -1,4 +1,4 @@
-package com.swimmingsprite.authentication.entity;
+package com.swimmingsprite.ems.authentication.entity;
 
 import com.swimmingsprite.ems.model.user.UserImpl;
 import org.hibernate.annotations.GenericGenerator;

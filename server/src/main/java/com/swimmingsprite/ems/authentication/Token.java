@@ -1,4 +1,4 @@
-package com.swimmingsprite.authentication;
+package com.swimmingsprite.ems.authentication;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;

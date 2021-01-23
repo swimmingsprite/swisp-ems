@@ -1,8 +1,8 @@
-package com.swimmingsprite.exceptionhandler;
+package com.swimmingsprite.ems.exceptionhandler;
 
-import com.swimmingsprite.authentication.exception.ExpiredTokenException;
-import com.swimmingsprite.authentication.exception.InvalidCredentialsException;
-import com.swimmingsprite.authentication.exception.UnknownTokenException;
+import com.swimmingsprite.ems.authentication.exception.ExpiredTokenException;
+import com.swimmingsprite.ems.authentication.exception.InvalidCredentialsException;
+import com.swimmingsprite.ems.authentication.exception.UnknownTokenException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

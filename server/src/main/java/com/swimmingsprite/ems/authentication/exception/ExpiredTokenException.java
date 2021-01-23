@@ -1,4 +1,4 @@
-package com.swimmingsprite.authentication.exception;
+package com.swimmingsprite.ems.authentication.exception;
 
 public class ExpiredTokenException extends RuntimeException {
     public ExpiredTokenException(String message) {

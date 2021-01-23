@@ -1,8 +1,8 @@
-package com.swimmingsprite.authentication;
+package com.swimmingsprite.ems.authentication;
 
-import com.swimmingsprite.authentication.exception.InvalidCredentialsException;
-import com.swimmingsprite.authentication.exception.ExpiredTokenException;
-import com.swimmingsprite.authentication.exception.UnknownTokenException;
+import com.swimmingsprite.ems.authentication.exception.InvalidCredentialsException;
+import com.swimmingsprite.ems.authentication.exception.ExpiredTokenException;
+import com.swimmingsprite.ems.authentication.exception.UnknownTokenException;
 import org.springframework.stereotype.Component;
 
 @Component

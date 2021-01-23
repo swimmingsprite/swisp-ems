@@ -1,8 +1,7 @@
-package com.swimmingsprite.authentication.repository;
+package com.swimmingsprite.ems.authentication.repository;
 
-import com.swimmingsprite.authentication.Token;
+import com.swimmingsprite.ems.authentication.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository

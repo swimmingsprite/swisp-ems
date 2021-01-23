@@ -1,7 +1,7 @@
-package com.swimmingsprite.interceptor;
+package com.swimmingsprite.ems.interceptor;
 
-import com.swimmingsprite.authentication.AuthenticationManager;
-import com.swimmingsprite.authentication.exception.UnknownTokenException;
+import com.swimmingsprite.ems.authentication.AuthenticationManager;
+import com.swimmingsprite.ems.authentication.exception.UnknownTokenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.server.ServerErrorException;
 import org.springframework.web.servlet.HandlerInterceptor;

@@ -1,4 +1,4 @@
-package com.swimmingsprite.exceptionhandler;
+package com.swimmingsprite.ems.exceptionhandler;
 
 import java.time.Instant;
 
