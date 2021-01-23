@@ -1,11 +1,16 @@
 package com.swimmingsprite.ems.authentication;
 
+import com.swimmingsprite.ems.authentication.entity.UserLogin;
 import com.swimmingsprite.ems.authentication.exception.InvalidCredentialsException;
 import com.swimmingsprite.ems.authentication.exception.UnknownTokenException;
 import com.swimmingsprite.ems.authentication.login.LoginAuthenticator;
+import com.swimmingsprite.ems.model.user.AvatarUserImpl;
+import com.swimmingsprite.ems.model.user.UserImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Component
@@ -14,6 +19,22 @@ public class BasicAuthenticator implements AuthenticationManager {
     LoginAuthenticator loginAuthenticator;
     @Autowired
     TokenService tokenService;
+
+    @Autowired
+    EntityManager entityManager;
+
+     @Transactional
+     public void test() {
+        AvatarUserImpl avatarUser = new AvatarUserImpl();
+        UserImpl user = new UserImpl();
+        avatarUser.setUser(user);
+        avatarUser.setName("John Barney");
+        UserLogin userLogin = new UserLogin(user, "admin", "admin");
+
+        entityManager.persist(user);
+        entityManager.persist(avatarUser);
+        entityManager.persist(userLogin);
+    }
 
     @Override
     public Token login(String login, String password) {

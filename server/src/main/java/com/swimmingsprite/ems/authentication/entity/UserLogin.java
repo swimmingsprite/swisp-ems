@@ -4,6 +4,7 @@ import com.swimmingsprite.ems.model.user.UserImpl;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "user_login")
@@ -15,17 +16,21 @@ public class UserLogin {
 
 
     @ManyToOne
+    @NotNull
     private UserImpl user;
 
     @Column(name = "login")
+    @NotNull
     private String login;
 
     @Column(name = "password")
+    @NotNull
     private String password;
 
-    public UserLogin(UserImpl user, String password) {
+    public UserLogin(UserImpl user, String login, String password) {
         this.user = user;
         this.password = password;
+        this.login = login;
     }
 
     public UserLogin() {}
