@@ -28,20 +28,22 @@ public class BasicAuthenticator implements AuthenticationManager {
 
     @Override
     public Token refresh(String refreshToken) {
-        if (refreshToken == null) throw new UnknownTokenException("Unknown token!");
+        if (refreshToken == null) throw new UnknownTokenException("Token not present!");
         return tokenService.refreshToken(refreshToken);
     }
 
     @Override
     public void logout(String token) {
-        if (token == null) throw new UnknownTokenException("Unknown token!");
+        if (token == null) throw new UnknownTokenException("Token not present!");
         tokenService.removeToken(token);
     }
 
     @Override
     public String getUserId(String token) {
-        if (token == null) throw new UnknownTokenException("Unknown token!");
+        if (token == null) throw new UnknownTokenException("Token not present!");
         return tokenService.getUserId(token);
     }
+
+
 
 }
