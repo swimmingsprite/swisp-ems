@@ -25,9 +25,16 @@ public class BasicLoginAuthenticator implements LoginAuthenticator {
             throw new RuntimeException("Server error.");
         }
         byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-        String hashPassword = Base64.getEncoder().encodeToString(hash);
 
-        return repository.getUserIdByCredentials(login, hashPassword);
+        return repository.getUserIdByCredentials(login, bytesToHex(hash));
+    }
+
+    private String bytesToHex(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
     }
 
 
