@@ -1,8 +1,7 @@
 package com.swimmingsprite.ems.model.attendance;
 
 import com.swimmingsprite.ems.model.Shift;
-import com.swimmingsprite.ems.model.user.AvatarUser;
-import com.swimmingsprite.ems.model.user.AvatarUserImpl;
+import com.swimmingsprite.ems.model.user.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -20,7 +19,7 @@ public class Absence {
     private Shift shift;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private AvatarUserImpl employee;
+    private User employee;
 
     public String getId() {
         return id;
@@ -35,11 +34,11 @@ public class Absence {
         this.shift = shift;
     }
 
-    public AvatarUser getEmployee() {
+    public User getEmployee() {
         return employee;
     }
 
-    public void setEmployee(AvatarUserImpl employee) {
+    public void setEmployee(User employee) {
         this.employee = employee;
     }
 }

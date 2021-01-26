@@ -1,14 +1,14 @@
 package com.swimmingsprite.ems.dto.employee;
 
-import com.swimmingsprite.ems.model.user.AvatarUserImpl;
+import com.swimmingsprite.ems.model.user.User;
 
 import java.time.Instant;
 
 public class ExitDTO {
     private Instant exitTime;
-    private AvatarUserImpl employee;
+    private User employee;
 
-    public ExitDTO(Instant exitTime, AvatarUserImpl employee) {
+    public ExitDTO(Instant exitTime, User employee) {
         this.exitTime = exitTime;
         this.employee = employee;
     }
@@ -21,11 +21,11 @@ public class ExitDTO {
         this.exitTime = exitTime;
     }
 
-    public AvatarUserImpl getEmployee() {
+    public User getEmployee() {
         return employee;
     }
 
-    public void setEmployee(AvatarUserImpl employee) {
+    public void setEmployee(User employee) {
         this.employee = employee;
     }
 }

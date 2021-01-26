@@ -46,7 +46,7 @@ var scheduler = {
     currentMonth: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
     calendarLock: false,
     selected: [
-        {
+        /*{
             id: 97486256,
             name: "Kaufland Stredočeská",
             employees: [
@@ -148,7 +148,8 @@ var scheduler = {
                     shiftStart: 1646996400000 + 3600000 * 0,
                     shiftEnd: 1646996400000 + 3600000 * 14,
                 },
-                /*{
+
+                {
                     departmentId: 25454,
                     departmentName: "oddelenie hračiek",
 
@@ -161,9 +162,9 @@ var scheduler = {
                     //dayEnd: 1646199204314 + 3600000 * 5,
                     shiftStart: 1646099204314 + 3600000 * 2,
                     shiftEnd: 1646099204314 + 3600000 * 251,
-                },*/
+                },
             ],
-        },
+        }, */
     ]
 };
 

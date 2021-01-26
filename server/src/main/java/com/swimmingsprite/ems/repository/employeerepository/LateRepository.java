@@ -11,7 +11,7 @@ import java.time.Instant;
 import java.util.List;
 
 @Repository
-public interface LateRepository extends JpaRepository<Late, Integer> {
+public interface LateRepository extends JpaRepository<Late, String> {
 
     /*@Query("select l from Late l where l.arrivedTime >= ?1 and l.arrivedTime <= ?2")
     List<Late> findAllByDate(Instant dayStartTimestamp, Instant dayEndTimestamp);
@@ -28,7 +28,7 @@ public interface LateRepository extends JpaRepository<Late, Integer> {
     @Query("select new com.swimmingsprite.ems.dto.employee.LateDTO(l.arrivedTime, l.shift.id, l.employee) " +
             "from  Late l " +
             "where l.shift.department.place.id = ?1 " +
-            "and (l.arrivedTime >= ?1 and l.arrivedTime <= ?2) " +
+            "and (l.arrivedTime >= ?2 and l.arrivedTime <= ?3) " +
             "order by l.arrivedTime desc")
     List<LateDTO> getAllLatesByTimeRangeAndPlace(String placeId, long startTimestamp, long endTimestamp);
 }

@@ -1,17 +1,13 @@
 package com.swimmingsprite.ems.dto.shift;
 
-import com.swimmingsprite.ems.model.Department;
-import com.swimmingsprite.ems.model.user.AvatarUserImpl;
+import com.swimmingsprite.ems.model.user.User;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.Set;
 
 public class ShiftDTO {
     private String id;
-    private Set<AvatarUserImpl> employees;
+    private Set<User> employees;
     private String placeId;
     private String departmentId;
     private String departmentName;
@@ -19,7 +15,7 @@ public class ShiftDTO {
     private Instant end;
 
     public ShiftDTO(String id,
-                    Set<AvatarUserImpl> employees,
+                    Set<User> employees,
                     String placeId,
                     String departmentId,
                     String departmentName,
@@ -42,11 +38,11 @@ public class ShiftDTO {
         this.id = id;
     }
 
-    public Set<AvatarUserImpl> getEmployees() {
+    public Set<User> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Set<AvatarUserImpl> employees) {
+    public void setEmployees(Set<User> employees) {
         this.employees = employees;
     }
 

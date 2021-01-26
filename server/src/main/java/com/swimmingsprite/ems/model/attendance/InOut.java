@@ -1,7 +1,7 @@
 package com.swimmingsprite.ems.model.attendance;
 
 import com.swimmingsprite.ems.model.Place;
-import com.swimmingsprite.ems.model.user.AvatarUserImpl;
+import com.swimmingsprite.ems.model.user.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -29,12 +29,12 @@ public class InOut {
     @NotNull
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
-    private AvatarUserImpl employee;
+    private User employee;
 
     public InOut() {
     }
 
-    public InOut(Instant arrival, Instant exit, AvatarUserImpl employee) {
+    public InOut(Instant arrival, Instant exit, User employee) {
         this.arrival = arrival;
         this.exit = exit;
         this.employee = employee;
@@ -60,11 +60,11 @@ public class InOut {
         this.exit = exit;
     }
 
-    public AvatarUserImpl getEmployee() {
+    public User getEmployee() {
         return employee;
     }
 
-    public void setEmployee(AvatarUserImpl employee) {
+    public void setEmployee(User employee) {
         this.employee = employee;
     }
 }

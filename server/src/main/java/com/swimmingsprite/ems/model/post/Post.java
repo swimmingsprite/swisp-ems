@@ -1,6 +1,6 @@
 package com.swimmingsprite.ems.model.post;
 
-import com.swimmingsprite.ems.model.user.AvatarUserImpl;
+import com.swimmingsprite.ems.model.user.User;
 import com.swimmingsprite.ems.model.user.Publishable;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "post")
-public class Post implements Publishable<String, AvatarUserImpl> {
+public class Post implements Publishable<String, User> {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
@@ -19,7 +19,7 @@ public class Post implements Publishable<String, AvatarUserImpl> {
 
     @NonNull
     @ManyToOne
-    private AvatarUserImpl author;
+    private User author;
 
     @NonNull
     @Column(name = "publish_time", columnDefinition = "TIMESTAMP")
@@ -29,7 +29,7 @@ public class Post implements Publishable<String, AvatarUserImpl> {
     private String publishContent;
 
     @OneToMany
-    private Set<AvatarUserImpl> likes;
+    private Set<User> likes;
     @OneToMany
     private Set<Comment> comments;
 
@@ -41,11 +41,11 @@ public class Post implements Publishable<String, AvatarUserImpl> {
 
     @NonNull
     @Override
-    public AvatarUserImpl getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(@NonNull AvatarUserImpl author) {
+    public void setAuthor(@NonNull User author) {
         this.author = author;
     }
 
@@ -68,11 +68,11 @@ public class Post implements Publishable<String, AvatarUserImpl> {
         this.publishContent = content;
     }
 
-    public Set<AvatarUserImpl> getLikes() {
+    public Set<User> getLikes() {
         return likes;
     }
 
-    public void setLikes(Set<AvatarUserImpl> likes) {
+    public void setLikes(Set<User> likes) {
         this.likes = likes;
     }
 

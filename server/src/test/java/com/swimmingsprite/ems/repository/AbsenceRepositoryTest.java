@@ -1,15 +1,12 @@
 package com.swimmingsprite.ems.repository;
 
 import com.swimmingsprite.ems.dto.employee.AbsenceDTO;
-import com.swimmingsprite.ems.model.Address;
 import com.swimmingsprite.ems.model.Department;
 import com.swimmingsprite.ems.model.Place;
 import com.swimmingsprite.ems.model.Shift;
 import com.swimmingsprite.ems.model.attendance.Absence;
-import com.swimmingsprite.ems.model.user.AvatarUserImpl;
-import com.swimmingsprite.ems.model.user.UserImpl;
+import com.swimmingsprite.ems.model.user.User;
 import com.swimmingsprite.ems.repository.employeerepository.AbsenceRepository;
-import org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,9 +16,6 @@ import javax.transaction.Transactional;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

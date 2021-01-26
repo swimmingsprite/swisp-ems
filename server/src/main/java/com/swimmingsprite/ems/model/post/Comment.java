@@ -1,6 +1,6 @@
 package com.swimmingsprite.ems.model.post;
 
-import com.swimmingsprite.ems.model.user.AvatarUserImpl;
+import com.swimmingsprite.ems.model.user.User;
 import com.swimmingsprite.ems.model.user.Publishable;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -9,7 +9,7 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "comment")
-public class Comment implements Publishable<String, AvatarUserImpl> {
+public class Comment implements Publishable<String, User> {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
@@ -19,7 +19,7 @@ public class Comment implements Publishable<String, AvatarUserImpl> {
     private Post post;
 
     @ManyToOne
-    private AvatarUserImpl author;
+    private User author;
 
     @Column(name = "publish_time", columnDefinition = "TIMESTAMP")
     private Instant publishTime;
@@ -49,7 +49,7 @@ public class Comment implements Publishable<String, AvatarUserImpl> {
     }
 
     @Override
-    public AvatarUserImpl getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
@@ -63,7 +63,7 @@ public class Comment implements Publishable<String, AvatarUserImpl> {
         return publishContent;
     }
 
-    public void setAuthor(AvatarUserImpl author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 }

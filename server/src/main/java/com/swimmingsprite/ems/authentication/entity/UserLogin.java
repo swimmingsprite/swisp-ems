@@ -1,6 +1,6 @@
 package com.swimmingsprite.ems.authentication.entity;
 
-import com.swimmingsprite.ems.model.user.UserImpl;
+import com.swimmingsprite.ems.model.user.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,7 +17,7 @@ public class UserLogin {
 
     @ManyToOne
     @NotNull
-    private UserImpl user;
+    private User user;
 
     @Column(name = "login")
     @NotNull
@@ -27,7 +27,7 @@ public class UserLogin {
     @NotNull
     private String password;
 
-    public UserLogin(UserImpl user, String login, String password) {
+    public UserLogin(User user, String login, String password) {
         this.user = user;
         this.password = password;
         this.login = login;
@@ -39,7 +39,7 @@ public class UserLogin {
         return login;
     }
 
-    public UserImpl getUser() {
+    public User getUser() {
         return user;
     }
 

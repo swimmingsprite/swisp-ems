@@ -1,25 +1,25 @@
 package com.swimmingsprite.ems.dto.employee;
 
-import com.swimmingsprite.ems.model.user.AvatarUserImpl;
+import com.swimmingsprite.ems.model.user.User;
 
 import java.time.Instant;
 
 public class LateDTO {
-    private AvatarUserImpl employee;
+    private User employee;
     private String shiftId;
     private Instant arrivedTime;
 
-    public LateDTO(Instant arrivedTime, String shiftId, AvatarUserImpl employee) {
+    public LateDTO(Instant arrivedTime, String shiftId, User employee) {
         this.employee = employee;
         this.shiftId = shiftId;
         this.arrivedTime = arrivedTime;
     }
 
-    public AvatarUserImpl getEmployee() {
+    public User getEmployee() {
         return employee;
     }
 
-    public void setEmployee(AvatarUserImpl employee) {
+    public void setEmployee(User employee) {
         this.employee = employee;
     }
 

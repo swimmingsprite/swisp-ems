@@ -2,15 +2,12 @@ package com.swimmingsprite.ems.controller.authentication;
 
 import com.swimmingsprite.ems.authentication.AuthenticationManager;
 import com.swimmingsprite.ems.authentication.Token;
-import com.swimmingsprite.ems.authentication.entity.UserLogin;
 import com.swimmingsprite.ems.authentication.exception.InvalidCredentialsException;
 import com.swimmingsprite.ems.authentication.exception.UnknownTokenException;
-import com.swimmingsprite.ems.model.user.AvatarUserImpl;
-import com.swimmingsprite.ems.model.user.UserImpl;
+import com.swimmingsprite.ems.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.EntityManager;

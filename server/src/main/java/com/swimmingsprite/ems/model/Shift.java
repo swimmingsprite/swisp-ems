@@ -1,6 +1,6 @@
 package com.swimmingsprite.ems.model;
 
-import com.swimmingsprite.ems.model.user.AvatarUserImpl;
+import com.swimmingsprite.ems.model.user.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -24,7 +24,7 @@ public class Shift {
             @JoinColumn(name = "employee_id")
     })
     @Size(min = 1)
-    private Set<AvatarUserImpl> shiftEmployees;
+    private Set<User> shiftEmployees;
 
     @NotNull
     @OneToOne
@@ -43,11 +43,11 @@ public class Shift {
         return id;
     }
 
-    public @Size(min = 1) Set<AvatarUserImpl> getShiftEmployees() {
+    public @Size(min = 1) Set<User> getShiftEmployees() {
         return shiftEmployees;
     }
 
-    public void setShiftEmployees(@Size(min = 1) Set<AvatarUserImpl> shiftEmployees) {
+    public void setShiftEmployees(@Size(min = 1) Set<User> shiftEmployees) {
         this.shiftEmployees = shiftEmployees;
     }
 

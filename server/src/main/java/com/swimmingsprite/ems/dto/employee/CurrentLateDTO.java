@@ -1,15 +1,15 @@
 package com.swimmingsprite.ems.dto.employee;
 
-import com.swimmingsprite.ems.model.user.AvatarUserImpl;
+import com.swimmingsprite.ems.model.user.User;
 
 import java.time.Instant;
 
 public class CurrentLateDTO {
     private Instant shiftStart;
     private String shiftId;
-    private AvatarUserImpl employee;
+    private User employee;
 
-    public CurrentLateDTO(Instant shiftStart, String shiftId, AvatarUserImpl employee) {
+    public CurrentLateDTO(Instant shiftStart, String shiftId, User employee) {
         this.shiftStart = shiftStart;
         this.shiftId = shiftId;
         this.employee = employee;
@@ -31,11 +31,11 @@ public class CurrentLateDTO {
         this.shiftId = shiftId;
     }
 
-    public AvatarUserImpl getEmployee() {
+    public User getEmployee() {
         return employee;
     }
 
-    public void setEmployee(AvatarUserImpl employee) {
+    public void setEmployee(User employee) {
         this.employee = employee;
     }
 }

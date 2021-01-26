@@ -1,8 +1,7 @@
 package com.swimmingsprite.ems.model.attendance;
 
 import com.swimmingsprite.ems.model.Shift;
-import com.swimmingsprite.ems.model.user.AvatarUser;
-import com.swimmingsprite.ems.model.user.AvatarUserImpl;
+import com.swimmingsprite.ems.model.user.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -22,7 +21,7 @@ public class Late {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
-    private AvatarUserImpl employee;
+    private User employee;
 
     @Column(name = "arrived_time")
     private Instant arrivedTime;
@@ -51,11 +50,11 @@ public class Late {
         this.arrivedTime = arrivedTime;
     }
 
-    public AvatarUser getEmployee() {
+    public User getEmployee() {
         return employee;
     }
 
-    public void setEmployee(AvatarUserImpl employee) {
+    public void setEmployee(User employee) {
         this.employee = employee;
     }
 }
