@@ -1,20 +1,28 @@
 package com.swimmingsprite.ems.configuration;
 
 import com.swimmingsprite.ems.interceptor.AuthenticationInterceptor;
+import com.swimmingsprite.ems.interceptor.AdminManagerAuthorizationInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class AuthenticationConfiguration implements WebMvcConfigurer {
+public class SecurityConfiguration implements WebMvcConfigurer {
     @Autowired
     AuthenticationInterceptor authenticationInterceptor;
+    @Autowired
+    AdminManagerAuthorizationInterceptor adminManagerAuthorizationInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authenticationInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/error", "/loUser/**", "/logout/**", "/refresh/**");
+                .excludePathPatterns("/error", "/login/**", "/logout/**", "/refresh/**");
+
+        registry.addInterceptor(adminManagerAuthorizationInterceptor)
+                .addPathPatterns("/employees/**", "/shifts/**")
+                .excludePathPatterns("/shifts/myShifts/**");
+
     }
 }

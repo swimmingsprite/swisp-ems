@@ -18,7 +18,7 @@ public class User {
     private String name;
 
     @NotNull
-    @Column(name = "userPermission")
+    @Column(name = "user_permission")
     private String userPermission;
 
     @Column(name = "role")

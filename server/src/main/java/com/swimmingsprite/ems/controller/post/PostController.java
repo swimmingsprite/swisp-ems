@@ -23,8 +23,8 @@ public class PostController {
     @GetMapping("/posts/nextSequence/{lastPostTimestamp}")
     public Set<Post> getNextPostsSequence(
             @PathVariable long lastPostTimestamp,
-            @RequestHeader("userId") String userId) {
-        return service.getNextPostsSequence(lastPostTimestamp, userId);
+            @RequestHeader("Bearer") String token) {
+        return service.getNextPostsSequence(lastPostTimestamp, token);
     }
 
     @GetMapping("/posts/{postId}/nextSequence/{lastPostTimestamp}")
