@@ -26,7 +26,7 @@ public class TokenService {
         dbTokens.forEach(token -> {
             tokens.put(token.getToken(), token);
             tokens.put(token.getRefreshToken(), token);
-            tokens.put(token.getUserId(), token);
+            //tokens.put(token.getUserId(), token);
         });
     }
 
@@ -34,13 +34,12 @@ public class TokenService {
         Token newToken = tokenRepository.save(token);
         tokens.put(newToken.getToken(), newToken);
         tokens.put(newToken.getRefreshToken(), newToken);
-        tokens.put(newToken.getUserId(), newToken);
+        //tokens.put(newToken.getUserId(), newToken);
     }
 
     protected boolean isUnique(Token token) {
         if (tokens.get(token.getToken()) == null
-                && tokens.get(token.getRefreshToken()) == null
-                && tokens.get(token.getUserId()) == null) return true;
+                && tokens.get(token.getRefreshToken()) == null) return true;
         return false;
     }
 
@@ -61,7 +60,6 @@ public class TokenService {
         if (isExpired(token)) throw new ExpiredTokenException("Token expired!");
 
         tokenRepository.delete(token);
-        tokens.remove(token.getUserId());
         tokens.remove(token.getRefreshToken());
         tokens.remove(token.getToken());
     }

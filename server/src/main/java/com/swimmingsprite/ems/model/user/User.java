@@ -1,5 +1,6 @@
 package com.swimmingsprite.ems.model.user;
 
+import com.swimmingsprite.ems.model.Address;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 
@@ -16,6 +17,10 @@ public class User {
     @NonNull
     @Column(name = "name")
     private String name;
+
+    @NotNull
+    @OneToOne
+    private Address address;
 
     @NotNull
     @Column(name = "user_permission")

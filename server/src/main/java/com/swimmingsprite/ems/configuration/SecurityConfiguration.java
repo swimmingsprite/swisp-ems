@@ -18,7 +18,11 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authenticationInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/error", "/login/**", "/logout/**", "/refresh/**");
+                .excludePathPatterns("/error",
+                        "/login/**",
+                        "/logout/**",
+                        "/refresh/**",
+                        "/register/**");
 
         registry.addInterceptor(adminManagerAuthorizationInterceptor)
                 .addPathPatterns("/employees/**", "/shifts/**")

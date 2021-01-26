@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
 
 @Entity
 @Table(name = "Address")
@@ -27,11 +29,21 @@ public class Address {
     private String street;
     private String number;
     private String phone;
+    @Email
+    private String email;
 
     public Address() {
     }
 
-    public Address(@NonNull String name, @NonNull String country, @NonNull String zipCode, @NonNull String province, @NonNull String street, String number, String phone) {
+    public Address(@NonNull String name,
+                   @NonNull String country,
+                   @NonNull String zipCode,
+                   @NonNull String province,
+                   @NonNull String street,
+                   String number,
+                   String phone,
+                   @Email String email
+                   ) {
         this.name = name;
         this.country = country;
         this.zipCode = zipCode;
@@ -99,5 +111,13 @@ public class Address {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
