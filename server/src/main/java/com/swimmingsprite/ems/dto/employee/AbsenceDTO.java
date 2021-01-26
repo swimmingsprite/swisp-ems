@@ -1,6 +1,7 @@
 package com.swimmingsprite.ems.dto.employee;
 
 import com.swimmingsprite.ems.model.user.AvatarUserImpl;
+import org.springframework.lang.Nullable;
 
 import java.time.Instant;
 
@@ -10,8 +11,14 @@ public class AbsenceDTO {
     private Instant shiftStart;
     private Instant shiftEnd;
 
-    public AbsenceDTO(Instant shiftStart, Instant shiftEnd, AvatarUserImpl employee, String shiftId) {
+    public AbsenceDTO(Instant shiftStart, Instant shiftEnd, @Nullable AvatarUserImpl employee, String shiftId) {
         this.employee = employee;
+        this.shiftId = shiftId;
+        this.shiftStart = shiftStart;
+        this.shiftEnd = shiftEnd;
+    }
+
+    public AbsenceDTO(Instant shiftStart, Instant shiftEnd, String shiftId) {
         this.shiftId = shiftId;
         this.shiftStart = shiftStart;
         this.shiftEnd = shiftEnd;

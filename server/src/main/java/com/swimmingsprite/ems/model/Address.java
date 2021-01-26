@@ -31,12 +31,18 @@ public class Address {
     public Address() {
     }
 
-    public String getId() {
-        return id;
+    public Address(@NonNull String name, @NonNull String country, @NonNull String zipCode, @NonNull String province, @NonNull String street, String number, String phone) {
+        this.name = name;
+        this.country = country;
+        this.zipCode = zipCode;
+        this.province = province;
+        this.street = street;
+        this.number = number;
+        this.phone = phone;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getId() {
+        return id;
     }
 
     public String getName() {

@@ -5,7 +5,7 @@ import com.swimmingsprite.ems.repository.employeerepository.AbsenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -13,7 +13,7 @@ public class AbsenceService {
     @Autowired
     private AbsenceRepository absenceRepository;
 
-    public List<AbsenceDTO> getAllAbsencesByTimeRangeAndPlace(String placeId, long startTimestamp, long endTimestamp) {
+    public List<AbsenceDTO> getAllAbsencesByTimeRangeAndPlace(String placeId, Instant startTimestamp, Instant endTimestamp) {
         //authorization
         return absenceRepository.getAllAbsencesByTimeRangeAndPlace(placeId, startTimestamp, endTimestamp);
     }

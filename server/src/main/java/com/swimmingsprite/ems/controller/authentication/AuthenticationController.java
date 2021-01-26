@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.EntityManager;
-import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
+
 
 @RestController
 public class AuthenticationController {
@@ -26,20 +25,12 @@ public class AuthenticationController {
     EntityManager entityManager;
 
 
-    @PostMapping("/loUser")
+    @PostMapping("/login")
     Token login(@RequestHeader("login") String login,
                 @RequestHeader("password") String password) throws InvalidCredentialsException {
         System.out.println("INSIDE LOGIN CONTROLLER");
-        /*response.addHeader("testing", "testing");
-
-        authenticationManager.test();
-        System.out.println("PERSISTENCE SUCCESSFUL !");*/
-
-//        return null;
         return authenticationManager.login(login, password);
     }
-
-
 
     @PostMapping("/refresh")
     Token refresh(String refreshToken) throws UnknownTokenException {

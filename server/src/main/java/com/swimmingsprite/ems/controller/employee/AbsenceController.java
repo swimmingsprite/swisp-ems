@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +25,9 @@ public class AbsenceController {
             @RequestHeader("startTimestamp") long startTimestamp,
             @RequestHeader("endTimestamp") long endTimestamp
     ) {
-        return service.getAllAbsencesByTimeRangeAndPlace(placeId, startTimestamp, endTimestamp);
+        return service.getAllAbsencesByTimeRangeAndPlace(placeId,
+                Instant.ofEpochMilli(startTimestamp),
+                Instant.ofEpochMilli(endTimestamp));
     }
 
 }
