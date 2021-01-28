@@ -1,47 +1,65 @@
 package com.swimmingsprite.ems.service.post;
 
+import com.swimmingsprite.ems.authorization.exception.AccessDeniedException;
+import com.swimmingsprite.ems.dto.post.CommentDTO;
 import com.swimmingsprite.ems.model.post.Comment;
 import com.swimmingsprite.ems.model.post.Post;
+import com.swimmingsprite.ems.model.user.CurrentUser;
 import com.swimmingsprite.ems.repository.post.PostRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.InvalidParameterException;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
 public class PostService {
-    @Autowired
-    PostRepository repository;
+    final PostRepository repository;
+    final CurrentUser currentUser;
 
-    public Set<Post> getNextPostsSequence(long lastPostTimestamp, String userId) {
+    public PostService(PostRepository repository, CurrentUser currentUser) {
+        this.repository = repository;
+        this.currentUser = currentUser;
+    }
+
+    public Set<Post> getNextPostsSequence(long lastPostTimestamp) {
         return repository.getNextPostsSequence(lastPostTimestamp);
     }
 
-    public Set<Comment> getNextCommentsSequence(String postId, long lastCommentTimestamp, String userId) {
+    public Set<Comment> getNextCommentsSequence(String postId, long lastCommentTimestamp) {
         return repository.getNextCommentsSequence(lastCommentTimestamp, postId);
     }
 
-    public Post save(Post post, String userId) {
-        return repository.save(post);
+    public void addPost(Post post) {
+        repository.save(post);
     }
 
-    public void deleteById(String postId, String id) {
-        repository.deleteById(id);
+    public void deletePostById(String postId) {
+        Optional<Post> optPost = repository.findById(postId);
+        if (optPost.isPresent()) {
+            if (optPost.get().getAuthor().getId().equals(currentUser.getUser().getId())
+                    || currentUser.getUser().getUserPermission().equals("ADMIN")) {
+                repository.deleteById(postId);
+            } else {
+                throw new AccessDeniedException("Unauthorized.");
+            }
+        } else throw new InvalidParameterException("Post with id: " + postId + " does not exist.");
+
     }
 
-    public void giveLike(String postId, String userId) {
+    public void addLikeToPost(String postId) {
         //authorization layer
     }
 
-    public void removeLike(String postId, String userId) {
+    public void removeLikeFromPost(String postId) {
         //authorization layer
     }
 
-    public void addComment(String postId, Comment comment, String userId) {
+    public void addComment(String postId, CommentDTO comment) {
         //authorization layer
     }
 
-    public void deleteComment(String commentId, String userId) {
+    public void deleteComment(String commentId) {
         //authorization layer
     }
 }

@@ -16,8 +16,11 @@ import java.nio.file.AccessDeniedException;
 
 @Component
 public class AdminManagerAuthorizationInterceptor implements HandlerInterceptor {
-    @Autowired
-    private CurrentUser currentUser;
+    private final CurrentUser currentUser;
+
+    public AdminManagerAuthorizationInterceptor(CurrentUser currentUser) {
+        this.currentUser = currentUser;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

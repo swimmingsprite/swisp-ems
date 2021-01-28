@@ -28,9 +28,9 @@ public class Post implements Publishable<String, User> {
     @NonNull
     private String publishContent;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<User> likes;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Comment> comments;
 
     public Post() {}

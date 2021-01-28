@@ -28,7 +28,6 @@ public class AuthenticationController {
     @Autowired
     CurrentUser currentUser;
 
-    //todo add to authorization interceptor
     @PostMapping("/register")
     String register(@RequestBody @Valid User newUser) {
         newUser.setId(null);
@@ -59,4 +58,3 @@ public class AuthenticationController {
     }
 }
 
-//c7abd6e6-7c33-4c2f-b338-3d8f06b2e3fc
