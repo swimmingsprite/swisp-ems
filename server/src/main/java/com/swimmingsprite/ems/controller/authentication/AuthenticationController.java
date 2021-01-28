@@ -28,14 +28,6 @@ public class AuthenticationController {
     @Autowired
     CurrentUser currentUser;
 
-
-    /*@PostMapping("/register")
-    void register(@RequestHeader("login") String login) {
-        // TODO: 26. 1. 2021 DTO FROM BODY, containing user info
-        System.out.println("INSIDE LOGIN CONTROLLER");
-       userService.registerUser(login);
-    }*/
-
     //todo add to authorization interceptor
     @PostMapping("/register")
     String register(@RequestBody @Valid User newUser) {
