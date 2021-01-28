@@ -28,6 +28,13 @@ public class Comment implements Publishable<String, User> {
 
     public Comment() {}
 
+    public Comment(Post post, User author, Instant publishTime, String publishContent) {
+        this.post = post;
+        this.author = author;
+        this.publishTime = publishTime;
+        this.publishContent = publishContent;
+    }
+
     public String getId() {
         return id;
     }

@@ -7,6 +7,7 @@ import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,9 +32,17 @@ public class Post implements Publishable<String, User> {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<User> likes;
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Comment> comments;
+    private List<Comment> comments;
 
     public Post() {}
+
+    public Post(@NonNull User author, @NonNull Instant publishTime, @NonNull String publishContent, Set<User> likes, List<Comment> comments) {
+        this.author = author;
+        this.publishTime = publishTime;
+        this.publishContent = publishContent;
+        this.likes = likes;
+        this.comments = comments;
+    }
 
     public String getId() {
         return id;
@@ -76,11 +85,11 @@ public class Post implements Publishable<String, User> {
         this.likes = likes;
     }
 
-    public Set<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(Set<Comment> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 }

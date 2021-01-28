@@ -1,6 +1,6 @@
 package com.swimmingsprite.ems.controller.post;
 
-import com.swimmingsprite.ems.dto.post.CommentDTO;
+import com.swimmingsprite.ems.dto.post.PublishableDTO;
 import com.swimmingsprite.ems.model.post.Comment;
 import com.swimmingsprite.ems.model.post.Post;
 import com.swimmingsprite.ems.service.post.PostService;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @RestController
@@ -35,14 +36,14 @@ public class PostController {
     }
 
     @PostMapping("/posts")
-    public void addPost(
-            @Valid @RequestBody Post post) {
-        service.addPost(post);
+    public String addPost(
+            @Valid @RequestBody @Size(min = 2) String postContent) {
+        return service.addPost(postContent);
     }
 
     @DeleteMapping("/posts/{id}")
     public void deletePost(
-            @PathVariable String postId) {
+            @PathVariable("id") String postId) {
         service.deletePostById(postId);
     }
 
@@ -57,10 +58,10 @@ public class PostController {
             @PathVariable String postId) { service.removeLikeFromPost(postId); }
 
     @PostMapping("/posts/{postId}/comment")
-    public void addCommentToPost(
+    public String addCommentToPost(
             @PathVariable String postId,
-            @Valid @RequestBody CommentDTO comment) {
-        service.addComment(postId, comment);
+            @Valid @RequestBody PublishableDTO comment) {
+        return service.addComment(postId, comment);
     }
 
     @DeleteMapping("/posts/comment/{commentId}")
