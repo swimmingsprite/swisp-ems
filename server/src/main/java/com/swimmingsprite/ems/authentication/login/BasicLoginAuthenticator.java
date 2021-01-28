@@ -1,6 +1,7 @@
 package com.swimmingsprite.ems.authentication.login;
 
 import com.swimmingsprite.ems.authentication.repository.UserLoginRepository;
+import com.swimmingsprite.ems.util.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,20 +20,14 @@ public class BasicLoginAuthenticator implements LoginAuthenticator {
         try {
             digest = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Server error.");
+            throw new RuntimeException("Server error. No SHA-256 algorithm.");
         }
         byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
-        return repository.getUserIdByCredentials(login, bytesToHex(hash));
+        return repository.getUserIdByCredentials(login, PasswordUtils.encrypt(password));
     }
 
-    private String bytesToHex(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {
-            sb.append(String.format("%02x", b));
-        }
-        return sb.toString();
-    }
+
 
 
 }

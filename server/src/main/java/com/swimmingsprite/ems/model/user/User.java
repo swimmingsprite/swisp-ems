@@ -85,4 +85,12 @@ public class User {
     public void setUserPermission(String userPermission) {
         this.userPermission = userPermission;
     }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 }

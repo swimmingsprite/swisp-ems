@@ -12,4 +12,7 @@ public interface UserLoginRepository extends JpaRepository<UserLogin, String> {
             "where u.login = ?1 " +
             "and u.password = ?2")
     String getUserIdByCredentials(String login, String passwordHash);
+
+    boolean existsByLogin(String login);
+
 }

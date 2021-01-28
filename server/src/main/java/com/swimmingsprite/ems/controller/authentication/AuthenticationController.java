@@ -8,12 +8,10 @@ import com.swimmingsprite.ems.model.user.CurrentUser;
 import com.swimmingsprite.ems.model.user.User;
 import com.swimmingsprite.ems.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
+import javax.validation.Valid;
 
 
 @RestController
@@ -31,14 +29,21 @@ public class AuthenticationController {
     CurrentUser currentUser;
 
 
-    @PostMapping("/register")
+    /*@PostMapping("/register")
     void register(@RequestHeader("login") String login) {
         // TODO: 26. 1. 2021 DTO FROM BODY, containing user info
         System.out.println("INSIDE LOGIN CONTROLLER");
        userService.registerUser(login);
+    }*/
+
+    //todo add to authorization interceptor
+    @PostMapping("/register")
+    String register(@RequestBody @Valid User newUser) {
+        newUser.setId(null);
+       return userService.registerUser(newUser);
     }
 
-    @GetMapping
+    @GetMapping //test
     String sayHi() {
         return "Hi, how are u "+currentUser.getUser().getName()+" ?";
     }
