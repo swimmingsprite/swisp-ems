@@ -7,15 +7,15 @@ var places = [
         departments: [
             {
                 id: 91354565,
-                name: "oddelenie záhrad"
+                name: "oddelenie nápojov"
             },
             {
                 id: 91359125,
-                name: "oddelenie drogéria"
+                name: "oddelenie drogérie"
             }
             , {
                 id: 4364565,
-                name: "oddelenie čokolad"
+                name: "oddelenie elektroniky"
             }
         ]
     },
@@ -29,11 +29,11 @@ var places = [
             }
             , {
                 id: 98236855,
-                name: "oddelenie zmrzlín"
+                name: "oddelenie pečiva"
             }
             , {
                 id: 62149855,
-                name: "oddelenie šamponov"
+                name: "oddelenie elektroniky"
             }
             , {
                 id: 46749855,
