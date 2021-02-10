@@ -1,11 +1,11 @@
 package com.swimmingsprite.ems.service.post;
 
+import com.swimmingsprite.ems.authentication.exception.AccessDeniedException;
 import com.swimmingsprite.ems.authentication.exception.NotFoundException;
-import com.swimmingsprite.ems.authorization.exception.AccessDeniedException;
 import com.swimmingsprite.ems.dto.post.PublishableDTO;
-import com.swimmingsprite.ems.model.post.Comment;
-import com.swimmingsprite.ems.model.post.Post;
-import com.swimmingsprite.ems.model.user.CurrentUser;
+import com.swimmingsprite.ems.entity.post.Comment;
+import com.swimmingsprite.ems.entity.post.Post;
+import com.swimmingsprite.ems.entity.user.CurrentUser;
 import com.swimmingsprite.ems.repository.post.CommentRepository;
 import com.swimmingsprite.ems.repository.post.PostRepository;
 import org.springframework.stereotype.Service;

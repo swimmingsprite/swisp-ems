@@ -4,10 +4,9 @@ import com.swimmingsprite.ems.authentication.AuthenticationManager;
 import com.swimmingsprite.ems.authentication.Token;
 import com.swimmingsprite.ems.authentication.exception.InvalidCredentialsException;
 import com.swimmingsprite.ems.authentication.exception.UnknownTokenException;
-import com.swimmingsprite.ems.model.user.CurrentUser;
-import com.swimmingsprite.ems.model.user.User;
+import com.swimmingsprite.ems.entity.user.CurrentUser;
+import com.swimmingsprite.ems.entity.user.User;
 import com.swimmingsprite.ems.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -16,17 +15,20 @@ import javax.validation.Valid;
 
 @RestController
 public class AuthenticationController {
-    @Autowired
-    AuthenticationManager authenticationManager;
+    final AuthenticationManager authenticationManager;
+    final EntityManager entityManager;
+    final UserService userService;
+    final CurrentUser currentUser;
 
-    @Autowired
-    EntityManager entityManager;
-
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    CurrentUser currentUser;
+    public AuthenticationController(AuthenticationManager authenticationManager,
+                                    EntityManager entityManager,
+                                    UserService userService,
+                                    CurrentUser currentUser) {
+        this.authenticationManager = authenticationManager;
+        this.entityManager = entityManager;
+        this.userService = userService;
+        this.currentUser = currentUser;
+    }
 
     @PostMapping("/register")
     String register(@RequestBody @Valid User newUser) {

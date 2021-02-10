@@ -1,30 +1,30 @@
-package com.swimmingsprite.ems.model.attendance;
+package com.swimmingsprite.ems.entity.attendance;
 
-import com.swimmingsprite.ems.model.Shift;
-import com.swimmingsprite.ems.model.user.User;
+import com.swimmingsprite.ems.entity.Shift;
+import com.swimmingsprite.ems.entity.user.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "absence")
-public class Absence {
+@Table(name = "current_late")
+public class CurrentLate {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "shift_id")
     private Shift shift;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "employee_id")
     private User employee;
 
     public String getId() {
         return id;
     }
-
 
     public Shift getShift() {
         return shift;

@@ -3,21 +3,24 @@ package com.swimmingsprite.ems.authentication;
 import com.swimmingsprite.ems.authentication.exception.InvalidCredentialsException;
 import com.swimmingsprite.ems.authentication.exception.UnknownTokenException;
 import com.swimmingsprite.ems.authentication.login.LoginAuthenticator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import java.util.Optional;
 
 @Component
-public class BasicAuthenticator implements AuthenticationManager {
-    @Autowired
-    LoginAuthenticator loginAuthenticator;
-    @Autowired
-    TokenService tokenService;
+class BasicAuthenticator implements AuthenticationManager {
+    final LoginAuthenticator loginAuthenticator;
+    final TokenService tokenService;
+    final EntityManager entityManager;
 
-    @Autowired
-    EntityManager entityManager;
+    public BasicAuthenticator(LoginAuthenticator loginAuthenticator,
+                              TokenService tokenService,
+                              EntityManager entityManager) {
+        this.loginAuthenticator = loginAuthenticator;
+        this.tokenService = tokenService;
+        this.entityManager = entityManager;
+    }
 
     @Override
     public Token login(String login, String password) {

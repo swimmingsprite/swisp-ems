@@ -1,4 +1,4 @@
-package com.swimmingsprite.ems.model;
+package com.swimmingsprite.ems.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 

@@ -1,6 +1,6 @@
-package com.swimmingsprite.ems.model.user;
+package com.swimmingsprite.ems.entity.user;
 
-import com.swimmingsprite.ems.model.Address;
+import com.swimmingsprite.ems.entity.Address;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 

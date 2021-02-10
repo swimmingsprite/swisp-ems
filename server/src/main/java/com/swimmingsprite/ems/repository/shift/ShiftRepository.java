@@ -1,7 +1,7 @@
 package com.swimmingsprite.ems.repository.shift;
 
 import com.swimmingsprite.ems.dto.shift.ShiftDTO;
-import com.swimmingsprite.ems.model.Shift;
+import com.swimmingsprite.ems.entity.Shift;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package com.swimmingsprite.ems.model;
+package com.swimmingsprite.ems.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
 
 @Entity

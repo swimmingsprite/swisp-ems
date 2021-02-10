@@ -1,36 +1,39 @@
 package com.swimmingsprite.ems.authentication;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
 @Entity
 @Table(name = "token")
-public class Token {
+public final class Token {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
-    @NonNull
+    @NotNull
     @Column(name = "token")
     private String token;
 
-    @NonNull
+    @NotNull
     @Column(name = "refreshToken")
     private String refreshToken;
 
-    @NonNull
+    @NotNull
     @Column(name = "userId")
     private String userId;
 
     @Column(name = "expire")
-    @NonNull
+    @NotNull
     private Instant expire;
 
-    public Token(@NonNull String token, @NonNull String refreshToken, String userId, Instant expire) {
+    public Token(@NotNull String token,
+                 @NotNull String refreshToken,
+                 @NotNull String userId,
+                 @NotNull Instant expire) {
         this.token = token;
         this.refreshToken = refreshToken;
         this.userId = userId;
@@ -39,41 +42,18 @@ public class Token {
 
     public Token() {}
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @NonNull
-    public String getToken() {
+    public String getTokenString() {
         return token;
     }
 
-    public void setToken(@NonNull String token) {
-        this.token = token;
-    }
-
-    @NonNull
     public String getRefreshToken() {
         return refreshToken;
     }
 
-    public void setRefreshToken(@NonNull String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+    public String getUserId() { return userId; }
 
     public Instant getExpire() {
         return expire;
     }
 
-    public void setExpire(Instant expire) {
-        this.expire = expire;
-    }
 }

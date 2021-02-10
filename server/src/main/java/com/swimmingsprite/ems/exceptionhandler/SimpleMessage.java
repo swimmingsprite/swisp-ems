@@ -17,7 +17,7 @@ public class SimpleMessage {
 
     public static void setSimpleMessageResponse(HttpServletResponse response, int code, String message) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        response.setStatus(code);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter()

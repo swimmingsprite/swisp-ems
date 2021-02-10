@@ -1,7 +1,7 @@
 package com.swimmingsprite.ems.repository.employeerepository;
 
 import com.swimmingsprite.ems.dto.employee.CurrentLateDTO;
-import com.swimmingsprite.ems.model.attendance.CurrentLate;
+import com.swimmingsprite.ems.entity.attendance.CurrentLate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

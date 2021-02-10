@@ -1,10 +1,9 @@
 package com.swimmingsprite.ems.controller.post;
 
 import com.swimmingsprite.ems.dto.post.PublishableDTO;
-import com.swimmingsprite.ems.model.post.Comment;
-import com.swimmingsprite.ems.model.post.Post;
+import com.swimmingsprite.ems.entity.post.Comment;
+import com.swimmingsprite.ems.entity.post.Post;
 import com.swimmingsprite.ems.service.post.PostService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -14,13 +13,14 @@ import java.util.Set;
 
 @RestController
 public class PostController {
-    @Autowired
-    PostService service;
+    final PostService service;
 
-    @Autowired
-    EntityManager entityManager;
+    final EntityManager entityManager;
 
-    //todo AUTHENTICATION in INTERCEPTOR, AUTHORIZATION in SERVICE
+    public PostController(PostService service, EntityManager entityManager) {
+        this.service = service;
+        this.entityManager = entityManager;
+    }
 
     @GetMapping("/posts/nextSequence/{lastPostTimestamp}")
     public Set<Post> getNextPostsSequence(

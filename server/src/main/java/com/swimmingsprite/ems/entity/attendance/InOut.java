@@ -1,7 +1,7 @@
-package com.swimmingsprite.ems.model.attendance;
+package com.swimmingsprite.ems.entity.attendance;
 
-import com.swimmingsprite.ems.model.Place;
-import com.swimmingsprite.ems.model.user.User;
+import com.swimmingsprite.ems.entity.Place;
+import com.swimmingsprite.ems.entity.user.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

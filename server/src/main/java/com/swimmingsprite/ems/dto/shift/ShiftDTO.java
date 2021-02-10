@@ -1,6 +1,6 @@
 package com.swimmingsprite.ems.dto.shift;
 
-import com.swimmingsprite.ems.model.user.User;
+import com.swimmingsprite.ems.entity.user.User;
 
 import java.time.Instant;
 import java.util.Set;

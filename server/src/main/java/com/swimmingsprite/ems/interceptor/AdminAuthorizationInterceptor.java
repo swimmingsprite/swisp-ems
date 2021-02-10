@@ -1,10 +1,8 @@
 package com.swimmingsprite.ems.interceptor;
 
-import com.swimmingsprite.ems.authentication.AuthenticationManager;
+import com.swimmingsprite.ems.entity.user.CurrentUser;
+import com.swimmingsprite.ems.entity.user.User;
 import com.swimmingsprite.ems.exceptionhandler.SimpleMessage;
-import com.swimmingsprite.ems.model.user.CurrentUser;
-import com.swimmingsprite.ems.model.user.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -12,9 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
-public class AdminAuthorizationInterceptor implements HandlerInterceptor {
-    @Autowired
-    private CurrentUser currentUser;
+public final class AdminAuthorizationInterceptor implements HandlerInterceptor {
+    private final CurrentUser currentUser;
+
+    public AdminAuthorizationInterceptor(CurrentUser currentUser) {
+        this.currentUser = currentUser;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

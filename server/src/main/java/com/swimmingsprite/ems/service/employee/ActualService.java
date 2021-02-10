@@ -3,20 +3,21 @@ package com.swimmingsprite.ems.service.employee;
 
 import com.swimmingsprite.ems.dto.employee.ArrivalDTO;
 import com.swimmingsprite.ems.dto.employee.CurrentLateDTO;
-import com.swimmingsprite.ems.model.attendance.CurrentLate;
 import com.swimmingsprite.ems.repository.employeerepository.AttendanceRepository;
 import com.swimmingsprite.ems.repository.employeerepository.CurrentLateRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ActualService {
-    @Autowired
-    private AttendanceRepository attendanceRepository;
-    @Autowired
-    private CurrentLateRepository currentLateRepository;
+    private final AttendanceRepository attendanceRepository;
+    private final CurrentLateRepository currentLateRepository;
+
+    public ActualService(AttendanceRepository attendanceRepository, CurrentLateRepository currentLateRepository) {
+        this.attendanceRepository = attendanceRepository;
+        this.currentLateRepository = currentLateRepository;
+    }
 
     public List<CurrentLateDTO> getAllCurrentLatesByPlace(String placeId) {
         //authorization

@@ -1,4 +1,4 @@
-package com.swimmingsprite.ems.model.user;
+package com.swimmingsprite.ems.entity.user;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;

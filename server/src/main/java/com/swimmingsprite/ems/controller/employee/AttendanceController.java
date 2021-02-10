@@ -3,7 +3,6 @@ package com.swimmingsprite.ems.controller.employee;
 import com.swimmingsprite.ems.dto.employee.ArrivalDTO;
 import com.swimmingsprite.ems.dto.employee.ExitDTO;
 import com.swimmingsprite.ems.service.employee.AttendanceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
@@ -12,8 +11,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/employees")
 public class AttendanceController {
-    @Autowired
-    AttendanceService service;
+    final AttendanceService service;
+
+    public AttendanceController(AttendanceService service) {
+        this.service = service;
+    }
 
 
     @GetMapping("/exit/all/{placeId}")

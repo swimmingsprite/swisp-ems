@@ -3,10 +3,9 @@ package com.swimmingsprite.ems.service;
 import com.swimmingsprite.ems.authentication.entity.UserLogin;
 import com.swimmingsprite.ems.authentication.exception.UserAlreadyExistsException;
 import com.swimmingsprite.ems.authentication.repository.UserLoginRepository;
-import com.swimmingsprite.ems.model.user.User;
+import com.swimmingsprite.ems.entity.user.User;
 import com.swimmingsprite.ems.repository.UserRepository;
 import com.swimmingsprite.ems.util.PasswordUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -16,24 +15,18 @@ import java.util.UUID;
 
 @Service
 public class UserService {
-    @Autowired
-    EntityManager entityManager;
+    final EntityManager entityManager;
+    final UserRepository userRepository;
+    final UserLoginRepository userLoginRepository;
 
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    UserLoginRepository userLoginRepository;
+    public UserService(EntityManager entityManager,
+                       UserRepository userRepository,
+                       UserLoginRepository userLoginRepository) {
+        this.entityManager = entityManager;
+        this.userRepository = userRepository;
+        this.userLoginRepository = userLoginRepository;
+    }
 
-  /*  @Transactional
-    public void registerUser(String login) {
-        // TODO: 26. 1. 2021 only for test
-        User user = new User();
-        user.setName("John Barney"+ UUID.randomUUID().toString().substring(0, 8));
-        entityManager.persist(user);
-        UserLogin userLogin = new UserLogin(user, login,"8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918");
-        entityManager.persist(userLogin);
-        System.out.println("OK..........");
-    }*/
 
     @Transactional
     public String registerUser(User user) {

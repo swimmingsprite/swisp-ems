@@ -1,6 +1,6 @@
 package com.swimmingsprite.ems.dto.employee;
 
-import com.swimmingsprite.ems.model.user.User;
+import com.swimmingsprite.ems.entity.user.User;
 
 import java.time.Instant;
 

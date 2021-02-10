@@ -3,7 +3,6 @@ package com.swimmingsprite.ems.authentication;
 import com.swimmingsprite.ems.authentication.exception.ExpiredTokenException;
 import com.swimmingsprite.ems.authentication.exception.UnknownTokenException;
 import com.swimmingsprite.ems.authentication.repository.TokenRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -14,31 +13,32 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
-public class TokenService {
-    @Autowired
-    private TokenRepository tokenRepository;
+class TokenService {
+    private final TokenRepository tokenRepository;
 
     private Map<String, Token> tokens = new ConcurrentHashMap<>();
+
+    public TokenService(TokenRepository tokenRepository) {
+        this.tokenRepository = tokenRepository;
+    }
 
     @EventListener(ApplicationReadyEvent.class)
     public void fetchAllTokensAfterStart() {
         List<Token> dbTokens = tokenRepository.findAll();
         dbTokens.forEach(token -> {
-            tokens.put(token.getToken(), token);
+            tokens.put(token.getTokenString(), token);
             tokens.put(token.getRefreshToken(), token);
-            //tokens.put(token.getUserId(), token);
         });
     }
 
     protected void addToken(Token token) {
         Token newToken = tokenRepository.save(token);
-        tokens.put(newToken.getToken(), newToken);
+        tokens.put(newToken.getTokenString(), newToken);
         tokens.put(newToken.getRefreshToken(), newToken);
-        //tokens.put(newToken.getUserId(), newToken);
     }
 
     protected boolean isUnique(Token token) {
-        if (tokens.get(token.getToken()) == null
+        if (tokens.get(token.getTokenString()) == null
                 && tokens.get(token.getRefreshToken()) == null) return true;
         return false;
     }
@@ -55,13 +55,13 @@ public class TokenService {
 
     protected void removeToken(String deleteToken) {
         Token token = tokens.get(deleteToken);
-        if (token == null || !token.getToken().equals(deleteToken))
+        if (token == null || !token.getTokenString().equals(deleteToken))
             throw new UnknownTokenException("Unknown token!");
         if (isExpired(token)) throw new ExpiredTokenException("Token expired!");
 
         tokenRepository.delete(token);
         tokens.remove(token.getRefreshToken());
-        tokens.remove(token.getToken());
+        tokens.remove(token.getTokenString());
     }
 
     protected void removeToken(Token token) {
@@ -69,13 +69,13 @@ public class TokenService {
         tokenRepository.delete(token);
         tokens.remove(token.getUserId());
         tokens.remove(token.getRefreshToken());
-        tokens.remove(token.getToken());
+        tokens.remove(token.getTokenString());
     }
 
     protected String getUserId(String clientToken) {
         Token token = tokens.get(clientToken);
         if (token != null
-                && token.getToken().equals(clientToken)) {
+                && token.getTokenString().equals(clientToken)) {
             if (isExpired(token)) throw new ExpiredTokenException("Token expired!");
             return token.getUserId();
         }

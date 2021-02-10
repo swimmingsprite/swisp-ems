@@ -2,12 +2,11 @@ package com.swimmingsprite.ems.repository.employeerepository;
 
 
 import com.swimmingsprite.ems.dto.employee.LateDTO;
-import com.swimmingsprite.ems.model.attendance.Late;
+import com.swimmingsprite.ems.entity.attendance.Late;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.time.Instant;
 import java.util.List;
 
 @Repository

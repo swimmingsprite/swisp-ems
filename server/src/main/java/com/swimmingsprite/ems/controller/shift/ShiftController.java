@@ -3,7 +3,6 @@ package com.swimmingsprite.ems.controller.shift;
 import com.swimmingsprite.ems.dto.shift.ShiftDTO;
 import com.swimmingsprite.ems.dto.shift.ShiftScheduleDTO;
 import com.swimmingsprite.ems.service.shift.ShiftService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
@@ -12,8 +11,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/shift")
 public class ShiftController {
-    @Autowired
-    ShiftService service;
+    final ShiftService service;
+
+    public ShiftController(ShiftService service) {
+        this.service = service;
+    }
 
     @GetMapping("/{departmentId}")
     public List<ShiftDTO> getAllShiftsByTimeRangeAndDepartment(

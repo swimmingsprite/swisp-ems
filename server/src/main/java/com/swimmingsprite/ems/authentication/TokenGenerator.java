@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
-public class TokenGenerator {
+class TokenGenerator {
     protected Token generate(String userId) {
         String token = UUID.randomUUID().toString();
         String refreshToken = UUID.randomUUID().toString();

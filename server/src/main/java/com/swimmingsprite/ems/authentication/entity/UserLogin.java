@@ -1,6 +1,6 @@
 package com.swimmingsprite.ems.authentication.entity;
 
-import com.swimmingsprite.ems.model.user.User;
+import com.swimmingsprite.ems.entity.user.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

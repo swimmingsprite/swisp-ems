@@ -1,7 +1,7 @@
-package com.swimmingsprite.ems.model.post;
+package com.swimmingsprite.ems.entity.post;
 
-import com.swimmingsprite.ems.model.user.User;
-import com.swimmingsprite.ems.model.user.Publishable;
+import com.swimmingsprite.ems.entity.user.Publishable;
+import com.swimmingsprite.ems.entity.user.User;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 

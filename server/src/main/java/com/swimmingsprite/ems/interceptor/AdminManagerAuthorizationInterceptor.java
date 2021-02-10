@@ -1,21 +1,16 @@
 package com.swimmingsprite.ems.interceptor;
 
-import com.swimmingsprite.ems.authentication.AuthenticationManager;
+import com.swimmingsprite.ems.entity.user.CurrentUser;
+import com.swimmingsprite.ems.entity.user.User;
 import com.swimmingsprite.ems.exceptionhandler.SimpleMessage;
-import com.swimmingsprite.ems.model.user.CurrentUser;
-import com.swimmingsprite.ems.model.user.User;
-import com.swimmingsprite.ems.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.nio.file.AccessDeniedException;
 
 @Component
-public class AdminManagerAuthorizationInterceptor implements HandlerInterceptor {
+public final class AdminManagerAuthorizationInterceptor implements HandlerInterceptor {
     private final CurrentUser currentUser;
 
     public AdminManagerAuthorizationInterceptor(CurrentUser currentUser) {

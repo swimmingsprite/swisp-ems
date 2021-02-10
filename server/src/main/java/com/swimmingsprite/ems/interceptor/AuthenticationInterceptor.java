@@ -3,11 +3,10 @@ package com.swimmingsprite.ems.interceptor;
 import com.swimmingsprite.ems.authentication.AuthenticationManager;
 import com.swimmingsprite.ems.authentication.exception.ExpiredTokenException;
 import com.swimmingsprite.ems.authentication.exception.UnknownTokenException;
+import com.swimmingsprite.ems.entity.user.CurrentUser;
+import com.swimmingsprite.ems.entity.user.User;
 import com.swimmingsprite.ems.exceptionhandler.SimpleMessage;
-import com.swimmingsprite.ems.model.user.CurrentUser;
-import com.swimmingsprite.ems.model.user.User;
 import com.swimmingsprite.ems.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -17,16 +16,18 @@ import java.util.Optional;
 
 @Component
 public class AuthenticationInterceptor implements HandlerInterceptor {
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private CurrentUser currentUser;
+    private final AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
+    private final CurrentUser currentUser;
+
+    public AuthenticationInterceptor(AuthenticationManager authenticationManager, UserRepository userRepository, CurrentUser currentUser) {
+        this.authenticationManager = authenticationManager;
+        this.userRepository = userRepository;
+        this.currentUser = currentUser;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("INTERCEPTOR PATH: " + request.getServletPath());
 
         //check if token is present
         String token;
