@@ -15,18 +15,15 @@ export function addMonth(date) {
 export function subMonth(date) {
     if (date.getMonth() === 0) {
         var a = new Date(date.getFullYear() - 1, 12, 0);
-        console.log("SUB JANUARY RETURN: " + a);
         return a;
     } else {
         var a = new Date(date.getFullYear(), date.getMonth(), 0)
-        console.log("SUB NORMAL RETURN: " + a);
         return a;
     }
 }
 
 export function handleDateClick(state, dayTimestamp) {
     //ak sa den nachadza medzi selectnutymi dnami
-    console.log("CLICK !")
     let filteredDays = state.selectedDays.filter(d => d === dayTimestamp);
     if (filteredDays.length > 0) {
         console.log("DESELECTUJEM DEN")

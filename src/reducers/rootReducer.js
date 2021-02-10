@@ -1,4 +1,4 @@
-export var rootReducer = (state = {currentSection: "Shifts"}, action) => {
+export var rootReducer = (state = {currentSection: "Home"}, action) => {
 
     switch(action.type) {
         case "CURRENT_SECTION": return {...state, currentSection: action.currentSection}

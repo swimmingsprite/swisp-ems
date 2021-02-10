@@ -18,7 +18,6 @@ export default function Content(props) {
         if (currentSection === "Shifts") return <Shifts />;
     }
 
-    console.log("NOTIFICATION JE: "+notification);
 
 
     return (
