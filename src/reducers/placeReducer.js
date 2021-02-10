@@ -1,7 +1,9 @@
+
+//FOR TESTING ONLY
 var places = [
     {
         id: 84486565,
-        name: "Kaufland Slovenská",
+        name: "Supermarket Slovenská",
         departments: [
             {
                 id: 91354565,
@@ -19,7 +21,7 @@ var places = [
     },
     {
         id: 97486256,
-        name: "Kaufland Stredočeská",
+        name: "Supermarket Stredočeská",
         departments: [
             {
                 id: 16549855,

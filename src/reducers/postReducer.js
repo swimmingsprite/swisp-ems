@@ -1,5 +1,6 @@
 import {addNewComment, deleteComment, deletePostFilter, getStatePostLikeToggle, setCommentsLimit} from "../logic/Posts";
 
+//FOR TESTING ONLY
 var posts =
     [
         {

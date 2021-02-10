@@ -1,43 +1,44 @@
-import {getCurrentTimestamp} from "../logic/shifts/currentView";
 import {addMonth, handleDateClick, subMonth} from "../logic/shifts/scheduler";
 import {isSameDate} from "../logic/time/timeUtils";
 
+
+//FOR TESTING ONLY
 var scheduler = {
     employees: [
         {
-            name: "Jozef Veselý", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red", place: {
+            name: "Cindy Rees", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red", place: {
                 id: 84486565,
-                name: "Kaufland Stredočeská"
+                name: "Supermarket Stredočeská"
             }
         },
         {
-            name: "Jozef Funny", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green", place: {
+            name: "Kyle Perry", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green", place: {
                 id: 84486565,
-                name: "Kaufland Stredočeská"
+                name: "Supermarket Stredočeská"
             }
         },
         {
-            name: "Sirius Black", id: 1885957, avatarImg: "image base64 <--", avatarColor: "blue", place: {
+            name: "Andreas Talbot", id: 1885957, avatarImg: "image base64 <--", avatarColor: "blue", place: {
                 id: 84486565,
-                name: "Kaufland Stredočeská"
+                name: "Supermarket Stredočeská"
             }
         },
         {
-            name: "Sirius White", id: 1885956, avatarImg: "image base64 <--", avatarColor: "orange", place: {
+            name: "Vickie Neville", id: 1885956, avatarImg: "image base64 <--", avatarColor: "orange", place: {
                 id: 84486565,
-                name: "Kaufland Stredočeská"
+                name: "Supermarket Stredočeská"
             }
         },
         {
             name: "Amanda Hamlet", id: 1885955, avatarImg: "image base64 <--", avatarColor: "brown", place: {
                 id: 84486565,
-                name: "Kaufland Stredočeská"
+                name: "Supermarket Stredočeská"
             }
         },
         {
-            name: "George Stuff", id: 1885954, avatarImg: "image base64 <--", avatarColor: "violet", place: {
+            name: "Lillie Rowley", id: 1885954, avatarImg: "image base64 <--", avatarColor: "violet", place: {
                 id: 84486565,
-                name: "Kaufland Stredočeská"
+                name: "Supermarket Stredočeská"
             }
         },
     ],
@@ -45,127 +46,7 @@ var scheduler = {
     selectedEmployees: [],
     currentMonth: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
     calendarLock: false,
-    selected: [
-        /*{
-            id: 97486256,
-            name: "Kaufland Stredočeská",
-            employees: [
-                {
-                    departmentId: 16549855,
-                    departmentName: "oddelenie nápojov",
-
-                    id: 789849,
-                    name: "John Barney",
-                    avatarColor: "orange",
-                    avatarImg: "base 64",
-
-                    // dayStart: 1606149204314,
-                    // dayEnd: 1606149204314,//+3600000*5,
-                    shiftStart: getCurrentTimestamp(),
-                    shiftEnd: getCurrentTimestamp(),
-                },
-                {
-                    departmentId: 16549855,
-                    departmentName: "oddelenie nápojov",
-
-                    id: 289849,
-                    name: "Jozo Banksy",
-                    avatarColor: "orange",
-                    avatarImg: "base 64",
-
-                    // dayStart: 1656149204314,
-                    // dayEnd: 1656149204314,
-                    shiftStart: getCurrentTimestamp(),
-                    shiftEnd: getCurrentTimestamp(),
-                },
-                {
-                    departmentId: 98236855,
-                    departmentName: "oddelenie zmrzlín",
-
-                    id: 54549849,
-                    name: "Majo Random",
-                    avatarColor: "orange",
-                    avatarImg: "base 64",
-
-                    //dayStart: 1646099204314 + 3600000 * 5,
-                    //dayEnd: 1646099204314 + 3600000 * 5,
-                    shiftStart: 1646099204314 + 3600000 * 2,
-                    shiftEnd: 1646099204314 + 3600000 * 10,
-                },
-                {
-                    departmentId: 62149855,
-                    departmentName: "oddelenie šamponov",
-
-                    id: 65432454,
-                    name: "Niekto Spriezviskom",
-                    avatarColor: "orange",
-                    avatarImg: "base 64",
-
-                    //dayStart: 1646099204314 + 3600000 * 5,
-                    //dayEnd: 1646099204314 + 3600000 * 5,
-                    shiftStart: 1646099204314 + 3600000 * 2,
-                    shiftEnd: 1646099204314 + 3600000 * 10,
-                },
-                {
-                    departmentId: 62149855,
-                    departmentName: "oddelenie šamponov",
-
-                    id: 654324456454,
-                    name: "Unikatne Meno",
-                    avatarColor: "orange",
-                    avatarImg: "base 64",
-
-                    //dayStart: 1646199204314 + 3600000 * 5,
-                    //dayEnd: 1646199204314 + 3600000 * 5,
-                    shiftStart: 1646099204314 + 3600000 * 2,
-                    shiftEnd: 1646099204314 + 3600000 * 11,
-                },
-                {
-                    departmentId: 62149855,
-                    departmentName: "oddelenie šamponov",
-
-                    id: 55555324456454,
-                    name: "Super Unikatnemeno",
-                    avatarColor: "orange",
-                    avatarImg: "base 64",
-
-                    //dayStart: 1646199204314 + 3600000 * 5,
-                    //dayEnd: 1646199204314 + 3600000 * 5,
-                    shiftStart: 1646099204314 + 3600000 * 2,
-                    shiftEnd: 1646099204314 + 3600000 * 250,
-                },
-                {
-                    departmentId: 62149855,
-                    departmentName: "oddelenie šamponov",
-
-                    id: 11555324456454,
-                    name: "Super Unikatnemeno2",
-                    avatarColor: "orange",
-                    avatarImg: "base 64",
-
-                    //dayStart: 1646199204314 + 3600000 * 5,
-                    //dayEnd: 1646199204314 + 3600000 * 5,
-                    shiftStart: 1646996400000 + 3600000 * 0,
-                    shiftEnd: 1646996400000 + 3600000 * 14,
-                },
-
-                {
-                    departmentId: 25454,
-                    departmentName: "oddelenie hračiek",
-
-                    id: 55555324456454,
-                    name: "Super Unikatnemeno2",
-                    avatarColor: "orange",
-                    avatarImg: "base 64",
-
-                    //dayStart: 1646199204314 + 3600000 * 5,
-                    //dayEnd: 1646199204314 + 3600000 * 5,
-                    shiftStart: 1646099204314 + 3600000 * 2,
-                    shiftEnd: 1646099204314 + 3600000 * 251,
-                },
-            ],
-        }, */
-    ]
+    selected: []
 };
 
 

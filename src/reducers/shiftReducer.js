@@ -6,6 +6,7 @@ import {
     getNextCurrentView
 } from "../logic/shifts/currentView";
 
+//FOR TESTING ONLY
 var shifts = {
     shifts: [
         {
@@ -13,9 +14,9 @@ var shifts = {
             start: new Date().getTime() - (60000 * 540),
             end: new Date().getTime() + (60000 * 240),
             employees: [
-                {name: "Jožo Baranek", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red"},
-                {name: "Majko Zguruna", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green"},
-                {name: "Harry Potter", id: 1885955, avatarImg: "image base64 <--", avatarColor: "violet"}
+                {name: "Samiha Wilks", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red"},
+                {name: "Lillia Haigh", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green"},
+                {name: "Darrell Gibson", id: 1885955, avatarImg: "image base64 <--", avatarColor: "violet"}
             ],
             placeId: 84486565,
             departmentId: 91359125
@@ -25,9 +26,9 @@ var shifts = {
             start: new Date().getTime() - (60000 * 540),
             end: new Date().getTime() + (60000 * 140),
             employees: [
-                {name: "Šamponov2 Veselý", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red"},
+                {name: "Natalia Bell", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red"},
                 {name: "Angela Funny", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green"},
-                {name: "Sirius Black", id: 1885955, avatarImg: "image base64 <--", avatarColor: "violet"}
+                {name: "Juan Vang", id: 1885955, avatarImg: "image base64 <--", avatarColor: "violet"}
             ],
             placeId: 97486256,
             departmentId: 62149855
@@ -37,9 +38,9 @@ var shifts = {
             start: new Date().getTime() - (60000 * 540),
             end: new Date().getTime() + (60000 * 140),
             employees: [
-                {name: "Šamponov Veselý", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red"},
-                {name: "Angela Funny", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green"},
-                {name: "Sirius Black", id: 1885955, avatarImg: "image base64 <--", avatarColor: "violet"}
+                {name: "Tanvir Ruiz", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red"},
+                {name: "Willie Edge", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green"},
+                {name: "Rosalie Atkinson", id: 1885955, avatarImg: "image base64 <--", avatarColor: "violet"}
             ],
             placeId: 97486256,
             departmentId: 62149855
@@ -49,9 +50,9 @@ var shifts = {
             start: new Date().getTime() - (60000 * 540),
             end: new Date().getTime() + (60000 * 140),
             employees: [
-                {name: "Hračiek Veselý", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red"},
-                {name: "Angela Funny", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green"},
-                {name: "Sirius Black", id: 1885955, avatarImg: "image base64 <--", avatarColor: "violet"}
+                {name: "Nelson Haley", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red"},
+                {name: "Vladimir Odonnell", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green"},
+                {name: "Kloe Travis", id: 1885955, avatarImg: "image base64 <--", avatarColor: "violet"}
             ],
             placeId: 97486256,
             departmentId: 46749855
@@ -61,9 +62,9 @@ var shifts = {
             start: new Date().getTime() - (60000 * 540),
             end: new Date().getTime() + (60000 * 140),
             employees: [
-                {name: "Zmrzlin Veselý", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red"},
-                {name: "Angela Funny", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green"},
-                {name: "Sirius Black", id: 1885955, avatarImg: "image base64 <--", avatarColor: "violet"}
+                {name: "Dawson Hodson", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red"},
+                {name: "Evelyn Vu", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green"},
+                {name: "Jarred Stein", id: 1885955, avatarImg: "image base64 <--", avatarColor: "violet"}
             ],
             placeId: 97486256,
             departmentId: 98236855
@@ -73,10 +74,10 @@ var shifts = {
             start: new Date().getTime() - (60000 * 540),
             end: new Date().getTime() + (60000 * 140),
             employees: [
-                {name: "Nápoje Veselý", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red"},
-                {name: "Angela Funny", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green"},
-                {name: "Sirius Black", id: 1885955, avatarImg: "image base64 <--", avatarColor: "violet"},
-                {name: "Sirius Black", id: 18887855, avatarImg: "image base64 <--", avatarColor: "violet"}
+                {name: "Patricia Metcalfe", id: 1885959, avatarImg: "image base64 <--", avatarColor: "red"},
+                {name: "Leona Mahoney", id: 1885958, avatarImg: "image base64 <--", avatarColor: "green"},
+                {name: "Bjorn Leon", id: 1885955, avatarImg: "image base64 <--", avatarColor: "violet"},
+                {name: "Luis Shaw", id: 18887855, avatarImg: "image base64 <--", avatarColor: "violet"}
             ],
             placeId: 97486256,
             departmentId: 16549855

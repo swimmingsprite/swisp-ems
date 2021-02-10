@@ -24,6 +24,7 @@ public class Comment implements Publishable<String, User> {
     @Column(name = "publish_time", columnDefinition = "TIMESTAMP")
     private Instant publishTime;
 
+    @Column(name = "content")
     private String publishContent;
 
     public Comment() {}
