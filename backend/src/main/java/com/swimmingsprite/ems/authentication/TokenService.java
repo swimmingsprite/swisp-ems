@@ -64,10 +64,9 @@ class TokenService {
         tokens.remove(token.getTokenString());
     }
 
-    protected void removeToken(Token token) {
+    private void removeToken(Token token) {
         if (isExpired(token)) throw new ExpiredTokenException("Token expired!");
         tokenRepository.delete(token);
-        tokens.remove(token.getUserId());
         tokens.remove(token.getRefreshToken());
         tokens.remove(token.getTokenString());
     }
@@ -95,6 +94,6 @@ class TokenService {
 
     protected boolean isExpired(Token token) {
         if (token.getExpire() == null) return true;
-        return Instant.now().toEpochMilli() > token.getExpire().toEpochMilli();
+        return token.getExpire().compareTo(Instant.now()) < 0;
     }
 }
