@@ -37,10 +37,9 @@ class TokenService {
         tokens.put(newToken.getRefreshToken(), newToken);
     }
 
-    protected boolean isUnique(Token token) {
-        if (tokens.get(token.getTokenString()) == null
-                && tokens.get(token.getRefreshToken()) == null) return true;
-        return false;
+    private boolean isUnique(Token token) {
+        return tokens.get(token.getTokenString()) == null
+                && tokens.get(token.getRefreshToken()) == null;
     }
 
     protected Token refreshToken(String refreshToken) {
