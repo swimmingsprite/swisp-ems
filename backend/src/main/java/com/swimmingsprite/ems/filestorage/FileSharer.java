@@ -4,9 +4,6 @@ import com.swimmingsprite.ems.entity.user.User;
 
 import java.util.List;
 
-/**
- *
-* */
 public interface FileSharer {
     enum AccessMode {
         READ_ONLY, READ_WRITE
@@ -16,7 +13,6 @@ public interface FileSharer {
     void unShare(String path, User user);
     void unShareAll(String path);
     boolean isShared(DirectoryItem directoryItem);
-    boolean isShared(String path);
     List<Integer> sharedList(String path);
 
 
