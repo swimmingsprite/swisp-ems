@@ -10,5 +10,7 @@ import java.util.List;
 public interface Storage<T, U extends DirectoryItem>
         extends FileOperation<T> {
     List<U> listDirectory(String directoryPath);
-    U fileInfo(String filePath);
+    U itemInfo(String filePath);
+    Optional<FileSharer> supportSharing();
+
 }
