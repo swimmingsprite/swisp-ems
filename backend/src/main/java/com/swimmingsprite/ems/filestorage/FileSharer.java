@@ -12,11 +12,12 @@ public interface FileSharer {
         READ_ONLY, READ_WRITE
     }
 
-    void share(User user, String path,);
-    void unShare(User user);
-    void unShareAll(User user);
+    void share(String path, User user, AccessMode accessMode);
+    void unShare(String path, User user);
+    void unShareAll(String path);
     boolean isShared(DirectoryItem directoryItem);
-    List<Integer> sharedWith(User user);
+    boolean isShared(String path);
+    List<Integer> sharedList(String path);
 
 
 }

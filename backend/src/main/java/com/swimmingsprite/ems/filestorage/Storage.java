@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface Storage<T, U extends DirectoryItem>
         extends FileOperation {
     List<U> listDirectory(String directoryPath);
-    U itemInfo(String filePath);
+    U getItem(String filePath);
     Optional<FileSharer> supportSharing();
 
 }
