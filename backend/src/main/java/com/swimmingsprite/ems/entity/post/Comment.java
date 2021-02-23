@@ -1,6 +1,6 @@
 package com.swimmingsprite.ems.entity.post;
 
-import com.swimmingsprite.ems.entity.user.Publishable;
+import com.swimmingsprite.ems.entity.user.PublishableEntity;
 import com.swimmingsprite.ems.entity.user.User;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -9,7 +9,7 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "comment")
-public class Comment implements Publishable<String, User> {
+public class Comment extends PublishableEntity<String, User> {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
