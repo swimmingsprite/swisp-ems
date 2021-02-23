@@ -2,13 +2,14 @@ package com.swimmingsprite.ems.filestorage;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 
-/*
-* T - type passed to save method and retrieved by load method
-* U - type represents directory item
+/**
+* @param <T> - type of data passed to save method and retrieved by load method
+* @param <U> - type represents directory item
 * */
 public interface Storage<T, U extends DirectoryItem>
-        extends FileOperation<T> {
+        extends FileOperation {
     List<U> listDirectory(String directoryPath);
     U itemInfo(String filePath);
     Optional<FileSharer> supportSharing();

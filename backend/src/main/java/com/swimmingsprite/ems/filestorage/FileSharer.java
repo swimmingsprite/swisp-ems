@@ -2,6 +2,8 @@ package com.swimmingsprite.ems.filestorage;
 
 import com.swimmingsprite.ems.entity.user.User;
 
+import java.util.List;
+
 /**
  *
 * */
@@ -14,7 +16,7 @@ public interface FileSharer {
     void unShare(User user);
     void unShareAll(User user);
     boolean isShared(DirectoryItem directoryItem);
-    List<> sharedWith(User user);
+    List<Integer> sharedWith(User user);
 
 
 }
