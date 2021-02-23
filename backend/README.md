@@ -28,3 +28,8 @@ pracovisku a vyplatenej mzdy.
 
 **Frontend:** React Hooks / Redux / JS   
 **Backend:** Spring Boot (REST API)
+
+### Screenshoty
+
+___
+[Link](https://github.com/swimmingsprite/swisp-ems/tree/master/screenshots)
