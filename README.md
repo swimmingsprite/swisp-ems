@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## Systém pre manažment zamestnancov
 
 ---
@@ -70,4 +69,3 @@ pracovisku a vyplatenej mzdy.
 
 ___
 [Link](https://github.com/swimmingsprite/swisp-ems/tree/master/screenshots)
->>>>>>> 497634218dca8507524e62786c3ddb8cdd9b051a
