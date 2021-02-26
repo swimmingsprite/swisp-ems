@@ -16,19 +16,19 @@ public final class Token {
 
     @NotNull
     @Column(name = "token")
-    private final String token;
+    private String token;
 
     @NotNull
     @Column(name = "refreshToken")
-    private final String refreshToken;
+    private String refreshToken;
 
     @NotNull
     @Column(name = "userId")
-    private final String userId;
+    private String userId;
 
     @Column(name = "expire")
     @NotNull
-    private final Instant expire;
+    private Instant expire;
 
     public Token(@NotNull String token,
                  @NotNull String refreshToken,
@@ -40,7 +40,7 @@ public final class Token {
         this.expire = expire;
     }
 
-
+    public Token() {}
 
     public String getTokenString() {
         return token;

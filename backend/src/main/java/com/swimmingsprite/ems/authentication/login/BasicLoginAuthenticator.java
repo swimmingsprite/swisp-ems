@@ -20,8 +20,4 @@ class BasicLoginAuthenticator implements LoginAuthenticator {
     public String validate(String login, String password) {
         return repository.getUserIdByCredentials(login, PasswordUtils.encrypt(password));
     }
-
-
-
-
 }

@@ -51,7 +51,6 @@ public class PostService {
                 throw new AccessDeniedException("Unauthorized.");
             }
         } else throw new NotFoundException("Post with id: " + postId + " not found.");
-
     }
 
     public void addLikeToPost(String postId) {
