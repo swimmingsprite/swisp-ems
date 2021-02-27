@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.Instant;
 
-public class SimpleMessage {
+public final class SimpleMessage {
     private long timestamp;
     private String message;
 
