@@ -28,7 +28,7 @@ public class DetailedDirectoryItem extends DirectoryItem {
         this.sharedWith = builder.sharedWith;
     }
 
-    public static DetailedDirectoryItem fromPath(Path path, BasicFileAttributes att) {
+ /*   public static DetailedDirectoryItem fromPath(Path path, BasicFileAttributes att) {
         return new DetailedDirectoryItem.Builder()
                 .created(att.creationTime().toInstant())
                 .lastModified(att.lastModifiedTime().toInstant())
@@ -41,7 +41,7 @@ public class DetailedDirectoryItem extends DirectoryItem {
                         : DirectoryItem.Type.FILE)
                 .build();
     }
-
+*/
     public static class Builder extends DirectoryItem.Builder<Builder> {
         private Instant lastModified;
         private Instant created;

@@ -17,6 +17,10 @@ public abstract class AbstractStorage<U extends DirectoryItem> implements Storag
         return Optional.ofNullable(fileSharer);
     }
 
+    protected FileSharer getFileSharer() {
+        return fileSharer;
+    }
+
     public String getPathPrefix() {
         return pathPrefix;
     }

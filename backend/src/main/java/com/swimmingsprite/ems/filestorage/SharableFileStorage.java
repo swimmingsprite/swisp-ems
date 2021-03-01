@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Collections;
 import java.util.List;
@@ -11,15 +12,29 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class FileStorage extends AbstractStorage<DetailedDirectoryItem> {
-    public FileStorage(FileSharer fileSharer, String pathPrefix) {
-        super(fileSharer, pathPrefix);
+public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> {
+    public SharableFileStorage(FileSharer fileSharer, String pathPrefix) {
+        super(Objects.requireNonNull(fileSharer), pathPrefix);
     }
 
-    public FileStorage() {}
+    public SharableFileStorage() {}
 
     private String getFullPath(String relativePath) {
         return getPathPrefix() + relativePath;
+    }
+
+    private DetailedDirectoryItem createItem(Path path, BasicFileAttributes att) {
+    return new DetailedDirectoryItem.Builder()
+            .created(att.creationTime().toInstant())
+            .lastModified(att.lastModifiedTime().toInstant())
+            .sharedWith(getFileSharer().sharedList(p)) // TODO: 23. 2. 2021 fetch shared
+            .withPath(path.toString())
+            .withName(path.getFileName().toString())
+            .withSize(att.size())
+            .ofType(att.isDirectory()
+                        ? DirectoryItem.Type.DIRECTORY
+                        : DirectoryItem.Type.FILE)
+            .build();
     }
 
     @Override
@@ -38,7 +53,7 @@ public class FileStorage extends AbstractStorage<DetailedDirectoryItem> {
                                 } catch (IOException e) {
                                     return null;
                                 }
-                                return att != null ? DetailedDirectoryItem.fromPath(path, att) : null;
+                                return att != null ? createItem(path, att) : null;
                             })
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
