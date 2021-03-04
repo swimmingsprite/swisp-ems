@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public interface StorageOperation {
     void save(String newFilePath, byte[] dataToSave) throws IOException;
-    byte[] load(String filePath);
+    byte[] load(String filePath) throws IOException;
     void delete(String itemPath);
     void rename(String itemPath, String newName);
     void move(String itemPath, String toMoveDirectoryPath);

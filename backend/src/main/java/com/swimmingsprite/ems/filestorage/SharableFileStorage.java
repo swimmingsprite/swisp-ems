@@ -103,8 +103,18 @@ public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> 
     }
 
     @Override
-    public byte[] load(String filePath) {
-        return new byte[0];
+    public byte[] load(String filePath) throws IOException {
+        Path fullPath = Path.of(getFullPath(filePath));
+        try (BufferedInputStream is = new BufferedInputStream(
+                new FileInputStream(getFullPath(filePath)))) {
+            if (Files.isRegularFile(fullPath, NOFOLLOW_LINKS)) {
+                return is.readAllBytes();
+            }
+            throw new IOException("File is not a regular file.");
+        }
+        catch (IOException e) {
+            throw e;
+        }
     }
 
     @Override
