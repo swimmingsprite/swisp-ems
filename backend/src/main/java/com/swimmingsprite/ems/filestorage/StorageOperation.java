@@ -6,10 +6,10 @@ package com.swimmingsprite.ems.filestorage;
 */
 
 public interface StorageOperation {
-    void save(String directory, byte[] dataToSave);
-    byte[] load(String file);
-    void delete(String item);
-    void rename(String item, String newName);
-    void move(String item, String toMoveDirectory);
-    void makeDirectory(String directory, String newDirName);
+    void save(String newFilePath, byte[] dataToSave);
+    byte[] load(String filePath);
+    void delete(String itemPath);
+    void rename(String itemPath, String newName);
+    void move(String itemPath, String toMoveDirectoryPath);
+    void makeDirectory(String directoryPath, String newDirName);
 }

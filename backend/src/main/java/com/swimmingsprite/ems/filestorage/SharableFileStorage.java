@@ -95,32 +95,32 @@ public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> 
     }
 
     @Override
-    public void save(String directory, byte[] dataToSave) {
+    public void save(String newFilePath, byte[] dataToSave) {
 
     }
 
     @Override
-    public byte[] load(String file) {
+    public byte[] load(String filePath) {
         return new byte[0];
     }
 
     @Override
-    public void delete(String item) {
+    public void delete(String itemPath) {
 
     }
 
     @Override
-    public void rename(String item, String newName) {
+    public void rename(String itemPath, String newName) {
 
     }
 
     @Override
-    public void move(String item, String toMoveDirectory) {
+    public void move(String itemPath, String toMoveDirectoryPath) {
 
     }
 
     @Override
-    public void makeDirectory(String directory, String newDirName) {
+    public void makeDirectory(String directoryPath, String newDirName) {
 
     }
 }
