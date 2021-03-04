@@ -8,9 +8,9 @@ import java.util.Optional;
 * @param <U> - type represents directory item
 * */
 public interface Storage<U extends DirectoryItem>
-        extends StorageOperation<U> {
+        extends StorageOperation {
     List<U> listDirectory(String directoryPath);
     Optional<U> getItem(String filePath);
     Optional<FileSharer> supportSharing();
-    U back(U directory);
+    U up(String directoryPath);
 }

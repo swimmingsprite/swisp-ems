@@ -27,7 +27,6 @@ public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> 
     return new DetailedDirectoryItem.Builder()
             .created(att.creationTime().toInstant())
             .lastModified(att.lastModifiedTime().toInstant())
-            .sharedWith(getFileSharer().sharedList(p)) // TODO: 23. 2. 2021 fetch shared
             .withPath(path.toString())
             .withName(path.getFileName().toString())
             .withSize(att.size())
@@ -74,37 +73,37 @@ public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> 
     }
 
     @Override
-    public DetailedDirectoryItem back(DetailedDirectoryItem directory) {
+    public DetailedDirectoryItem up(String directoryPath) {
         return null;
     }
 
     @Override
-    public void save(DetailedDirectoryItem directory, byte[] dataToSave) {
+    public void save(String directory, byte[] dataToSave) {
 
     }
 
     @Override
-    public byte[] load(DetailedDirectoryItem file) {
+    public byte[] load(String file) {
         return new byte[0];
     }
 
     @Override
-    public void delete(DetailedDirectoryItem item) {
+    public void delete(String item) {
 
     }
 
     @Override
-    public void rename(DetailedDirectoryItem item, String newName) {
+    public void rename(String item, String newName) {
 
     }
 
     @Override
-    public void move(DetailedDirectoryItem item, DetailedDirectoryItem toMoveDirectory) {
+    public void move(String item, String toMoveDirectory) {
 
     }
 
     @Override
-    public void makeDirectory(DetailedDirectoryItem directory, String newDirName) {
+    public void makeDirectory(String directory, String newDirName) {
 
     }
 }

@@ -70,11 +70,6 @@ public class DetailedDirectoryItem extends DirectoryItem {
             this.size = Objects.requireNonNull(size);
             return self();
         }
-
-        public Builder sharedWith(List<User> sharedWith) {
-            this.sharedWith = Objects.requireNonNull(sharedWith);
-            return self();
-        }
     }
 
     public Instant getLastModified() {
