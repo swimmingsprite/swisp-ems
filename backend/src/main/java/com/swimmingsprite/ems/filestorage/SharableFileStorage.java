@@ -1,13 +1,12 @@
 package com.swimmingsprite.ems.filestorage;
 
 import java.io.*;
+import java.lang.invoke.LambdaConversionException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 
@@ -118,8 +117,22 @@ public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> 
     }
 
     @Override
-    public void delete(String itemPath) {
-
+    public void delete(String itemPath) throws IOException {
+        Path fullPath = Path.of(getFullPath(itemPath));
+        try (Stream<File> files = Files.walk(fullPath)
+                .sorted(Comparator.reverseOrder())
+                .map(Path::toFile)
+        ) {
+            files.forEach(file -> {
+                if (!file.delete())
+                    throw new RuntimeException("File "+file.getName()+" can't be deleted");
+            });
+        } catch (IOException e) {
+            throw e;
+        }
+        catch (RuntimeException e) {
+            throw new IOException(e.getMessage());
+        }
     }
 
     @Override
