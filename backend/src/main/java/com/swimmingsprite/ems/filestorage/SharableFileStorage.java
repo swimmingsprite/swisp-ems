@@ -15,23 +15,24 @@ public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> 
         super(Objects.requireNonNull(fileSharer), pathPrefix);
     }
 
-    public SharableFileStorage() {}
+    public SharableFileStorage() {
+    }
 
     private String getFullPath(String relativePath) {
         return getPathPrefix() + relativePath;
     }
 
     private DetailedDirectoryItem createItem(Path path, BasicFileAttributes att) {
-    return new DetailedDirectoryItem.Builder()
-            .created(att.creationTime().toInstant())
-            .lastModified(att.lastModifiedTime().toInstant())
-            .withPath(path.toString())
-            .withName(path.getFileName().toString())
-            .withSize(att.size())
-            .ofType(att.isDirectory()
+        return new DetailedDirectoryItem.Builder()
+                .created(att.creationTime().toInstant())
+                .lastModified(att.lastModifiedTime().toInstant())
+                .withPath(path.toString())
+                .withName(path.getFileName().toString())
+                .withSize(att.size())
+                .ofType(att.isDirectory()
                         ? DirectoryItem.Type.DIRECTORY
                         : DirectoryItem.Type.FILE)
-            .build();
+                .build();
     }
 
     @Override
@@ -42,16 +43,16 @@ public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> 
                     .filter(path -> Files.isRegularFile(path, NOFOLLOW_LINKS)
                             || Files.isDirectory(path, NOFOLLOW_LINKS))
                     .map(path -> {
-                                BasicFileAttributes att;
-                                try {
-                                    att = Files.readAttributes(path,
-                                            BasicFileAttributes.class,
-                                            NOFOLLOW_LINKS);
-                                } catch (IOException e) {
-                                    return null;
-                                }
-                                return att != null ? createItem(path, att) : null;
-                            })
+                        BasicFileAttributes att;
+                        try {
+                            att = Files.readAttributes(path,
+                                    BasicFileAttributes.class,
+                                    NOFOLLOW_LINKS);
+                        } catch (IOException e) {
+                            return null;
+                        }
+                        return att != null ? createItem(path, att) : null;
+                    })
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
         } catch (IOException e) {
@@ -71,8 +72,7 @@ public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> 
                         BasicFileAttributes.class,
                         LinkOption.NOFOLLOW_LINKS);
                 return Optional.of(createItem(fullPath, att));
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
                 return Optional.empty();
             }
@@ -93,12 +93,8 @@ public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> 
     @Override
     public void save(String newFilePath, byte[] dataToSave) throws IOException {
         Path fullPath = Path.of(getFullPath(newFilePath));
-        try (InputStream is = new ByteArrayInputStream(dataToSave)){
-            Files.copy(is, fullPath);
-        }
-        catch (IOException e) {
-            throw e;
-        }
+        InputStream is = new ByteArrayInputStream(dataToSave);
+        Files.copy(is, fullPath);
     }
 
     @Override
@@ -111,9 +107,6 @@ public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> 
             }
             throw new IOException("File is not a regular file.");
         }
-        catch (IOException e) {
-            throw e;
-        }
     }
 
     @Override
@@ -125,19 +118,23 @@ public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> 
         ) {
             files.forEach(file -> {
                 if (!file.delete())
-                    throw new RuntimeException("File "+file.getName()+" can't be deleted");
+                    throw new RuntimeException("File " + file.getName() + " can't be deleted");
             });
         } catch (IOException e) {
             throw e;
-        }
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             throw new IOException(e.getMessage());
         }
     }
 
     @Override
-    public void rename(String itemPath, String newName) {
-
+    public void rename(String itemPath, String newName) throws IOException {
+        File item = new File(getFullPath(itemPath));
+        File newItem = new File(getPathPrefix() + "/" + newName);
+        if (item.isFile() || item.isDirectory()) {
+            if (!item.renameTo(newItem)) throw new IOException("Can't rename item with path " + itemPath);
+        }
+        throw new FileNotFoundException("File or directory with path " + itemPath + " not found.");
     }
 
     @Override
