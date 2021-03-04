@@ -14,7 +14,8 @@ public class SharableFileStorage<T extends DetailedDirectoryItem> extends Abstra
         super(Objects.requireNonNull(fileSharer), pathPrefix);
     }
 
-    public SharableFileStorage() {}
+    public SharableFileStorage() {
+    }
 
     private String getFullPath(String relativePath) {
         return getPathPrefix() + relativePath;
@@ -141,7 +142,12 @@ public class SharableFileStorage<T extends DetailedDirectoryItem> extends Abstra
     }
 
     @Override
-    public void makeDirectory(String directoryPath, String newDirName) {
-
+    public void makeDirectory(String directoryPath, String newDirName) throws IOException {
+        Path fullPath = Path.of(getFullPath(directoryPath));
+        if (Files.isDirectory(fullPath)) {
+            Files.createDirectory(
+                    Path.of(getFullPath(directoryPath)+"/"+newDirName));
+        }
+        throw new IOException("Path "+directoryPath+" is not directory.");
     }
 }

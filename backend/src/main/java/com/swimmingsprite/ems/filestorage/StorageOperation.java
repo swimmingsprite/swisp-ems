@@ -14,5 +14,5 @@ public interface StorageOperation {
     void delete(String itemPath) throws IOException;
     void rename(String itemPath, String newName) throws IOException;
     void move(String itemPath, String toMoveDirectoryPath);
-    void makeDirectory(String directoryPath, String newDirName);
+    void makeDirectory(String directoryPath, String newDirName) throws IOException;
 }
