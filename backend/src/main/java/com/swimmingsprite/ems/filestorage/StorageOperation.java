@@ -5,8 +5,10 @@ package com.swimmingsprite.ems.filestorage;
 * @param <T> type representation of data to save/load
 */
 
+import java.io.IOException;
+
 public interface StorageOperation {
-    void save(String newFilePath, byte[] dataToSave);
+    void save(String newFilePath, byte[] dataToSave) throws IOException;
     byte[] load(String filePath);
     void delete(String itemPath);
     void rename(String itemPath, String newName);

@@ -1,10 +1,7 @@
 package com.swimmingsprite.ems.filestorage;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
+import java.io.*;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Collections;
 import java.util.List;
@@ -95,8 +92,14 @@ public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> 
     }
 
     @Override
-    public void save(String newFilePath, byte[] dataToSave) {
-
+    public void save(String newFilePath, byte[] dataToSave) throws IOException {
+        Path fullPath = Path.of(getFullPath(newFilePath));
+        try (InputStream is = new ByteArrayInputStream(dataToSave)){
+            Files.copy(is, fullPath);
+        }
+        catch (IOException e) {
+            throw e;
+        }
     }
 
     @Override
