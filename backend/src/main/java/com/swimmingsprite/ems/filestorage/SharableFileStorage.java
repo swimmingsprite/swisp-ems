@@ -1,7 +1,6 @@
 package com.swimmingsprite.ems.filestorage;
 
 import java.io.*;
-import java.lang.invoke.LambdaConversionException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
@@ -10,13 +9,12 @@ import java.util.stream.Stream;
 
 import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 
-public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> {
+public class SharableFileStorage<T extends DetailedDirectoryItem> extends AbstractStorage<DetailedDirectoryItem> {
     public SharableFileStorage(FileSharer fileSharer, String pathPrefix) {
         super(Objects.requireNonNull(fileSharer), pathPrefix);
     }
 
-    public SharableFileStorage() {
-    }
+    public SharableFileStorage() {}
 
     private String getFullPath(String relativePath) {
         return getPathPrefix() + relativePath;
@@ -130,7 +128,7 @@ public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> 
     @Override
     public void rename(String itemPath, String newName) throws IOException {
         File item = new File(getFullPath(itemPath));
-        File newItem = new File(getPathPrefix() + "/" + newName);
+        File newItem = new File(getPathPrefix() + newName);
         if (item.isFile() || item.isDirectory()) {
             if (!item.renameTo(newItem)) throw new IOException("Can't rename item with path " + itemPath);
         }
