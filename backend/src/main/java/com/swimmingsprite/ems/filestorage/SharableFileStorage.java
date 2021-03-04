@@ -12,6 +12,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
+
 public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> {
     public SharableFileStorage(FileSharer fileSharer, String pathPrefix) {
         super(Objects.requireNonNull(fileSharer), pathPrefix);
@@ -41,14 +43,14 @@ public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> 
         try {
             return Files.list(new File(getFullPath(directoryPath)).toPath())
                     .parallel()
-                    .filter(path -> Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS)
-                            || Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS))
+                    .filter(path -> Files.isRegularFile(path, NOFOLLOW_LINKS)
+                            || Files.isDirectory(path, NOFOLLOW_LINKS))
                     .map(path -> {
                                 BasicFileAttributes att;
                                 try {
                                     att = Files.readAttributes(path,
                                             BasicFileAttributes.class,
-                                            LinkOption.NOFOLLOW_LINKS);
+                                            NOFOLLOW_LINKS);
                                 } catch (IOException e) {
                                     return null;
                                 }
@@ -64,12 +66,27 @@ public class SharableFileStorage extends AbstractStorage<DetailedDirectoryItem> 
 
     @Override
     public Optional<DetailedDirectoryItem> getItem(String filePath) {
+        Path fullPath = Path.of(getFullPath(filePath));
+
+        if (Files.exists(Path.of(getFullPath(filePath)), LinkOption.NOFOLLOW_LINKS)) {
+            try {
+                BasicFileAttributes
+                        att = Files.readAttributes(fullPath,
+                        BasicFileAttributes.class,
+                        LinkOption.NOFOLLOW_LINKS);
+                return Optional.of(createItem(fullPath, att));
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+                return Optional.empty();
+            }
+        }
         return Optional.empty();
     }
 
     @Override
     public Optional<FileSharer> supportSharing() {
-        return Optional.empty();
+        return Optional.of(getFileSharer());
     }
 
     @Override

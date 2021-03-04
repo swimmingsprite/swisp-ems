@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public abstract class AbstractStorage<U extends DirectoryItem> implements Storage<U> {
     private FileSharer fileSharer;
-    private String pathPrefix;
+    private String pathPrefix = "";
 
     public AbstractStorage(FileSharer fileSharer, String pathPrefix) {
         this.fileSharer = fileSharer;
