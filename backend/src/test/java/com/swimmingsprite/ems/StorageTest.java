@@ -7,6 +7,7 @@ import com.swimmingsprite.ems.filestorage.Storage;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class StorageTest {
 
 
     @Test
+    @Order(1)
     void testGetItem_FromFile() throws IOException {
         Files.deleteIfExists(getFullPath("test.txt"));
         Path temp = Files.createFile(getFullPath("test.txt"));
@@ -44,6 +46,7 @@ public class StorageTest {
     }
 
     @Test
+    @Order(2)
     void testGetItem_FromDirectory() throws IOException {
         Files.deleteIfExists(getFullPath("testDirectory"));
         Path temp = Files.createDirectory(getFullPath("testDirectory"));
@@ -55,6 +58,44 @@ public class StorageTest {
         assertEquals(dirDirI.getType(), DirectoryItem.Type.DIRECTORY);
 
         Files.delete(temp);
+    }
+
+
+    @Test
+    @Order(3)
+    void testGetItem_NotExist() throws IOException {
+        Optional<DetailedDirectoryItem> dirOpt = storage.getItem("nonexistentfile.txt");
+        assertFalse(dirOpt::isPresent, "Storage returned non empty Optional");
+    }
+
+    @Test
+    @Order(4)
+    void testGetItem_FromDirectoryWithDepth() throws IOException {
+        Files.deleteIfExists(getFullPath("testDirectory/testDirectory2/test.txt"));
+        Files.deleteIfExists(getFullPath("testDirectory/testDirectory2"));
+        Files.deleteIfExists(getFullPath("testDirectory"));
+        Path tempDir = Files.createDirectory(getFullPath("testDirectory"));
+        Path tempDir2 = Files.createDirectory(getFullPath("testDirectory/testDirectory2"));
+
+
+        Optional<DetailedDirectoryItem> dirOpt = storage.getItem("testDirectory/testDirectory2");
+        assertDoesNotThrow(dirOpt::get, "Storage returned empty Optional");
+        DetailedDirectoryItem dirDirI = dirOpt.get();
+        assertEquals(dirDirI.getName(), "testDirectory2");
+        assertEquals(dirDirI.getType(), DirectoryItem.Type.DIRECTORY);
+
+        Path tempFile = Files.createFile(getFullPath("testDirectory/testDirectory2/test.txt"));
+
+        Optional<DetailedDirectoryItem> fileOpt = storage.getItem("testDirectory/testDirectory2/test.txt");
+        assertDoesNotThrow(fileOpt::get, "Storage returned empty Optional");
+        DetailedDirectoryItem fileDirI = fileOpt.get();
+        assertEquals(fileDirI.getName(), "test.txt");
+        assertEquals(fileDirI.getType(), DirectoryItem.Type.FILE);
+
+
+        Files.delete(tempFile);
+        Files.delete(tempDir2);
+        Files.delete(tempDir);
     }
 
 
