@@ -17,6 +17,7 @@ import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
@@ -124,6 +125,27 @@ public class StorageTest {
     void test_loadString() throws IOException {
         String loadedString = new String(storage.load("savetext.txt"), StandardCharsets.UTF_8);
         assertEquals("hello", loadedString, "Loaded String is not correct");
+        //Files.deleteIfExists(Path.of(prefix + "savetext.txt"));
+    }
+
+    @Test
+    @Order(7)
+    void test_deleteFile() throws IOException {
+        assertTrue(Files.exists(getFullPath("savetext.txt")));
+        storage.delete("savetext.txt");
+        assertFalse(Files.exists(getFullPath("savetext.txt")), "File wasn't deleted");
+    }
+
+    @Test
+    @Order(8)
+    void test_deleteDirectory() throws IOException {
+        if (!Files.exists(getFullPath("testDir"))) Files.createDirectory(getFullPath("testDir"));
+
+        assertTrue(Files.exists(getFullPath("testDir")));
+        assertTrue(Files.isDirectory(getFullPath("testDir"), LinkOption.NOFOLLOW_LINKS));
+        storage.delete("testDir");
+        assertFalse(Files.exists(getFullPath("testDir")), "Directory wasn't deleted");
+
         Files.deleteIfExists(Path.of(prefix + "savetext.txt"));
     }
 
