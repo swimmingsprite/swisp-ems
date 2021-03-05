@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,10 +27,11 @@ import java.util.Optional;
 public class StorageTest {
     @Autowired
     Storage<DetailedDirectoryItem> storage;
-    @Value("${storage.files.prefix}") String prefix;
+    @Value("${storage.files.prefix}")
+    String prefix;
 
     private Path getFullPath(String path) {
-        return Path.of(prefix+path);
+        return Path.of(prefix + path);
     }
 
 
@@ -42,8 +44,8 @@ public class StorageTest {
         Optional<DetailedDirectoryItem> fileOpt = storage.getItem("test.txt");
         assertDoesNotThrow(fileOpt::get, "Storage returned empty Optional");
         DetailedDirectoryItem fileDirI = fileOpt.get();
-        assertEquals(fileDirI.getName(), "test.txt");
-        assertEquals(fileDirI.getType(), DirectoryItem.Type.FILE);
+        assertEquals("test.txt", fileDirI.getName());
+        assertEquals(DirectoryItem.Type.FILE, fileDirI.getType());
 
         Files.delete(temp);
     }
@@ -57,8 +59,8 @@ public class StorageTest {
         Optional<DetailedDirectoryItem> dirOpt = storage.getItem("testDirectory");
         assertDoesNotThrow(dirOpt::get, "Storage returned empty Optional");
         DetailedDirectoryItem dirDirI = dirOpt.get();
-        assertEquals(dirDirI.getName(), "testDirectory");
-        assertEquals(dirDirI.getType(), DirectoryItem.Type.DIRECTORY);
+        assertEquals("testDirectory", dirDirI.getName());
+        assertEquals(DirectoryItem.Type.DIRECTORY, dirDirI.getType());
 
         Files.delete(temp);
     }
@@ -84,16 +86,16 @@ public class StorageTest {
         Optional<DetailedDirectoryItem> dirOpt = storage.getItem("testDirectory/testDirectory2");
         assertDoesNotThrow(dirOpt::get, "Storage returned empty Optional");
         DetailedDirectoryItem dirDirI = dirOpt.get();
-        assertEquals(dirDirI.getName(), "testDirectory2");
-        assertEquals(dirDirI.getType(), DirectoryItem.Type.DIRECTORY);
+        assertEquals("testDirectory2", dirDirI.getName());
+        assertEquals(DirectoryItem.Type.DIRECTORY ,dirDirI.getType());
 
         Path tempFile = Files.createFile(getFullPath("testDirectory/testDirectory2/test.txt"));
 
         Optional<DetailedDirectoryItem> fileOpt = storage.getItem("testDirectory/testDirectory2/test.txt");
         assertDoesNotThrow(fileOpt::get, "Storage returned empty Optional");
         DetailedDirectoryItem fileDirI = fileOpt.get();
-        assertEquals(fileDirI.getName(), "test.txt");
-        assertEquals(fileDirI.getType(), DirectoryItem.Type.FILE);
+        assertEquals("test.txt", fileDirI.getName() );
+        assertEquals(DirectoryItem.Type.FILE, fileDirI.getType());
 
 
         Files.delete(tempFile);
@@ -102,28 +104,34 @@ public class StorageTest {
     }
 
     @Test
+    @Order(5)
     void test_saveString() throws IOException {
-        Files.deleteIfExists(Path.of(prefix+"savetext.txt"));
+        Files.deleteIfExists(Path.of(prefix + "savetext.txt"));
 
         String s = "hello";
         storage.save("savetext.txt", s.getBytes(StandardCharsets.UTF_8));
 
-        Optional<String> readed = Files.lines(Path.of(prefix+"savetext.txt"))
+        Optional<String> readed = Files.lines(Path.of(prefix + "savetext.txt"))
                 .findFirst();
 
         assertTrue(readed.isPresent(), "Saved file String is not present.");
-        assertEquals(readed.get(), "hello", "Saved String is not correct.");
+        assertEquals("hello", readed.get(), "Saved String is not correct.");
 
-        Files.deleteIfExists(Path.of(prefix+"savetext.txt"));
+        //Files.deleteIfExists(Path.of(prefix+"savetext.txt"));
     }
 
+    @Test
+    @Order(6)
+    void test_loadString() throws IOException {
+
+        String loadedString = new String(storage.load("savetext.txt"), StandardCharsets.UTF_8);
+
+        assertEquals("hello", loadedString, "Loaded String is not correct");
+
+        //new String(Files.readAllBytes(Path.of(prefix+"savetext.txt")));
 
 
-
-
-
-
-
+    }
 
 
 }
