@@ -6,10 +6,7 @@ import com.swimmingsprite.ems.filestorage.Storage;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,13 +19,18 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class StorageTest {
     @Autowired
     Storage<DetailedDirectoryItem> storage;
     @Value("${storage.files.prefix}")
     String prefix;
+
+    private static CountDownLatch latch = new CountDownLatch(1);
 
     private Path getFullPath(String path) {
         return Path.of(prefix + path);
@@ -68,7 +70,7 @@ public class StorageTest {
 
     @Test
     @Order(3)
-    void testGetItem_NotExist() throws IOException {
+    void testGetItem_NotExist() {
         Optional<DetailedDirectoryItem> dirOpt = storage.getItem("nonexistentfile.txt");
         assertFalse(dirOpt::isPresent, "Storage returned non empty Optional");
     }
@@ -117,20 +119,14 @@ public class StorageTest {
         assertTrue(readed.isPresent(), "Saved file String is not present.");
         assertEquals("hello", readed.get(), "Saved String is not correct.");
 
-        //Files.deleteIfExists(Path.of(prefix+"savetext.txt"));
     }
 
     @Test
     @Order(6)
     void test_loadString() throws IOException {
-
         String loadedString = new String(storage.load("savetext.txt"), StandardCharsets.UTF_8);
-
         assertEquals("hello", loadedString, "Loaded String is not correct");
-
-        //new String(Files.readAllBytes(Path.of(prefix+"savetext.txt")));
-
-
+        Files.deleteIfExists(Path.of(prefix + "savetext.txt"));
     }
 
 
