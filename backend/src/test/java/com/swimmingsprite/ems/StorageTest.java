@@ -14,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -96,6 +99,22 @@ public class StorageTest {
         Files.delete(tempFile);
         Files.delete(tempDir2);
         Files.delete(tempDir);
+    }
+
+    @Test
+    void test_saveString() throws IOException {
+        Files.deleteIfExists(Path.of(prefix+"savetext.txt"));
+
+        String s = "hello";
+        storage.save("savetext.txt", s.getBytes(StandardCharsets.UTF_8));
+
+        Optional<String> readed = Files.lines(Path.of(prefix+"savetext.txt"))
+                .findFirst();
+
+        assertTrue(readed.isPresent(), "Saved file String is not present.");
+        assertEquals(readed.get(), "hello", "Saved String is not correct.");
+
+        Files.deleteIfExists(Path.of(prefix+"savetext.txt"));
     }
 
 
