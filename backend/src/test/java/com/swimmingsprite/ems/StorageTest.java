@@ -149,5 +149,18 @@ public class StorageTest {
         Files.deleteIfExists(Path.of(prefix + "savetext.txt"));
     }
 
+    @Test
+    @Order(9)
+    void test_deleteDirectoryIfContainsFiles() throws IOException {
+        if (!Files.exists(getFullPath("testDir"))) Files.createDirectory(getFullPath("testDir"));
+
+        assertTrue(Files.exists(getFullPath("testDir")));
+        assertTrue(Files.isDirectory(getFullPath("testDir"), LinkOption.NOFOLLOW_LINKS));
+        storage.delete("testDir");
+        assertFalse(Files.exists(getFullPath("testDir")), "Directory wasn't deleted");
+
+        Files.deleteIfExists(Path.of(prefix + "savetext.txt"));
+    }
+
 
 }

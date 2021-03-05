@@ -24,7 +24,8 @@ class BasicAuthenticator implements AuthenticationManager {
 
     @Override
     public Token login(String login, String password) {
-        if (login == null || password == null)
+        if (login == null || password == null
+            || login.isBlank() || password.isBlank())
             throw new InvalidCredentialsException("Login and password can't be empty!");
         String userId = Optional
                 .ofNullable(loginAuthenticator.validate(login, password))
@@ -35,19 +36,19 @@ class BasicAuthenticator implements AuthenticationManager {
 
     @Override
     public Token refresh(String refreshToken) {
-        if (refreshToken == null) throw new UnknownTokenException("Token not present!");
+        if (refreshToken == null || refreshToken.isBlank()) throw new UnknownTokenException("Token not present!");
         return tokenService.refreshToken(refreshToken);
     }
 
     @Override
     public void logout(String token) {
-        if (token == null) throw new UnknownTokenException("Token not present!");
+        if (token == null || token.isBlank()) throw new UnknownTokenException("Token not present!");
         tokenService.removeToken(token);
     }
 
     @Override
     public String getUserId(String token) {
-        if (token == null) throw new UnknownTokenException("Token not present!");
+        if (token == null || token.isBlank()) throw new UnknownTokenException("Token not present!");
         return tokenService.getUserId(token);
     }
 
