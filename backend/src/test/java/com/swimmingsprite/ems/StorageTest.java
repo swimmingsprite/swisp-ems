@@ -30,8 +30,6 @@ public class StorageTest {
     @Value("${storage.files.prefix}")
     String prefix;
 
-    private static CountDownLatch latch = new CountDownLatch(1);
-
     private Path getFullPath(String path) {
         return Path.of(prefix + path);
     }
