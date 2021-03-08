@@ -179,14 +179,15 @@ public class StorageTest {
         Files.createFile(getFullPath("savetext.txt"));
 
         assertTrue(Files.exists(getFullPath("savetext.txt")), "Testing file does not exist.");
-
         storage.rename("savetext.txt", "renamedFile.txt");
         assertFalse(Files.exists(getFullPath("savetext.txt")), "File wasn't renamed.");
-
         assertTrue(Files.exists(getFullPath("renamedFile.txt")), "Renamed file does not exist.");
 
         Files.deleteIfExists(getFullPath("savetext.txt"));
+        Files.deleteIfExists(getFullPath("renamedFile.txt"));
     }
+
+
 
 
 
