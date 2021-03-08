@@ -3,25 +3,22 @@ package com.swimmingsprite.ems;
 import com.swimmingsprite.ems.filestorage.DetailedDirectoryItem;
 import com.swimmingsprite.ems.filestorage.DirectoryItem;
 import com.swimmingsprite.ems.filestorage.Storage;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.charset.Charset;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.util.Optional;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -146,7 +143,7 @@ public class StorageTest {
         storage.delete("testDir");
         assertFalse(Files.exists(getFullPath("testDir")), "Directory wasn't deleted");
 
-        Files.deleteIfExists(Path.of(prefix + "savetext.txt"));
+        //Files.deleteIfExists(Path.of(prefix + "savetext.txt"));
     }
 
     @Test
@@ -173,9 +170,24 @@ public class StorageTest {
 
         assertTrue(Files.exists(getFullPath("renamedDir")), "Renamed directory does not exist.");
 
-
-        Files.deleteIfExists(Path.of(prefix + "savetext.txt"));
+        Files.deleteIfExists(getFullPath("renamedDir"));
     }
+
+    @Test
+    @Order(11)
+    void test_renameFile() throws IOException {
+        Files.createFile(getFullPath("savetext.txt"));
+
+        assertTrue(Files.exists(getFullPath("savetext.txt")), "Testing file does not exist.");
+
+        storage.rename("savetext.txt", "renamedFile.txt");
+        assertFalse(Files.exists(getFullPath("savetext.txt")), "File wasn't renamed.");
+
+        assertTrue(Files.exists(getFullPath("renamedFile.txt")), "Renamed file does not exist.");
+
+        Files.deleteIfExists(getFullPath("savetext.txt"));
+    }
+
 
 
 }
