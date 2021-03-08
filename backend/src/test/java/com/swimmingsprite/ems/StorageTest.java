@@ -159,6 +159,21 @@ public class StorageTest {
         storage.delete("testDir");
         assertFalse(Files.exists(getFullPath("testDir")), "Directory wasn't deleted");
 
+        //Files.deleteIfExists(Path.of(prefix + "savetext.txt"));
+    }
+
+    @Test
+    @Order(10)
+    void test_renameDirectory() throws IOException {
+        if (!Files.exists(getFullPath("testDir"))) Files.createDirectory(getFullPath("testDir"));
+
+        assertTrue(Files.exists(getFullPath("testDir")), "Testing directory does not exist.");
+        storage.rename("testDir", "renamedDir");
+        assertFalse(Files.exists(getFullPath("testDir")), "Directory wasn't renamed.");
+
+        assertTrue(Files.exists(getFullPath("renamedDir")), "Renamed directory does not exist.");
+
+
         Files.deleteIfExists(Path.of(prefix + "savetext.txt"));
     }
 

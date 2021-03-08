@@ -130,11 +130,14 @@ public class SharableFileStorage<T extends DetailedDirectoryItem> extends Abstra
     @Override
     public void rename(String itemPath, String newName) throws IOException {
         File item = new File(getFullPath(itemPath));
-        File newItem = new File(getPathPrefix() + newName);
+
+        File newItem = new File(item.getParent() + "/"+newName);
+        System.out.println("NEW item path: "+newItem.getAbsolutePath());
+
         if (item.isFile() || item.isDirectory()) {
             if (!item.renameTo(newItem)) throw new IOException("Can't rename item with path " + itemPath);
-        }
-        throw new FileNotFoundException("File or directory with path " + itemPath + " not found.");
+        } else throw new FileNotFoundException("File or directory with path " + item.getAbsolutePath() + " not found.");
+
     }
 
     @Override
@@ -147,8 +150,8 @@ public class SharableFileStorage<T extends DetailedDirectoryItem> extends Abstra
         Path fullPath = Path.of(getFullPath(directoryPath));
         if (Files.isDirectory(fullPath)) {
             Files.createDirectory(
-                    Path.of(getFullPath(directoryPath)+"/"+newDirName));
+                    Path.of(getFullPath(directoryPath) + "/" + newDirName));
         }
-        throw new IOException("Path "+directoryPath+" is not directory.");
+        throw new IOException("Path " + directoryPath + " is not directory.");
     }
 }

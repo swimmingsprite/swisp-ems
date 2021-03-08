@@ -51,7 +51,4 @@ class BasicAuthenticator implements AuthenticationManager {
         if (token == null || token.isBlank()) throw new UnknownTokenException("Token not present!");
         return tokenService.getUserId(token);
     }
-
-
-
 }
