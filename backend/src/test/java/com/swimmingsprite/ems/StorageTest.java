@@ -191,15 +191,14 @@ public class StorageTest {
     @Test
     @Order(12)
     void test_moveDirectory() throws IOException {
-/*
-        Files.deleteIfExists(getFullPath("savetext.txt"));
-        Files.deleteIfExists(getFullPath("renamedFile.txt"));
+
+        Files.deleteIfExists(getFullPath("dir1/dir2/testFile.txt"));
+        Files.deleteIfExists(getFullPath("dir1/dir2"));
+        Files.deleteIfExists(getFullPath("dir1"));
 
         Files.createDirectory(getFullPath("dir1"));
         Files.createDirectory(getFullPath("dir2"));
         Files.createFile(getFullPath("dir2/testFile.txt"));
-*/
-
 
         storage.move("dir2", "dir1");
 
