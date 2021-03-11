@@ -141,7 +141,32 @@ public class SharableFileStorage<T extends DetailedDirectoryItem> extends Abstra
     }
 
     @Override
-    public void move(String itemPath, String toMoveDirectoryPath) {
+    public void move(String itemPath, String toMoveDirectoryPath) throws IOException {
+        File item = new File(getFullPath(itemPath));
+        File toMove = new File(getFullPath(toMoveDirectoryPath));
+        Path toMovePath = Path.of(getFullPath(toMoveDirectoryPath));
+
+        Path itemP = Path.of(getFullPath(itemPath));
+
+
+        if (item.isDirectory() && toMove.isDirectory()) {
+
+            System.out.println("Item path: "+itemP);
+            System.out.println("toMove path: "+toMovePath.resolve(itemP.getFileName()));
+
+            Files.move(itemP, toMovePath.resolve(itemP.getFileName()));
+
+            /*DirectoryStream<Path> dstream = Files.newDirectoryStream(Path.of(getFullPath(itemPath)));
+            dstream.forEach(path -> {
+                try {
+                    System.out.println(path);
+                    Files.move(path, toMovePath.resolve(path.getFileName()), StandardCopyOption.REPLACE_EXISTING);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });*/
+        }
 
     }
 
