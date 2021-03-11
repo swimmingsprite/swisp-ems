@@ -85,14 +85,14 @@ public class StorageTest {
         assertDoesNotThrow(dirOpt::get, "Storage returned empty Optional");
         DetailedDirectoryItem dirDirI = dirOpt.get();
         assertEquals("testDirectory2", dirDirI.getName());
-        assertEquals(DirectoryItem.Type.DIRECTORY ,dirDirI.getType());
+        assertEquals(DirectoryItem.Type.DIRECTORY, dirDirI.getType());
 
         Path tempFile = Files.createFile(getFullPath("testDirectory/testDirectory2/test.txt"));
 
         Optional<DetailedDirectoryItem> fileOpt = storage.getItem("testDirectory/testDirectory2/test.txt");
         assertDoesNotThrow(fileOpt::get, "Storage returned empty Optional");
         DetailedDirectoryItem fileDirI = fileOpt.get();
-        assertEquals("test.txt", fileDirI.getName() );
+        assertEquals("test.txt", fileDirI.getName());
         assertEquals(DirectoryItem.Type.FILE, fileDirI.getType());
 
 
@@ -188,7 +188,30 @@ public class StorageTest {
     }
 
 
+    @Test
+    @Order(12)
+    void test_moveDirectory() throws IOException {
+/*
+        Files.deleteIfExists(getFullPath("savetext.txt"));
+        Files.deleteIfExists(getFullPath("renamedFile.txt"));
 
+        Files.createDirectory(getFullPath("dir1"));
+        Files.createDirectory(getFullPath("dir2"));
+        Files.createFile(getFullPath("dir2/testFile.txt"));
+*/
+
+
+        storage.move("dir2", "dir1");
+
+        assertTrue(Files.exists(getFullPath("dir1/dir2")));
+        assertTrue(Files.exists(getFullPath("dir1/dir2/testFile.txt")));
+        assertFalse(Files.exists(getFullPath("dir2")));
+
+
+
+
+
+    }
 
 
 }
